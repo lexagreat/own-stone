@@ -1,0 +1,49 @@
+.home-taxi {
+   position: relative;
+   img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+   }
+   // .home-taxi__wrapper
+
+   &__wrapper {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      max-height: 825px;
+      padding: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+      @media (max-width: $tablet) {
+         padding: 72px;
+         gap: 30px;
+      }
+      @media (max-width: $mobile) {
+         max-height: 640px;
+         padding: 56px;
+      }
+   }
+
+   // .home-taxi__title
+
+   &__title {
+      color: $white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      span {
+         color: $white-50;
+      }
+      @media (max-width: $mobile) {
+         display: block;
+      }
+   }
+}

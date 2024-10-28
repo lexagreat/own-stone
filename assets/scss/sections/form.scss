@@ -1,0 +1,105 @@
+.form-section {
+   background-color: #f8f8f8;
+   // .form-section__wrapper
+
+   &__wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+   }
+
+   // .form-section__main
+
+   &__main {
+      padding: 76px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      .btn {
+         width: 100%;
+      }
+   }
+
+   // .form-section__header
+
+   &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 420px;
+      text-align: center;
+      .body-text {
+         color: #18181880;
+      }
+   }
+
+   // .form-section__titl1
+
+   &__title {
+      span {
+         color: $black-50;
+      }
+   }
+
+   // .form-section__content
+
+   &__content {
+      max-width: 420px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   // .form-section__inputs
+
+   &__inputs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+   }
+
+   // .form-section__check
+
+   &__check {
+      width: 100%;
+      margin-top: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 6px;
+      @include regular-12;
+      color: rgba(24, 24, 24, 0.3);
+      a {
+         color: rgba(24, 24, 24, 0.6);
+         border-bottom: 1px solid rgba(24, 24, 24, 0.6);
+      }
+   }
+
+   // .form-section__map
+
+   &__map {
+      background-color: $black-50;
+   }
+   @media (max-width: $tablet) {
+      &__wrapper {
+         grid-template-columns: 1fr;
+      }
+      &__map {
+         height: 300px;
+      }
+      &__main {
+         padding: 70px 20px;
+      }
+      &__check {
+         margin-bottom: 24px;
+      }
+   }
+   @media (max-width: $mobile) {
+      &__main {
+         padding: 40px 30px;
+         gap: 30px;
+      }
+   }
+}

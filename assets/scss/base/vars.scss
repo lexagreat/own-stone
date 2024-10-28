@@ -1,0 +1,115 @@
+$tablet: 1024px;
+$mobile: 568px;
+.wrapper {
+   --margin: 160px;
+   @media (max-width: $tablet) {
+      --margin: 135px;
+   }
+   @media (max-width: $mobile) {
+      --margin: 100px;
+   }
+}
+$black: #181818;
+$black-50: rgba($black, 0.5);
+$black-15: rgba($black, 0.15);
+$black-5: rgba($black, 0.05);
+$white: #fff;
+$white-50: rgba($white, 0.5);
+$white-15: rgba($white, 0.15);
+$white-bg: rgba($white, 0.09);
+$dark-red: #4f0014;
+$light-grey: #f1f1f1;
+
+$fontMontreal: "PP Neue Montreal", sans-serif;
+$fontArial: "Arial", sans-serif;
+
+$transition: 0.4s;
+@mixin h1 {
+   /* h1 */
+   font-family: $fontMontreal;
+   font-size: 50px;
+   font-weight: 500;
+   line-height: 110%; /* 55px */
+   letter-spacing: 0.5px;
+   text-transform: uppercase;
+}
+@mixin h2 {
+   /* h2 */
+   font-family: $fontMontreal;
+   font-size: 30px;
+   font-weight: 500;
+   line-height: 110%; /* 33px */
+   letter-spacing: 0.3px;
+   text-transform: uppercase;
+}
+@mixin h3 {
+   /* h3 */
+   font-family: $fontMontreal;
+   font-size: 24px;
+   font-weight: 500;
+   line-height: 115%; /* 27.6px */
+   text-transform: uppercase;
+}
+@mixin h4 {
+   /* h4 */
+   font-family: $fontArial;
+   font-size: 18px;
+   line-height: 120%; /* 21.6px */
+}
+@mixin h1-tablet {
+   font-family: $fontMontreal;
+   font-size: 37px;
+   font-weight: 500;
+   line-height: 40.7px;
+   letter-spacing: 0.01em;
+}
+@mixin h2-tablet {
+}
+@mixin h3-tablet {
+}
+@mixin h4-tablet {
+}
+@mixin h1-mobile {
+   font-family: $fontMontreal;
+   font-size: 23px;
+   font-weight: 500;
+   line-height: 25.3px;
+   letter-spacing: 0.01em;
+}
+@mixin h2-mobile {
+}
+@mixin h3-mobile {
+}
+@mixin h4-mobile {
+}
+@mixin body-text {
+   /* body */
+   font-family: $fontArial;
+   font-size: 15px;
+   line-height: 140%; /* 21px */
+}
+@mixin button-name {
+   /* button name */
+   font-family: $fontMontreal;
+   font-size: 13px;
+   font-weight: 500;
+   line-height: 110%; /* 14.3px */
+}
+@mixin regular-14 {
+   /* regular_14px */
+   font-family: $fontArial;
+   font-size: 14px;
+   line-height: 140%; /* 19.6px */
+}
+@mixin regular-13 {
+   /* regular_13 */
+   font-family: $fontArial;
+   font-size: 13px;
+   line-height: 110%; /* 14.3px */
+}
+@mixin regular-12 {
+   /* regular_12 */
+   font-family: $fontArial;
+   font-size: 12px;
+   line-height: 140%; /* 16.8px */
+}

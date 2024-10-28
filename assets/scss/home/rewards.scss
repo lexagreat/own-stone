@@ -1,0 +1,82 @@
+.rewards-section {
+   background-color: $black;
+   padding: 80px 0;
+   // .rewards-section__wrapper
+
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 160px;
+   }
+
+   // .rewards-section__header
+
+   &__header {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   // .rewards-section__subtitle
+   &__title {
+      color: $white;
+      max-width: 869px;
+      span {
+         color: $white-50;
+      }
+   }
+   &__subtitle {
+      color: $white-50;
+      @include regular-13;
+   }
+
+   // .rewards-section__list
+
+   &__list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      a {
+         border-radius: 8px;
+         border: 1px solid $white-15;
+         height: 142px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+   }
+   @media (max-width: $tablet) {
+      padding: 70px 0;
+      &__header {
+         text-align: center;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         gap: 40px;
+         max-width: 701px;
+         margin: 0 auto;
+      }
+      &__wrapper {
+         gap: 135px;
+      }
+      &__list {
+         grid-template-columns: repeat(2, 1fr);
+         a img {
+            max-width: 60%;
+         }
+      }
+   }
+   @media (max-width: $tablet) {
+      padding: 60px 0;
+      &__header {
+         gap: 30px;
+      }
+      &__wrapper {
+         gap: 100px;
+      }
+      &__list {
+         a {
+            height: 100px;
+         }
+      }
+   }
+}

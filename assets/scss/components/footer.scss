@@ -1,0 +1,238 @@
+.footer {
+   background-color: $black;
+   // .footer__wrapper
+
+   &__wrapper {
+      padding-top: 80px;
+      padding-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 154px;
+   }
+
+   // .footer__upper
+
+   &__upper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+   }
+
+   // .footer__main
+
+   &__main {
+      display: flex;
+      justify-content: space-between;
+      border-right: 1px solid $white-15;
+      padding-right: 114px;
+   }
+
+   // .footer__left
+
+   &__left {
+      display: flex;
+      flex-direction: column;
+      gap: 65px;
+   }
+
+   // .footer__logo
+
+   &__logo {
+   }
+
+   // .footer__phone
+
+   &__phone {
+      color: $white;
+      font-size: 18px;
+   }
+
+   // .footer__links
+
+   &__links {
+      display: flex;
+      gap: 80px;
+      ul {
+         display: flex;
+         flex-direction: column;
+         gap: 24px;
+         a {
+            color: $white;
+            @include regular-13;
+         }
+      }
+   }
+
+   // .footer__contacts
+
+   &__contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-left: 48px;
+   }
+
+   // .footer__place
+
+   &__place {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+   }
+
+   // .footer__address
+
+   &__address {
+      @include h4;
+      color: $white;
+   }
+
+   // .footer__schedule
+
+   &__schedule {
+      @include body-text;
+      color: $white-50;
+   }
+
+   // .footer__media
+
+   &__media {
+      display: flex;
+      justify-content: space-between;
+      ul {
+         display: flex;
+         gap: 12px;
+      }
+      button {
+         @include button-name;
+         color: $white;
+         border-bottom: 1px solid $white;
+      }
+   }
+
+   // .footer__down
+
+   &__down {
+      display: grid;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      div:first-child {
+         display: flex;
+         justify-content: space-between;
+         padding-right: 150px;
+         gap: 10px;
+         flex-wrap: wrap;
+         color: $white-50;
+         font-size: 13px;
+         line-height: 110%; /* 14.3px */
+         a {
+            color: $white-50;
+         }
+      }
+      div:last-child {
+         padding-left: 48px;
+         display: flex;
+         align-items: end;
+         gap: 23px;
+         justify-content: space-between;
+         p {
+            color: $white-50;
+            font-size: 10px;
+         }
+         span {
+            white-space: nowrap;
+            color: $white-50;
+            font-size: 13px;
+            text-transform: uppercase;
+            a {
+               color: $white;
+            }
+         }
+      }
+   }
+   @media (max-width: $tablet) {
+      &__wrapper {
+         padding-top: 40px;
+         padding-bottom: 12px;
+         gap: 225px;
+      }
+      &__media {
+         button {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            translate: 0 70px;
+         }
+      }
+      &__main {
+         flex-direction: column;
+         border: 0;
+         position: relative;
+         gap: 70px;
+      }
+      &__logo svg {
+         width: 84px;
+         height: 43px;
+      }
+      &__upper {
+         position: relative;
+      }
+      &__phone {
+         position: absolute;
+         top: 0;
+         left: 100%;
+         white-space: nowrap;
+         translate: 48px 0;
+      }
+      &__contacts {
+         margin-top: 115px;
+         border-left: 1px solid $white-15;
+      }
+   }
+   @media (max-width: $mobile) {
+      &__phone {
+         position: relative;
+         top: unset;
+         left: unset;
+         translate: unset;
+      }
+      &__left {
+         gap: 40px;
+      }
+      &__main {
+         gap: 60px;
+         padding-bottom: 40px;
+         padding-right: 0;
+      }
+      &__upper {
+         grid-template-columns: 1fr;
+      }
+      &__contacts {
+         margin: 0;
+         padding: 0;
+         border: 0;
+         padding-top: 40px;
+         border-top: 1px solid $white-15;
+      }
+      &__media button {
+         translate: 0 30px;
+      }
+      &__wrapper {
+         gap: 110px;
+      }
+      &__down {
+         grid-template-columns: 1fr;
+         gap: 20px;
+         div {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 0 !important;
+         }
+         div:last-child {
+            gap: 20px;
+            br {
+               display: none;
+            }
+         }
+      }
+   }
+}

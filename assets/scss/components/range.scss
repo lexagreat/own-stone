@@ -1,0 +1,39 @@
+.multi-range-slider {
+   border: 0 !important;
+   box-shadow: unset !important;
+   padding: 0 !important;
+   width: calc(100% - 7px);
+   translate: 3px 0;
+   .labels {
+      display: none !important;
+   }
+   .caption {
+      display: none !important;
+   }
+   .bar-inner {
+      background-color: $black !important;
+      border: 0;
+      box-shadow: unset;
+      height: 1px;
+      padding: 0;
+   }
+   .bar-right,
+   .bar-left {
+      background-color: #d9d9d9;
+      padding: 0 !important;
+      height: 1px;
+      border: 0 !important;
+      box-shadow: inset 0px 0px 1px #d9d9d9 !important;
+   }
+   .thumb {
+      &::before {
+         translate: 0 4px !important;
+         width: 10px !important;
+         height: 10px !important;
+         flex: 0 0 10px !important;
+         background-color: $black !important;
+         border: 0;
+         box-shadow: unset !important;
+      }
+   }
+}

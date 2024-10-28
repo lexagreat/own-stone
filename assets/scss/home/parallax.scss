@@ -1,0 +1,20 @@
+.parallax-section {
+   --height: 272px;
+   height: var(--height);
+   overflow: hidden;
+   div {
+      transform: translate(0, calc(-100% + var(--height)));
+   }
+   img {
+      width: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      // translate: 0 calc(-100% + 272px);
+   }
+   @media (max-width: $tablet) {
+      --height: 272px;
+   }
+   @media (max-width: $mobile) {
+      --height: 272px;
+   }
+}
