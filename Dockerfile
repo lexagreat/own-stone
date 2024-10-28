@@ -19,7 +19,8 @@ RUN yarn build
 # run
 FROM base
 # COPY --from=build /frontend/.output /frontend/.output
-COPY --from=build /var/www/own/data/www/own.okttastudio.ru/.output /var/www/own/data/www/own.okttastudio.ru/.output
+# COPY --from=build /var/www/own/data/www/own.okttastudio.ru/.output /var/www/own/data/www/own.okttastudio.ru/.output
+COPY --from=build ./.output ./.output
 # Optional, only needed if you rely on unbundled dependencies
 # COPY --from=build /src/node_modules /src/node_modules
 
