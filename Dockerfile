@@ -4,7 +4,7 @@ FROM node:${NODE_VERSION}-slim as base
 
 ENV NODE_ENV=production
 
-WORKDIR /var/www/own/data/www/own.okttastudio.ru/
+WORKDIR /var/www/own/data/www/own.okttastudio.ru
 
 # build
 FROM base as build
