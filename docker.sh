@@ -1,1 +1,1 @@
-sshpass -p 'o5Cv@jsZq3bG_K' ssh root@83.147.247.116 "cd var/www/own/data/www/own.okttastudio.ru; git reset --hard; git pull origin main; docker stop nuxt-app;docker rm nuxt-app;docker system prune -a -f; docker-compose pull; docker-compose  up -d"
+sshpass -p 'o5Cv@jsZq3bG_K' ssh root@83.147.247.116 "cd /var/www/own/data/www/own.okttastudio.ru; git reset --hard; git pull origin main; docker stop nuxt-app;docker rm nuxt-app;docker system prune -a -f; docker-compose pull; docker-compose  up -d"
