@@ -7,7 +7,7 @@
                   <SearchIcon />
                   <span>{{ currentPhrase }}</span>
                </div>
-               <img src="/public/img/home/media.png" alt="">
+               <img src="/img/home/media.png" alt="">
             </div>
             <div class="home-media__main">
                <h2 class="home-media__title h1">
