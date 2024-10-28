@@ -130,21 +130,21 @@
    width: var(--size);
    height: var(--size);
    flex: 0 0 var(--size);
-   position: relative;
-   top: unset;
-   left: unset;
-   right: unset;
-   bottom: unset;
-   margin: unset;
+   position: relative !important;
+   top: unset !important;
+   left: unset !important;
+   right: unset !important;
+   bottom: unset !important;
+   margin: unset !important;
    border-radius: 4px;
    border: 1px solid $black-15;
    background: $light-grey;
    svg {
-      width: unset;
-      height: unset;
+      width: unset !important;
+      height: unset !important;
    }
    &::after {
-      display: none;
+      display: none !important;
    }
 }
 
