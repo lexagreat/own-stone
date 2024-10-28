@@ -82,7 +82,7 @@
 
    &__slide {
       max-width: 333px;
-      height: 400px;
+      height: 400px !important;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -170,7 +170,7 @@
       }
       &__slide {
          max-width: 285px;
-         height: 360px;
+         height: 360px !important;
       }
       &__subtitle {
          font-size: 18px;
