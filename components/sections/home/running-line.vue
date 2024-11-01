@@ -4,17 +4,17 @@
          <div class="marquee marquee-b2b">
             <div class="marquee__group">
                <li class="running-line__item" v-for="item in items" :key="item">
-                  <NuxtLink to="/" target="_blank">
+                  <div>
                      <component :is="item.icon" />
-                  </NuxtLink>
+                  </div>
                </li>
 
             </div>
             <div aria-hidden="true" class="marquee__group">
                <li class="running-line__item" v-for="item in items" :key="item">
-                  <NuxtLink to="/" target="_blank">
+                  <div>
                      <component :is="item.icon" />
-                  </NuxtLink>
+                  </div>
                </li>
             </div>
          </div>
@@ -40,9 +40,9 @@ let items = ref([
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/home/running5.svg'))),
    },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/home/running6.svg'))),
-   },
+   // {
+   //    icon: markRaw(defineAsyncComponent(() => import('@/assets/img/home/running6.svg'))),
+   // },
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/home/running7.svg'))),
    },

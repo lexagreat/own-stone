@@ -98,7 +98,7 @@
                </ul>
             </li>
             <li class="catalog-filters__btns">
-               <UiButton class="white">
+               <UiButton class="white map">
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
