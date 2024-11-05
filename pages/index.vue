@@ -11,6 +11,7 @@
       <SectionsHomeRewards />
       <SectionsHomeOffice />
       <SectionsHomeMedia />
+      <SectionsHomeReviews />
       <SectionsHomeSubscribe />
       <SectionsHomePartners />
       <SectionsHomeTaxi />
@@ -18,4 +19,5 @@
    </main>
 </template>
 <script setup>
+
 </script>
