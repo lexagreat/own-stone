@@ -85,6 +85,8 @@ onMounted(() => {
 .v-select {
    cursor: pointer;
    position: relative;
+   position: relative;
+   z-index: 10;
    max-width: fit-content;
 
    &.open {
@@ -105,7 +107,7 @@ onMounted(() => {
    &__wrapper {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 12px;
    }
 
    &__icon {

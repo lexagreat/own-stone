@@ -7,7 +7,16 @@
                <span class="selection-section__count">3 100 объектов </span>
             </div>
             <div class="selection-section__main">
-               <CatalogFilters :isOpenModal="isOpenModal" @closeModal="isOpenModal = false" />
+               <ul class="selection-section__radios">
+                  <li v-for="(item, index) in types" :key="index">
+                     <input v-model="type" type="radio" :value="item.value" :id="'selectionRadio' + item.value"
+                        name="selectionRadio">
+                     <label :for="'selectionRadio' + item.value">
+                        <span>{{ item.name }}</span>
+                     </label>
+                  </li>
+               </ul>
+               <CatalogFilters :type="type" :isOpenModal="isOpenModal" @closeModal="isOpenModal = false" />
             </div>
             <div class="catalog-filters__controls">
                <UiButton class="black" @click="isOpenModal = true">
@@ -26,4 +35,21 @@
 <script setup>
 import filterIcon from '@/assets/img/icons/filter.svg'
 const isOpenModal = ref(false)
+
+
+const types = ref([
+   {
+      name: 'Новостройки',
+      value: "build",
+   },
+   {
+      name: 'Вторичная',
+      value: "secondary",
+   },
+   {
+      name: 'Коммерция ',
+      value: "commerce",
+   },
+])
+const type = ref("build")
 </script>

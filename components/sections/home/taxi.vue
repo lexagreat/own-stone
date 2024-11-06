@@ -13,4 +13,11 @@
       </div>
    </section>
 </template>
-<script setup></script>
+<script setup>
+import { taxiAnimation } from '@/assets/js/animations'
+
+onMounted(() => {
+   taxiAnimation()
+})
+
+</script>

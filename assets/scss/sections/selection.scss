@@ -36,7 +36,6 @@
    &__main {
       display: flex;
       flex-direction: column;
-      gap: 25px;
    }
 
    // .selection-section__radios
@@ -45,6 +44,9 @@
       display: flex;
       gap: 8px;
       border-bottom: 1px solid $black-15;
+      @media (max-width: $tablet) {
+         display: none;
+      }
       li {
          input {
             display: none;

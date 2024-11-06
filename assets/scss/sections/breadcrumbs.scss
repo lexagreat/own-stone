@@ -1,0 +1,26 @@
+.breadcrumbs {
+   // .breadcrumbs__list
+
+   &__list {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      justify-content: center;
+      a {
+         color: rgba(24, 24, 24, 0.3);
+         font-family: $fontArial;
+         font-size: 13px;
+         font-weight: 400;
+         line-height: 140%; /* 18.2px */
+         display: flex;
+         align-items: center;
+         gap: 2px;
+         &::after {
+            content: "/";
+         }
+      }
+      li:last-child a::after {
+         display: none;
+      }
+   }
+}

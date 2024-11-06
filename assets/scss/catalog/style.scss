@@ -1,0 +1,204 @@
+.catalog {
+   background-color: #f8f8f8;
+}
+.catalog-hero {
+   margin-top: 8px;
+   // .catalog-hero__title
+
+   &__title {
+      margin: 50px 0;
+      text-align: center;
+      span {
+         color: rgba(24, 24, 24, 0.5);
+      }
+   }
+   @media (max-width: $mobile) {
+      margin-top: 12px;
+   }
+}
+.catalog-page {
+   &__wrapper {
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+   }
+   // .catalog-page__filters
+
+   &__filters {
+      .container > ul {
+         display: flex;
+         justify-content: center;
+         gap: 8px;
+         border-bottom: 1px solid $black-15;
+         width: 100%;
+         a {
+            color: $black-50;
+            @include regular-13;
+            transition: $transition;
+            position: relative;
+            padding: 8px;
+            display: flex;
+            &::after {
+               content: "";
+               position: absolute;
+               display: block;
+               top: 100%;
+               left: 0;
+               width: 100%;
+               height: 1px;
+               background-color: $black;
+               transform-origin: left;
+               scale: 0;
+               transition: $transition;
+            }
+            @media (hover: hover) {
+               &:hover {
+                  color: $black;
+                  &::after {
+                     scale: 1;
+                  }
+               }
+            }
+            &.router-link-active {
+               color: $black;
+               &::after {
+                  scale: 1;
+               }
+            }
+         }
+      }
+   }
+   &__list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+   }
+   &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      .all-filters {
+         display: none;
+         @media (max-width: $tablet) {
+            display: flex;
+            flex: 1;
+         }
+      }
+   }
+
+   // .catalog-page__sort
+
+   &__sort {
+      .mobile {
+         display: none;
+      }
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      & > span {
+         color: rgba(24, 24, 24, 0.5);
+         font-size: 13px;
+      }
+   }
+
+   // .catalog-page__controls
+
+   &__controls {
+      display: flex;
+      gap: 8px;
+   }
+
+   // .catalog-page__views
+
+   &__views {
+      display: flex;
+      gap: 8px;
+      input {
+         display: none;
+      }
+      label {
+         --size: 48px;
+         cursor: pointer;
+         transition: $transition;
+         background-color: $white;
+         border: 1px solid rgba(0, 0, 0, 0.15);
+
+         svg path {
+            fill: $black;
+            transition: $transition;
+         }
+      }
+      input:checked + label {
+         background-color: $black;
+         svg path {
+            fill: $white;
+         }
+      }
+   }
+
+   // .catalog-page__map
+
+   &__map {
+   }
+   @media (max-width: $tablet) {
+      &__wrapper {
+         padding-top: 30px;
+      }
+      &__list {
+         grid-template-columns: repeat(3, 1fr);
+         column-gap: 10px;
+         row-gap: 30px;
+      }
+      &__header {
+         gap: 10px;
+      }
+      &__controls {
+         gap: 10px;
+      }
+      &__views {
+         gap: 10px;
+      }
+   }
+   @media (max-width: 768px) {
+      &__list {
+         grid-template-columns: repeat(2, 1fr);
+      }
+   }
+   @media (max-width: $mobile) {
+      &__header {
+         gap: 8px;
+      }
+      &__controls {
+         gap: 8px;
+      }
+      &__views {
+         gap: 8px;
+      }
+      &__list {
+         grid-template-columns: 1fr;
+         gap: 12px;
+      }
+      &__sort {
+         .v-select,
+         & > span {
+            display: none;
+         }
+         .mobile {
+            display: flex;
+            --size: 48px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: $white;
+         }
+      }
+      &__map {
+         width: 48px;
+         flex: 0 0 48px;
+         height: 48px;
+         padding: 0;
+         span {
+            display: none;
+         }
+      }
+   }
+}

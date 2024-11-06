@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal }">
+   <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog }">
       <div class="catalog-filters__header">
          <button class="circle circle40" @click="emit('closeModal')">
             <ArrowDownIcon style="rotate: 90deg;" />
@@ -7,18 +7,9 @@
          <h3 class="catalog-filters__title">Фильтр</h3>
          <button class="catalog-filters__reset">Сбросить все</button>
       </div>
-      <ul class="selection-section__radios">
-         <li v-for="(item, index) in types" :key="index">
-            <input v-model="type" type="radio" :value="item.value" :id="'selectionRadio' + item.value"
-               name="selectionRadio">
-            <label :for="'selectionRadio' + item.value">
-               <span>{{ item.name }}</span>
-            </label>
-         </li>
-      </ul>
       <ul class="catalog-filters__radios">
          <li v-for="(item, index) in types" :key="index">
-            <input v-model="type" type="radio" :value="item.value" :id="'catalogRadio' + item.value"
+            <input v-model="myType" type="radio" :value="item.value" :id="'catalogRadio' + item.value"
                name="catalogRadio">
             <label :for="'catalogRadio' + item.value">
                <component :is="item.icon" />
@@ -95,10 +86,16 @@
                         :id="'catalogFilterOptions' + item.value" name="catalogFilterOptions">
                      <label class="circle" :for="'catalogFilterOptions' + item.value">{{ item.name }}</label>
                   </li>
+                  <li v-if="fromCatalog">
+                     <UiButton class="white all-filters">
+                        <IconFilter />
+                        <span>Все фильтры</span>
+                     </UiButton>
+                  </li>
                </ul>
             </li>
             <li class="catalog-filters__btns">
-               <UiButton class="white map">
+               <UiButton class="white map" v-if="!fromCatalog">
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
@@ -111,9 +108,12 @@
 <script setup>
 import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber, formatPrice } from "~/utils/formattingNumbers";
+import IconFilter from '@/assets/img/icons/filter.svg'
 import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
 const props = defineProps({
-   isOpenModal: Boolean
+   isOpenModal: Boolean,
+   type: String,
+   fromCatalog: Boolean
 })
 const emit = defineEmits(["closeModal"])
 const types = ref([
@@ -133,7 +133,7 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const type = ref(0)
+const myType = ref(0)
 
 const categories = ref([
    {
@@ -253,3 +253,12 @@ watch(() => props.isOpenModal, (value) => {
    }
 })
 </script>
+
+
+<style lang="scss">
+.all-filters {
+   svg path {
+      fill: black;
+   }
+}
+</style>

@@ -1,4 +1,11 @@
 .catalog-filters {
+   &_catalog {
+      .catalog-filters {
+         &__content {
+            background-color: transparent;
+         }
+      }
+   }
    // .catalog-filters__content
    &__header {
       display: none;

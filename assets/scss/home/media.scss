@@ -7,8 +7,11 @@
       padding-top: 80px;
       display: flex;
 
-      gap: 80px;
-      justify-content: space-between;
+      gap: 220px;
+      justify-content: center;
+      @media (max-width: $tablet) {
+         gap: 80px;
+      }
    }
 
    // .home-media__visual

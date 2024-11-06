@@ -14,7 +14,7 @@
       display: block;
    }
    &__wrapper {
-      height: 70px;
+      height: var(--headerHeight);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -160,9 +160,9 @@
       .circle {
          --size: 32px;
       }
-      &__wrapper {
-         height: 56px;
-      }
+      // &__wrapper {
+      //    height: 56px;
+      // }
       &__logo {
          svg {
             width: 63px;
