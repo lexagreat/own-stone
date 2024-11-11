@@ -17,7 +17,7 @@
                @closeModal="isFiltersOpen = false" />
          </div>
       </section>
-      <div class="catalog-page">
+      <section class="catalog-page">
          <div class="container">
             <div class="catalog-page__wrapper">
                <div class="catalog-page__header">
@@ -54,7 +54,7 @@
                         <CatalogCard />
                      </li>
                   </ul>
-                  <div class="catalog-banner">benner</div>
+                  <BannersCatalogObject />
                   <ul class="catalog-page__list">
                      <li v-for="item in 8">
                         <CatalogCard />
@@ -63,7 +63,14 @@
                </div>
             </div>
          </div>
-      </div>
+      </section>
+      <CatalogPagination />
+      <SectionsProductSlider>
+         Вы ранее <span>смотрели</span>
+      </SectionsProductSlider>
+      <SectionsProductSlider>
+         Вам <span>подходит</span>
+      </SectionsProductSlider>
    </main>
 </template>
 <script setup>

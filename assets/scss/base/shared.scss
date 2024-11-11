@@ -85,6 +85,18 @@
       @include h4-mobile;
    }
 }
+.dark-title {
+   color: $black;
+   span {
+      color: $black-50;
+   }
+}
+.light-title {
+   color: $white;
+   span {
+      color: $white-50;
+   }
+}
 .body-text {
    @include body-text;
 }

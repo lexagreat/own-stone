@@ -202,3 +202,125 @@
       }
    }
 }
+
+.object-banner {
+   margin: 60px 0;
+   // .object-banner__wrapper
+
+   &__wrapper {
+      padding: 50px;
+      padding-right: 164px;
+      background-color: $black;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+   }
+
+   // .object-banner__title
+
+   &__title {
+      color: $white;
+      span {
+         color: rgba(255, 255, 255, 0.5);
+      }
+   }
+
+   // .object-banner__main
+
+   &__main {
+      max-width: 510px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      .btn {
+         width: fit-content;
+      }
+      p {
+         color: $white;
+      }
+   }
+   @media (max-width: $tablet) {
+      margin: 30px 0;
+      &__wrapper {
+         flex-direction: column;
+         padding: 40px;
+         align-items: center;
+         text-align: center;
+      }
+
+      &__main {
+         max-width: unset;
+         text-align: center;
+         align-items: center;
+      }
+   }
+   @media (max-width: $mobile) {
+      margin: 12px 0;
+      &__wrapper {
+         padding: 48px 12px;
+         gap: 30px;
+      }
+      &__main {
+      }
+   }
+}
+.catalog-pagination {
+   margin-top: 80px;
+   margin-bottom: var(--margin);
+   // .catalog-pagination__wrapper
+
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+   }
+
+   // .catalog-pagination__list
+
+   &__list {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-family: $fontMontreal;
+      button {
+         --size: 40px;
+         width: var(--size);
+         height: var(--size);
+         flex: 0 0 var(--size);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: rgba(24, 24, 24, 0.5);
+         font-size: 13px;
+         font-weight: 500;
+         transition-property: $transition;
+         @media (max-width: 389px) {
+            --size: 32px;
+         }
+         &.active {
+            color: #181818;
+            svg path {
+               stroke-opacity: 1;
+            }
+         }
+      }
+      svg {
+         transition: $transition;
+         path {
+            stroke-opacity: 0.2;
+         }
+      }
+   }
+
+   // .catalog-pagination__prev
+
+   &__prev {
+   }
+
+   // .catalog-pagination__next
+
+   &__next {
+   }
+}

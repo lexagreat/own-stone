@@ -12,7 +12,7 @@
       <SectionsHomeOffice />
       <SectionsHomeMedia />
       <SectionsHomeReviews />
-      <SectionsHomeSubscribe />
+      <BannersHomeSubscribe />
       <SectionsHomePartners />
       <SectionsHomeTaxi />
       <SectionsForm />
