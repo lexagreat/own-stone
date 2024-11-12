@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-card">
+   <div class="catalog-card with-hover">
       <div class="catalog-card__gallery">
          <ul>
             <li v-for="item in 3" @mouseenter="onMouseenter(item)"></li>
@@ -83,7 +83,7 @@
                </li>
             </ul>
             <div class="catalog-card__btns">
-               <UiButton class="white">Подробнее о проекте</UiButton>
+               <NuxtLink class="btn white" to="/project/lexagreat">Подробнее о проекте</NuxtLink>
                <button class="circle">
                   <IconPhone />
                </button>

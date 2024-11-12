@@ -49,17 +49,12 @@
                   </div>
                </div>
                <div class="catalog-page__main">
-                  <ul class="catalog-page__list">
-                     <li v-for="item in 8">
-                        <CatalogCard />
-                     </li>
-                  </ul>
+                  <CatalogListsGrid v-if="currentView == 'grid'" />
+                  <CatalogListsColumn v-if="currentView == 'column'" />
                   <BannersCatalogObject />
-                  <ul class="catalog-page__list">
-                     <li v-for="item in 8">
-                        <CatalogCard />
-                     </li>
-                  </ul>
+                  <CatalogListsGrid v-if="currentView == 'grid'" />
+                  <CatalogListsColumn v-if="currentView == 'column'" />
+
                </div>
             </div>
          </div>
@@ -88,7 +83,7 @@ let path = ref([
    },
    {
       name: "Купить",
-      to: "/catalog/" + type
+      to: ""
    },
 ])
 
@@ -132,15 +127,15 @@ const types = ref([
 const views = ref([
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/card.svg'))),
-      value: 'table'
+      value: 'grid'
    },
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/list.svg'))),
-      value: 'list'
+      value: 'column'
 
    },
 ])
-const currentView = ref("table")
+const currentView = ref("grid")
 const sortSettings = ref({
    options: [
       {

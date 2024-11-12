@@ -19,7 +19,7 @@
       </ul>
       <div class="catalog-filters__content">
          <ul class="catalog-filters__items">
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title"></span>
                <ul class="catalog-filter__categories">
                   <li v-for="(item, index) in categories" :key="index">
@@ -29,7 +29,7 @@
                   </li>
                </ul>
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Количество комнат</span>
                <ul class="catalog-filter__rooms">
                   <li v-for="item in 5">
@@ -53,7 +53,7 @@
                      :maxValue="areaMaxValue" @input="UpdateAreas" />
                </div>
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Отделка</span>
                <UiSelect :settings="repairSettings" @selectOption="onSelectRepairOption" />
             </li>
@@ -70,28 +70,44 @@
                      :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
                </div>
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="type == 'commerce'">
+               <span class="catalog-filter__title">Назначение</span>
+               <UiSelect :settings="targetSettings" @selectOption="onSelectTargetOption" />
+            </li>
+            <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title">Срок сдачи</span>
                <UiSelect :settings="dateSettings" @selectOption="onSelectDateOption" />
             </li>
             <li class="catalog-filter">
-               <span class="catalog-filter__title">Расположение</span>
+               <span class="catalog-filter__title">Локация</span>
                <UiSelect :settings="placementSettings" @selectOption="onSelectPlacementOption" />
+            </li>
+            <li class="catalog-filter">
+               <span class="catalog-filter__title">Внутри транспортных колец</span>
+               <UiSelect :settings="transportSettings" @selectOption="onSelectTransportOption" />
+            </li>
+            <li class="catalog-filter" v-if="type == 'commerce'">
+               <span class="catalog-filter__title">Этаж</span>
+               <UiSelect :settings="floorSettings" @selectOption="onSelectFloorOption" />
+            </li>
+            <li class="catalog-filter" v-if="type == 'commerce'">
+               <span class="catalog-filter__title">Вход</span>
+               <UiSelect :settings="entrySettings" @selectOption="onSelectEntryOption" />
             </li>
             <li class="catalog-filter">
                <span class="catalog-filter__title"></span>
                <ul class="catalog-filter__options catalog-filter__rooms">
-                  <li v-for="item in options">
+                  <li v-for="item in filteredOptions">
                      <input v-model="checkedOptions" type="checkbox" :value="item.value"
                         :id="'catalogFilterOptions' + item.value" name="catalogFilterOptions">
                      <label class="circle" :for="'catalogFilterOptions' + item.value">{{ item.name }}</label>
                   </li>
-                  <li v-if="fromCatalog">
+                  <!-- <li v-if="fromCatalog">
                      <UiButton class="white all-filters">
                         <IconFilter />
                         <span>Все фильтры</span>
                      </UiButton>
-                  </li>
+                  </li> -->
                </ul>
             </li>
             <li class="catalog-filters__btns">
@@ -189,6 +205,24 @@ const placementOption = ref(null)
 function onSelectPlacementOption(option) {
    placementOption.value = option
 }
+const transportSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "Важно",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const transportOption = ref(null)
+function onSelectTransportOption(option) {
+   transportOption.value = option
+}
 const dateSettings = ref({
    options: [
       {
@@ -206,6 +240,60 @@ const dateSettings = ref({
 const dateOption = ref(null)
 function onSelectDateOption(option) {
    dateOption.value = option
+}
+const targetSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "Важно",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const targetOption = ref(null)
+function onSelectTargetOption(option) {
+   targetOption.value = option
+}
+const floorSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "Важно",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const floorOption = ref(null)
+function onSelectFloorOption(option) {
+   floorOption.value = option
+}
+const entrySettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "Важно",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const entryOption = ref(null)
+function onSelectEntryOption(option) {
+   entryOption.value = option
 }
 
 
@@ -230,20 +318,48 @@ const UpdateAreas = (e) => {
 
 const options = ref([
    {
-      name: "В Хамовниках",
-      value: 0
+      name: "Старт продаж",
+      value: 0,
+      types: [
+         "build",
+         "commerce",
+      ]
    },
    {
-      name: "Рассрочка",
-      value: 1
+      name: "В Хамовниках",
+      value: 1,
+      types: [
+         "build",
+      ]
    },
    {
       name: "Вид на парк",
-      value: 2
+      value: 2,
+      types: [
+         "build",
+      ]
+   },
+   {
+      name: "Цена снижена",
+      value: 3,
+      types: [
+         "secondary",
+      ]
+   },
+   {
+      name: "Эксклюзив",
+      value: 4,
+      types: [
+         "secondary",
+      ]
    },
 ])
 const checkedOptions = ref([])
-
+const filteredOptions = computed(() => {
+   return options.value.filter(item => {
+      return item.types.includes(props.type)
+   })
+})
 
 watch(() => props.isOpenModal, (value) => {
    if (value) {

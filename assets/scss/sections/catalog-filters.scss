@@ -158,6 +158,8 @@
    }
 }
 .catalog-filter {
+   // max-width: 280px;
+   // flex: 1;
    justify-content: end;
    display: flex;
    flex-direction: column;
@@ -178,7 +180,13 @@
 
    &__categories {
       display: grid;
-      grid-template-columns: repeat(2, 110px);
+      grid-template-columns: repeat(2, 1fr);
+      & > li {
+         min-width: 110px;
+         @media (max-width: $tablet) {
+            min-width: unset;
+         }
+      }
       input {
          display: none;
       }
@@ -234,16 +242,19 @@
    }
    .v-select {
       &__wrapper {
-         width: 220px;
+         min-width: 220px;
+         width: 100%;
       }
       @media (max-width: $tablet) {
          max-width: 100%;
+         min-width: unset;
          &__wrapper {
             width: 100%;
          }
       }
    }
    @media (max-width: $tablet) {
+      max-width: unset;
       &__categories {
          grid-template-columns: repeat(2, 1fr);
       }

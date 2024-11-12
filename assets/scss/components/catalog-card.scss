@@ -9,14 +9,37 @@
    gap: 18px;
    border-radius: 8px;
    overflow: hidden;
-
+   &_object {
+      .catalog-card {
+         &__tags {
+            li {
+               color: $black;
+               border: 1px solid rgba(24, 24, 24, 0.07);
+            }
+         }
+         &__like {
+            border-radius: 34px;
+            background: rgba(24, 24, 24, 0.05);
+            svg path {
+               stroke: #181818;
+            }
+         }
+      }
+   }
    // .catalog-card__gallery
-   &:has(.catalog-card__main:hover) {
+   &.with-hover:has(.catalog-card__main:hover) {
       .catalog-card {
          &__gallery {
             height: 71px;
             @media (max-width: 1400px) {
                height: calc(60px + 11 * ((100vw - 1024px) / (1400 - 1024)));
+            }
+         }
+      }
+      @media (max-width: $tablet) {
+         .catalog-card {
+            &__gallery {
+               height: 215px;
             }
          }
       }

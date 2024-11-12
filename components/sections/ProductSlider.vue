@@ -18,7 +18,7 @@
                   }
                }">
                   <SwiperSlide v-for="item in 8">
-                     <CatalogCard />
+                     <CatalogCardsProject />
                   </SwiperSlide>
                </Swiper>
             </div>
