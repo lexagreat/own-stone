@@ -79,6 +79,53 @@
                </ul>
             </div>
          </div>
+         <div class="header-menu scrollbar-none" :class="{ active: isBurgerOpen }">
+            <ul class="header-menu__list">
+               <li>
+                  <NuxtLink to="/">Купить</NuxtLink>
+               </li>
+               <li>
+                  <NuxtLink to="/">Продать</NuxtLink>
+               </li>
+               <li>
+                  <NuxtLink to="/">Услуги</NuxtLink>
+               </li>
+               <li>
+                  <NuxtLink to="/">Партнерам</NuxtLink>
+               </li>
+               <li>
+                  <NuxtLink to="/">О нас</NuxtLink>
+               </li>
+               <li>
+                  <NuxtLink to="/">Контакты</NuxtLink>
+               </li>
+            </ul>
+            <div class="header__schedule">
+               <span>Нащокинский пер., 8</span>
+               <span>Ежедневно: 10:00 – 20:00</span>
+            </div>
+            <div class="header-menu__form">
+               <span>Связаться с нами</span>
+               <ul>
+                  <li>
+                     <a href="tel:+7 (993) 338-07 07">+7 (993) 338-07 07</a>
+                  </li>
+                  <ul class="header__icons">
+                     <li>
+                        <NuxtLink class="circle">
+                           <TgIcon />
+                        </NuxtLink>
+                     </li>
+                     <li>
+                        <NuxtLink class="circle">
+                           <WhatsappIcon />
+                        </NuxtLink>
+                     </li>
+                  </ul>
+               </ul>
+               <UiButton class="white">Заказать звонок</UiButton>
+            </div>
+         </div>
       </div>
    </header>
 </template>
