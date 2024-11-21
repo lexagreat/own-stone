@@ -7,8 +7,8 @@
                   <slot />
                </h2>
                <div class="product-slider__btns">
-                  <UiSliderBtn prev @click="slidePrev" />
-                  <UiSliderBtn next @click="slideNext" />
+                  <UiSliderBtn prev @click="slidePrev" :white="whiteBtns" />
+                  <UiSliderBtn next @click="slideNext" :white="whiteBtns" />
                </div>
             </div>
             <div class="product-slider__main">
@@ -27,6 +27,9 @@
    </section>
 </template>
 <script setup>
+const props = defineProps({
+   whiteBtns: Boolean
+})
 const swiperInst = ref(null)
 const onSwiper = (swiper) => {
    swiperInst.value = swiper;

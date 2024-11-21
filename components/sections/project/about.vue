@@ -28,7 +28,7 @@
                </div>
             </div>
             <div class="project-about__main">
-               <ul class="project-about__tabs app-tabs">
+               <ul class="project-about__tabs app-tabs scrollbar-none">
                   <li v-for="item in tabs" :key="item">
                      <input type="radio" name="projectAbout" :value="item.value" :id="'project' + item.value"
                         v-model="tab">
@@ -36,13 +36,13 @@
                   </li>
                </ul>
                <div class="project-about__slider">
-                  <Swiper @swiper="onSwiper" :slides-per-view="1">
+                  <Swiper :modules="[SwiperPagination]" @swiper="onSwiper" :slides-per-view="1" :pagination="true">
                      <SwiperSlide v-for="item in 3">
                         <img src="/img/project/about-1.png" alt="">
                      </SwiperSlide>
                   </Swiper>
-                  <UiSliderBtn prev @click="SwiperInst.slidePrev()" />
-                  <UiSliderBtn next @click="SwiperInst.slideNext()" />
+                  <UiSliderBtn prev transparent @click="SwiperInst.slidePrev()" />
+                  <UiSliderBtn next transparent @click="SwiperInst.slideNext()" />
                </div>
 
             </div>

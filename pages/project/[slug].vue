@@ -5,12 +5,12 @@
       <SectionsProjectChars />
       <SectionsProjectFeatures />
       <SectionsProjectFilters />
-      <SectionsProjectFilters />
-      <SectionsProjectBuyWays />
-      <SectionsProjectPosition />
-      <SectionsProjectNearPlaces />
-      <SectionsProjectDocuments />
-      <section class="project-sliders">
+      <SectionsProjectFilters v-if="false" />
+      <SectionsProjectBuyWays v-if="false" />
+      <SectionsProjectPosition v-if="false" />
+      <SectionsProjectNearPlaces v-if="false" />
+      <SectionsProjectDocuments v-if="false" />
+      <section class="project-sliders" v-if="false">
          <SectionsProductSlider>
             похожие <span>предложения</span>
          </SectionsProductSlider>

@@ -33,7 +33,7 @@
    </section>
 </template>
 <script setup>
-import filterIcon from '@/assets/img/icons/filter.svg'
+import FilterIcon from '@/assets/img/icons/filter.svg'
 const isOpenModal = ref(false)
 
 

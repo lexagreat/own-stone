@@ -10,7 +10,7 @@
                </div>
             </div>
             <div class="project-features__main">
-               <Swiper @swiper="onSwiper" :slides-per-view="3" :space-between="10">
+               <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop>
                   <SwiperSlide>
                      <div class="project-feature">
                         <img src="/img/project/feature1.png" alt="">
@@ -100,6 +100,11 @@
 </template>
 <script setup>
 const swiper = ref(null)
+const breakpoints = {
+   1025: {
+      slidesPerView: 3
+   }
+}
 const onSwiper = (s) => {
    swiper.value = s;
 }

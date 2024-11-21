@@ -241,17 +241,20 @@
       }
    }
    .v-select {
-      &__wrapper {
-         min-width: 220px;
-         width: 100%;
-      }
-      @media (max-width: $tablet) {
-         max-width: 100%;
-         min-width: unset;
-         &__wrapper {
-            width: 100%;
-         }
-      }
+      max-width: unset;
+      width: 100%;
+      // &__wrapper {
+      //    min-width: 220px;
+      //    width: 100%;
+      // }
+      // @media (max-width: $tablet) {
+      //    max-width: 100%;
+      //    min-width: unset;
+      //    &__wrapper {
+      //       min-width: unset;
+      //       width: 100%;
+      //    }
+      // }
    }
    @media (max-width: $tablet) {
       max-width: unset;
