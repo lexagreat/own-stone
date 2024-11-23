@@ -737,3 +737,378 @@
       }
    }
 }
+.buy-ways {
+   padding: var(--padding) 0;
+   // .buy-ways__wrapper
+
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+   }
+
+   // .buy-ways__title
+
+   &__title {
+   }
+
+   // .buy-ways__main
+
+   &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+   }
+
+   // .buy-ways__row
+
+   &__row {
+      display: flex;
+      gap: 10px;
+   }
+
+   // .buy-ways__form
+
+   &__form {
+      flex: 0 0 447px;
+      border-radius: 8px;
+      background: var(--Brand-Light-Gray, #f1f1f1);
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      height: fit-content;
+      .v-select {
+         max-width: unset;
+      }
+      .catalog-range {
+         &__output {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            span {
+               width: 100% !important;
+            }
+         }
+      }
+   }
+   &__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 33px;
+      position: relative;
+   }
+   // .buy-ways__subtitle
+
+   &__subtitle {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 115%; /* 27.6px */
+      text-transform: uppercase;
+   }
+
+   // .buy-ways__filters
+
+   &__filters {
+      display: flex;
+      flex-direction: column;
+      gap: 27px;
+      & > li {
+         display: flex;
+         flex-direction: column;
+         gap: 14px;
+         & > span {
+            color: $black-50;
+            @include regular-13;
+         }
+      }
+   }
+
+   // .buy-ways__items
+
+   &__items {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+   }
+
+   // .buy-ways__cats
+
+   &__cats {
+      padding-right: 20px;
+      display: grid;
+      grid-template-columns: 1fr repeat(4, auto);
+      gap: 75px;
+      align-items: center;
+      & > span {
+         color: rgba(0, 0, 0, 0.4);
+         font-family: $fontArial;
+         font-size: 13px;
+         font-weight: 400;
+         line-height: 140%; /* 18.2px */
+      }
+      .v-select__wrapper {
+         height: unset;
+         padding: unset;
+      }
+      @media (max-width: 1440px) {
+         gap: calc(32px + 43 * ((100vw - 1024px) / (1440 - 1024)));
+      }
+   }
+
+   // .buy-ways__list
+
+   &__list {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      height: 532px;
+      overflow: auto; /* Добавляет скролл, если содержимое превышает доступное пространство */
+      &_instal {
+         height: calc(609px - 36px);
+      }
+   }
+   @media (max-width: $tablet) {
+      &__row {
+         flex-direction: column;
+      }
+      &__cats {
+         gap: 0;
+         justify-content: space-between;
+         padding: 0;
+         .desktop {
+            display: none;
+         }
+         &_instal {
+            display: none;
+         }
+      }
+      &__list {
+         flex-direction: row;
+         height: unset !important;
+         margin-left: calc(-1 * var(--containerPadding));
+         margin-right: calc(-1 * var(--containerPadding));
+         padding-left: calc(1 * var(--containerPadding));
+         padding-right: calc(1 * var(--containerPadding));
+         width: 100vw;
+         overflow: auto;
+         & > li {
+            flex: 0 0 447px;
+         }
+      }
+   }
+   @media (max-width: $mobile) {
+      &__list {
+         & > li {
+            flex: 0 0 333px;
+         }
+      }
+      &__form {
+         gap: 30px;
+         padding: 35px 12px;
+      }
+   }
+}
+.ipoteka-card {
+   border-radius: 8px;
+   background: var(--Brand-Light-Gray, #f1f1f1);
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   gap: 56px;
+   @media (max-width: 1440px) {
+      gap: calc(16px + 40 * ((100vw - 1024px) / (1440 - 1024)));
+   }
+   // .ipoteka-card__main
+   &_instal {
+      gap: 90px;
+      .ipoteka-card__main {
+         flex: 0 0 190px;
+         @media (max-width: 1440px) {
+            flex: 0 0 calc(90px + 100 * ((100vw - 1024px) / (1440 - 1024)));
+         }
+         @media (max-width: $tablet) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            flex: unset;
+         }
+      }
+      .ipoteka-card__subtitle {
+         display: none;
+         @media (max-width: $tablet) {
+            display: block;
+            color: var(--black-50, rgba(24, 24, 24, 0.5));
+            font-family: $fontArial;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%; /* 18.2px */
+         }
+      }
+      @media (max-width: 1440px) {
+         gap: calc(40px + 50 * ((100vw - 1024px) / (1440 - 1024)));
+      }
+      @media (max-width: $tablet) {
+         gap: 20px;
+      }
+   }
+   &__main {
+      flex: 0 0 272px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      @media (max-width: 1440px) {
+         flex: 0 0 calc(140px + 132 * ((100vw - 1024px) / (1440 - 1024)));
+         gap: calc(12px + 20 * ((100vw - 1024px) / (1440 - 1024)));
+      }
+      @media (max-width: $tablet) {
+         gap: 20px;
+      }
+   }
+   &__image {
+      --size: 48px;
+   }
+   // .ipoteka-card__info
+
+   &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+   }
+
+   // .ipoteka-card__item
+
+   &__item {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 100%; /* 16px */
+      @media (max-width: 1440px) {
+         font-size: calc(12px + 4 * ((100vw - 1024px) / (1440 - 1024)));
+      }
+   }
+   &__btn {
+      flex: 1;
+      justify-self: end;
+   }
+   &__price {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 115%; /* 23px */
+      justify-self: end;
+      flex: 1;
+      text-align: right;
+      @media (max-width: $tablet) {
+         display: none;
+      }
+   }
+   & > ul {
+      display: none;
+   }
+   @media (max-width: $tablet) {
+      flex-direction: column;
+      gap: 20px;
+      align-items: unset;
+      & > ul {
+         display: flex;
+         flex-direction: column;
+         gap: 16px;
+         li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
+            span:nth-child(1) {
+               color: var(--black-50, rgba(24, 24, 24, 0.5));
+               font-family: $fontArial;
+               font-size: 13px;
+               font-style: normal;
+               font-weight: 400;
+               line-height: 140%; /* 18.2px */
+            }
+            span:nth-child(2) {
+               color: var(--black-100, #181818);
+               font-family: $fontMontreal;
+               font-size: 16px;
+               font-style: normal;
+               font-weight: 500;
+               line-height: normal;
+            }
+         }
+      }
+      & > .ipoteka-card__item {
+         display: none;
+      }
+      &__main {
+         flex: unset;
+      }
+      &__item {
+         font-size: 16px;
+      }
+      .btn {
+         height: 37px;
+         flex: 0 0 37px;
+      }
+   }
+}
+.ipoteka-banner {
+   border-radius: 8px;
+   background: var(--black-100, #181818);
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 24px;
+   padding: 30px 20px;
+   // .ipoteka-banner__image
+
+   &__image {
+      max-width: 270px;
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+
+   // .ipoteka-banner__main
+
+   &__main {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      .btn {
+         width: fit-content;
+      }
+   }
+
+   // .ipoteka-banner__text
+
+   &__text {
+      max-width: 340px;
+      color: white;
+   }
+   @media (max-width: $tablet) {
+      gap: 30px;
+      flex-direction: column;
+      padding: 30px 12px;
+      &__main {
+         gap: 20px;
+         flex-direction: column;
+         text-align: center;
+      }
+   }
+   @media (max-width: $mobile) {
+      &__main {
+         gap: 30px;
+      }
+   }
+}

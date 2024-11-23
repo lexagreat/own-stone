@@ -22,6 +22,9 @@ export default defineNuxtConfig({
          svgLoader(), // Добавляем плагин для работы с SVG как с Vue компонентами
       ],
    },
+   experimental: {
+      typedPages: true,
+   },
    routeRules: {
       "/catalog": { redirect: "/catalog/build" },
    },

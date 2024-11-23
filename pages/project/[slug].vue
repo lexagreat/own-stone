@@ -5,8 +5,7 @@
       <SectionsProjectChars />
       <SectionsProjectFeatures />
       <SectionsProjectFilters />
-      <SectionsProjectFilters v-if="false" />
-      <SectionsProjectBuyWays v-if="false" />
+      <SectionsProjectBuyWays />
       <SectionsProjectPosition v-if="false" />
       <SectionsProjectNearPlaces v-if="false" />
       <SectionsProjectDocuments v-if="false" />

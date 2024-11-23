@@ -140,6 +140,19 @@
          border-color: $black;
       }
    }
+   &.transparent {
+      background-color: transparent;
+      color: $black;
+      border: 1px solid $black-50;
+      @media (hover: hover) {
+         &:hover {
+            border-color: $black;
+         }
+      }
+      &:active {
+         border-color: $black;
+      }
+   }
 }
 
 .slider-btn {
