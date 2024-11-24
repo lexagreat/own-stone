@@ -13,8 +13,8 @@
                   <NuxtLink :to="item.to">{{ item.name }}</NuxtLink>
                </li>
             </ul>
-            <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen"
-               @closeModal="isFiltersOpen = false" />
+            <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @closeModal="isFiltersOpen = false"
+               @changeCategory="onChangeCategory" />
          </div>
       </section>
       <section class="catalog-page">
@@ -49,11 +49,11 @@
                   </div>
                </div>
                <div class="catalog-page__main">
-                  <CatalogListsGrid v-if="currentView == 'grid'" />
-                  <CatalogListsColumn v-if="currentView == 'column'" />
+                  <CatalogListsGrid v-if="currentView == 'grid'" :category="category" />
+                  <CatalogListsColumn v-if="currentView == 'column'" :category="category" />
                   <BannersCatalogObject />
-                  <CatalogListsGrid v-if="currentView == 'grid'" />
-                  <CatalogListsColumn v-if="currentView == 'column'" />
+                  <CatalogListsGrid v-if="currentView == 'grid'" :category="category" />
+                  <CatalogListsColumn v-if="currentView == 'column'" :category="category" />
 
                </div>
             </div>
@@ -76,7 +76,7 @@ import IconGeo from "@/assets/img/icons/geo.svg"
 const route = useRoute()
 const type = route.params.type
 
-let path = ref([
+const path = ref([
    {
       name: "Главная",
       to: "/"
@@ -155,5 +155,8 @@ function onSelectSortOption(option) {
    sortOption.value = option
 }
 const isFiltersOpen = ref(false)
-
+const category = ref(0)
+const onChangeCategory = (value) => {
+   category.value = value
+}
 </script>

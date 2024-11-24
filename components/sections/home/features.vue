@@ -26,7 +26,7 @@
    </section>
 </template>
 <script setup>
-import { featureAnimation } from '@/assets/js/animations'
+import { sharedParallaxAnimation } from '@/assets/js/animations'
 const items = ref([
    {
       number: 8,
@@ -58,7 +58,7 @@ function animateNumber(index) {
    }, interval)
 }
 onMounted(() => {
-   featureAnimation()
+   sharedParallaxAnimation(".home-features__parallax", ".home-features")
    const targetElement = document.querySelector('.home-features__list');
 
    const observer = new IntersectionObserver((entries) => {

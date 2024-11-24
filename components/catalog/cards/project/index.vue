@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-card with-hover">
+   <div class="catalog-card with-hover" :class="{ 'project-card': type == 'row' }">
       <div class="catalog-card__gallery">
          <ul>
             <li v-for="item in 3" @mouseenter="onMouseenter(item)"></li>
@@ -43,8 +43,14 @@
                   <IconMan />
                </li>
             </ul>
+            <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M13 6L8 11L3 6" stroke="#181818" stroke-width="1.33333" stroke-linecap="square"
+                     stroke-linejoin="round" />
+               </svg>
+            </button>
          </div>
-         <div class="catalog-card__footer">
+         <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
             <ul>
                <li>
                   <p>
@@ -97,6 +103,9 @@ import IconMan from '@/assets/img/icons/catalog-card-man.svg'
 import IconDot from '@/assets/img/icons/catalog-card-dot.svg'
 import IconAddress from '@/assets/img/icons/catalog-card-address.svg'
 import IconPhone from '@/assets/img/icons/phone.svg'
+const props = defineProps({
+   type: String
+})
 
 const swiperInstance = ref(null)
 const onSwiper = (swiper) => {
@@ -105,4 +114,32 @@ const onSwiper = (swiper) => {
 const onMouseenter = (index) => {
    swiperInstance.value.slideTo(index - 1)
 }
+const isCollapse = ref(false)
+const spoiler = ref(null)
+const isCollapsed = ref(false)
+onMounted(() => {
+   isCollapse.value = getIsCollapse()
+   window.addEventListener("resize", () => {
+      isCollapse.value = getIsCollapse()
+
+   })
+})
+const getIsCollapse = () => {
+   if (props.type == 'row' && window.innerWidth <= 568) {
+      return true
+   }
+   return false
+}
+
+const collapse = () => {
+   if (spoiler.value.classList.contains("collapse_show")) {
+      slideHide(spoiler.value)
+      isCollapsed.value = false
+   } else {
+      slideShow(spoiler.value);
+      isCollapsed.value = true
+
+   }
+}
+
 </script>

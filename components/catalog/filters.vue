@@ -131,7 +131,7 @@ const props = defineProps({
    type: String,
    fromCatalog: Boolean
 })
-const emit = defineEmits(["closeModal"])
+const emit = defineEmits(["closeModal", "changeCategory"])
 const types = ref([
    {
       name: 'Новостройки',
@@ -368,6 +368,18 @@ watch(() => props.isOpenModal, (value) => {
       bodyUnlock()
    }
 })
+
+
+const categoryCard = computed(() => {
+   if (props.type == 'secondary') {
+      return 0
+   }
+   return category.value
+})
+watch(categoryCard, (value) => {
+   emit('changeCategory', value)
+})
+
 </script>
 
 

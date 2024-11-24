@@ -2,7 +2,7 @@
    <section class="project-chars">
       <div class="container">
          <div class="project-chars__wrapper">
-            <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ</h2>
+            <slot />
             <ul class="project-chars__list">
                <li>
                   <span>Срок сдачи</span>

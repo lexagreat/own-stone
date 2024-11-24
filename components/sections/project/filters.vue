@@ -15,7 +15,7 @@
                   <div class="catalog-filters__content">
                      <ul class="catalog-filters__items">
 
-                        <li class="catalog-filter" id="RoomsCount">
+                        <li class="catalog-filter" id="RoomsCount" v-if="type !== 'commerce'">
                            <span class="catalog-filter__title">Количество комнат</span>
                            <ul class="catalog-filter__rooms">
                               <li v-for="item in 5">
@@ -40,7 +40,7 @@
                                  :minValue="areaMinValue" :maxValue="areaMaxValue" @input="UpdateAreas" />
                            </div>
                         </li>
-                        <li class="catalog-filter">
+                        <li class="catalog-filter" v-if="type !== 'commerce'">
                            <span class="catalog-filter__title">Отделка</span>
                            <UiSelect :settings="repairSettings" @selectOption="onSelectRepairOption" />
                         </li>
@@ -56,6 +56,10 @@
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
                            </div>
+                        </li>
+                        <li class="catalog-filter" v-if="type == 'commerce'">
+                           <span class="catalog-filter__title">Назначение</span>
+                           <UiSelect :settings="targetSettings" @selectOption="onSelectTargetOption" />
                         </li>
                         <li class="catalog-filter">
                            <span class="catalog-filter__title">Срок сдачи</span>
@@ -89,7 +93,7 @@
       <SectionsProductSlider white-btns>
          ТИПЫ <span>планировок</span>
       </SectionsProductSlider>
-      <BannersProjectMoreInfo />
+      <BannersProjectMoreInfo v-if="type !== 'commerce'" />
    </section>
 </template>
 <script setup>
@@ -97,6 +101,11 @@ import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber, formatPrice } from "~/utils/formattingNumbers";
 import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
 import FilterIcon from '@/assets/img/icons/filter.svg'
+const props = defineProps({
+   type: String
+})
+
+
 const isOpenModal = ref(false)
 const roomsChecked = ref([])
 
@@ -140,8 +149,24 @@ const dateOption = ref(null)
 function onSelectDateOption(option) {
    dateOption.value = option
 }
-
-
+const targetSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "Важно",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const targetOption = ref(null)
+function onSelectTargetOption(option) {
+   targetOption.value = option
+}
 
 const priceMin = ref(0)
 const priceMax = ref(50000000)

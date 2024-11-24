@@ -2,14 +2,20 @@
    <main class="main">
       <SectionsProjectHero />
       <SectionsProjectAbout />
-      <SectionsProjectChars />
-      <SectionsProjectFeatures />
+      <SectionsProjectChars>
+         <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ
+         </h2>
+      </SectionsProjectChars>
+      <SectionsProjectFeatures>
+         <h2 class="project-features__title h1 dark-title">преимущества</h2>
+      </SectionsProjectFeatures>
+
       <SectionsProjectFilters />
       <SectionsProjectBuyWays />
-      <SectionsProjectPosition v-if="false" />
-      <SectionsProjectNearPlaces v-if="false" />
-      <SectionsProjectDocuments v-if="false" />
-      <section class="project-sliders" v-if="false">
+      <SectionsProjectPosition />
+      <SectionsProjectNearPlaces />
+      <SectionsProjectDocuments />
+      <section class="project-sliders">
          <SectionsProductSlider>
             похожие <span>предложения</span>
          </SectionsProductSlider>

@@ -2,10 +2,14 @@ $tablet: 1024px;
 $mobile: 568px;
 .wrapper {
    --margin: 160px;
+   --headerHeight: 70px;
+   --containerPadding: 20px;
    @media (max-width: $tablet) {
       --margin: 135px;
    }
    @media (max-width: $mobile) {
+      --headerHeight: 56px;
+      --containerPadding: 12px;
       --margin: 100px;
    }
 }

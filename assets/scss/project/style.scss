@@ -300,6 +300,9 @@
    }
 }
 .project-chars {
+   &_commerce {
+      margin-top: var(--margin);
+   }
    margin-bottom: var(--margin);
    // .project-chars__wrapper
 
@@ -357,6 +360,16 @@
    }
 }
 .project-features {
+   &_commerce {
+      padding: 80px 0;
+      margin-bottom: 0 !important;
+      @media (max-width: $tablet) {
+         padding: 70px 0;
+      }
+      @media (max-width: $mobile) {
+         padding: 60px 0;
+      }
+   }
    margin-bottom: var(--margin);
    // .project-features__wrapper
 
@@ -451,6 +464,7 @@
    }
 }
 .project-documents {
+   margin-top: var(--margin);
    margin-bottom: var(--margin);
    // .project-documents__wrapper
 
@@ -458,6 +472,12 @@
       display: flex;
       flex-direction: column;
       gap: 50px;
+      @media (max-width: $tablet) {
+         gap: 40px;
+      }
+      @media (max-width: $mobile) {
+         gap: 30px;
+      }
    }
 
    // .project-documents__title
@@ -471,6 +491,9 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
+      @media (max-width: $tablet) {
+         grid-template-columns: repeat(2, 1fr);
+      }
    }
 }
 .document-item {
@@ -480,6 +503,7 @@
    display: flex;
    flex-direction: column;
    gap: 20px;
+   position: relative;
    // .document-item__header
 
    &__header {
@@ -508,6 +532,9 @@
       font-size: 18px;
       font-weight: 500;
       line-height: 115%; /* 20.7px */
+      @media (max-width: $mobile) {
+         font-size: 14px;
+      }
    }
 
    // .document-item__footer
@@ -518,10 +545,37 @@
       font-size: 12px;
       font-weight: 500;
    }
+   @media (max-width: $mobile) {
+      padding: 16px;
+      &__header {
+         gap: 7px;
+         a {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+         }
+      }
+      &__title {
+         padding-right: 25px;
+         flex: unset;
+      }
+   }
 }
 
 .near-places {
+   background-color: $black;
+   padding-top: var(--margin);
+   padding-bottom: 80px;
    overflow: hidden;
+   @media (max-width: $tablet) {
+      padding-bottom: 70px;
+   }
+   @media (max-width: $mobile) {
+      padding-bottom: 60px;
+   }
    // .near-places__wrapper
 
    &__wrapper {
@@ -554,6 +608,8 @@
          padding-right: calc((100vw - 1360px) / 2);
          width: 100vw;
          .swiper-slide {
+            border-radius: 8px;
+            overflow: hidden;
             max-width: 333px;
             height: 400px;
             position: relative;
@@ -600,6 +656,18 @@
                left: 24px;
                right: 24px;
                color: $white;
+            }
+         }
+         @media (max-width: 1440px) {
+            margin-left: calc(-1 * var(--containerPadding));
+            margin-right: calc(-1 * var(--containerPadding));
+            padding-left: calc(1 * var(--containerPadding));
+            padding-right: calc(1 * var(--containerPadding));
+         }
+         @media (max-width: $mobile) {
+            .swiper-slide {
+               max-width: 285px;
+               height: 360px;
             }
          }
       }
@@ -738,7 +806,10 @@
    }
 }
 .buy-ways {
-   padding: var(--padding) 0;
+   &_commerce {
+      padding-bottom: 0 !important;
+   }
+   padding: var(--margin) 0;
    // .buy-ways__wrapper
 
    &__wrapper {
@@ -865,7 +936,7 @@
       display: flex;
       gap: 10px;
       flex-direction: column;
-      height: 532px;
+      height: 562px;
       overflow: auto; /* Добавляет скролл, если содержимое превышает доступное пространство */
       &_instal {
          height: calc(609px - 36px);
@@ -1110,5 +1181,27 @@
       &__main {
          gap: 30px;
       }
+   }
+}
+.project-dark {
+   background-color: $black;
+}
+.project-filters_commerce {
+   .catalog-filter {
+      width: 319px;
+      .catalog-range__output {
+         width: 100%;
+         display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         span {
+            width: 100%;
+         }
+      }
+      @media (max-width: $tablet) {
+         width: 100%;
+      }
+   }
+   .v-select__wrapper {
+      width: 100%;
    }
 }

@@ -3,7 +3,7 @@
       <div class="container">
          <div class="project-features__wrapper">
             <div class="project-features__header">
-               <h2 class="project-features__title h1 dark-title">преимущества</h2>
+               <slot />
                <div class="project-features__btns">
                   <UiSliderBtn prev @click="swiper.slidePrev()" />
                   <UiSliderBtn next @click="swiper.slideNext()" />

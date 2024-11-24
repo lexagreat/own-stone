@@ -18,23 +18,10 @@ export const parallaxAnimation = () => {
       y: 0,
    });
 };
-
-export const featureAnimation = () => {
-   gsap.to(".home-features__parallax", {
+export const sharedParallaxAnimation = (itemSelector, thriggerSelector) => {
+   gsap.to(itemSelector, {
       scrollTrigger: {
-         trigger: ".home-features", // элемент, который должен запускать анимацию
-         start: "top 80%", // Когда верх элемента достигает 80% высоты экрана
-         end: `bottom 0`, // Используем высоту элемента для end
-         // markers: true, // включить маркеры для визуальной отладки
-         scrub: 1.5,
-      },
-      y: "-10%",
-   });
-};
-export const taxiAnimation = () => {
-   gsap.to(".home-taxi > img", {
-      scrollTrigger: {
-         trigger: ".home-taxi", // элемент, который должен запускать анимацию
+         trigger: thriggerSelector, // элемент, который должен запускать анимацию
          start: "top 80%", // Когда верх элемента достигает 80% высоты экрана
          end: `bottom 0`, // Используем высоту элемента для end
          // markers: true, // включить маркеры для визуальной отладки

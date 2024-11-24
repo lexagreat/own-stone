@@ -14,10 +14,10 @@
    </section>
 </template>
 <script setup>
-import { taxiAnimation } from '@/assets/js/animations'
+import { sharedParallaxAnimation } from '@/assets/js/animations'
 
 onMounted(() => {
-   taxiAnimation()
+   sharedParallaxAnimation(".home-taxi > img", ".home-taxi")
 })
 
 </script>

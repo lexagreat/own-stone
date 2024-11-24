@@ -89,12 +89,12 @@
                   <div class="footer__links">
                      <ul>
                         <li>
-                           <NuxtLink to="/">
+                           <NuxtLink to="/catalog">
                               Купить
                            </NuxtLink>
                         </li>
                         <li>
-                           <NuxtLink to="/">
+                           <NuxtLink to="/sell">
                               Продать
                            </NuxtLink>
                         </li>

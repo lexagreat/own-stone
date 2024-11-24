@@ -17,7 +17,7 @@
                   <NuxtLink to="/catalog">Купить</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Продать</NuxtLink>
+                  <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/">Услуги</NuxtLink>
@@ -82,10 +82,10 @@
          <div class="header-menu scrollbar-none" :class="{ active: isBurgerOpen }">
             <ul class="header-menu__list">
                <li>
-                  <NuxtLink to="/">Купить</NuxtLink>
+                  <NuxtLink to="/catalog">Купить</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Продать</NuxtLink>
+                  <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/">Услуги</NuxtLink>
