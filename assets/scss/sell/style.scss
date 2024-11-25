@@ -456,7 +456,7 @@
    // .sell-portfolio__slide
 
    &__slide {
-      display: flex;
+      display: flex !important;
       gap: 10px;
       @media (max-width: $tablet) {
          flex-direction: column;
