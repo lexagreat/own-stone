@@ -156,9 +156,9 @@
    align-items: center;
    justify-content: center;
    --size: 48px;
-   width: var(--size);
-   height: var(--size);
-   flex: 0 0 var(--size);
+   width: var(--size) !important;
+   height: var(--size) !important;
+   flex: 0 0 var(--size) !important;
    position: relative !important;
    top: unset !important;
    left: unset !important;
