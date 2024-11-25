@@ -91,7 +91,7 @@
          </div>
       </div>
       <SectionsProductSlider white-btns>
-         ТИПЫ <span>планировок</span>
+         <slot />
       </SectionsProductSlider>
       <BannersProjectMoreInfo v-if="type !== 'commerce'" />
    </section>

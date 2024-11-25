@@ -10,7 +10,9 @@
          <h2 class="project-features__title h1 dark-title">преимущества</h2>
       </SectionsProjectFeatures>
 
-      <SectionsProjectFilters />
+      <SectionsProjectFilters>
+         ТИПЫ <span>планировок</span>
+      </SectionsProjectFilters>
       <SectionsProjectBuyWays />
       <SectionsProjectPosition />
       <SectionsProjectNearPlaces />
