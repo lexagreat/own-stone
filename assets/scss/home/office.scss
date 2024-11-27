@@ -41,6 +41,7 @@
       }
       button {
          @include button-name;
+         color: $black;
          padding: 3px;
          border-bottom: 1px solid $black;
          margin-top: 30px;
