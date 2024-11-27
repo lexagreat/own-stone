@@ -21,7 +21,7 @@ export default defineNuxtConfig({
          ],
       },
    },
-   modules: ["nuxt-swiper"],
+   modules: ["nuxt-swiper", "@nuxt/image-edge"],
    vite: {
       plugins: [
          svgLoader(), // Добавляем плагин для работы с SVG как с Vue компонентами
@@ -29,8 +29,32 @@ export default defineNuxtConfig({
    },
    experimental: {
       typedPages: true,
+      payloadExtraction: true, // Уменьшает объём передаваемых данных // оптимизация
    },
    routeRules: {
       "/catalog": { redirect: "/catalog/build" },
+   },
+   build: {
+      // оптимизация
+      splitChunks: {
+         layouts: true,
+         pages: true,
+         commons: true,
+      },
+   },
+   nitro: {
+      compressPublicAssets: true, // Включить сжатие
+   },
+   image: {
+      // оптимизация
+      // domains: ['example.com'], // Укажите домены для внешних изображений
+      presets: {
+         thumbnail: {
+            modifiers: {
+               format: "webp",
+               quality: 90,
+            },
+         },
+      },
    },
 });
