@@ -1,5 +1,5 @@
 <template>
-   <main class="main catalog">
+   <main class="main catalog dark-page">
       <section class="catalog-hero">
          <SectionsBreadcrumbs :path="path" />
          <div class="container">

@@ -1,3 +1,11 @@
+.wrapper {
+   &:has(.dark-page) {
+      .header,
+      .header-menu {
+         background-color: #f8f8f8;
+      }
+   }
+}
 .header {
    background-color: $white;
    position: fixed;

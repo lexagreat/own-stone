@@ -57,7 +57,7 @@
                <span class="border desktop"></span>
                <ul class="header__icons">
                   <li>
-                     <NuxtLink class="circle">
+                     <NuxtLink class="circle" to="/favorites">
                         <HeartIcon />
                      </NuxtLink>
                   </li>

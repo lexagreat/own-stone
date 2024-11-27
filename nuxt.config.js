@@ -21,7 +21,7 @@ export default defineNuxtConfig({
          ],
       },
    },
-   modules: ["nuxt-swiper", "@nuxt/image-edge"],
+   modules: ["nuxt-swiper"],
    vite: {
       plugins: [
          svgLoader(), // Добавляем плагин для работы с SVG как с Vue компонентами
@@ -43,18 +43,7 @@ export default defineNuxtConfig({
       },
    },
    nitro: {
-      compressPublicAssets: true, // Включить сжатие
-   },
-   image: {
       // оптимизация
-      // domains: ['example.com'], // Укажите домены для внешних изображений
-      presets: {
-         thumbnail: {
-            modifiers: {
-               format: "webp",
-               quality: 90,
-            },
-         },
-      },
+      compressPublicAssets: true, // Включить сжатие
    },
 });
