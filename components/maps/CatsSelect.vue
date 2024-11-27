@@ -3,16 +3,21 @@
       <div class="v-select__backdrop"></div>
       <div class="v-select__wrapper" :class="{ placeholder: settings.placeholder }" ref="output">
          <span class="v-select__input">
-
-            {{ choosedValue }}
+            <div class="circle">
+               <component :is="choosedValue.icon" />
+            </div>
+            {{ choosedValue.name }}
          </span>
          <div class="v-select__icon">
             <ArrowDownIcon />
          </div>
       </div>
       <ul class="v-select__list">
-         <li class="v-select__item" :class="{ active: option.name === choosedValue }"
+         <li class="v-select__item" :class="{ active: option.name === choosedValue.name }"
             v-for="(option, index) in settings.options" :key="index" @click="selectOption(option)">
+            <div class="circle">
+               <component :is="option.icon" />
+            </div>
             {{ option.name }}
          </li>
       </ul>
@@ -37,7 +42,7 @@ const emit = defineEmits(["selectOption"])
 
 const route = useRoute()
 
-const choosedValue = ref("");
+const choosedValue = ref({});
 const output = ref(null)
 
 function toggleOptions(event) {
@@ -46,7 +51,7 @@ function toggleOptions(event) {
 }
 function selectOption(option) {
    output.value.classList.remove("placeholder");
-   choosedValue.value = option.name;
+   choosedValue.value = option;
    emit("selectOption", option);
 }
 
@@ -71,7 +76,7 @@ watch(props.settings.options, (value) => {
 
 onMounted(() => {
    if (props.settings.placeholder) {
-      choosedValue.value = props.settings.placeholder;
+      choosedValue.value.name = props.settings.placeholder;
    } else {
       if (!props.settings.options?.length) {
          return;
@@ -154,6 +159,10 @@ onMounted(() => {
    &__item {
       padding-bottom: 14px;
       border-bottom: 1px solid #0000001A;
+
+      &.active {
+         display: none;
+      }
 
       &:last-child {
          padding: 0;

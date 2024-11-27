@@ -75,3 +75,40 @@ export function slideToggle(el, duration = 500) {
       ? slideHide(el, duration)
       : slideShow(el, duration);
 }
+export function accordion(linkSelector, contentSelector) {
+   // получаем линки
+   const openLinks = document.querySelectorAll(`${linkSelector}`);
+   // контенты
+   const contents = document.querySelectorAll(`${contentSelector}`);
+   if (openLinks.length > 0) {
+      for (let i = 0; i < openLinks.length; i++) {
+         let openLink = openLinks[i];
+         openLink.addEventListener("click", () => {
+            // все прячем
+            for (let j = 0; j < contents.length; j++) {
+               // если хоть один открывается - return
+               if (contents[j].classList.contains("collapsing")) {
+                  return;
+               } // Иначе
+               // все прячем
+               slideHide(contents[j]);
+            }
+            for (let j = 0; j < openLinks.length; j++) {
+               openLinks[j].classList.remove("active");
+            }
+            // записываем в переменную нужный таб
+            let content = contents[i];
+            // работаем с классами линка
+            if (content.classList.contains("collapsing")) {
+               return;
+            } else if (content.classList.contains("collapse_show")) {
+               openLink.classList.remove("active");
+            } else {
+               openLink.classList.add("active");
+            }
+            // показываем нужный
+            slideShow(content);
+         });
+      }
+   }
+}

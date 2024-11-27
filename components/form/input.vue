@@ -23,23 +23,4 @@ let props = defineProps({
       default: false,
    },
 });
-// let input = ref(null);
-
-// function watchForValue(value) {
-//    if (value) {
-//       input?.value?.classList.add("filled");
-//       input?.value?.classList.remove("error");
-//    } else {
-//       input?.value?.classList.remove("filled");
-//    }
-// }
-// onMounted(() => {
-//    watchForValue(props.modelValue);
-// });
-// watch(
-//    () => props.modelValue,
-//    (value) => {
-//       watchForValue(value);
-//    }
-// );
 </script>

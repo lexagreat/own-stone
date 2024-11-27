@@ -23,13 +23,13 @@
                   <NuxtLink to="/">Услуги</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Партнерам</NuxtLink>
+                  <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/">О нас</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Контакты</NuxtLink>
+                  <NuxtLink to="/contacts">Контакты</NuxtLink>
                </li>
             </ul>
             <div class="header__actions">
@@ -91,13 +91,13 @@
                   <NuxtLink to="/">Услуги</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Партнерам</NuxtLink>
+                  <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/">О нас</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Контакты</NuxtLink>
+                  <NuxtLink to="/contacts">Контакты</NuxtLink>
                </li>
             </ul>
             <div class="header__schedule">

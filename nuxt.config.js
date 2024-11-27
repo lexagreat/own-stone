@@ -14,6 +14,11 @@ export default defineNuxtConfig({
                content: "telephone=no",
             },
          ],
+         script: [
+            {
+               src: "https://maps.api.2gis.ru/2.0/loader.js?pkg=full",
+            },
+         ],
       },
    },
    modules: ["nuxt-swiper"],

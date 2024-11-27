@@ -11,8 +11,8 @@
       <SectionsProjectFeatures class="project-dark project-features_commerce">
          <h2 class="project-features__title h1 light-title">преимущества</h2>
       </SectionsProjectFeatures>
+      <SectionsProjectPosition class="commerce-position" />
       <SectionsProjectBuyWays class="buy-ways_commerce" />
-      <SectionsProjectPosition />
       <SectionsProjectDocuments />
       <section class="project-sliders">
          <SectionsProductSlider>

@@ -1205,3 +1205,192 @@
       width: 100%;
    }
 }
+.project-position {
+   &.commerce-position {
+      padding-bottom: 80px;
+      @media (max-width: $mobile) {
+         padding-bottom: 60px;
+      }
+   }
+   padding-top: 80px;
+   background-color: $black;
+   @media (max-width: $mobile) {
+      padding-top: 60px;
+   }
+   // .project-position__wrapper
+
+   &__wrapper {
+      & > .btn {
+         display: none;
+         @media (max-width: $mobile) {
+            display: flex;
+            width: fit-content;
+         }
+      }
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 50px;
+      @media (max-width: $tablet) {
+         gap: 40px;
+      }
+      @media (max-width: $mobile) {
+         gap: 35px;
+      }
+   }
+
+   // .project-position__header
+
+   &__header {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+   }
+
+   // .project-position__title
+
+   &__title {
+   }
+
+   // .project-position__main
+
+   &__main {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+   }
+
+   // .project-position__categories
+
+   &__categories {
+      flex: 0 0 373px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      input {
+         display: none;
+      }
+      label {
+         cursor: pointer;
+         display: flex;
+         align-items: center;
+         gap: 16px;
+
+         color: $white-50;
+         font-family: "PP Neue Montreal";
+         font-size: 16px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: 125%; /* 20px */
+         transition: $transition;
+         .circle {
+            transition: $transition;
+            background-color: $white-15;
+            --size: 40px;
+            svg path {
+               fill: white;
+            }
+         }
+      }
+      input:checked + label {
+         color: $white;
+         .circle {
+            background-color: $white;
+            svg path {
+               fill: $black;
+            }
+         }
+      }
+   }
+
+   // .project-position__map
+
+   &__map {
+      flex: 1;
+      .v-select {
+         display: none;
+      }
+   }
+   @media (max-width: $tablet) {
+      &__categories {
+         display: none;
+      }
+      &__map {
+         position: relative;
+         height: 680px;
+         width: 100%;
+         .v-select {
+            top: 12px;
+            left: 12px;
+            min-width: 289px;
+            position: absolute;
+            display: flex;
+            color: $white;
+            font-family: $fontMontreal;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 125%; /* 20px */
+            .circle {
+               --size: 40px;
+               background-color: $white;
+               svg path {
+                  fill: $black;
+               }
+            }
+            &__icon {
+               svg path {
+                  stroke: $white;
+               }
+            }
+            &__wrapper {
+               height: 64px;
+               background: #242424;
+            }
+            &__list {
+               background: #242424;
+               border-radius: 6px;
+               overflow: hidden;
+            }
+            &__input {
+               font-family: $fontMontreal;
+               font-size: 16px;
+               display: flex;
+               align-items: center;
+               gap: 16px;
+            }
+            &__item {
+               display: flex;
+               align-items: center;
+               gap: 16px;
+               color: $white-50;
+               .circle {
+                  background-color: $white-15;
+                  svg path {
+                     fill: $white;
+                  }
+               }
+            }
+         }
+      }
+   }
+   @media (max-width: $mobile) {
+      &__header {
+         justify-content: center;
+         .btn {
+            display: none;
+         }
+      }
+      &__map {
+         .v-select {
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            max-width: unset;
+         }
+      }
+   }
+}

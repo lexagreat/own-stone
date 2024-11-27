@@ -117,12 +117,16 @@ const onMouseenter = (index) => {
 const isCollapse = ref(false)
 const spoiler = ref(null)
 const isCollapsed = ref(false)
+const setСollapse = () => {
+   isCollapse.value = getIsCollapse()
+}
 onMounted(() => {
    isCollapse.value = getIsCollapse()
-   window.addEventListener("resize", () => {
-      isCollapse.value = getIsCollapse()
+   window.addEventListener("resize", setСollapse)
+})
+onBeforeUnmount(() => {
+   window.removeEventListener('resize', setСollapse)
 
-   })
 })
 const getIsCollapse = () => {
    if (props.type == 'row' && window.innerWidth <= 568) {
