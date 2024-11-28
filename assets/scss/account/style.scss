@@ -219,9 +219,9 @@
       }
    }
    &__back {
-      display: none;
+      display: none !important;
       @media (max-width: $tablet) {
-         display: block;
+         display: flex !important;
       }
    }
    &__main {
