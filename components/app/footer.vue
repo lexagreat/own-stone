@@ -113,17 +113,17 @@
                      </ul>
                      <ul>
                         <li>
-                           <NuxtLink to="/">
+                           <NuxtLink to="/catalog/build">
                               Новостройки
                            </NuxtLink>
                         </li>
                         <li>
-                           <NuxtLink to="/">
+                           <NuxtLink to="/catalog/secondary">
                               Вторичная
                            </NuxtLink>
                         </li>
                         <li>
-                           <NuxtLink to="/">
+                           <NuxtLink to="/catalog/commerce">
                               Коммерция
 
                            </NuxtLink>

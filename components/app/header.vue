@@ -137,7 +137,7 @@ import ProfileIcon from '~/assets/img/icons/user.svg'
 import LogoIcon from '~/assets/img/icons/logo.svg'
 import { bodyLock, bodyUnlock } from '~/utils/bodyLocker'
 const isBurgerOpen = ref(false)
-
+const route = useRoute()
 watch(isBurgerOpen, (value) => {
    if (value) {
       bodyLock()
@@ -145,4 +145,10 @@ watch(isBurgerOpen, (value) => {
       bodyUnlock()
    }
 })
+
+
+watch(route.fullPath, () => {
+   isBurgerOpen.value = false
+})
+
 </script>

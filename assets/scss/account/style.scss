@@ -1,0 +1,579 @@
+.account-aside {
+   border-right: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
+   background-color: $white;
+   padding: 8px;
+   flex: 0 0 260px;
+   display: flex;
+   flex-direction: column;
+   @media (max-width: $tablet) {
+      flex-direction: column-reverse;
+      flex: 1;
+      background-color: unset;
+      border-right: 0;
+      padding: 0;
+      gap: 10px;
+      display: none;
+      &.active {
+         display: flex;
+      }
+   }
+   // .account-aside__list
+
+   &__list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      li:has(.account-aside__exit) {
+         display: none;
+         @media (max-width: $tablet) {
+            display: flex;
+         }
+      }
+      @media (max-width: $tablet) {
+         gap: 0;
+         border-radius: 8px !important;
+         overflow: hidden;
+      }
+   }
+
+   // .account-aside__footer
+
+   &__footer {
+   }
+   &__exit {
+      border: 0 !important;
+   }
+   // .account-aside__main
+
+   &__main {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      gap: 15px;
+      @media (max-width: $tablet) {
+         background-color: $white;
+         height: 90px;
+      }
+      @media (max-width: $mobile) {
+         height: 80px;
+         padding: 15px;
+      }
+      .circle {
+         --size: 50px;
+      }
+      svg {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+      div {
+         display: flex;
+         flex-direction: column;
+         gap: 6px;
+         span:nth-child(1) {
+            color: var(--black-100, #181818);
+            font-family: $fontMontreal;
+            font-size: 16px;
+            font-weight: 500;
+         }
+         span:nth-child(2) {
+            color: $black-50;
+            @include regular-13;
+         }
+      }
+      @media (hover: hover) {
+         &:hover {
+            background: var(--Brand-Light-Gray, #f1f1f1);
+         }
+      }
+      &:active {
+         background: var(--Brand-Light-Gray, #f1f1f1);
+      }
+      &.router-link-active {
+         background: var(--Brand-Light-Gray, #f1f1f1);
+         @media (max-width: $tablet) {
+            background: $white;
+         }
+      }
+   }
+}
+.account-link {
+   width: 100%;
+   height: 63px;
+   display: flex;
+   padding: 12px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   transition: $transition;
+   border-radius: 6px;
+   position: relative;
+   @media (max-width: $tablet) {
+      border-radius: 0;
+
+      background-color: $white;
+      height: 79px;
+      padding: 20px;
+      border-bottom: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
+   }
+   @media (max-width: $mobile) {
+      height: 69px;
+      padding: 15px;
+   }
+   @media (hover: hover) {
+      &:hover {
+         background: var(--Brand-Light-Gray, #f1f1f1);
+      }
+   }
+   &:active {
+      background: var(--Brand-Light-Gray, #f1f1f1);
+   }
+   &.router-link-active {
+      background: var(--Brand-Light-Gray, #f1f1f1);
+      @media (max-width: $tablet) {
+         background: $white;
+      }
+   }
+   // .account-link__icon
+   &__arrow {
+      display: none;
+      @media (max-width: $tablet) {
+         width: 20px !important;
+         height: 20px !important;
+         display: block;
+         position: absolute;
+         right: 20px;
+         top: 50%;
+         rotate: -90deg;
+         translate: 0 -50%;
+      }
+      @media (max-width: $mobile) {
+         right: 15px;
+      }
+   }
+   &__icon {
+      --size: 20px;
+      width: var(--size);
+      height: var(--size);
+      flex: 0 0 var(--size);
+
+      svg {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+
+   // .account-link__info
+
+   &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+   }
+
+   // .account-link__title
+
+   &__title {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 16px;
+      font-weight: 500;
+   }
+
+   // .account-link__subtitle
+
+   &__subtitle {
+      color: var(--black-50, rgba(24, 24, 24, 0.5));
+      @include regular-13;
+   }
+}
+.account-page {
+   display: flex;
+   flex-direction: column;
+   & > .container {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+   }
+   padding-bottom: 40px;
+   // .account-page__wrapper
+
+   &__wrapper {
+      min-height: 776px;
+      flex: 1;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      @media (max-width: $tablet) {
+         min-height: unset;
+         border-radius: unset;
+         overflow: unset;
+      }
+   }
+   &__back {
+      display: none;
+      @media (max-width: $tablet) {
+         display: block;
+      }
+   }
+   &__main {
+      background-color: $white;
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: $transition;
+      @media (max-width: $tablet) {
+         // position: fixed;
+         // top: calc(var(--headerHeight) + 0px);
+         // left: 0;
+         // width: 100vw;
+         // padding: 0 var(--containerPadding);
+         // background-color: #f8f8f8;
+         // z-index: 2;
+         padding: 0;
+         background-color: unset;
+         &.hidden {
+            display: none;
+         }
+      }
+   }
+   &__header {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      @media (max-width: $tablet) {
+         margin-bottom: 24px;
+         justify-content: unset;
+         gap: 20px;
+         background-color: #f8f8f8;
+         padding-bottom: 24px;
+         margin-bottom: 0;
+         height: unset;
+         .account-profile__exit,
+         .btn {
+            display: none;
+         }
+      }
+      @media (max-width: $mobile) {
+         padding-bottom: 20px;
+         gap: 15px;
+         .slider-btn {
+            --size: 32px;
+            svg {
+               translate: 0 1px;
+               scale: 0.75;
+            }
+         }
+      }
+   }
+   &__title {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 120%; /* 28.8px */
+      @media (max-width: $mobile) {
+         font-size: 18px;
+      }
+   }
+}
+.account-profile {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   // .account-profile__exit
+
+   &__exit {
+      border-bottom: 1px solid var(--black-50, rgba(24, 24, 24, 0.5));
+      color: $black-50;
+      @include button-name;
+   }
+
+   // .account-profile__main
+
+   &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      @media (max-width: $tablet) {
+         background-color: $white;
+         padding: var(--containerPadding);
+         padding-bottom: 0;
+         border-radius: 8px 8px 0 0;
+      }
+      @media (max-width: $mobile) {
+         gap: 24px;
+      }
+   }
+   &__footer {
+      @media (max-width: $tablet) {
+         background-color: $white;
+         padding-bottom: var(--containerPadding);
+         padding-left: var(--containerPadding);
+      }
+   }
+   // .account-profile__image
+
+   &__image {
+      position: relative;
+      width: fit-content;
+      label {
+         cursor: pointer;
+      }
+      svg {
+         width: 24px;
+         height: 24px;
+         flex: 0 0 24px;
+         position: absolute;
+         bottom: 0;
+         right: 0;
+      }
+      .circle {
+         --size: 100px;
+         background-color: $black-15;
+         color: $white;
+         color: var(--white-100, #fff);
+         font-family: $fontMontreal;
+         font-size: 50px;
+         font-weight: 500;
+         line-height: 110%; /* 55px */
+         @media (max-width: $mobile) {
+            --size: 78px;
+            font-size: 36px;
+         }
+      }
+   }
+
+   // .account-profile__inputs
+
+   &__inputs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 40px;
+      row-gap: 16px;
+      .text-input {
+         input {
+            background: #f8f8f8;
+         }
+      }
+      @media (max-width: $tablet) {
+         grid-template-columns: repeat(2, 1fr);
+      }
+      @media (max-width: $mobile) {
+         grid-template-columns: 1fr;
+         gap: 8px;
+      }
+   }
+
+   // .account-profile__requisites
+
+   &__requisites {
+   }
+}
+.account-requisites {
+   padding: 50px 0;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   flex: 1;
+   // .account-requisites__header
+
+   &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .app-tabs {
+         width: fit-content;
+         border: 0;
+      }
+   }
+
+   // .account-requisites__inputs
+
+   &__inputs {
+   }
+
+   // .account-requisites__save
+
+   &__save {
+      width: fit-content;
+   }
+   @media (max-width: $tablet) {
+      background-color: $white;
+      padding: 50px var(--containerPadding);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+   }
+}
+.account-documents {
+   flex: 1;
+   // .account-documents__list
+
+   &__list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      @media (max-width: $tablet) {
+         grid-template-columns: repeat(2, 1fr);
+         .document-item {
+            background-color: $white;
+         }
+      }
+   }
+}
+.account-info {
+   // .account-info__main
+
+   &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      .btn {
+         width: fit-content;
+      }
+      @media (max-width: $mobile) {
+         gap: 24px;
+      }
+   }
+
+   // .account-info__list
+
+   &__list {
+      & > li {
+         border-bottom: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
+      }
+   }
+
+   // .account-info__header
+
+   &__header {
+      gap: 15px;
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      .circle {
+         transition: $transition;
+         --size: 40px;
+         background-color: $black-5;
+      }
+      &.active {
+         .circle {
+            rotate: 180deg;
+         }
+      }
+   }
+
+   // .account-info__subtitle
+
+   &__subtitle {
+      color: var(--black-100, #181818);
+      font-family: $fontArial;
+      font-size: 18px;
+      line-height: 140%; /* 25.2px */
+      @media (max-width: $mobile) {
+         font-size: 15px;
+      }
+   }
+
+   // .account-info__spoiler
+
+   &__spoiler {
+      p {
+         max-width: 875px;
+         color: $black-50;
+         padding-bottom: 15px;
+      }
+   }
+}
+.client-card {
+   border-radius: 6px;
+   background: #f8f8f8;
+   // .client-card__name
+   align-items: center;
+   padding: 14px 12px;
+   gap: 40px;
+   display: grid;
+   grid-template-columns: 333px 90px 117px auto 173px;
+   text-align: center;
+   @media (max-width: 1440px) {
+      gap: calc(20px + 20 * ((100vw - 1024px) / (1440 - 1024)));
+      grid-template-columns:
+         calc(133px + 200 * ((100vw - 1024px) / (1440 - 1024)))
+         90px calc(87px + 30 * ((100vw - 1024px) / (1440 - 1024))) auto calc(83px +
+               90 * ((100vw - 1024px) / (1440 - 1024)));
+   }
+   &__name {
+      text-align: left;
+   }
+
+   // .client-card__price
+
+   &__price {
+   }
+
+   // .client-card__date
+
+   &__date {
+   }
+
+   // .client-card__banner
+
+   &__banner {
+      height: 33px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      gap: 6px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+   }
+
+   // .client-card__date2
+
+   &__date2 {
+   }
+}
+.account-clients {
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+   // .account-clients__cats
+
+   &__cats {
+      gap: 40px;
+      display: grid;
+      grid-template-columns: 333px 90px 117px auto 173px;
+      text-align: center;
+      @media (max-width: 1440px) {
+         gap: calc(20px + 20 * ((100vw - 1024px) / (1440 - 1024)));
+         grid-template-columns:
+            calc(133px + 200 * ((100vw - 1024px) / (1440 - 1024)))
+            90px calc(87px + 30 * ((100vw - 1024px) / (1440 - 1024))) auto calc(83px +
+                  90 * ((100vw - 1024px) / (1440 - 1024)));
+      }
+      @include regular-13;
+      color: $black-50;
+      span:first-child {
+         text-align: left;
+      }
+   }
+
+   // .account-clients__list
+
+   &__list {
+   }
+}

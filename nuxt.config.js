@@ -21,7 +21,7 @@ export default defineNuxtConfig({
          ],
       },
    },
-   modules: ["nuxt-swiper"],
+   modules: ["nuxt-swiper", "@pinia/nuxt"],
    vite: {
       plugins: [
          svgLoader(), // Добавляем плагин для работы с SVG как с Vue компонентами
