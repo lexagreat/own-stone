@@ -291,6 +291,7 @@
          &:hover {
             .header-profile {
                opacity: 1;
+               pointer-events: all;
             }
          }
       }
@@ -302,6 +303,7 @@
    }
 }
 .header-profile {
+   pointer-events: none;
    transition: $transition;
    opacity: 0;
    padding: 20px;
@@ -335,6 +337,7 @@
       width: 100%;
    }
    @media (max-width: $tablet) {
+      pointer-events: all;
       position: relative;
       top: unset;
       right: unset;
