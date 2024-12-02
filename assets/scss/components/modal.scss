@@ -1,0 +1,114 @@
+.modal__content {
+   @media (max-width: $mobile) {
+      width: 100vw;
+      height: 100vh;
+      padding: 12px !important;
+   }
+}
+
+.auth-modal {
+   // .auth-modal__content
+
+   &__content {
+      min-width: 460px;
+      @media (max-width: $mobile) {
+         min-width: unset !important;
+         padding-top: 130px !important;
+      }
+   }
+   &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+   }
+   // .auth-modal__title
+
+   &__title {
+   }
+
+   // .auth-modal__main
+
+   &__main {
+      margin-top: 40px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      @media (max-width: $mobile) {
+         margin-top: 24px;
+         gap: 24px;
+      }
+   }
+   .btn {
+      width: 100%;
+   }
+}
+.modal__close {
+   --size: 48px !important;
+   background-color: $black-5 !important;
+   position: absolute;
+   top: 16px;
+   right: 16px;
+   @media (max-width: $mobile) {
+      --size: 40px !important;
+      top: 12px;
+      right: 12px;
+   }
+}
+
+.code-input {
+   display: flex;
+   gap: 15px;
+   input {
+      flex: 0 0 56px;
+      width: 56px;
+      height: 56px;
+      color: $black;
+      text-align: center;
+      font-size: 16px;
+      line-height: 100%; /* 16px */
+      border-radius: 4px;
+      background-color: $white;
+   }
+}
+.sms-modal {
+   // .sms-modal__row
+
+   &__row {
+      display: flex;
+      gap: 20px;
+      & > span:nth-child(1) {
+         color: var(--black-100, #181818);
+         font-family: $fontMontreal;
+         font-size: 20px;
+         font-weight: 500;
+         line-height: 115%; /* 23px */
+         text-transform: uppercase;
+      }
+      button {
+         border-bottom: 1px solid var(--black-100, #181818);
+         padding: 3px;
+         @include button-name;
+      }
+   }
+
+   // .sms-modal__main
+
+   &__main {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      span {
+         color: rgba(24, 24, 24, 0.6);
+         font-family: $fontMontreal;
+         font-size: 13px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+      @media (max-width: $mobile) {
+         gap: 24px;
+      }
+   }
+}

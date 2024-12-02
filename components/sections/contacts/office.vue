@@ -14,9 +14,4 @@
    </section>
 </template>
 <script setup>
-import { sharedParallaxAnimation } from '~/assets/js/animations';
-
-onMounted(() => {
-   sharedParallaxAnimation(".contacts-office__image img", ".contacts-office__image")
-})
 </script>

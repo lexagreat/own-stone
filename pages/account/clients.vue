@@ -26,6 +26,8 @@
    </section>
 </template>
 <script setup>
-
+onMounted(() => {
+   console.log('mounted clients');
+})
 
 </script>

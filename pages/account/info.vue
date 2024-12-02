@@ -45,5 +45,7 @@ const faq = ref([
 
 onMounted(() => {
    accordion(".account-info__header", ".account-info__spoiler")
+   console.log('mounted info');
+
 })
 </script>

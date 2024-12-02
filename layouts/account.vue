@@ -3,10 +3,9 @@
    <main class="main account-page dark-page">
       <div class="container">
          <div class="account-page__wrapper">
-            <AccountAside :class="{active: aside.isAside}" />
+            <AccountAside   :class="{active: aside.isAside}"/>
             <div class="account-page__main" :class="{hidden: aside.isAside}">
-               <slot v-if="!aside.isAside"/>
-
+               <slot/>
             </div>
          </div>
       </div>

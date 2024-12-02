@@ -1,5 +1,5 @@
 <template>
-   <header class="header">
+   <header class="header lock-padding">
       <div class="container">
          <div class="header__wrapper">
             <div class="header__info">
@@ -20,13 +20,13 @@
                   <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Услуги</NuxtLink>
+                  <NuxtLink to="/services">Услуги</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">О нас</NuxtLink>
+                  <NuxtLink to="/about">О нас</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/contacts">Контакты</NuxtLink>
@@ -62,9 +62,20 @@
                      </NuxtLink>
                   </li>
                   <li>
-                     <NuxtLink class="circle profile">
-                        <ProfileIcon />
-                     </NuxtLink>
+                     <div class="circle profile" style="position: relative;">
+                        <ProfileIcon @click="onClickProfile" />
+                        <div class="header-profile">
+                           <h4 class="h4">Личный кабинет партнера</h4>
+                           <p>Передайте клиента в наше агентство и получите вознаграждение в размере 30% от общей
+                              комиссии по факту реализованной сделки</p>
+                           <UiButton class="black" @click="isOpenAuthModal = true">Войти или зарегистрироваться
+                           </UiButton>
+                        </div>
+                     </div>
+                     <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
+                        @open="isOpenAuthModal = true" />
+                     <ModalAuthHint :isOpen="isOpenAuthHint" @close="isOpenAuthHint = false"
+                        @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" />
                   </li>
                </ul>
                <span class="border mobile"></span>
@@ -88,13 +99,13 @@
                   <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">Услуги</NuxtLink>
+                  <NuxtLink to="/services">Услуги</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/">О нас</NuxtLink>
+                  <NuxtLink to="/about">О нас</NuxtLink>
                </li>
                <li>
                   <NuxtLink to="/contacts">Контакты</NuxtLink>
@@ -138,6 +149,8 @@ import LogoIcon from '~/assets/img/icons/logo.svg'
 import { bodyLock, bodyUnlock } from '~/utils/bodyLocker'
 const isBurgerOpen = ref(false)
 const route = useRoute()
+const isOpenAuthModal = ref(false)
+const isOpenAuthHint = ref(false)
 watch(isBurgerOpen, (value) => {
    if (value) {
       bodyLock()
@@ -151,4 +164,10 @@ watch(route.fullPath, () => {
    isBurgerOpen.value = false
 })
 
+
+const onClickProfile = () => {
+   if (window?.innerWidth <= 1024) {
+      isOpenAuthHint.value = true
+   }
+}
 </script>

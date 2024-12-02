@@ -96,4 +96,9 @@ const inn = ref("")
 const bik = ref("")
 const paymentAcc = ref("")
 const corrAcc = ref("")
+
+
+onMounted(() => {
+   console.log('mounted main');
+})
 </script>

@@ -17,4 +17,7 @@ const docs = ref([
    { name: "Извещение о начале строительства" },
    { name: "Извещение о начале строительства" },
 ])
+onMounted(() => {
+   console.log('mounted docs');
+})
 </script>
