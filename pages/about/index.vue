@@ -4,7 +4,7 @@
       <SectionsAboutVideo />
       <SectionsAboutMission />
       <SectionsAboutValue />
-      <SectionsAboutBosses />
+      <SectionsHomeBosses />
       <SectionsAboutRewards />
       <SectionsAboutEvents />
       <SectionsHomeOffice />

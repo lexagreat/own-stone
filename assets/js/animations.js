@@ -64,7 +64,6 @@ export const aboutValueAnim = () => {
                rows.forEach((item) => {
                   item.classList.remove("active");
                });
-               console.log(rows[index - 1]);
                if (rows[index - 1]) {
                   rows[index - 1].classList.add("hidden-down");
                }

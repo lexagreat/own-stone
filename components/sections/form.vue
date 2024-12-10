@@ -25,7 +25,9 @@
                <UiButton class="black">Оставить заявку</UiButton>
             </div>
          </div>
-         <div class="form-section__map"></div>
+         <div class="form-section__map">
+            <MapsOffice />
+         </div>
       </div>
    </section>
 </template>

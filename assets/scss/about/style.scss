@@ -46,6 +46,26 @@
    max-height: calc(100dvh - var(--headerHeight));
    position: relative;
    overflow: hidden;
+   &::before,
+   &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 8px;
+      left: 0;
+      z-index: 2;
+      position: absolute;
+   }
+   &::before {
+      background-color: $white;
+      top: -2px;
+      border-radius: 0 0 8px 8px;
+   }
+   &::after {
+      background-color: $black;
+      border-radius: 8px 8px 0 0;
+      bottom: -2px;
+   }
    &:hover {
       cursor: none !important;
    }
@@ -157,6 +177,84 @@
       .btn {
          margin-top: 30px;
          width: fit-content;
+      }
+   }
+}
+.about-events {
+   max-height: calc(100dvh - var(--headerHeight));
+   overflow: hidden;
+   position: relative;
+   .swiper {
+      width: 100vw;
+      .swiper-slide {
+         height: auto;
+         opacity: 0 !important;
+         &-active {
+            opacity: 1 !important;
+         }
+      }
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+   // .about-events__pagination
+
+   &__pagination {
+      color: $white;
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+      position: absolute;
+      z-index: 2;
+      bottom: 30px;
+      left: calc((100vw - 1360px) / 2);
+      @media (max-width: 1400px) {
+         left: var(--containerPadding);
+      }
+      li {
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+      }
+      span {
+         opacity: 0;
+         font-size: 0;
+         transition: $transition;
+      }
+      div {
+         position: relative;
+         width: 40px;
+         height: 2px;
+         border-radius: 7px;
+         background: rgba(217, 217, 217, 0.6);
+         transition: $transition;
+         &::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: $white;
+            z-index: 2;
+         }
+      }
+      .active {
+         span {
+            opacity: 1;
+            @include h4;
+         }
+         div {
+            width: 280px;
+            &::after {
+               width: 100%;
+               transition: 3s;
+            }
+         }
       }
    }
 }
