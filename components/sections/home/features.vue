@@ -20,8 +20,7 @@
       <div class="home-features__parallax">
          <img src="/img/home/feature.png" alt="" class="desktop">
          <img src="/img/home/feature-tablet.png" alt="" class="tablet">
-         <img src="/img/home/feature-mobile.png" alt="" class="mobile">
-
+         <img src="/img/home/feature-mobile.png" alt="" class="mobile">\
       </div>
    </section>
 </template>

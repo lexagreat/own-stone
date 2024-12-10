@@ -10,7 +10,6 @@
       "postinstall": "nuxt prepare"
    },
    "dependencies": {
-      "@nuxt/image": "^1.8.1",
       "@pinia/nuxt": "0.8.0",
       "gsap": "^3.12.5",
       "maska": "^3.0.3",

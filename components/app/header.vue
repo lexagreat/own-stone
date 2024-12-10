@@ -160,7 +160,7 @@ watch(isBurgerOpen, (value) => {
 })
 
 
-watch(route.fullPath, () => {
+watch(() => route.fullPath, () => {
    isBurgerOpen.value = false
 })
 
