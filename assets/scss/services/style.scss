@@ -59,18 +59,28 @@
    &__card {
       height: fit-content;
       position: sticky;
-      top: 300px;
+      top: 200px;
       left: 0;
       padding: 10px 40px;
       border-radius: 8px;
       max-width: 1094px;
       width: 100%;
       background-color: $white;
+      height: 600px;
    }
 
    // .services-section__list
 
    &__list {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      li:has(.services-section__header.hidden) {
+         flex: 1;
+      }
+      li {
+         transition: 0.5s;
+      }
    }
 
    // .services-section__item
