@@ -31,6 +31,32 @@
             </ul>
          </div>
       </section>
+      <section class="services-mobile">
+         <div class="container">
+            <div class="services-section__bgs">
+               <img class="services-section__bg" v-for="item in services" :key="item" :src="item.image" alt="">
+            </div>
+            <div class="services-mobile__wrapper">
+               <div class="services-mobile__header">
+                  <h1 class="services-mobile__title h1" v-html="services[0].title"></h1>
+                  <p class="body-text"> {{ services[0].text }}</p>
+               </div>
+               <Swiper @slide-change="onSlideChange" :speed="500" centered-slides :space-between="10"
+                  slides-per-view="auto" class="services-section__list">
+                  <template v-for="(item, index) in services" :key="item">
+                     <SwiperSlide class="services-section__item" v-if="index !== 0">
+                        <h2 class="h1 dark-title" v-html="item.title"></h2>
+                        <div class="services-section__description">
+                           <div class="body-text" v-html="item.text"></div>
+                           <UiButton class="black">Оставить заявку</UiButton>
+
+                        </div>
+                     </SwiperSlide>
+                  </template>
+               </Swiper>
+            </div>
+         </div>
+      </section>
    </main>
 </template>
 <script setup>
@@ -104,7 +130,16 @@ const services = ref([
 onMounted(() => {
    setTimeout(() => {
       servicesAnimation()
-
    }, 300)
 })
+const onSlideChange = (s) => {
+   const bgs = document.querySelectorAll('.services-mobile .services-section__bg')
+   bgs.forEach((bg, index) => {
+      if (index < s.activeIndex) {
+         bg.classList.add("hidden")
+      } else {
+         bg.classList.remove("hidden")
+      }
+   })
+}
 </script>

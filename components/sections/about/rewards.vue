@@ -1,5 +1,5 @@
 <template>
-   <section class="rewards-section">
+   <section class="rewards-section about-rewards">
       <div class="container">
          <div class="rewards-section__wrapper">
             <div class="rewards-section__header">
@@ -7,7 +7,7 @@
                <div class="rewards-section__right">
                   <h2 class="rewards-section__title h1">Лидеры продаж <span>в Аквилоне, Эталоне, STONE и в стране</span>
                   </h2>
-                  <ul class="rewards-section__list">
+                  <ul class="rewards-section__list scrollbar-none">
                      <li>
                         <NuxtLink to="/" @mouseover="show(0)" @mouseleave="hide(0)">
                            <img src="/img/home/rewards1.svg" alt="" ref="start1">
@@ -50,6 +50,7 @@
 
 </template>
 <script setup>
+import { rewardsAnimmation } from "@/assets/js/animations"
 const img1 = ref(null)
 const img2 = ref(null)
 const img3 = ref(null)
@@ -75,45 +76,9 @@ const hide = (index) => {
    hiddenImages.value[index].value.style.opacity = 0
    images.value[index].value.style.opacity = 1
 }
+
+
+onMounted(() => {
+   rewardsAnimmation()
+})
 </script>
-
-
-<style lang="scss" scoped>
-.rewards-section {
-   &__right {
-      flex: 0 0 869px;
-      display: flex;
-      flex-direction: column;
-      gap: 80px;
-   }
-
-   &__list {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 100px;
-
-      li {
-         a {
-            height: 32px;
-            width: 78px;
-            border: none;
-
-            img {
-               width: 100%;
-               height: 100%;
-               transition: 0.4s;
-            }
-
-            position: relative;
-
-            .hidden {
-               position: absolute;
-               top: 50%;
-               left: 50%;
-               translate: -50% -50%;
-               opacity: 0;
-            }
-         }
-      }
-   }
-}
-</style>

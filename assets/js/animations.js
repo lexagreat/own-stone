@@ -89,10 +89,16 @@ export const aboutValueAnim = () => {
 };
 
 export const servicesAnimation = () => {
-   const bgs = document.querySelectorAll(".services-section__bg");
+   const bgs = document.querySelectorAll(
+      ".services-section .services-section__bg"
+   );
    const section = document.querySelector(".services-section");
-   const spoilers = document.querySelectorAll(".services-section__content");
-   const headers = document.querySelectorAll(".services-section__header");
+   const spoilers = document.querySelectorAll(
+      ".services-section .services-section__content"
+   );
+   const headers = document.querySelectorAll(
+      ".services-section .services-section__header"
+   );
    const sectionHeight = section.clientHeight;
    gsap.to(section, {
       scrollTrigger: {
@@ -211,4 +217,22 @@ export const servicesAnimation = () => {
    //    },
    //    y: "-10%",
    // });
+};
+export const rewardsAnimmation = () => {
+   if (window.innerWidth > 1024) return;
+   // Находим элемент
+   const rewardsList = document.querySelector(".rewards-section__list");
+
+   // Вычисляем максимальное значение прокрутки
+   const maxScrollLeft = rewardsList.scrollWidth - rewardsList.clientWidth;
+   gsap.to(rewardsList, {
+      scrollLeft: maxScrollLeft,
+      scrollTrigger: {
+         trigger: ".about-rewards", // элемент, который должен запускать анимацию
+         start: "top 50%", // Когда верх элемента достигает 80% высоты экрана
+         end: `top 10%`, // Используем высоту элемента для end
+         // markers: true, // включить маркеры для визуальной отладки
+         scrub: 1.5,
+      },
+   });
 };

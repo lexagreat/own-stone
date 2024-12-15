@@ -9,6 +9,14 @@
       flex-direction: column;
       gap: 160px;
       // border-radius: 8px 8px 0px 0px;
+      @media (max-width: $tablet) {
+         gap: 135px;
+         padding-top: 70px;
+      }
+      @media (max-width: $mobile) {
+         gap: 60px;
+         padding-top: 60px;
+      }
    }
 
    // .about-mission__header
@@ -18,6 +26,13 @@
       gap: 120px;
       .rewards-section__subtitle {
          white-space: nowrap;
+         @media (max-width: $mobile) {
+            font-size: 12px;
+         }
+      }
+      @media (max-width: $tablet) {
+         flex-direction: column;
+         gap: 30px;
       }
    }
 
@@ -40,12 +55,23 @@
             }
          }
       }
+      .home-features__list {
+         @media (max-width: $tablet) {
+            grid-template-columns: 1fr;
+         }
+      }
    }
 }
 .about-video {
    max-height: calc(100dvh - var(--headerHeight));
    position: relative;
    overflow: hidden;
+   @media (max-width: $tablet) {
+      height: 434px;
+   }
+   @media (max-width: $mobile) {
+      height: 310px;
+   }
    &::before,
    &::after {
       content: "";
@@ -77,6 +103,9 @@
    // .about-video__btn
 
    &__btn {
+      @media (max-width: $tablet) {
+         display: none;
+      }
       position: absolute;
       background-color: $black;
       top: 0;
@@ -104,7 +133,10 @@
 }
 
 .about-value {
-   margin-bottom: var(--margin);
+   margin-bottom: 16px;
+   @media (max-width: $tablet) {
+      margin-bottom: 0;
+   }
    padding-top: 80px;
    // .about-value__wrapper
 
@@ -112,6 +144,16 @@
       display: flex;
       flex-direction: column;
       gap: 65px;
+      @media (max-width: $tablet) {
+         flex-direction: row;
+         gap: 10px;
+         overflow-x: auto;
+         width: 100vw;
+         margin-left: calc(-1 * var(--containerPadding));
+         margin-right: calc(-1 * var(--containerPadding));
+         padding-left: calc(1 * var(--containerPadding));
+         padding-right: calc(1 * var(--containerPadding));
+      }
    }
 
    // .about-value__row
@@ -146,6 +188,21 @@
             }
          }
       }
+      @media (max-width: $tablet) {
+         padding: 20px;
+         padding-top: 160px;
+         border-radius: 8px;
+         border: 1px solid rgba(24, 24, 24, 0.15);
+         flex: 0 0 333px;
+         flex-direction: column;
+         position: relative;
+         gap: 30px;
+      }
+      @media (max-width: $mobile) {
+         flex: 0 0 300px;
+         padding-top: 135px;
+         gap: 25px;
+      }
    }
    &__bg {
       display: block;
@@ -153,6 +210,11 @@
       position: sticky;
       top: calc(var(--headerHeight) + 250px);
       height: fit-content;
+      @media (max-width: $tablet) {
+         position: relative;
+         top: unset;
+         flex: unset;
+      }
    }
    // .about-value__title
 
@@ -163,6 +225,19 @@
       p {
          // translate: 0 -165px;
          transition: 0.6s;
+      }
+      @media (max-width: $tablet) {
+         translate: 0 !important;
+         opacity: 1 !important;
+         overflow: unset !important;
+         font-size: 23px;
+         line-height: 115%;
+         p {
+            translate: 0 !important;
+         }
+      }
+      @media (max-width: $mobile) {
+         font-size: 18px;
       }
    }
 
@@ -177,6 +252,30 @@
       .btn {
          margin-top: 30px;
          width: fit-content;
+      }
+      svg {
+         width: 220px;
+         height: 170px;
+      }
+      @media (max-width: $tablet) {
+         padding-left: 0;
+         border: 0;
+         svg {
+            position: absolute;
+            top: 20px;
+            width: 140px;
+            height: 110px;
+            left: 20px;
+         }
+         h4 {
+            margin-top: 0;
+         }
+      }
+      @media (max-width: $mobile) {
+         svg {
+            width: 116px;
+            height: 90px;
+         }
       }
    }
 }
@@ -212,11 +311,15 @@
       left: calc((100vw - 1360px) / 2);
       @media (max-width: 1400px) {
          left: var(--containerPadding);
+         right: var(--containerPadding);
       }
       li {
          display: flex;
          flex-direction: column;
          gap: 12px;
+         @media (max-width: $mobile) {
+            display: none;
+         }
       }
       span {
          opacity: 0;
@@ -255,6 +358,102 @@
                transition: 3s;
             }
          }
+         @media (max-width: $mobile) {
+            display: flex;
+            width: 100%;
+            div {
+               width: 100%;
+               &::after {
+                  animation: full-width-anim;
+                  animation-duration: 3s;
+               }
+            }
+         }
       }
+   }
+   @media (max-width: $tablet) {
+      height: 456px;
+      .swiper {
+         height: 100%;
+      }
+   }
+   @media (max-width: $mobile) {
+      height: 580px;
+   }
+}
+.about-rewards {
+   .rewards-section {
+      &__right {
+         flex: 0 0 869px;
+         display: flex;
+         flex-direction: column;
+         gap: 80px;
+         @media (max-width: $tablet) {
+            flex: unset;
+            gap: 70px;
+         }
+         @media (max-width: $mobile) {
+            gap: 100px;
+         }
+      }
+
+      &__list {
+         grid-template-columns: repeat(5, 1fr);
+         gap: 100px;
+         @media (max-width: $tablet) {
+            gap: 75px;
+         }
+         @media (max-width: 767px) {
+            pointer-events: none;
+            gap: 70px;
+            display: flex;
+            width: 100vw;
+            margin-left: calc(-1 * var(--containerPadding));
+            margin-right: calc(-1 * var(--containerPadding));
+            padding-left: calc(1 * var(--containerPadding));
+            padding-right: calc(1 * var(--containerPadding));
+            overflow-x: auto;
+         }
+         li {
+            a {
+               height: 32px;
+               width: 78px;
+               border: none;
+
+               img {
+                  width: 100%;
+                  height: 100%;
+                  transition: 0.4s;
+                  max-width: unset;
+               }
+
+               position: relative;
+
+               .hidden {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  translate: -50% -50%;
+                  opacity: 0;
+               }
+               @media (max-width: $tablet) {
+                  width: 88px;
+               }
+               @media (max-width: 767px) {
+                  width: 78px;
+                  flex: 0 0 78px;
+               }
+            }
+         }
+      }
+   }
+}
+
+@keyframes full-width-anim {
+   0% {
+      width: 0;
+   }
+   100% {
+      width: 100%;
    }
 }

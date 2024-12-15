@@ -1,7 +1,7 @@
 <template>
    <section class="about-value">
       <div class="container">
-         <div class="about-value__wrapper">
+         <div class="about-value__wrapper scrollbar-none">
             <div class="about-value__row" v-for="item in items" :key="item">
                <div class="about-value__bg">
                   <h2 class="about-value__title h1 dark-title">

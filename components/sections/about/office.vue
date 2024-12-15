@@ -52,6 +52,16 @@
    @media(max-width: 1400px) {
       padding-left: var(--containerPadding);
    }
+
+   @media(max-width: 1024px) {
+      gap: 70px;
+      padding: 70px 40px;
+   }
+
+   @media(max-width: 568px) {
+      gap: 24px;
+      padding: 40px var(--containerPadding);
+   }
 }
 
 .about-office {
@@ -59,6 +69,11 @@
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+
+      @media(max-width: 568px) {
+         grid-template-columns: 1fr;
+         gap: 40px;
+      }
    }
 
    &__address {
@@ -75,6 +90,12 @@
       span {
          color: rgba(24, 24, 24, 0.50);
       }
+
+      @media(max-width: 568px) {
+         border: 0;
+         padding-right: 0;
+         gap: 0;
+      }
    }
 
    &__taxi {
@@ -82,6 +103,11 @@
       flex-direction: column;
       gap: 25px;
       padding-left: 44px;
+
+      @media(max-width: 568px) {
+         padding-left: 0;
+         gap: 15px;
+      }
    }
 }
 </style>
