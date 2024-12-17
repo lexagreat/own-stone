@@ -78,11 +78,15 @@
                <span class="catalog-filter__title">Срок сдачи</span>
                <UiSelect :settings="dateSettings" @selectOption="onSelectDateOption" />
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Локация</span>
                <UiSelect :settings="placementSettings" @selectOption="onSelectPlacementOption" />
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="fromHome">
+               <span class="catalog-filter__title">Расположение</span>
+               <UiPlacementSelect :settings="placementSettings" @selectOption="onSelectPlacementOption" />
+            </li>
+            <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
                <UiSelect :settings="transportSettings" @selectOption="onSelectTransportOption" />
             </li>
@@ -129,7 +133,8 @@ import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
 const props = defineProps({
    isOpenModal: Boolean,
    type: String,
-   fromCatalog: Boolean
+   fromCatalog: Boolean,
+   fromHome: Boolean
 })
 const emit = defineEmits(["closeModal", "changeCategory"])
 const types = ref([

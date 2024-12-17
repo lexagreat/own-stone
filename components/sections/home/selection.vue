@@ -16,7 +16,7 @@
                      </label>
                   </li>
                </ul>
-               <CatalogFilters :type="type" :isOpenModal="isOpenModal" @closeModal="isOpenModal = false" />
+               <CatalogFilters fromHome :type="type" :isOpenModal="isOpenModal" @closeModal="isOpenModal = false" />
             </div>
             <div class="catalog-filters__controls">
                <UiButton class="black" @click="isOpenModal = true">
