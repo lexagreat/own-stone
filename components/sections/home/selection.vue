@@ -16,7 +16,8 @@
                      </label>
                   </li>
                </ul>
-               <CatalogFilters fromHome :type="type" :isOpenModal="isOpenModal" @closeModal="isOpenModal = false" />
+               <CatalogFilters fromHome :type="type" :isOpenModal="isOpenModal" @changeType="onChangeType"
+                  @closeModal="isOpenModal = false" />
             </div>
             <div class="catalog-filters__controls">
                <UiButton class="black" @click="isOpenModal = true">
@@ -52,4 +53,8 @@ const types = ref([
    },
 ])
 const type = ref("build")
+
+const onChangeType = (value) => {
+   type.value = value
+}
 </script>

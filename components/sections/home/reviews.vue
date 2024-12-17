@@ -19,11 +19,11 @@
                      <CardsReviewBig />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
-                     <CardsReviewMedium />
+                     <CardsReviewMedium @openModal="openModal" />
+                     <CardsReviewMedium @openModal="openModal" />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
+                     <CardsReviewMedium @openModal="openModal" />
                      <CardsReviewSmall />
                      <CardsReviewSmall />
                   </SwiperSlide>
@@ -31,32 +31,37 @@
                      <CardsReviewBig />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
-                     <CardsReviewMedium />
+                     <CardsReviewMedium @openModal="openModal" />
+                     <CardsReviewMedium @openModal="openModal" />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
+                     <CardsReviewMedium v-model="isModalOpen" />
                      <CardsReviewSmall />
                   </SwiperSlide>
                   <SwiperSlide>
                      <CardsReviewBig />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
-                     <CardsReviewMedium />
+                     <CardsReviewMedium @openModal="openModal" />
+                     <CardsReviewMedium @openModal="openModal" />
                   </SwiperSlide>
                   <SwiperSlide>
-                     <CardsReviewMedium />
+                     <CardsReviewMedium @openModal="openModal" />
                      <CardsReviewSmall />
                   </SwiperSlide>
                </Swiper>
             </div>
          </div>
       </div>
+      <modalReviewText :isOpen="isModalOpen" @closePopup="isModalOpen = false" />
    </section>
 </template>
 <script setup>
-const swiperInstance = ref(false)
+const swiperInstance = ref(null)
+const isModalOpen = ref(false)
+const openModal = () => {
+   isModalOpen.value = true
+}
 const onSwiper = (swiper) => {
    swiperInstance.value = swiper
 }

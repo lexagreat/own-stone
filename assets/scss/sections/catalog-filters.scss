@@ -15,6 +15,39 @@
       background-color: $light-grey;
       border-radius: 8px;
       margin-top: 25px;
+      @media (max-width: $tablet) {
+         display: flex;
+         flex-direction: column;
+
+         justify-content: space-between;
+         gap: 25px;
+         flex: 1;
+      }
+   }
+   &__sticky {
+      display: none;
+      @media (max-width: $tablet) {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         position: sticky;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         width: 100%;
+         background-color: #f1f1f1;
+         z-index: 10;
+         margin-left: calc(-1 * 20px);
+         margin-right: calc(-1 * 20px);
+         padding-left: calc(1 * var(--containerPadding));
+         padding-right: calc(1 * var(--containerPadding));
+         translate: 0 25px;
+         height: 82px;
+         width: 100vw;
+         .btn {
+            width: 100%;
+         }
+      }
    }
    &__radios {
       display: none;
@@ -33,6 +66,9 @@
       display: flex;
       align-items: end;
       gap: 8px;
+      @media (max-width: $tablet) {
+         display: none;
+      }
    }
    &__controls {
       display: none;
@@ -52,6 +88,9 @@
       background-color: $light-grey;
       padding: 35px 20px;
       padding-bottom: 24px;
+      &:has(.v-select.open) {
+         overflow: hidden;
+      }
       &.open {
          translate: 0;
       }
@@ -130,6 +169,54 @@
          }
          .white {
             display: none;
+         }
+      }
+
+      .v-select {
+         &__subheader {
+            position: relative;
+            display: flex !important;
+            .circle {
+               background-color: $black-5;
+            }
+            span {
+               top: 50%;
+               left: 50%;
+               translate: -50% -50%;
+               font-family: $fontMontreal;
+               font-size: 18px;
+               font-weight: 500;
+               line-height: 20.7px;
+               text-align: center;
+               position: absolute;
+            }
+         }
+         &__content {
+            padding: 25px var(--containerPadding);
+            position: fixed;
+            top: 0;
+            left: 100vw;
+            width: 100vw;
+            height: 100vh;
+            background-color: #f1f1f1;
+            transition: left $transition, translate $transition;
+            overflow: auto;
+         }
+         &__list {
+            opacity: 1;
+            position: relative;
+            top: unset;
+            translate: unset;
+            background-color: #f1f1f1;
+            padding: 0;
+            margin-top: 50px;
+         }
+         &.open {
+            .v-select {
+               &__content {
+                  left: 0;
+               }
+            }
          }
       }
    }

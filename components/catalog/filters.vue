@@ -55,7 +55,7 @@
             </li>
             <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Отделка</span>
-               <UiSelect :settings="repairSettings" @selectOption="onSelectRepairOption" />
+               <UiSelect title="Отделка" :settings="repairSettings" @selectOption="onSelectRepairOption" />
             </li>
             <li class="catalog-filter" id="priceRange">
                <span class="catalog-filter__title">Стоимость за <b>все</b> м2</span>
@@ -72,31 +72,33 @@
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Назначение</span>
-               <UiSelect :settings="targetSettings" @selectOption="onSelectTargetOption" />
+               <UiSelect title="Назначение" :settings="targetSettings" @selectOption="onSelectTargetOption" />
             </li>
             <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title">Срок сдачи</span>
-               <UiSelect :settings="dateSettings" @selectOption="onSelectDateOption" />
+               <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
             </li>
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Локация</span>
-               <UiSelect :settings="placementSettings" @selectOption="onSelectPlacementOption" />
+               <UiSelect title="Локация" :settings="placementSettings" @selectOption="onSelectPlacementOption" />
             </li>
             <li class="catalog-filter" v-if="fromHome">
                <span class="catalog-filter__title">Расположение</span>
-               <UiPlacementSelect :settings="placementSettings" @selectOption="onSelectPlacementOption" />
+               <UiPlacementSelect title="Расположение" :settings="placementSettings"
+                  @selectOption="onSelectPlacementOption" />
             </li>
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
-               <UiSelect :settings="transportSettings" @selectOption="onSelectTransportOption" />
+               <UiSelect title="Внутри транспортных колец" :settings="transportSettings"
+                  @selectOption="onSelectTransportOption" />
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Этаж</span>
-               <UiSelect :settings="floorSettings" @selectOption="onSelectFloorOption" />
+               <UiSelect title="Этаж" :settings="floorSettings" @selectOption="onSelectFloorOption" />
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Вход</span>
-               <UiSelect :settings="entrySettings" @selectOption="onSelectEntryOption" />
+               <UiSelect title="Вход" :settings="entrySettings" @selectOption="onSelectEntryOption" />
             </li>
             <li class="catalog-filter">
                <span class="catalog-filter__title"></span>
@@ -122,6 +124,9 @@
                <UiButton class="black">Показать 1 100 предложений</UiButton>
             </li>
          </ul>
+         <div class="catalog-filters__sticky">
+            <UiButton class="black">Показать 1 100 предложений</UiButton>
+         </div>
       </div>
    </div>
 </template>
@@ -136,25 +141,25 @@ const props = defineProps({
    fromCatalog: Boolean,
    fromHome: Boolean
 })
-const emit = defineEmits(["closeModal", "changeCategory"])
+const emit = defineEmits(["closeModal", "changeCategory", "changeType"])
 const types = ref([
    {
       name: 'Новостройки',
-      value: 0,
+      value: "build",
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/new-buildings.svg'))),
    },
    {
       name: 'Вторичная',
-      value: 1,
+      value: "secondary",
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
    },
    {
       name: 'Коммерция ',
-      value: 2,
+      value: "commerce",
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const myType = ref(0)
+const myType = ref("build")
 
 const categories = ref([
    {
@@ -373,7 +378,12 @@ watch(() => props.isOpenModal, (value) => {
       bodyUnlock()
    }
 })
-
+watch(() => props.type, (value) => {
+   myType.value = value
+})
+watch(myType, (value) => {
+   emit("changeType", value)
+})
 
 const categoryCard = computed(() => {
    if (props.type == 'secondary') {

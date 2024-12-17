@@ -13,8 +13,8 @@
                   <NuxtLink :to="item.to">{{ item.name }}</NuxtLink>
                </li>
             </ul>
-            <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @closeModal="isFiltersOpen = false"
-               @changeCategory="onChangeCategory" />
+            <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
+               @closeModal="isFiltersOpen = false" @changeCategory="onChangeCategory" />
          </div>
       </section>
       <section class="catalog-page">
@@ -49,13 +49,13 @@
                   </div>
                </div>
                <div class="catalog-page__main">
-                  <CatalogListsGrid v-if="currentView == 'grid'" :category="category" />
-                  <CatalogListsColumn v-if="currentView == 'column'" :category="category" />
+                  <CatalogListsGrid @openForm="onOpenForm" v-if="currentView == 'grid'" :category="category" />
+                  <CatalogListsColumn @openForm="onOpenForm" v-if="currentView == 'column'" :category="category" />
                   <BannersCatalogObject />
-                  <CatalogListsGrid v-if="currentView == 'grid'" :category="category" />
-                  <CatalogListsColumn v-if="currentView == 'column'" :category="category" />
-
+                  <CatalogListsGrid @openForm="onOpenForm" v-if="currentView == 'grid'" :category="category" />
+                  <CatalogListsColumn @openForm="onOpenForm" v-if="currentView == 'column'" :category="category" />
                </div>
+               <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
             </div>
          </div>
       </section>
@@ -74,8 +74,12 @@ import IconSort from '@/assets/img/icons/sort.svg'
 import IconGeo from "@/assets/img/icons/geo.svg"
 // Получаем параметр type из маршрута
 const route = useRoute()
-const type = route.params.type
-
+const router = useRouter()
+let type = route.params.type
+const isOpenFormModal = ref(false)
+const onOpenForm = () => {
+   isOpenFormModal.value = true
+}
 const path = ref([
    {
       name: "Главная",
@@ -86,7 +90,9 @@ const path = ref([
       to: ""
    },
 ])
-
+const onChangeType = (value) => {
+   type = value
+}
 // Определяем заголовок страницы
 const pageStaticInfo = {
    build: {

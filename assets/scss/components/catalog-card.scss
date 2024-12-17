@@ -9,7 +9,14 @@
    gap: 18px;
    border-radius: 8px;
    overflow: hidden;
+   transition: $transition;
    &_object {
+      cursor: pointer;
+      @media (hover: hover) {
+         &:hover {
+            box-shadow: 0px 2px 12px 0px #18181826;
+         }
+      }
       .catalog-card {
          &__tags {
             li {
@@ -66,6 +73,11 @@
                background-color: aqua;
             }
          }
+      }
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: contain;
       }
       .swiper-slide {
          border-radius: 8px;
@@ -477,6 +489,82 @@
       transition: 0.3s;
       &.active {
          rotate: 180deg;
+      }
+   }
+}
+.object-form {
+   // .object-form__content
+
+   &__content {
+      width: 470px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      @media (max-width: $tablet) {
+         width: 100vw;
+         height: 100dvh;
+         gap: 24px;
+         padding-top: 130px !important;
+         padding-left: var(--containerPadding) !important;
+         padding-right: var(--containerPadding) !important;
+         border-radius: 0 !important;
+      }
+   }
+
+   // .object-form__header
+
+   &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      p {
+         color: $black-50;
+      }
+   }
+
+   // .object-form__title
+
+   &__title {
+   }
+
+   // .object-form__main
+
+   &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      .btn {
+         width: 100%;
+      }
+      .form-section__check {
+         margin: 0;
+      }
+   }
+
+   // .object-form__inputs
+
+   &__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+   }
+
+   // .object-form__footer
+
+   &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: $black-50;
+      padding-top: 20px;
+      border-top: 1px solid $black-15;
+      ul {
+         display: flex;
+         gap: 10px;
+         .circle {
+            --size: 32px;
+            background-color: $black-5;
+         }
       }
    }
 }

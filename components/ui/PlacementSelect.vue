@@ -9,7 +9,13 @@
             <ArrowDownIcon />
          </div>
       </div>
-      <div class="v-select__content placement-select__content scrollbar-none">
+      <div class="v-select__content placement-select__content scrollbar-none" ref="content">
+         <div class="v-select__subheader">
+            <button class="circle circle40" @click="isOpen = false">
+               <ArrowDownIcon style="rotate: 90deg;" />
+            </button>
+            <span>{{ title }}</span>
+         </div>
          <ul class="placement-select__tabs scrollbar-none">
             <li v-for="(item, index) in data" :key="item.tabName">
                <label>
@@ -45,8 +51,9 @@
 <script setup>
 import ArrowDownIcon from "@/assets/img/icons/arrow_down.svg"
 import SearchIcon from "@/assets/img/icons/search.svg"
-
-const emit = defineEmits(["selectOption"])
+const props = defineProps({
+   title: String
+})
 
 const isOpen = ref(false)
 const tab = ref(0)
@@ -162,14 +169,14 @@ const data = ref([
       ]
    },
 ])
-
+const content = ref(null)
 const searchedItems = computed(() => {
    return data.value[tab.value].items.filter((item) => {
       return item.name.toLowerCase().includes(data.value[tab.value].searchValue.toLowerCase())
    })
 })
 const choosedValue = computed(() => {
-   let arr = data.value.map(tab => tab.items).flat().filter((item) => item.selected).map(item => item.name).join()
+   let arr = data.value.map(tab => tab.items).flat().filter((item) => item.selected).map(item => item.name).join(", ")
    return arr
 })
 function selectOption(option) {
@@ -179,6 +186,12 @@ function selectOption(option) {
       }
    })
 }
+watch(isOpen, (value) => {
+   if (document.querySelector('.catalog-filters')) {
+      let top = document.querySelector('.catalog-filters').scrollTop
+      content.value.style.top = top + "px"
+   }
+})
 </script>
 <style lang="scss">
 .v-select {
@@ -244,7 +257,6 @@ function selectOption(option) {
       gap: 14px;
       padding: 16px 14px;
       background-color: white;
-
    }
 
    &__item {
@@ -260,6 +272,10 @@ function selectOption(option) {
 
 .placement-select {
    width: 220px !important;
+
+   @media(max-width: 1024px) {
+      width: 100% !important;
+   }
 
    &.open {
       .placement-select__content {
@@ -291,6 +307,16 @@ function selectOption(option) {
       opacity: 0;
       pointer-events: none;
       transition: 0.4s;
+
+      .v-select__subheader {
+         margin-bottom: 50px;
+      }
+
+      @media(max-width: 1024px) {
+         max-height: unset;
+         translate: 0;
+         opacity: 1;
+      }
    }
 
    // .placement-select__tabs

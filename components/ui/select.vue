@@ -10,12 +10,20 @@
             <ArrowDownIcon />
          </div>
       </div>
-      <ul class="v-select__list">
-         <li class="v-select__item" :class="{ active: option.name === choosedValue }"
-            v-for="(option, index) in settings.options" :key="index" @click="selectOption(option)">
-            {{ option.name }}
-         </li>
-      </ul>
+      <div class="v-select__content" ref="content">
+         <div class="v-select__subheader">
+            <button class="circle circle40" @click="emit('closeSelect')">
+               <ArrowDownIcon style="rotate: 90deg;" />
+            </button>
+            <span>{{ title }}</span>
+         </div>
+         <ul class="v-select__list">
+            <li class="v-select__item" :class="{ active: option.name === choosedValue }"
+               v-for="(option, index) in settings.options" :key="index" @click="selectOption(option)">
+               {{ option.name }}
+            </li>
+         </ul>
+      </div>
    </div>
 </template>
 <script setup>
@@ -32,7 +40,9 @@ const props = defineProps({
       default: "",
       required: false,
    },
+   title: String
 })
+const content = ref(null)
 const emit = defineEmits(["selectOption"])
 
 const route = useRoute()
@@ -41,6 +51,10 @@ const choosedValue = ref("");
 const output = ref(null)
 
 function toggleOptions(event) {
+   if (document.querySelector('.catalog-filters')) {
+      let top = document.querySelector('.catalog-filters').scrollTop
+      content.value.style.top = top + "px"
+   }
    if (!props.settings.options.length) return
    event.target.closest(".v-select").classList.toggle("open");
 }
@@ -117,6 +131,10 @@ onMounted(() => {
 
    &__icon {
       transition: 0.3s;
+   }
+
+   &__subheader {
+      display: none;
    }
 
    &__backdrop {

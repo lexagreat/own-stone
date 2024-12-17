@@ -26,9 +26,10 @@
                      </li>
                   </ul>
                   <div class="favrotite-page__products">
-                     <CatalogListsGrid :category="category" />
-                     <CatalogListsGrid :category="category" />
+                     <CatalogListsGrid @openForm="onOpenForm" :category="category" />
+                     <CatalogListsGrid @openForm="onOpenForm" :category="category" />
                   </div>
+                  <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
                </div>
             </div>
          </div>
@@ -46,7 +47,10 @@ const path = ref([
       to: ""
    },
 ])
-
+const isOpenFormModal = ref(false)
+const onOpenForm = () => {
+   isOpenFormModal.value = true
+}
 const categories = ref([
    {
       name: "Проекты",
