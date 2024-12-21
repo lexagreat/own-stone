@@ -31,6 +31,11 @@
                stroke: #181818;
             }
          }
+         &__gallery {
+            padding-top: 50px;
+            padding-left: 15px;
+            padding-right: 15px;
+         }
       }
    }
    // .catalog-card__gallery
@@ -130,6 +135,8 @@
       position: absolute;
       top: 15px;
       left: 15px;
+      right: 45px;
+      flex-wrap: wrap;
       z-index: 2;
       li {
          border-radius: 30px;
@@ -170,6 +177,8 @@
 
    &__main {
       padding: 0 15px;
+      display: flex;
+      flex-direction: column;
       position: relative;
    }
 
@@ -240,12 +249,17 @@
          font-family: $fontMontreal;
          font-size: 13px;
          font-weight: 500;
+         .circle {
+            --size: 8px;
+         }
       }
    }
 
    // .catalog-card__footer
 
    &__footer {
+      flex: 1;
+      justify-content: space-between;
       position: absolute;
       top: 100%;
       left: 0;
@@ -265,10 +279,12 @@
          gap: 8px;
          li {
             display: flex;
+            align-items: flex-end;
             justify-content: space-between;
             gap: 16px;
             p {
                display: flex;
+               align-items: flex-end;
                gap: 6px;
                color: rgba(24, 24, 24, 0.5);
             }

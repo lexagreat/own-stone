@@ -64,25 +64,34 @@ function selectOption(option) {
    emit("selectOption", option);
 }
 
-watch(() => route.params, () => {
-   if (!props.settings.options) {
-      return;
-   }
-   props.settings.options.forEach((item, index) => {
-      if (index == 0) {
-         selectOption(item);
-      }
-   });
-})
-watch(props.settings.options, (value) => {
+// onMounted(() => {
+//    watch(() => route.params, () => {
+//       if (!props.settings.options) {
+//          return;
+//       }
+//       props.settings.options.forEach((item, index) => {
+//          if (index == 0) {
+//             selectOption(item);
+//          }
+//       });
+//    })
+//    watch(props.settings.options, (value) => {
+//       value.forEach((item) => {
+//          if (item.selected) {
+//             selectOption(item);
+//          }
+//       });
+//    })
+// })
+
+watch(() => props.settings.options, (value) => {
+   console.log("props", value);
    value.forEach((item) => {
       if (item.selected) {
          selectOption(item);
       }
    });
-})
-
-
+}, { deep: true })
 onMounted(() => {
    if (props.settings.placeholder) {
       choosedValue.value = props.settings.placeholder;

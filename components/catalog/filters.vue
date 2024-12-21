@@ -84,8 +84,7 @@
             </li>
             <li class="catalog-filter" v-if="fromHome">
                <span class="catalog-filter__title">Расположение</span>
-               <UiPlacementSelect title="Расположение" :settings="placementSettings"
-                  @selectOption="onSelectPlacementOption" />
+               <UiPlacementSelect title="Расположение" />
             </li>
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
@@ -121,7 +120,7 @@
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
-               <UiButton class="black">Показать 1 100 предложений</UiButton>
+               <UiButton class="black" @click="search">Показать 1 100 предложений</UiButton>
             </li>
          </ul>
          <div class="catalog-filters__sticky">
@@ -135,13 +134,18 @@ import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber, formatPrice } from "~/utils/formattingNumbers";
 import IconFilter from '@/assets/img/icons/filter.svg'
 import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
+import { useCatalog } from "~/store/catalog";
+const catalog = useCatalog()
+const route = useRoute()
 const props = defineProps({
    isOpenModal: Boolean,
    type: String,
    fromCatalog: Boolean,
-   fromHome: Boolean
+   fromHome: Boolean,
+   products: Array,
+   filters: Object
 })
-const emit = defineEmits(["closeModal", "changeCategory", "changeType"])
+const emit = defineEmits(["closeModal", "setCat", "changeType", "search",])
 const types = ref([
    {
       name: 'Новостройки',
@@ -154,7 +158,7 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
    },
    {
-      name: 'Коммерция ',
+      name: 'Коммерция',
       value: "commerce",
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
@@ -182,19 +186,12 @@ const repairSettings = ref({
          value: 0,
          selected: true
       },
-      {
-         name: "Без ремонта",
-         value: 1,
-      },
-      {
-         name: "С ремонтом",
-         value: 2,
-      },
    ],
    placeholder: ""
 })
 const repairOption = ref(null)
 function onSelectRepairOption(option) {
+   console.log("select repair option", option);
    repairOption.value = option
 }
 const placementSettings = ref({
@@ -239,10 +236,6 @@ const dateSettings = ref({
          name: "Не важно",
          value: 0,
          selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
@@ -385,16 +378,168 @@ watch(myType, (value) => {
    emit("changeType", value)
 })
 
-const categoryCard = computed(() => {
-   if (props.type == 'secondary') {
-      return 0
+// const categoryCard = computed(() => { // не нужно вроде
+//    if (props.type == 'secondary') {
+//       return 0
+//    }
+//    return category.value
+// })
+const filtersObject = computed(() => {
+   let obj = {}
+   obj.category = category.value
+   obj.type = types.value.find(item => item.value == props.type).name
+   if (roomsChecked.value?.length) {
+      obj.rooms = roomsChecked.value
    }
-   return category.value
+   if (areaMinValue.value !== areaMin.value) {
+      obj.area = {}
+      obj.area.min = areaMinValue.value
+   }
+   if (areaMaxValue.value !== areaMax.value) {
+      if (!obj.area) {
+         obj.area = {}
+      }
+      obj.area.max = areaMaxValue.value
+   }
+   obj.repair = repairOption.value
+   if (priceMinValue.value !== priceMin.value) {
+      obj.price = {}
+      obj.price.min = priceMinValue.value
+   }
+   if (priceMaxValue.value !== priceMax.value) {
+      if (!obj.price) {
+         obj.price = {}
+      }
+      obj.price.max = priceMaxValue.value
+   }
+   obj.date = dateOption.value
+   obj.placement = placementOption.value?.name
+   obj.transport = transportOption.value?.name
+   obj.options = checkedOptions.value
+   obj.floor = floorOption.value?.name
+   return obj
 })
-watch(categoryCard, (value) => {
-   emit('changeCategory', value)
-})
+const search = async () => {
+   // console.log('category', category.value);
+   // console.log("props.type", props.type);
+   if (props.type == 'secondary') {
+      category.value = 1
+   }
+   emit('setCat', category.value)
+   if (route.query["filters[category]"] == 'apartaments' && category.value == 0 || route.query["filters[category]"] == 'projects' && category.value == 1) {
+      await setCat()
+   }
+   console.log('3. search');
+   const url = catalog.getUrl(filtersObject.value)
+   emit('search', url)
+}
+const getFiltersFromQuery = () => {
+   if (route.query["filters[category]"] == 'apartaments') {
+      category.value = 1
+   } else {
+      category.value = 0
 
+   }
+   if (route.query["filters[count_rooms]"]) {
+      if (Array.isArray(route.query["filters[count_rooms]"])) {
+         roomsChecked.value = route.query["filters[count_rooms]"].map(item => +item)
+      } else {
+         roomsChecked.value = [+route.query["filters[count_rooms]"]]
+      }
+   }
+   if (route.query["filters[apartaments][count_rooms]"]) {
+      if (Array.isArray(route.query["filters[apartaments][count_rooms]"])) {
+         roomsChecked.value = route.query["filters[apartaments][count_rooms]"].map(item => +item)
+      } else {
+         roomsChecked.value = [+route.query["filters[apartaments][count_rooms]"]]
+      }
+   }
+   if (route.query["filters[square_apartament][$gte]"]) {
+      areaMinValue.value = +route.query["filters[square_apartament][$gte]"]
+   }
+   if (route.query["filters[apartaments][square_apartament][$gte]"]) {
+      areaMinValue.value = +route.query["filters[apartaments][square_apartament][$gte]"]
+   }
+   if (route.query["filters[square_apartament][$lte]"] || route.query["filters[apartaments][square_apartament][$lte]"]) {
+      areaMaxValue.value = +route.query["filters[square_apartament][$lte]"] || +route.query["filters[apartaments][square_apartament][$lte]"]
+   }
+   if (route.query["filters[cost_total][$gte]"]) {
+      priceMinValue.value = +route.query["filters[cost_total][$gte]"]
+   }
+   if (route.query["filters[apartaments][cost_total][$gte]"]) {
+      priceMinValue.value = +route.query["filters[apartaments][cost_total][$gte]"]
+   }
+   if (route.query["filters[cost_total][$lte]"] || route.query["filters[apartaments][cost_total][$lte]"]) {
+      priceMaxValue.value = +route.query["filters[cost_total][$lte]"] || +route.query["filters[apartaments][cost_total][$lte]"]
+   }
+   if (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"]) {
+      repairSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      console.log(repairSettings.value.options);
+      onSelectRepairOption(repairSettings.value.options.filter(item => item.name == (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"]))[0])
+   }
+   if (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]) {
+      dateSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectDateOption(dateSettings.value.options.filter(item => item.name == (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]))[0])
+   }
+   // if (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]) {
+   //    dateSettings.value.options.forEach(item => {
+   //       if (item.name == (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"])) {
+   //          item.selected = true
+   //       }
+   //    });
+   //    onSelectDateOption(dateSettings.value.options.filter(item => item.name == (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]))[0])
+
+   // }
+   // date: dateOption.value?.name,
+   // placement: placementOption.value?.name,
+   // transport: transportOption.value?.name,
+   // options: checkedOptions.value,
+   // floor: floorOption.value?.name,
+   // search()
+   // console.log('set filters from query');
+}
+const setCat = async () => {
+
+   let response = await catalog.getFiltersForCats(category.value, props.type);
+   console.log("1. filters from cat", response);
+   setFiltersFromCat(response)
+}
+
+function setFiltersFromCat(obj) {
+   // set ranges
+   priceMin.value = obj.ranges?.price?.min
+   priceMax.value = obj.ranges?.price?.max
+   priceMinValue.value = priceMin.value
+   priceMaxValue.value = priceMax.value
+   areaMin.value = Math.round(obj.ranges?.area?.min)
+   areaMax.value = Math.round(obj.ranges?.area?.max)
+   areaMinValue.value = areaMin.value
+   areaMaxValue.value = areaMax.value
+
+   // set repair
+   repairSettings.value.options = obj?.repair
+   // set sroks
+   dateSettings.value.options = obj?.sroks
+   console.log("2. set filters");
+}
+onMounted(async () => {
+   await setCat()
+   getFiltersFromQuery()
+   await search()
+
+})
 </script>
 
 

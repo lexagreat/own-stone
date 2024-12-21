@@ -40,6 +40,7 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
 const modules = ref([Pagination])
 const types = ref([

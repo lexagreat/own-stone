@@ -90,7 +90,7 @@
             </UiButton>
          </div>
       </div>
-      <SectionsProductSlider white-btns>
+      <SectionsProductSlider white-btns :category="1">
          <slot />
       </SectionsProductSlider>
       <BannersProjectMoreInfo v-if="type !== 'commerce'" />

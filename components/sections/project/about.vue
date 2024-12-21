@@ -36,7 +36,7 @@
                   </li>
                </ul>
                <div class="project-about__slider">
-                  <Swiper :modules="[SwiperPagination]" @swiper="onSwiper" :slides-per-view="1" :pagination="true">
+                  <Swiper :modules="[Pagination]" @swiper="onSwiper" :slides-per-view="1" :pagination="true">
                      <SwiperSlide v-for="item in 3">
                         <img src="/img/project/about-1.png" alt="">
                      </SwiperSlide>
@@ -51,6 +51,8 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination } from 'swiper/modules';
 const isTextFull = ref(false)
 const tabs = ref([
    {

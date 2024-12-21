@@ -27,6 +27,12 @@ export default defineNuxtConfig({
          svgLoader(), // Добавляем плагин для работы с SVG как с Vue компонентами
       ],
    },
+   runtimeConfig: {
+      public: {
+         baseURL:
+            process.env.BASE_URL || "https://own-admin.okttastudio.ru/api",
+      },
+   },
    experimental: {
       typedPages: true,
       payloadExtraction: true, // Уменьшает объём передаваемых данных // оптимизация

@@ -2,29 +2,33 @@
    <div class="list-object">
       <div class="list-object__main">
          <div class="list-object__image">
-            <img src="/img/catalog-card-2.png" alt="">
+            <img :src="product?.preview_picture.url" alt="">
          </div>
          <div class="list-object__info">
             <ul class="catalog-card__tags">
-               <li>IV кв.2029</li>
-               <li>ЖК Rеpublic</li>
+               <li>{{ product?.proekty?.date_complete }}</li>
+               <li>{{ product?.name }}</li>
             </ul>
             <ul class="list-object__tags">
-               <li>IV кв.2029</li>
-               <li>ЖК Rеpublic</li>
-               <li>14 ЭТАЖ</li>
-               <li>без отделки</li>
+               <li>{{ product?.proekty?.date_complete }}</li>
+               <li>{{ product?.name }}</li>
+               <li>{{ product?.floor }} ЭТАЖ</li>
+               <li>{{ product?.finishing }}</li>
             </ul>
-            <span class="list-object__price">73 947 168 ₽ - 77 770 160 ₽</span>
-            <span class="list-object__name">2 комнатная квартира, 52м2, 2 спальни</span>
+            <span class="list-object__price">{{ formatPrice(product?.cost_total) }}</span>
+            <span class="list-object__name">{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }} комнатная
+               квартира, {{ product?.square_apartament }}м<sup>2</sup>, 2
+               спальни </span>
             <ul class="catalog-card__addresses">
                <li>
                   <IconAddress />
-                  <span>Пресненский вал, вл. 27</span>
+                  <span>{{ product?.proekty?.address_short }}</span>
                </li>
-               <li>
-                  <IconDot />
-                  <span>Белорусская, 15 мин </span>
+               <li v-if="product?.proekty?.metro_nearby?.length">
+                  <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+                  </div>
+                  <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }} мин
+                  </span>
                   <IconMan />
                </li>
             </ul>
@@ -32,18 +36,20 @@
       </div>
       <div class="list-object__content">
          <ul class="catalog-card__banners">
-            <li>14 ЭТАЖ</li>
-            <li>без отделки</li>
-            <li>ID 50555</li>
+            <li>{{ product?.floor }} ЭТАЖ</li>
+            <li>{{ product?.finishing }}</li>
+            <li>ID {{ product?.id }}</li>
          </ul>
          <ul class="catalog-card__addresses">
             <li>
                <IconAddress />
-               <span>Пресненский вал, вл. 27</span>
+               <span>{{ product?.proekty?.address_short }}</span>
             </li>
-            <li>
-               <IconDot />
-               <span>Белорусская, 15 мин </span>
+            <li v-if="product?.proekty?.metro_nearby?.length">
+               <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+               </div>
+               <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }} мин
+               </span>
                <IconMan />
             </li>
          </ul>
@@ -56,7 +62,7 @@
                   stroke="white" />
             </svg>
          </button>
-         <span>ID 50555</span>
+         <span>ID {{ product?.id }}</span>
       </div>
    </div>
 </template>
@@ -64,4 +70,8 @@
 import IconMan from '@/assets/img/icons/catalog-card-man.svg'
 import IconDot from '@/assets/img/icons/catalog-card-dot.svg'
 import IconAddress from '@/assets/img/icons/catalog-card-address.svg'
+
+const props = defineProps({
+   product: Object
+})
 </script>

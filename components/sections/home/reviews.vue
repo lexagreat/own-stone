@@ -57,6 +57,7 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from "swiper/vue"
 const swiperInstance = ref(null)
 const isModalOpen = ref(false)
 const openModal = () => {

@@ -252,7 +252,12 @@
    flex-direction: column;
    gap: 14px;
    // .catalog-filter__title
-
+   &:has(.v-select) {
+      flex: 0 0 220px;
+      @media (max-width: $tablet) {
+         flex: unset;
+      }
+   }
    &__title {
       color: $black-50;
       @include regular-13;

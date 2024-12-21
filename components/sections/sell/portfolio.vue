@@ -9,7 +9,7 @@
                <Swiper @swiper="onSwiper" :space-between="10">
                   <SwiperSlide class="sell-portfolio__slide" v-for="item in items" :key="item">
                      <div class="sell-portfolio__gallery">
-                        <Swiper :modules="[SwiperPagination]" :pagination="true">
+                        <Swiper :modules="[Pagination]" :pagination="true">
                            <SwiperSlide v-for="image in item.images" :key="image">
                               <img :src="image" alt="">
                            </SwiperSlide>
@@ -43,6 +43,8 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination } from 'swiper/modules';
 const items = ref([
    {
       title: "3-комнатная квартира,<br> 136 м² в ЖК «Пресня Сити»",

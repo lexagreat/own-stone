@@ -6,5 +6,6 @@
    </div>
 </template>
 <style lang="scss">
+@import 'swiper/swiper-bundle.css';
 @import "@/assets/scss/style";
 </style>

@@ -1,10 +1,9 @@
 <template>
    <section class="project-hero">
-      <Swiper :modules="[SwiperPagination, SwiperAutoplay]" :pagination="{ el: pagination }" :slides-per-view="1"
-         :autoplay="{
-            delay: 1500,
-            enadled: true
-         }" :speed="700">
+      <Swiper :modules="[Pagination, Autoplay]" :pagination="{ el: pagination }" :slides-per-view="1" :autoplay="{
+         delay: 1500,
+         enadled: true
+      }" :speed="700">
          <SwiperSlide v-for="item in 3">
             <img src="/img/project/hero.png" alt="">
          </SwiperSlide>
@@ -53,6 +52,8 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination, Autoplay } from 'swiper/modules';
 const path = ref([
    {
       name: "Главная",

@@ -14,7 +14,8 @@
                </li>
             </ul>
             <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
-               @closeModal="isFiltersOpen = false" @changeCategory="onChangeCategory" />
+               @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
+               @setCat="setCat" />
          </div>
       </section>
       <section class="catalog-page">
@@ -49,30 +50,36 @@
                   </div>
                </div>
                <div class="catalog-page__main">
-                  <CatalogListsGrid @openForm="onOpenForm" v-if="currentView == 'grid'" :category="category" />
-                  <CatalogListsColumn @openForm="onOpenForm" v-if="currentView == 'column'" :category="category" />
+                  <CatalogListsGrid :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'grid'"
+                     :category="category" />
+                  <CatalogListsColumn :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'column'"
+                     :category="category" />
                   <BannersCatalogObject />
-                  <CatalogListsGrid @openForm="onOpenForm" v-if="currentView == 'grid'" :category="category" />
-                  <CatalogListsColumn @openForm="onOpenForm" v-if="currentView == 'column'" :category="category" />
+                  <CatalogListsGrid :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'grid'"
+                     :category="category" />
+                  <CatalogListsColumn :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'column'"
+                     :category="category" />
                </div>
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
             </div>
          </div>
       </section>
       <CatalogPagination />
-      <SectionsProductSlider>
+      <!-- <SectionsProductSlider>
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
       <SectionsProductSlider>
          Вам <span>подходит</span>
-      </SectionsProductSlider>
+      </SectionsProductSlider> -->
    </main>
 </template>
 <script setup>
 import IconFilter from '@/assets/img/icons/filter.svg'
 import IconSort from '@/assets/img/icons/sort.svg'
 import IconGeo from "@/assets/img/icons/geo.svg"
+import { useCatalog } from '~/store/catalog';
 // Получаем параметр type из маршрута
+const catalog = useCatalog()
 const route = useRoute()
 const router = useRouter()
 let type = route.params.type
@@ -124,7 +131,7 @@ const types = ref([
       // icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
    },
    {
-      name: 'Коммерция ',
+      name: 'Коммерция',
       to: "/catalog/commerce"
       // icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
@@ -162,7 +169,18 @@ function onSelectSortOption(option) {
 }
 const isFiltersOpen = ref(false)
 const category = ref(0)
-const onChangeCategory = (value) => {
-   category.value = value
+const searchUrl = ref("")
+// const onChangeCategory = (value) => {
+//    category.value = value
+// }
+const search = async (url = searchUrl.value) => {
+   router.push(route.path + url)
+   await catalog.getProducts(url)
 }
+const filters = ref({})
+const setCat = (cat) => {
+   category.value = cat
+}
+
+// console.log('должно быть set cat -> get filters for cat -> set filters from query -> search');
 </script>

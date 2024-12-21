@@ -94,6 +94,7 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, EffectFade } from 'swiper/modules';
 const swiperInstance = ref(null)
 const thumbsSwiper = ref(null)

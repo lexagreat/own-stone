@@ -18,7 +18,8 @@
                   }
                }">
                   <SwiperSlide v-for="item in 8">
-                     <CatalogCardsProject />
+                     <CatalogCardsObject :product="item" @click="openForm" v-if="category == 1" />
+                     <CatalogCardsProject :product="item" v-else />
                   </SwiperSlide>
                </Swiper>
             </div>
@@ -27,8 +28,13 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
 const props = defineProps({
-   whiteBtns: Boolean
+   whiteBtns: Boolean,
+   category: {
+      Number,
+      default: 0
+   },
 })
 const swiperInst = ref(null)
 const onSwiper = (swiper) => {
@@ -39,5 +45,8 @@ const slidePrev = () => {
 }
 const slideNext = () => {
    swiperInst.value.slideNext()
+}
+const openform = () => {
+
 }
 </script>
