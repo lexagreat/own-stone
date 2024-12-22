@@ -436,6 +436,12 @@
       background: rgba(24, 24, 24, 0.05);
       svg path {
          stroke: $black;
+         fill: $black-5;
+      }
+      &.active {
+         svg path {
+            fill: $black;
+         }
       }
    }
    @media (max-width: $tablet) {

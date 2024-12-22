@@ -85,6 +85,11 @@ export const useCatalog = defineStore("useCatalog", {
                resultString
             )}[proekty][date_complete]=${object.date?.name}`;
          }
+         if (object.placement?.value) {
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[finishing]=${object.placement?.name}`;
+         }
          return resultString;
       },
       getRanges(arr) {

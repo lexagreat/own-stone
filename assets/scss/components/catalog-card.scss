@@ -30,6 +30,11 @@
             svg path {
                stroke: #181818;
             }
+            &.active {
+               svg path {
+                  fill: $black;
+               }
+            }
          }
          &__gallery {
             padding-top: 50px;
@@ -171,6 +176,15 @@
       top: 15px;
       right: 15px;
       z-index: 2;
+      svg path {
+         fill: $white-15;
+         backdrop-filter: blur(8px);
+      }
+      &.active {
+         svg path {
+            fill: $white;
+         }
+      }
    }
 
    // .catalog-card__main
@@ -186,6 +200,9 @@
 
    &__content {
       padding-bottom: 15px;
+      .catalog-card__like {
+         display: none;
+      }
    }
 
    // .catalog-card__banners
@@ -479,6 +496,21 @@
       }
       &__content {
          position: relative;
+         .catalog-card__like {
+            display: flex;
+            background-color: $black-5;
+            top: -2px;
+            right: 0;
+            svg path {
+               stroke: $black;
+               fill: $black-5;
+            }
+            &.active {
+               svg path {
+                  fill: $black;
+               }
+            }
+         }
       }
       &__footer {
          position: relative;
