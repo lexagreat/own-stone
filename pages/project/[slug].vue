@@ -1,30 +1,41 @@
 <template>
    <main class="main">
-      <SectionsProjectHero />
-      <SectionsProjectAbout />
-      <SectionsProjectChars>
+      <SectionsProjectHero :info="info" />
+      <SectionsProjectAbout :info="info" />
+      <SectionsProjectChars :info="info">
          <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ
          </h2>
-      </SectionsProjectChars>
-      <SectionsProjectFeatures>
+      </SectionsProjectChars :info="info">
+      <SectionsProjectFeatures :info="info.advantages" v-if="info.advantages?.length">
          <h2 class="project-features__title h1 dark-title">преимущества</h2>
       </SectionsProjectFeatures>
 
-      <SectionsProjectFilters>
+      <!-- <SectionsProjectFilters>
          ТИПЫ <span>планировок</span>
-      </SectionsProjectFilters>
-      <SectionsProjectBuyWays />
-      <SectionsProjectPosition />
-      <SectionsProjectNearPlaces />
-      <SectionsProjectDocuments />
-      <section class="project-sliders">
+      </SectionsProjectFilters> -->
+      <!-- <SectionsProjectBuyWays /> -->
+      <!-- <SectionsProjectPosition /> -->
+      <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
+      <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
+      <!-- <section class="project-sliders">
          <SectionsProductSlider>
             похожие <span>предложения</span>
          </SectionsProductSlider>
          <SectionsProductSlider>
             Вы ранее <span>смотрели</span>
          </SectionsProductSlider>
-      </section>
+      </section> -->
    </main>
 </template>
-<script setup></script>
+<script setup>
+const route = useRoute()
+let { data: info } = await useBaseFetch(`/projects/?pLevel=3&filters[slug]=${route.params.slug}`)
+if (!info.length) {
+   throw createError({
+      statusCode: 404,
+      statusMessage: 'Page Not Found'
+   })
+}
+info = info[0]
+console.log('project page info: ', info);
+</script>

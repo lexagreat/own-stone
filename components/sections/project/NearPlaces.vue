@@ -11,11 +11,11 @@
             </div>
             <div class="near-places__main">
                <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10">
-                  <SwiperSlide v-for="item in places" :key="item">
-                     <img :src="item.image" alt="">
+                  <SwiperSlide v-for="item in info" :key="item">
+                     <img :src="item?.picture.url" alt="">
                      <ul>
-                        <li v-for="banner in item.banners">
-                           <span>{{ banner }}</span>
+                        <li>
+                           <span>{{ item.time }}</span>
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
                               fill="none">
                               <path
@@ -24,7 +24,7 @@
                            </svg>
                         </li>
                      </ul>
-                     <h3 class="h3">{{ item.name }}</h3>
+                     <h3 class="h3">{{ item.title }}</h3>
                   </SwiperSlide>
                </Swiper>
             </div>
@@ -33,43 +33,10 @@
    </section>
 </template>
 <script setup>
-const places = ref([
-   {
-      name: "парк горького",
-      banners: [
-         "6 мин "
-      ],
-      image: "/img/project/near1.png"
-   },
-   {
-      name: "кремль",
-      banners: [
-         "6 мин "
-      ],
-      image: "/img/project/near2.png"
-   },
-   {
-      name: "ДОМ КУЛЬТУРЫ «ГЭС-2»",
-      banners: [
-         "6 мин "
-      ],
-      image: "/img/project/near3.png"
-   },
-   {
-      name: "МГУ им. М.в. ломоносова",
-      banners: [
-         "6 мин "
-      ],
-      image: "/img/project/near4.png"
-   },
-   {
-      name: "Квартиры в ЦАО",
-      banners: [
-         "6 мин "
-      ],
-      image: "/img/project/near1.png"
-   }
-])
+import { Swiper, SwiperSlide } from 'swiper/vue'
+const props = defineProps({
+   info: Array
+})
 const swiper = ref(null)
 const onSwiper = (s) => {
    swiper.value = s;

@@ -8,9 +8,13 @@
 <script setup>
 import { useFavorites } from './store/favorites';
 const favorites = useFavorites()
+import { useContacts } from './store/contacts';
+const contacts = useContacts()
 onMounted(() => {
    favorites.getFromLS()
 })
+
+contacts.getInfo()
 </script>
 
 <style lang="scss">

@@ -5,17 +5,17 @@
             <h2 class="home-team__title h1">команда <span>ownstone</span></h2>
             <div class="home-team__btns">
                <UiButton class="black">Стать частью команды</UiButton>
-               <UiButton class="white">Вакансии</UiButton>
+               <NuxtLink to="https://hh.ru/" class="btn white" target="_blank">Вакансии</NuxtLink>
             </div>
          </div>
       </div>
       <div class="home-team__image">
          <img src="/img/home/team.png" alt="">
          <ul class="home-team__dots">
-            <li v-for="item in team" :key="item" class="home-team__item">
+            <li v-for="item in team" :key="item" class="home-team__item" :style="item.line_style">
                <div class="home-team__dot"></div>
                <div class="home-team__modal">
-                  <span>{{ item }}</span>
+                  <span>{{ item.title }}</span>
                </div>
             </li>
          </ul>
@@ -23,11 +23,7 @@
    </section>
 </template>
 <script setup>
-const team = ref([
-   "Михаил, брокер",
-   "Василий, SEO",
-   "Алексей, директор",
-   "Александр, основатель",
-   "Петр, основатель",
-])
+const props = defineProps({
+   team: Array
+})
 </script>

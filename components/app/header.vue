@@ -8,8 +8,8 @@
                </NuxtLink>
                <span class="border desktop"></span>
                <div class="header__schedule">
-                  <span>Нащокинский пер., 8</span>
-                  <span>Ежедневно: 10:00 – 20:00</span>
+                  <span>{{ address }}</span>
+                  <span>{{ contacts?.info?.contacts_info?.worktime }}</span>
                </div>
             </div>
             <ul class="header__list">
@@ -42,13 +42,16 @@
                   <li>
                      <ul class="header__icons">
                         <li>
-                           <NuxtLink class="circle">
-                              <TgIcon />
+                           <NuxtLink target="_blank" class="circle"
+                              :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                              <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
                            </NuxtLink>
                         </li>
                         <li>
-                           <NuxtLink class="circle">
-                              <WhatsappIcon />
+                           <NuxtLink target="_blank" class="circle"
+                              :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+                              <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
+
                            </NuxtLink>
                         </li>
                      </ul>
@@ -112,24 +115,30 @@
                </li>
             </ul>
             <div class="header__schedule">
-               <span>Нащокинский пер., 8</span>
-               <span>Ежедневно: 10:00 – 20:00</span>
+               <span v-html="contacts?.info?.contacts_info?.address_string"></span>
+               <span v-html="contacts?.info?.contacts_info?.worktime"></span>
             </div>
             <div class="header-menu__form">
                <span>Связаться с нами</span>
                <ul>
                   <li>
-                     <a href="tel:+7 (993) 338-07 07">+7 (993) 338-07 07</a>
+                     <NuxtLink :to="'tel:' + contacts?.info?.contacts_info?.phonenumber">{{
+                        contacts?.info?.contacts_info?.phonenumber }}</NuxtLink>
                   </li>
                   <ul class="header__icons">
-                     <li>
-                        <NuxtLink class="circle">
-                           <TgIcon />
+                     <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url?.length">
+                        <NuxtLink target="_blank" class="circle"
+                           :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                           <!-- <TgIcon /> -->
+                           <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
                         </NuxtLink>
                      </li>
-                     <li>
-                        <NuxtLink class="circle">
-                           <WhatsappIcon />
+                     <li v-if="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url?.length">
+                        <NuxtLink target="_blank" class="circle"
+                           :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+                           <!-- <WhatsappIcon /> -->
+                           <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
+
                         </NuxtLink>
                      </li>
                   </ul>
@@ -141,12 +150,14 @@
    </header>
 </template>
 <script setup>
-import TgIcon from '~/assets/img/icons/tg.svg'
-import WhatsappIcon from '~/assets/img/icons/whatsapp.svg'
 import HeartIcon from '~/assets/img/icons/heart.svg'
 import ProfileIcon from '~/assets/img/icons/user.svg'
 import LogoIcon from '~/assets/img/icons/logo.svg'
+// import TgIcon from '@/assets/img/icons/tg.svg'
+// import WhatsappIcon from '@/assets/img/icons/whatsapp.svg'
 import { bodyLock, bodyUnlock } from '~/utils/bodyLocker'
+import { useContacts } from '~/store/contacts'
+const contacts = useContacts()
 const isBurgerOpen = ref(false)
 const route = useRoute()
 const isOpenAuthModal = ref(false)
@@ -170,4 +181,8 @@ const onClickProfile = () => {
       isOpenAuthHint.value = true
    }
 }
+
+const address = computed(() => {
+   return contacts?.info?.contacts_info?.address_string.split(',').slice(1).join('')
+})
 </script>

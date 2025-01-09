@@ -102,8 +102,8 @@
             <li class="catalog-filter">
                <span class="catalog-filter__title"></span>
                <ul class="catalog-filter__options catalog-filter__rooms">
-                  <li v-for="item in filteredOptions">
-                     <input v-model="checkedOptions" type="checkbox" :value="item.value"
+                  <li v-for="item in options" :key="item">
+                     <input v-model="checkedOptions" type="checkbox" :value="item.name"
                         :id="'catalogFilterOptions' + item.value" name="catalogFilterOptions">
                      <label class="circle" :for="'catalogFilterOptions' + item.value">{{ item.name }}</label>
                   </li>
@@ -120,11 +120,11 @@
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
-               <UiButton class="black" @click="search">Показать 1 100 предложений</UiButton>
+               <UiButton class="black" @click="search">Показать все</UiButton>
             </li>
          </ul>
          <div class="catalog-filters__sticky">
-            <UiButton class="black">Показать 1 100 предложений</UiButton>
+            <UiButton class="black">Показать все</UiButton>
          </div>
       </div>
    </div>
@@ -132,7 +132,6 @@
 <script setup>
 import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber, formatPrice } from "~/utils/formattingNumbers";
-import IconFilter from '@/assets/img/icons/filter.svg'
 import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
 import { useCatalog } from "~/store/catalog";
 const catalog = useCatalog()
@@ -319,50 +318,8 @@ const UpdateAreas = (e) => {
 }
 
 
-const options = ref([
-   {
-      name: "Старт продаж",
-      value: 0,
-      types: [
-         "build",
-         "commerce",
-      ]
-   },
-   {
-      name: "В Хамовниках",
-      value: 1,
-      types: [
-         "build",
-      ]
-   },
-   {
-      name: "Вид на парк",
-      value: 2,
-      types: [
-         "build",
-      ]
-   },
-   {
-      name: "Цена снижена",
-      value: 3,
-      types: [
-         "secondary",
-      ]
-   },
-   {
-      name: "Эксклюзив",
-      value: 4,
-      types: [
-         "secondary",
-      ]
-   },
-])
+const options = ref([])
 const checkedOptions = ref([])
-const filteredOptions = computed(() => {
-   return options.value.filter(item => {
-      return item.types.includes(props.type)
-   })
-})
 
 watch(() => props.isOpenModal, (value) => {
    if (value) {
@@ -413,10 +370,12 @@ const filtersObject = computed(() => {
       obj.price.max = priceMaxValue.value
    }
    obj.date = dateOption.value
-   obj.placement = placementOption.value?.name
-   obj.transport = transportOption.value?.name
-   obj.options = checkedOptions.value
-   obj.floor = floorOption.value?.name
+   obj.floor = floorOption.value
+   obj.placement = placementOption.value
+   obj.transport = transportOption.value
+   obj.target = targetOption.value
+   obj.entry = entryOption.value
+   obj.tags = checkedOptions.value
    return obj
 })
 const search = async () => {
@@ -493,22 +452,56 @@ const getFiltersFromQuery = () => {
       });
       onSelectDateOption(dateSettings.value.options.filter(item => item.name == (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]))[0])
    }
-   // if (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]) {
-   //    dateSettings.value.options.forEach(item => {
-   //       if (item.name == (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"])) {
-   //          item.selected = true
-   //       }
-   //    });
-   //    onSelectDateOption(dateSettings.value.options.filter(item => item.name == (route.query["filters[date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]))[0])
-
-   // }
-   // date: dateOption.value?.name,
-   // placement: placementOption.value?.name,
-   // transport: transportOption.value?.name,
-   // options: checkedOptions.value,
-   // floor: floorOption.value?.name,
-   // search()
-   // console.log('set filters from query');
+   if (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"]) {
+      floorSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectFloorOption(floorSettings.value.options.filter(item => item.name == (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"]))[0])
+   }
+   if (route.query["filters[location]"] || route.query["filters[apartaments][location]"]) {
+      placementSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[location]"] || route.query["filters[apartaments][location]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectPlacementOption(placementSettings.value.options.filter(item => item.name == (route.query["filters[location]"] || route.query["filters[apartaments][location]"]))[0])
+   }
+   if (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"]) {
+      transportSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectTransportOption(transportSettings.value.options.filter(item => item.name == (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"]))[0])
+   }
+   if (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"]) {
+      targetSettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectTargetOption(targetSettings.value.options.filter(item => item.name == (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"]))[0])
+   }
+   if (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"]) {
+      entrySettings.value.options.forEach(item => {
+         if (item.name == (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"])) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectEntryOption(entrySettings.value.options.filter(item => item.name == (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"]))[0])
+   }
 }
 const setCat = async () => {
 
@@ -532,6 +525,19 @@ function setFiltersFromCat(obj) {
    repairSettings.value.options = obj?.repair
    // set sroks
    dateSettings.value.options = obj?.sroks
+   // set floors
+   floorSettings.value.options = obj?.floors
+   // set location
+   placementSettings.value.options = obj?.location
+   // set transport
+   transportSettings.value.options = obj?.transport
+   // set target
+   targetSettings.value.options = obj?.target
+   // set entry
+   entrySettings.value.options = obj?.entry
+   // set entry
+   options.value = obj?.tags
+
    console.log("2. set filters");
 }
 onMounted(async () => {

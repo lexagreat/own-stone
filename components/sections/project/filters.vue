@@ -78,7 +78,7 @@
                            </ul>
                         </li>
                         <li class="catalog-filters__btns">
-                           <UiButton class="black">Показать 1 100 предложений</UiButton>
+                           <UiButton class="black">Показать все</UiButton>
                         </li>
                      </ul>
                   </div>

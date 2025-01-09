@@ -1,7 +1,7 @@
 <template>
    <div class="catalog-card catalog-card_object" @click="emit('onForm')">
       <div class="catalog-card__gallery">
-         <img :src="product?.preview_picture.url" alt="">
+         <img :src="product?.preview_picture?.url" alt="">
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li>{{ product?.proekty?.date_complete }}</li>

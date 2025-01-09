@@ -1,15 +1,17 @@
 <template>
    <section class="parallax-section">
-      <div>
-         <img src="/img/home/parallax.png" alt="" class="desktop">
-         <img src="/img/home/parallax-tablet.png" alt="" class="tablet">
-         <img src="/img/home/parallax-mobile.png" alt="" class="mobile">
+      <div style="pointer-events: none;">
+         <img :src="info?.picture.url" alt="" class="desktop">
+         <img :src="info?.picture_tablet.url" alt="" class="tablet">
+         <img :src="info?.picture_mobile.url" alt="" class="mobile">
       </div>
    </section>
 </template>
 <script setup>
 import { parallaxAnimation } from '@/assets/js/animations'
-
+const props = defineProps({
+   info: Object
+})
 onMounted(() => {
    parallaxAnimation()
 })

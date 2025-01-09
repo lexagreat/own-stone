@@ -2,7 +2,7 @@
    <div class="catalog-pagination">
       <div class="container">
          <div class="catalog-pagination__wrapper">
-            <UiButton class="white">Показать еще</UiButton>
+            <UiButton v-if="pages > 1 && currentPage !== pages" class="white" @click="showMore">Показать еще</UiButton>
             <ul class="catalog-pagination__list">
                <li>
                   <button :class="{ active: canMakeLessPage }" @click="minusPage" class="catalog-pagination__prev">
@@ -12,7 +12,7 @@
                      </svg>
                   </button>
                </li>
-               <li v-for="page in filteredPages" :key="pages">
+               <li v-for="page in filteredPages" :key="page">
                   <button @click="setPage(page)" :class="{ active: page == currentPage }">
                      {{ page }}
                   </button>
@@ -31,8 +31,12 @@
    </div>
 </template>
 <script setup>
-const pages = ref(21)
-const currentPage = ref(1)
+const props = defineProps({
+   pages: Number
+})
+const emit = defineEmits(['showMore'])
+const currentPage = defineModel()
+// const currentPage = ref(1)
 
 
 const minusPage = () => {
@@ -55,14 +59,14 @@ const canMakeLessPage = computed(() => {
    return currentPage.value > 1
 })
 const canMakeMorePage = computed(() => {
-   return currentPage.value !== pages.value
+   return currentPage.value !== props.pages
 })
 
 
 
 const filteredPages = computed(() => {
    let array = []
-   for (let i = 1; i <= pages.value; i++) {
+   for (let i = 1; i <= props.pages; i++) {
       array.push(i);
    }
    if (array.length <= 6) {
@@ -77,4 +81,11 @@ const filteredPages = computed(() => {
       }
    }
 })
+
+
+const showMore = () => {
+   emit('showMore')
+}
+
+
 </script>

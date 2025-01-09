@@ -1,0 +1,39 @@
+<template>
+   <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="videos-modal">
+      <div class="videos-modal__content modal__content">
+         <Swiper @swiper="onSwiper" :breakpoints="breakpoints" :slides-per-view="1" centered-slides :space-between="8"
+            loop>
+            <SwiperSlide v-for="item in info">
+               <UiSliderBtn prev @click="swiper.slidePrev()" />
+               <UiModalCloseBtn @click="emit('closePopup')" />
+               <video :src="item.video.url" controls></video>
+               <UiSliderBtn next @click="swiper.slideNext()" />
+            </SwiperSlide>
+         </Swiper>
+      </div>
+   </UiModal>
+</template>
+<script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+const props = defineProps({
+   isOpen: Boolean,
+   info: Array,
+   currentIndex: Number
+})
+const breakpoints = ref({
+   1024: {
+      slidesPerView: 2,
+      spaceBetween: 274
+   },
+})
+const emit = defineEmits(['closePopup'])
+
+const swiper = ref(null)
+const onSwiper = (s) => {
+   swiper.value = s
+}
+
+watch(() => props.currentIndex, () => {
+   swiper.value.slideTo(props.currentIndex)
+})
+</script>

@@ -3,15 +3,14 @@
       <div class="container">
          <div class="home-office__wrapper">
             <div class="home-office__main">
-               <h2 class="home-office__title h1">Офис компании</h2>
+               <h2 class="home-office__title h1" v-html="info.title"></h2>
                <div class="home-office__text">
                   <div class="body-text">
                      <p>
-                        Мы тщательно подошли к созданию пространства, где вам предстоит сделать
-                        важный выбор в пользу своей идеальной недвижимости.
+                        {{ info.desc }}
                      </p>
                   </div>
-                  <button @click="isModalOpen = true" v-if="!isTextFull">Читать полностью</button>
+                  <button @click="isModalOpen = true">Читать полностью</button>
 
                </div>
                <div class="home-office__navigation">
@@ -22,80 +21,35 @@
             <div class="home-office__slider">
                <Swiper @swiper="setThumbsSwiper" class="thumbs" direction="vertical" slides-per-view="auto"
                   :space-between="10" :loop="true" :speed="1000">
-                  <SwiperSlide>
-                     <img src="/img/home/office1.jpeg" alt="">
+                  <SwiperSlide v-for="item in info.gallery">
+                     <img :src="item.url" alt="">
                   </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office2.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office3.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office4.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office5.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office1.jpeg" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office2.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office3.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office4.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office5.png" alt="">
+                  <SwiperSlide v-for="item in info.gallery">
+                     <img :src="item.url" alt="">
                   </SwiperSlide>
                </Swiper>
                <Swiper :modules="[Autoplay, EffectFade]" @swiper="onSwiper" @slideNextTransitionStart="onSlideNext"
                   @slidePrevTransitionStart="onSlidePrev" class="main-slider" :slides-per-view="1" :loop="true"
                   :autoplay="autoplayOptions" effect="fade" :speed="1000">
-                  <SwiperSlide>
-                     <img src="/img/home/office1.jpeg" alt="">
+                  <SwiperSlide v-for="item in info.gallery">
+                     <img :src="item.url" alt="">
                   </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office2.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office3.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office4.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office5.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office1.jpeg" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office2.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office3.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office4.png" alt="">
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <img src="/img/home/office5.png" alt="">
+                  <SwiperSlide v-for="item in info.gallery">
+                     <img :src="item.url" alt="">
                   </SwiperSlide>
                </Swiper>
             </div>
          </div>
       </div>
-      <ModalOfficeInfo :isOpen="isModalOpen" @closePopup="isModalOpen = false" />
+      <ModalOfficeInfo :isOpen="isModalOpen" @closePopup="isModalOpen = false" :title="info.title" :desc="info.desc" />
    </section>
 </template>
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, EffectFade } from 'swiper/modules';
+const props = defineProps({
+   info: Object
+})
 const swiperInstance = ref(null)
 const thumbsSwiper = ref(null)
 const isModalOpen = ref(false)
@@ -116,5 +70,4 @@ const onSlidePrev = () => {
 const autoplayOptions = {
    delay: 3000, // Время задержки между слайдами в миллисекундах
 };
-const isTextFull = ref(false)
 </script>

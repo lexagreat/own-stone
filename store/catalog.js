@@ -9,6 +9,14 @@ export const useCatalog = defineStore("useCatalog", {
             ? "[apartaments]"
             : "";
       },
+      async showMore(url) {
+         let base = "catalog";
+         const response = await useBaseFetch(base + url);
+         this.products = this.products.concat(response.data);
+         this.meta = response.meta;
+         console.log("response", response);
+         return response;
+      },
       async getProducts(url, cat) {
          let base = "catalog";
          // if (object.type !== "Вторичная") {
@@ -26,11 +34,12 @@ export const useCatalog = defineStore("useCatalog", {
          // console.log("Продукты по поиску", response.data);
          this.products = response.data;
          this.meta = response.meta;
+         console.log("response", response);
          return response;
       },
       getUrl(object) {
          let resultString = "";
-         // console.log("filters object", object);
+         console.log("filters object", object);
          if (object.type !== "Вторичная") {
             // project || apartaments
             if (object.category == 0) {
@@ -85,10 +94,39 @@ export const useCatalog = defineStore("useCatalog", {
                resultString
             )}[proekty][date_complete]=${object.date?.name}`;
          }
+         if (object.floor?.value) {
+            resultString += `&filters${this.makeSubStr(resultString)}[floor]=${
+               object.floor?.name
+            }`;
+         }
          if (object.placement?.value) {
             resultString += `&filters${this.makeSubStr(
                resultString
-            )}[finishing]=${object.placement?.name}`;
+            )}[location]=${object.placement?.name}`;
+         }
+         if (object.transport?.value) {
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[ring_road]=${object.transport?.name}`;
+         }
+         if (object.target?.value) {
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[appointment]=${object.target?.name}`;
+         }
+         if (object.entry?.value) {
+            console.log("ENTRY");
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[entrance]=${object.entry?.name}`;
+         }
+         // rooms
+         if (object?.tags?.length) {
+            object.tags.forEach((tag) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[ap_tags][tag][$eq]=${tag}`;
+            });
          }
          return resultString;
       },
@@ -134,6 +172,22 @@ export const useCatalog = defineStore("useCatalog", {
          });
          return res;
       },
+      getFloors(arr) {
+         let res = [...new Set(arr.map((item) => item.floor))]
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            })
+            .sort((a, b) => a.name - b.name);
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
       getSroks(arr) {
          let res = [
             ...new Set(arr.map((item) => item.proekty.date_complete)),
@@ -147,9 +201,91 @@ export const useCatalog = defineStore("useCatalog", {
             name: "Не важно",
             value: 0,
          });
-         console.log("srok", res);
          return res;
       },
+      getLocation(arr) {
+         let res = [...new Set(arr.map((item) => item.location))]
+            .filter((item) => item !== null)
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            });
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
+      getTransport(arr) {
+         let res = [...new Set(arr.map((item) => item.ring_road))]
+            .filter((item) => item !== null)
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            });
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
+      getTarget(arr) {
+         let res = [...new Set(arr.map((item) => item.appointment))]
+            .filter((item) => item !== null)
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            });
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
+      getEntry(arr) {
+         let res = [...new Set(arr.map((item) => item.entrance))]
+            .filter((item) => item !== null)
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            });
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
+      getTags(arr) {
+         let res = [
+            ...new Set(
+               arr
+                  .map((item) => item.ap_tags)
+                  .filter((item) => item !== null && item.length !== 0)
+                  .flat()
+                  .map((item) => item.tag)
+            ),
+         ].map((item, index) => {
+            return {
+               name: item,
+               value: index + 1,
+            };
+         });
+         console.log("tags", res);
+         return res;
+      },
+
       async getFiltersForCats(cat, t) {
          let types = {
             build: "Новостройки",
@@ -167,6 +303,7 @@ export const useCatalog = defineStore("useCatalog", {
             cat == 0 ? "projects" : "apartaments"
          }`;
          url += `&filters${this.makeSubStr(url)}[type_aparts]=${type}`;
+         url += `&pagination[pageSize]=10000`;
          const response = await useBaseFetch(base + url);
          let productsArr = [];
          if (cat == 0) {
@@ -177,6 +314,12 @@ export const useCatalog = defineStore("useCatalog", {
          obj.ranges = this.getRanges(productsArr);
          obj.repair = this.getFinishing(productsArr);
          obj.sroks = this.getSroks(productsArr);
+         obj.floors = this.getFloors(productsArr);
+         obj.location = this.getLocation(productsArr);
+         obj.transport = this.getTransport(productsArr);
+         obj.target = this.getTarget(productsArr);
+         obj.entry = this.getEntry(productsArr);
+         obj.tags = this.getTags(productsArr);
          // console.log("get filters for cat");
          return obj;
       },

@@ -1,5 +1,5 @@
 <template lang="">
-   <div class="modal" :class="{ open: isOpen }" @click="detectWhere">
+   <div class="modal" :class="{ open: isOpen }" @click="detectWhere" @keydown="handleEscape">
       <slot></slot>
    </div>
 </template>
@@ -16,6 +16,12 @@ export default {
       return {};
    },
    methods: {
+      handleEscape(e) {
+         if (e.key == 'Escape') {
+            this.$emit("closePopup");
+
+         }
+      },
       detectWhere(e) {
          if (!e.target.closest(".modal__content")) {
             this.$emit("closePopup");
@@ -49,6 +55,14 @@ export default {
          }
       },
    },
+   mounted() {
+      // Добавляем обработчик события keydown на window
+      window.addEventListener('keydown', this.handleEscape);
+   },
+   beforeDestroy() {
+      // Удаляем обработчик события keydown при уничтожении компонента
+      window.removeEventListener('keydown', this.handleEscape);
+   }
 };
 </script>
 <style lang="scss">

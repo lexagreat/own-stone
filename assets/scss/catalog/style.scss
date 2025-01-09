@@ -121,6 +121,12 @@
          color: rgba(24, 24, 24, 0.5);
          font-size: 13px;
       }
+      .v-select__wrapper {
+         width: 225px;
+         @media (max-width: $tablet) {
+            width: unset;
+         }
+      }
    }
 
    // .catalog-page__controls

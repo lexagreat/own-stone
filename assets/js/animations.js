@@ -118,43 +118,6 @@ export const servicesAnimation = () => {
          headers[0].classList.add("hidden");
          headers[1].classList.remove("hidden");
       },
-      // onUpdate: function () {
-      //    // Проверяем прогресс анимации
-      //    const progress = this.ratio;
-      //    if (progress >= 0 && progress < 0.25) {
-      //       bgs.forEach((item) => {
-      //          item.classList.remove("active");
-      //       });
-      //       bgs[0].classList.add("active");
-      //       bgs[0].style.transform = `translate(0, ${-100 * this.ratio}%)`;
-      //    }
-      //    if (progress >= 0.25 && progress < 0.45) {
-      //       bgs.forEach((item) => {
-      //          item.classList.remove("active");
-      //       });
-      //       bgs[1].classList.add("active");
-      //       bgs[1].style.transform = `translate(0, ${
-      //          -100 * (this.ratio - 0.25)
-      //       }%)`;
-      //    }
-      //    if (progress >= 0.45 && progress < 0.65) {
-      //       bgs.forEach((item) => {
-      //          item.classList.remove("active");
-      //       });
-      //       bgs[2].classList.add("active");
-      //       bgs[2].style.transform = `translate(0, ${
-      //          -100 * (this.ratio - 0.5)
-      //       }%)`;
-      //    }
-      //    if (progress >= 0.65) {
-      //       bgs.forEach((item) => {
-      //          item.classList.remove("active");
-      //       });
-      //       bgs[3].classList.add("active");
-      //       bgs[3].style.transform = `translate(0, ${
-      //          -100 * (this.ratio - 0.65)
-      //       }%)`;
-      //    }
       onUpdate: function () {
          // Проверяем прогресс анимации
          const progress = this.ratio;
@@ -206,17 +169,6 @@ export const servicesAnimation = () => {
          }
       },
    });
-   // gsap.to(bgs[0], {
-   //    scrollTrigger: {
-   //       trigger: section, // элемент, который должен запускать анимацию
-   //       start: "top top", // Точка начала анимации
-   //       end: `+=100vh`, // Конец анимации через высоту секции
-   //       endTrigger: section, // указание родителя для окончания анимации
-   //       // markers: true, // включить маркеры для визуальной отладки
-   //       scrub: 1.5,
-   //    },
-   //    y: "-10%",
-   // });
 };
 export const rewardsAnimmation = () => {
    if (window.innerWidth > 1024) return;

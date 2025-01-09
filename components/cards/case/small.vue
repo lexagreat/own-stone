@@ -2,31 +2,27 @@
    <div class="case-small">
       <div class="case-small__header">
          <div class="case-small__image circle">
-            <img src="/img/partners/case-small-image.png" alt="">
+            <img :src="info?.photo?.url" alt="">
          </div>
-         <h3 class="case-small__title h3">3-комнатная квартира в ЦАО</h3>
+         <h3 class="case-small__title h3">{{ info?.title }}</h3>
       </div>
       <div class="case-small__main body-text">
          <ul>
-            <li>
-               <span>Комиссия партнера</span>
-               <span>2 000 000 ₽</span>
-            </li>
-            <li>
-               <span>Стоимость объекта</span>
-               <span>150 000 000 ₽</span>
-            </li>
-            <li>
-               <span>Тип сделки</span>
-               <span>Продажа</span>
-            </li>
-            <li>
-               <span>Срок реализации</span>
-               <span>5 месяцев</span>
+            <li v-for="item in info?.partners_case_props" :key="item">
+               <span>{{ item?.name }}</span>
+               <span>{{ item?.value }}</span>
             </li>
          </ul>
       </div>
-      <button class="case-small__link">Читать кейс</button>
+      <button class="case-small__link" @click="open">Читать кейс</button>
    </div>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+   info: Object
+})
+const emit = defineEmits(['openModal'])
+const open = () => {
+   emit('openModal', props.info)
+}
+</script>

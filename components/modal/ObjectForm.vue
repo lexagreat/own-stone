@@ -54,7 +54,6 @@
 <script setup>
 import TgIcon from '~/assets/img/icons/tg.svg'
 import WhatsappIcon from '~/assets/img/icons/whatsapp.svg'
-import IconPhone from '@/assets/img/icons/phone.svg'
 
 const props = defineProps({
    isOpen: Boolean

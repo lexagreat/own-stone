@@ -10,8 +10,8 @@
             </div>
             <div class="about-office__content">
                <div class="about-office__address">
-                  <p class="h4">Москва, <br> Нащокинский пер., 8</p>
-                  <span class="body-text">ежедневно: 10:00 – 20:00</span>
+                  <p class="h4">{{ contacts?.info?.contacts_info?.address_string }}</p>
+                  <span class="body-text">{{ contacts?.info?.contacts_info?.worktime }}</span>
                </div>
                <div class="about-office__taxi">
                   <span class="h4">Оплатим такси до нашего офиса</span>
@@ -33,6 +33,10 @@
    </section>
 </template>
 <script setup>
+import { useContacts } from '~/store/contacts';
+
+const contacts = useContacts()
+console.log(contacts.info);
 </script>
 
 

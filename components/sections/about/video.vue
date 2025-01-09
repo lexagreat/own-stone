@@ -1,6 +1,6 @@
 <template>
    <section class="about-video" :class="{ bounce: isBouncing }">
-      <img src="/public/img/partners/hero.png" alt="">
+      <video :src="video" ref="videoElement" loop></video>
       <button class="about-video__btn circle" @click="onClick">
          <IconPlay class="play" v-if="!isPlaying" />
          <IconPause class="pause" v-else />
@@ -12,8 +12,13 @@ import { stickyForCursor } from "~/assets/js/animations";
 import IconPlay from "@/assets/img/icons/video-play.svg"
 import IconPause from "@/assets/img/icons/pause.svg"
 
+const props = defineProps({
+   video: String
+})
+
 const isBouncing = ref(false)
 const isPlaying = ref(false)
+const videoElement = ref(null)
 onMounted(() => {
    stickyForCursor(".about-video", ".about-video__btn")
 })
@@ -27,6 +32,15 @@ const onClick = () => {
       isBouncing.value = false;
    }, 200);
 }
+
+watch(isPlaying, (value) => {
+   if (value) {
+      videoElement.value.play()
+   } else {
+      videoElement.value.pause()
+
+   }
+})
 </script>
 
 

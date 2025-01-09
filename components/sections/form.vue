@@ -3,11 +3,9 @@
       <div class="form-section__wrapper">
          <div class="form-section__main">
             <div class="form-section__header">
-               <h2 class="form-section__title h1">
-                  Оставить <span>заявку</span>
+               <h2 class="form-section__title h1" v-html="info.title">
                </h2>
-               <p class="body-text">Наши специалисты в кратчайшие сроки свяжутся с Вами и проконсультируют по всем
-                  интересующим вопросам!</p>
+               <p class="body-text" v-html="info.text"></p>
             </div>
             <div class="form-section__content">
                <ul class="form-section__inputs">
@@ -32,6 +30,9 @@
    </section>
 </template>
 <script setup>
+const props = defineProps({
+   info: Object
+})
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)

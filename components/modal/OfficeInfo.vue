@@ -2,25 +2,17 @@
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="office-modal">
       <div class="modal__content office-modal__content">
          <UiModalCloseBtn @click="emit('closePopup')" />
-         <h4 class="h1 office-modal__title dark-title">
-            Офис <span>компании</span>
+         <h4 class="h1 office-modal__title dark-title" v-html="title">
          </h4>
-         <p class="body-text">
-            Мы тщательно подошли к созданию пространства, где вам предстоит сделать важный выбор в пользу своей
-            идеальной недвижимости.
-            Наш офис располагается в доме-особняке, в историческом центре Москвы, где вы сможете окунуться в атмосферу
-            доверия и профессионализма, а также насладиться готическим стилем архитектуры XIX века.
-            В 1934 году М.А. Булгаков жил и творил напротив здания нашего офиса, поэтому принято считать, что именно
-            этот дом стал прототипом особняка Маргариты из знаменитого романа писателя.
-            Вдохновленные стремлением предоставить нашим клиентам исключительный опыт и премиальный сервис, мы продумали
-            каждую деталь пространства, где гармонично сочетаются современный стиль, комфорт и вековая история.
-         </p>
+         <p class="body-text" v-html="desc"></p>
       </div>
    </UiModal>
 </template>
 <script setup>
 const props = defineProps({
-   isOpen: Boolean
+   isOpen: Boolean,
+   title: String,
+   desc: String,
 })
 const emit = defineEmits(['closePopup'])
 </script>

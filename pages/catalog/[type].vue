@@ -50,21 +50,22 @@
                   </div>
                </div>
                <div class="catalog-page__main">
-                  <CatalogListsGrid :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'grid'"
+                  <CatalogListsGrid :products="splicedProducts[0]" @openForm="onOpenForm" v-if="currentView == 'grid'"
                      :category="category" />
-                  <CatalogListsColumn :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'column'"
-                     :category="category" />
+                  <CatalogListsColumn :products="splicedProducts[0]" @openForm="onOpenForm"
+                     v-if="currentView == 'column'" :category="category" />
                   <BannersCatalogObject />
-                  <CatalogListsGrid :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'grid'"
-                     :category="category" />
-                  <CatalogListsColumn :products="catalog.products" @openForm="onOpenForm" v-if="currentView == 'column'"
-                     :category="category" />
+                  <CatalogListsGrid :products="splicedProducts[1]" @openForm="onOpenForm"
+                     v-if="currentView == 'grid' && splicedProducts[1].length" :category="category" />
+                  <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
+                     v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
             </div>
          </div>
       </section>
-      <CatalogPagination />
+
+      <CatalogPagination :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage" @showMore="onShowMore" />
       <!-- <SectionsProductSlider>
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
@@ -153,19 +154,38 @@ const sortSettings = ref({
    options: [
       {
          name: "По рекомендации",
-         value: 0,
-         selected: true
+         value: '',
       },
       {
-         name: "Не по рекомендации",
-         value: 1,
-      }
+         name: "Сначала новые",
+         value: 'createdAt:asc',
+      },
+      {
+         name: "Сначала старые",
+         value: 'createdAt:desc',
+      },
+      {
+         name: "По возрастанию цены",
+         value: 'cost_total:asc',
+      },
+      {
+         name: "По убыванию цены",
+         value: 'cost_total:desc',
+      },
+      {
+         name: "По возрастанию площади",
+         value: 'square_apartament:asc',
+      },
+      {
+         name: "По убыванию площади",
+         value: 'square_apartament:desc',
+      },
    ],
-   placeholder: ""
+   placeholder: "Выберите сортировку"
 })
-const sortOption = ref(null)
+const sortOption = ref('')
 function onSelectSortOption(option) {
-   sortOption.value = option
+   sortOption.value = option.value
 }
 const isFiltersOpen = ref(false)
 const category = ref(0)
@@ -174,8 +194,18 @@ const searchUrl = ref("")
 //    category.value = value
 // }
 const search = async (url = searchUrl.value) => {
-   router.push(route.path + url)
-   await catalog.getProducts(url)
+   if (url.length) {
+      searchUrl.value = url;
+   }
+   let searchingUrl = url + `&pagination[page]=${currentPage.value}`
+   let pageUrl = route.path + searchingUrl
+   if (sortOption.value.length) {
+      searchingUrl += `&sort=${sortOption.value}`
+      pageUrl += `&sort=${sortOption.value}`
+   }
+   router.push(pageUrl)
+   await catalog.getProducts(searchingUrl)
+   stopConditionForSearch.value = false
 }
 const filters = ref({})
 const setCat = (cat) => {
@@ -183,4 +213,55 @@ const setCat = (cat) => {
 }
 
 // console.log('должно быть set cat -> get filters for cat -> set filters from query -> search');
+const splicedProducts = computed(() => {
+   if (catalog.products.length <= 8) {
+      return [catalog.products, []];
+   } else {
+      // Иначе возвращаем первые 8 элементов в первом списке и оставшиеся элементы во втором
+      return [catalog.products.slice(0, 8), catalog.products.slice(8)];
+   }
+})
+const currentPage = ref(1)
+
+watch(currentPage, async () => {
+   if (stopConditionForSearch.value) return
+   await search()
+})
+watch(() => catalog.meta?.pagination?.total, (value) => {
+   if (stopConditionForSearch.value) return
+   currentPage.value = 1
+})
+const stopConditionForSearch = ref(true)
+
+const onShowMore = async () => {
+   stopConditionForSearch.value = true
+   currentPage.value++
+   let searchingUrl = searchUrl.value + `&pagination[page]=${currentPage.value}`
+   let pageUrl = route.path + searchingUrl
+   router.push(pageUrl)
+   // console.log(searchingUrl);
+
+   await catalog.showMore(searchingUrl)
+   stopConditionForSearch.value = false
+}
+onMounted(() => {
+   if (route.query['pagination[page]']) {
+      currentPage.value = route.query['pagination[page]']
+   }
+   if (route.query['sort']) {
+      sortSettings.value.options.forEach(item => {
+         if (item.value == route.query.sort) {
+            item.selected = true
+         } else {
+            item.selected = false
+         }
+      });
+      onSelectSortOption(sortSettings.value.options.filter(item => item.value == route.query.sort)[0])
+   }
+
+})
+watch(sortOption, async () => {
+   if (stopConditionForSearch.value) return
+   await search()
+})
 </script>

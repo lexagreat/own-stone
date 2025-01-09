@@ -1,14 +1,14 @@
 <template>
    <section class="sell-hero">
       <div class="sell-hero__image">
-         <img src="/img/partners/hero.png" alt="">
+         <img :src="info?.picture.url" alt="">
       </div>
       <div class="container">
          <div class="sell-hero__wrapper">
             <SectionsBreadcrumbs :path="path" />
-            <h1 class="sell-hero__title h1 light-title">присоединяйтесь <br> <span>к партнерской программе</span> </h1>
+            <h1 class="sell-hero__title h1 light-title" v-html="info.title"></h1>
             <div class="sell-hero__main">
-               <p>И получайте вознаграждение в размере 30% от общей комиссии по факту реализованной сделки </p>
+               <p>{{ info.desc }}</p>
                <UiButton class="white">Стать партнером</UiButton>
             </div>
          </div>
@@ -17,13 +17,16 @@
 </template>
 <script setup>
 import { sharedParallaxAnimation } from '~/assets/js/animations';
+const props = defineProps({
+   info: Object
+})
 const path = ref([
    {
       name: "Главная",
       to: "/"
    },
    {
-      name: "Партнеры",
+      name: "Партнерам",
       to: ""
    },
 ])

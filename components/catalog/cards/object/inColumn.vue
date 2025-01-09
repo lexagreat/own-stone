@@ -2,7 +2,7 @@
    <div class="list-object">
       <div class="list-object__main">
          <div class="list-object__image">
-            <img :src="product?.preview_picture.url" alt="">
+            <img :src="product?.preview_picture?.url" alt="">
          </div>
          <div class="list-object__info">
             <ul class="catalog-card__tags">

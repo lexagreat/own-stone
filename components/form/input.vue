@@ -1,10 +1,11 @@
 <template>
    <div class="text-input" ref="input">
 
-      <input :placeholder="placeholder" type="text" :id="id" @input="emit('update:modelValue', $event?.target?.value)"
-         :value="props.modelValue" v-maska="'+7 (###) ###-##-##'" v-if="isPhone" />
-      <input :placeholder="placeholder" type="text" :id="id" @input="emit('update:modelValue', $event?.target?.value)"
-         :value="props.modelValue" v-else />
+      <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id"
+         @input="emit('update:modelValue', $event?.target?.value)" :value="props.modelValue"
+         v-maska="'+7 (###) ###-##-##'" v-if="isPhone" />
+      <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id"
+         @input="emit('update:modelValue', $event?.target?.value)" :value="props.modelValue" v-else />
    </div>
 </template>
 <script setup>
@@ -15,6 +16,10 @@ let props = defineProps({
    modelValue: String,
    placeholder: String,
    isPhone: {
+      type: Boolean,
+      default: false,
+   },
+   disabled: {
       type: Boolean,
       default: false,
    },

@@ -72,7 +72,7 @@
                </template>
             </ul>
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" :to="'/project/' + product?.slug">Подробнее о проекте</NuxtLink>
+               <NuxtLink class="btn white" :to="link">Подробнее о проекте</NuxtLink>
                <button class="circle">
                   <IconPhone />
                </button>
@@ -214,5 +214,14 @@ const onLike = () => {
 }
 const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.projects) || favorites.isContains(props.product?.slug, favorites.commerce.projects)
+})
+const link = computed(() => {
+   let base = '/project/'
+   if (!props.product?.apartaments?.length) {
+      return ''
+   }
+   props.product?.apartaments[0]?.type_aparts !== 'Новостройки' ? base = '/commerce/' : '';
+   let url = base + props.product?.slug
+   return url
 })
 </script>

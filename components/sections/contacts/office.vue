@@ -1,17 +1,18 @@
 <template>
    <section class="contacts-office">
       <div class="contacts-office__header">
-         <h2 class="contacts-office__title h1 dark-title">
-            Будем рады видеть вас <br> <span>в нашем офисе</span>
+         <h2 class="contacts-office__title h1 dark-title" v-html="info?.title">
          </h2>
-         <p class="body-text">Познакомим с нашей командой, проконсультируем по всем вопросам, предварительно уточним
-            задачи и угостим вкусным кофе</p>
+         <p class="body-text" v-html="info?.text"></p>
       </div>
       <div class="contacts-office__image">
-         <img src="/img/contacts/office.png" alt="">
-         <UiButton class="black">Стать частью команды</UiButton>
+         <img :src="info?.photo?.url" alt="">
+         <UiButton class="black">{{ info?.btn_text }}</UiButton>
       </div>
    </section>
 </template>
 <script setup>
+const props = defineProps({
+   info: Object
+})
 </script>

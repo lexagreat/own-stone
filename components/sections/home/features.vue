@@ -2,13 +2,8 @@
    <section class="home-features">
       <div class="container">
          <div class="home-features__wrapper">
-            <h2 class="home-features__title h1">
-               Агентство недвижимости <span>бизнес и&nbsp;премиум-сегмента </span>
-            </h2>
-            <p class="body-text home-features__text"> Мы&nbsp;стремимся стать агентством, которое меняет представление
-               о&nbsp;сделках с&nbsp;недвижимостью. Наши стандарты основаны на&nbsp;честности, где в&nbsp;центре каждого
-               решения находится человек и&nbsp;его потребности. Наши клиенты&nbsp;&mdash; это партнеры, с&nbsp;которыми
-               мы&nbsp;идём вместе к&nbsp;созданию лучшего будущего.</p>
+            <h2 class="home-features__title h1" v-html="info.title"></h2>
+            <p class="body-text home-features__text" v-html="info.text"></p>
             <ul class="home-features__list">
                <li class="home-features__item" v-for="(item, index) in items" :key="item">
                   <h4 class="h1">{{ item.renderNumber + " " + item.title }}</h4>
@@ -26,26 +21,18 @@
 </template>
 <script setup>
 import { sharedParallaxAnimation } from '@/assets/js/animations'
-const items = ref([
-   {
-      number: 8,
+const props = defineProps({
+   info: Object
+})
+const items = ref([])
+items.value = props.info.home_features_list.map(item => {
+   return {
+      number: +item.number,
+      title: item.sub_number || '',
       renderNumber: 1,
-      title: " лет",
-      subtitle: "работы с ведущими застройщиками"
-   },
-   {
-      number: 20,
-      renderNumber: 1,
-      title: " млрд. ₽",
-      subtitle: "привлеченных инвестиций"
-   },
-   {
-      number: 3000,
-      renderNumber: 1,
-      title: "",
-      subtitle: "реализованных сделок"
-   },
-])
+      subtitle: item.title
+   }
+})
 function animateNumber(index) {
    let allTime = 5000;
    let interval = allTime / items.value[index].number;

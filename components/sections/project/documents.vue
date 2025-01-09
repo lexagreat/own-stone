@@ -4,7 +4,7 @@
          <div class="project-documents__wrapper">
             <h2 class="project-documents__title h1">Документы</h2>
             <ul class="project-documents__list">
-               <li v-for="item in docs" :key="item">
+               <li v-for="item in documents" :key="item">
                   <CardsDocument :info="item" />
                </li>
             </ul>
@@ -13,6 +13,9 @@
    </section>
 </template>
 <script setup>
+const props = defineProps({
+   documents: Array
+})
 const docs = ref([
    { name: "Разрешение на строительство" },
    { name: "Проектная декларация" },

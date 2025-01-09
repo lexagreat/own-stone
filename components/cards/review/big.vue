@@ -2,15 +2,19 @@
    <div class="review-big home-reviews__card">
       <div class="review-big__header">
          <div class="review-big__image">
-            <img src="/img/home/reviews-big.png" alt="">
+            <img :src="info?.photo.url" alt="">
          </div>
-         <UiPlayButton />
+         <UiPlayButton @click="emit('openModal', info)" />
       </div>
       <div class="review-big__main">
-         <div class="review-big__title h2">Видеоотзыв от андрея</div>
-         <div class="review-big__text body-text">С помощью агентства OWNSTONE купил квартиру в ЦАО и
-            сэкономил 3 000 000 ₽</div>
+         <div class="review-big__title h2">{{ info?.name }}</div>
+         <div class="review-big__text body-text">{{ info?.text }}</div>
       </div>
    </div>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+   info: Object
+})
+const emit = defineEmits(['openModal'])
+</script>

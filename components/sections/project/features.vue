@@ -10,86 +10,12 @@
                </div>
             </div>
             <div class="project-features__main">
-               <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature1.png" alt="">
-                        <h3 class="h3">авторская архитектура</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature2.png" alt="">
-                        <h3 class="h3">большой приватный парк</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">Drop off
-                           парадный подъезд к каждому дому</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature3.png" alt="">
-                        <h3 class="h3">панорамное остекление</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">50 М ДО ВХОДА В ОК «ЛУЖНИКИ»</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature1.png" alt="">
-                        <h3 class="h3">авторская архитектура</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature2.png" alt="">
-                        <h3 class="h3">большой приватный парк</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">Drop off
-                           парадный подъезд к каждому дому</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature3.png" alt="">
-                        <h3 class="h3">панорамное остекление</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">50 М ДО ВХОДА В ОК «ЛУЖНИКИ»</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature1.png" alt="">
-                        <h3 class="h3">авторская архитектура</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature2.png" alt="">
-                        <h3 class="h3">большой приватный парк</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">Drop off
-                           парадный подъезд к каждому дому</h3>
-                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <div class="project-feature">
-                        <img src="/img/project/feature3.png" alt="">
-                        <h3 class="h3">панорамное остекление</h3>
-                     </div>
-                     <div class="project-feature">
-                        <img src="/img/project/feature4.png" alt="">
-                        <h3 class="h3">50 М ДО ВХОДА В ОК «ЛУЖНИКИ»</h3>
+               <Swiper :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }" @swiper="onSwiper"
+                  slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop>
+                  <SwiperSlide v-for="item in items" :key="item">
+                     <div class="project-feature" v-for="sub in item" :key="sub">
+                        <img :src="sub?.picture[0].url" alt="">
+                        <h3 class="h3">{{ sub.title }}</h3>
                      </div>
                   </SwiperSlide>
                </Swiper>
@@ -99,6 +25,11 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Mousewheel } from 'swiper/modules'
+const props = defineProps({
+   info: Array
+})
 const swiper = ref(null)
 const breakpoints = {
    1025: {
@@ -107,5 +38,22 @@ const breakpoints = {
 }
 const onSwiper = (s) => {
    swiper.value = s;
+}
+
+const items = [];
+let takeOne = false; // Флаг, который определяет, сколько элементов брать
+
+for (let i = 0; i < props.info.length;) {
+   if (takeOne) {
+      // Если флаг установлен, берем один элемент
+      items.push([props.info[i]]);
+      i += 1;
+   } else {
+      // Иначе берем два элемента
+      items.push(props.info.slice(i, i + 2));
+      i += 2;
+   }
+   // Переключаем флаг
+   takeOne = !takeOne;
 }
 </script>

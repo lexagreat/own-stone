@@ -6,47 +6,62 @@
             <ul class="project-chars__list">
                <li>
                   <span>Срок сдачи</span>
-                  <p>IV кв.2026</p>
+                  <p>{{ info.date_complete }}</p>
                </li>
-               <li>
+               <li v-if="info.properties.find(item => item.title == 'Класс')">
                   <span>Класс</span>
-                  <p>Премиум</p>
+                  <p>{{ info.properties.find(item => item.title == 'Класс')?.desc }}</p>
                </li>
                <li>
                   <span>Застройщик</span>
-                  <p>Absolute Premium</p>
+                  <p>{{ info.developer }}</p>
                </li>
                <li>
                   <span>Стоимость лотов</span>
-                  <p>от 57 968 000 ₽</p>
+                  <p>от {{ formatPrice(apartamentsMinPrice) }}</p>
                </li>
                <li>
                   <span>Тип отделки</span>
-                  <p>Без отделки, whitebox</p>
+                  <p> {{ finishing }}</p>
                </li>
-               <li>
+               <li v-if="info.properties.find(item => item.title == 'Этажи')">
                   <span>Этажи</span>
-                  <p>от 12 до 18</p>
+                  <p>{{ info.properties.find(item => item.title == 'Этажи')?.desc }}</p>
                </li>
                <li>
                   <span>Всего лотов</span>
-                  <p>2 600</p>
+                  <p>{{ info.apartaments.length }}</p>
                </li>
-               <li>
+               <li v-if="info.properties.find(item => item.title == 'Высота потолков')">
                   <span>Высота потолков</span>
-                  <p>от 3,25 м до 4,73 м</p>
+                  <p>{{ info.properties.find(item => item.title == 'Высота потолков')?.desc }}</p>
                </li>
                <li>
                   <span>Площадь лотов</span>
-                  <p>от 50 м2</p>
+                  <p>от {{ apartamentsMinArea }} м<sup>2</sup></p>
                </li>
-               <li>
+               <li v-if="info.properties.find(item => item.title == 'Паркинг')">
                   <span>Паркинг</span>
-                  <p>Подземная, гостевая</p>
+                  <p>{{ info.properties.find(item => item.title == 'Паркинг')?.desc }}</p>
                </li>
             </ul>
          </div>
       </div>
    </section>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+   info: Object
+})
+
+const apartamentsMinPrice = computed(() => {
+   return Math.min(...props.info.apartaments.map((item) => +item.cost_total))
+})
+const apartamentsMinArea = computed(() => {
+   return Math.min(...props.info.apartaments.map((item) => +item.square_apartament))
+})
+
+let finishing = [...new Set(props.info.apartaments.map((item) => item.finishing))].map(
+   (item) => item
+).join(", ");
+</script>

@@ -2,7 +2,7 @@
    <div class="document-item">
       <div class="document-item__header">
          <span class="document-item__title">{{ info.name }}</span>
-         <NuxtLink to="/" download>
+         <NuxtLink :to="info.url" download target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                <g clip-path="url(#clip0_1122_1262)">
                   <g filter="url(#filter0_d_1122_1262)">
@@ -33,11 +33,19 @@
             </svg>
          </NuxtLink>
       </div>
-      <div class="document-item__footer">PDF , 0.37 MB</div>
+      <div class="document-item__footer"><span style="text-transform: uppercase;">{{ ext }}</span>, {{
+         convertKbToMb(info.size) }} MB
+      </div>
    </div>
 </template>
 <script setup>
 const props = defineProps({
    info: Object
 })
+
+const ext = props.info.ext.replaceAll('.', '')
+function convertKbToMb(kb) {
+   const mb = kb / 1024;
+   return mb.toFixed(2);
+}
 </script>

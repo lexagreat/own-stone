@@ -4,35 +4,14 @@
          <div class="rewards-section__wrapper">
             <div class="rewards-section__header">
                <span class="rewards-section__subtitle">Наши награды</span>
-               <h2 class="rewards-section__title h1">Лидеры продаж <span>в Аквилоне, Эталоне, STONE и в стране</span>
+               <h2 class="rewards-section__title h1" v-html="info.title">
                </h2>
             </div>
             <ul class="rewards-section__list">
-               <li>
-                  <NuxtLink to="/" @mouseover="show(0)" @mouseleave="hide(0)">
-                     <img src="/img/home/rewards1.svg" alt="" ref="start1">
-                     <img src="/img/home/rewards2.svg" alt="" class="hidden" ref="img1">
-
-                  </NuxtLink>
-               </li>
-               <li>
-                  <NuxtLink to="/" @mouseover="show(1)" @mouseleave="hide(1)">
-                     <img src="/img/home/rewards2.svg" alt="" ref="start2">
-                     <img src="/img/home/rewards3.svg" alt="" class="hidden" ref="img2">
-
-                  </NuxtLink>
-               </li>
-               <li>
-                  <NuxtLink to="/" @mouseover="show(2)" @mouseleave="hide(2)">
-                     <img src="/img/home/rewards3.svg" alt="" ref="start3">
-                     <img src="/img/home/rewards4.svg" alt="" class="hidden" ref="img3">
-
-                  </NuxtLink>
-               </li>
-               <li>
-                  <NuxtLink to="/" @mouseover="show(3)" @mouseleave="hide(3)">
-                     <img src="/img/home/rewards4.svg" alt="" ref="start4">
-                     <img src="/img/home/rewards1.svg" alt="" class="hidden" ref="img4">
+               <li v-for="(item, index) in info.rewards_section_images" :key="item">
+                  <NuxtLink to="/" @mouseover="show(index)" @mouseleave="hide(index)">
+                     <img :src="item.rewards_img.url" alt="" :ref="images[index]">
+                     <img :src="item.rewards_img_hover.url" alt="" class="hidden" :ref="hiddenImages[index]">
                   </NuxtLink>
                </li>
             </ul>
@@ -42,28 +21,23 @@
 
 </template>
 <script setup>
-const img1 = ref(null)
-const img2 = ref(null)
-const img3 = ref(null)
-const img4 = ref(null)
 
-const hiddenImages = ref([img1, img2, img3, img4])
+const props = defineProps({
+   info: Object
+})
 
+const hiddenImages = ref([ref(null), ref(null), ref(null), ref(null)])
 
-const start1 = ref(null)
-const start2 = ref(null)
-const start3 = ref(null)
-const start4 = ref(null)
-const images = ref([start1, start2, start3, start4])
+const images = ref([ref(null), ref(null), ref(null), ref(null)])
 
 
 const show = (index) => {
-   hiddenImages.value[index].value.style.opacity = 1
-   images.value[index].value.style.opacity = 0
+   hiddenImages.value[index].value[0].style.opacity = 1
+   images.value[index].value[0].style.opacity = 0
 }
 const hide = (index) => {
-   hiddenImages.value[index].value.style.opacity = 0
-   images.value[index].value.style.opacity = 1
+   hiddenImages.value[index].value[0].style.opacity = 0
+   images.value[index].value[0].style.opacity = 1
 }
 </script>
 

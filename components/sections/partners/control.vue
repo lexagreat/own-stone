@@ -3,11 +3,9 @@
       <div class="container">
          <div class="sell-coop__wrapper">
             <div class="sell-coop__main">
-               <h2 class="sell-coop__title h1 dark-title">Контролируйте статус<br> <span>сделки в личном кабинете</span>
+               <h2 class="sell-coop__title h1 dark-title" v-html="info.title">
                </h2>
-               <p class="body-text">Ни одна сделка не пройдет мимо Вас. Вы сможете контролировать все онлайн и быть в
-                  курсе каждого этапа. В личном кабинете доступны информация по клиентам, полезная информация и статусы
-                  сделки. Начните зарабатывать больше с партнерской программой OWNSTONE.</p>
+               <p class="body-text" v-html="info.text"></p>
                <NuxtLink to="/profile" class="btn black">Войти в личный кабинет</NuxtLink>
             </div>
             <div class="sell-coop__visual">
@@ -20,7 +18,7 @@
                   <span>{{ phrases[currentIndex] }}</span>
                </div>
                <div class="sell-coop__image">
-                  <img src="/public/img/sell/coop-tel.png" alt="">
+                  <img :src="info?.picture.url" alt="">
                </div>
             </div>
          </div>
@@ -28,11 +26,11 @@
    </section>
 </template>
 <script setup>
-const phrases = ref([
-   "Статус работы по сделке",
-   "Оптимальная стратегия",
-   "фраза номер 3",
-])
+const props = defineProps({
+   info: Object
+})
+const phrases = ref([])
+phrases.value = props.info.partners_control_list.map(item => item.text)
 const currentIndex = ref(0)
 const animatePhrases = () => {
    setInterval(() => {

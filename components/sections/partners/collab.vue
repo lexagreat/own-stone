@@ -3,16 +3,17 @@
       <div class="container">
          <div class="partners-collab__wrapper">
             <div class="partners-collab__header">
-               <h2 class="partners-collab__title h1 dark-title">С кем мы <span>работаем</span></h2>
+               <h2 class="partners-collab__title h1 dark-title" v-html="info.title"></h2>
                <UiButton class="black">
                   Стать партнером
                </UiButton>
             </div>
             <div class="partners-collab__main">
                <ul class="partners-collab__list">
-                  <li class="partners-collab__item collab-item" v-for="(item, index) in items" :key="item">
+                  <li class="partners-collab__item collab-item" v-for="(item, index) in info.partners_collab_list"
+                     :key="item">
                      <div class="collab-item__header h3" :class="{ 'active': index == 0 }"
-                        @click="setOutput(item.title)">
+                        @click="setOutput(item.status_text)">
                         {{ item.title }}
                      </div>
                      <div class="collab-item__spoiler collapse body-text" :class="{ 'collapse_show': index == 0 }">
@@ -81,7 +82,7 @@
                         </ul>
                      </div>
                   </div>
-                  <img src="/img/partners/collab.png" alt="">
+                  <img :src="info.picture.url" alt="">
                </div>
             </div>
          </div>
@@ -90,33 +91,10 @@
 </template>
 <script setup>
 import { accordion } from '~/utils/slideToggle';
-const items = ref([
-   {
-      title: "Частные брокеры",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-   {
-      title: "Агенства недвижимости",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-   {
-      title: "Бизнес-консультанты  ",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-   {
-      title: "Личные ассистенты  ",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-   {
-      title: "Архитекторы и дизайнеры",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-   {
-      title: "Физические лица",
-      text: "из Москвы и других регионов, которые не всегда достаточно хорошо знают рынок недвижимости Москвы или у которых нет прямого выхода на застройщика"
-   },
-])
-const output = ref("Частные брокеры")
+const props = defineProps({
+   info: Object
+})
+const output = ref(props.info.partners_collab_list[0].status_text)
 
 
 onMounted(() => {

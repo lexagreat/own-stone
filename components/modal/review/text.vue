@@ -4,22 +4,20 @@
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="review-modal__header">
             <div class="review-modal__image circle">
-               <img src="/img/home/review-medium.png" alt="">
+               <img :src="info?.photo?.url" alt="">
             </div>
-            <span class="review-modal__name">Елена</span>
+            <span class="review-modal__name">{{ info?.name }}</span>
          </div>
          <p class="body-text">
-            С помощью агентства OWNSTONE мы с мужем купили квартиру. Очень комфортно было смотреть квартиры, Елизавета
-            договаривалась по времени удобно для нас. Очень ответственная, вежливая, к работе с полной отдачей. Нас
-            устроило отношения, профессионализм. Всегда была с нами на связи, отвечала на интересующие вопросы. Сделка
-            прошла легко и отлично.
+            {{ info?.text }}
          </p>
       </div>
    </UiModal>
 </template>
 <script setup>
 const props = defineProps({
-   isOpen: Boolean
+   isOpen: Boolean,
+   info: Object
 })
 const emit = defineEmits(['closePopup'])
 </script>

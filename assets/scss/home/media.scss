@@ -62,16 +62,24 @@
    &__title {
       display: flex;
       flex-direction: column;
-      a {
+      label {
          width: fit-content;
          color: $black-50;
          transition: $transition;
          border-bottom: 1px solid transparent;
+         cursor: pointer;
+         input {
+            display: none;
+         }
          @media (hover: hover) {
             &:hover {
                color: $black;
                border-color: $black;
             }
+         }
+         &:has(input:checked) {
+            color: $black;
+            border-color: $black;
          }
       }
    }

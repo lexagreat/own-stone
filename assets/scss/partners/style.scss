@@ -603,6 +603,7 @@
    // .case-small__main
 
    &__main {
+      flex: 1;
       ul {
          display: flex;
          flex-direction: column;
@@ -643,6 +644,36 @@
       }
       &__main {
          flex: 1;
+      }
+   }
+}
+.case-modal {
+   // .case-modal__content
+
+   &__content {
+      background: #181818 !important;
+      @media (max-width: $tablet) {
+         border-radius: 0 !important;
+      }
+      .modal__close {
+         background: rgba(255, 255, 255, 0.05) !important;
+         svg path {
+            fill: white !important;
+         }
+      }
+      .case-small {
+         &__header {
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         }
+         &__main {
+            margin-top: 30px;
+
+            p {
+               margin-top: 30px;
+               color: $white-50;
+            }
+         }
       }
    }
 }

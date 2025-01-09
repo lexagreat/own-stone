@@ -24,6 +24,7 @@
    </section>
 </template>
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
 const swiperInstance = ref(null)
 const onSwiper = (swiper) => {
    swiperInstance.value = swiper

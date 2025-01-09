@@ -2,12 +2,10 @@
    <section class="home-conductor" style="margin-bottom: 100px;">
       <div class="container">
          <div class="home-conductor__wrapper">
-            <h2 class="home-conductor__title h1">
-               ваш проводник к идеальному <br><span>выбору недвижимости</span>
-            </h2>
+            <h2 class="home-conductor__title h1" v-html="info.title"></h2>
             <ul class="home-conductor__filters" style="display: flex;">
                <li v-for="(item, index) in types" :key="index">
-                  <input v-model="type" type="radio" :value="item.value" :id="'conductorRadio' + item.value"
+                  <input v-model="type" type="radio" :value="item.name" :id="'conductorRadio' + item.value"
                      name="conductorRadio">
                   <label :for="'conductorRadio' + item.value">
                      <component :is="item.icon" />
@@ -19,18 +17,14 @@
                <Swiper :pagination="{
                   type: 'progressbar',
                }" :modules="modules" :space-between="10" slides-per-view="auto" :speed="500">
-                  <SwiperSlide v-for="item in items" :key="item" class="home-conductor__slide">
-                     <ul class="home-conductor__banners">
-                        <li v-for="banner in item.banners">{{ banner }}</li>
-                     </ul>
-                     <img :src="item.image" alt="">
-                     <h3 class="home-conductor__subtitle h3">{{ item.title }}</h3>
-                  </SwiperSlide>
-                  <SwiperSlide v-for="item in items" :key="item" class="home-conductor__slide">
-                     <ul class="home-conductor__banners">
-                        <li v-for="banner in item.banners">{{ banner }}</li>
-                     </ul>
-                     <img :src="item.image" alt="">
+
+                  <SwiperSlide v-for="item in filtered" :key="item" class="home-conductor__slide">
+                     <div>
+                        <ul class="home-conductor__banners" v-if="item.labels">
+                           <li v-for="banner in item.labels.split(',')">{{ banner }}</li>
+                        </ul>
+                     </div>
+                     <img :src="item?.picture.url" alt="">
                      <h3 class="home-conductor__subtitle h3">{{ item.title }}</h3>
                   </SwiperSlide>
                </Swiper>
@@ -42,6 +36,9 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
+const props = defineProps({
+   info: Object
+})
 const modules = ref([Pagination])
 const types = ref([
    {
@@ -55,43 +52,13 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
    },
    {
-      name: 'Коммерция ',
+      name: 'Коммерция',
       value: 2,
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const type = ref()
-
-
-const items = ref([
-   {
-      // image: require('@/assets/img/home/conductor0.png'),
-      image: '/img/home/conductor0.png',
-      title: "Квартиры в Хамовниках",
-      banners: []
-   },
-   {
-      // image: require('@/assets/img/home/conductor1.png'),
-      image: '/img/home/conductor3.png',
-      title: "Квартиры в ЗАО",
-      banners: [
-         "NEW"
-      ]
-   },
-   {
-      // image: require('@/assets/img/home/conductor3.png'),
-      image: '/img/home/conductor0.png',
-      title: "Квартиры в САО",
-      banners: []
-   },
-   {
-      // image: require('@/assets/img/home/conductor4.png'),
-      image: '/img/home/conductor3.png',
-      title: "Квартиры в ЦАО",
-      banners: [
-         "РАССРОЧКА 0%"
-      ]
-   },
-])
-
+const type = ref('Новостройки')
+const filtered = computed(() => {
+   return props.info.home_conductor_elements.filter(item => item.type == type.value)
+})
 </script>

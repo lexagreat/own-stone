@@ -266,6 +266,9 @@
          font-family: $fontMontreal;
          font-size: 13px;
          font-weight: 500;
+         svg {
+            flex: 0 0 12px;
+         }
          .circle {
             --size: 8px;
          }

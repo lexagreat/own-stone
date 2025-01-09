@@ -97,6 +97,13 @@
       .circle {
          cursor: pointer;
          background-color: $black-5;
+         svg {
+            width: 16px;
+            height: 16px;
+            path {
+               fill: $black;
+            }
+         }
       }
       .profile {
          background-color: $black;
@@ -201,7 +208,7 @@
    flex-direction: column;
    gap: 40px;
    position: fixed;
-   top: calc(var(--headerHeight) + 4px);
+   top: calc(var(--headerHeight) + 0px);
    bottom: 0;
    left: 0;
    right: 0;

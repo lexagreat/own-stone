@@ -1,18 +1,23 @@
 <template>
    <div class="case-big">
       <div class="case-big__image">
-         <img src="/img/partners/case-big-image.png" alt="">
+         <img :src="info?.photo?.url" alt="">
       </div>
       <div class="case-big__main">
-         <UiPlayButton />
+         <UiPlayButton @click="emit('openVideo', info)" />
          <div class="case-big__info">
-            <h3 class="case-big__title h3">«Как я заработала на сделке 2.7 млн рублей»</h3>
+            <h3 class="case-big__title h3">{{ info?.title }}</h3>
             <span class="case-big__author body-text">
-               Диана, частный брокер
+               {{ info?.text_short }}
             </span>
          </div>
       </div>
 
    </div>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+   info: Object
+})
+const emit = defineEmits('openVideo')
+</script>
