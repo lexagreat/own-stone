@@ -43,7 +43,7 @@ const props = defineProps({
    info: Object
 })
 
-const ext = props.info.ext.replaceAll('.', '')
+const ext = props?.info?.ext?.replaceAll('.', '')
 function convertKbToMb(kb) {
    const mb = kb / 1024;
    return mb.toFixed(2);

@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-pagination">
+   <div class="catalog-pagination" :style="{ hidden: pages <= 1 }">
       <div class="container">
          <div class="catalog-pagination__wrapper">
             <UiButton v-if="pages > 1 && currentPage !== pages" class="white" @click="showMore">Показать еще</UiButton>
@@ -89,3 +89,15 @@ const showMore = () => {
 
 
 </script>
+
+
+<style lang="scss">
+.catalog-pagination {
+   transition: 0.4s;
+
+   &.hidden {
+      opacity: 0;
+      pointer-events: none;
+   }
+}
+</style>

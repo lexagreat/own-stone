@@ -157,6 +157,9 @@ import LogoIcon from '~/assets/img/icons/logo.svg'
 // import WhatsappIcon from '@/assets/img/icons/whatsapp.svg'
 import { bodyLock, bodyUnlock } from '~/utils/bodyLocker'
 import { useContacts } from '~/store/contacts'
+import { useAccount } from '~/store/account'
+const router = useRouter()
+const store = useAccount()
 const contacts = useContacts()
 const isBurgerOpen = ref(false)
 const route = useRoute()
@@ -177,11 +180,14 @@ watch(() => route.fullPath, () => {
 
 
 const onClickProfile = () => {
-   if (window?.innerWidth <= 1024) {
-      isOpenAuthHint.value = true
+   if (store.user) {
+      router.push('/account')
+   } else {
+      if (window?.innerWidth <= 1024) {
+         isOpenAuthHint.value = true
+      }
    }
 }
-
 const address = computed(() => {
    return contacts?.info?.contacts_info?.address_string.split(',').slice(1).join('')
 })

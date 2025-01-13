@@ -2,7 +2,7 @@
    <aside class="account-aside">
       <ul class="account-aside__list">
          <li v-for="link in links" :key="link">
-            <NuxtLink class="account-aside__link account-link" :to="link.to" @click="aside.closeAside">
+            <NuxtLink class="account-aside__link account-link" :to="link.to" @click="store.closeAside">
                <component :is="link.icon" class="account-link__icon" />
                <div class="account-link__info">
                   <span class="account-link__title">{{ link.title }}</span>
@@ -22,13 +22,13 @@
          </li>
       </ul>
       <div class="account-aside__footer">
-         <NuxtLink to="/account" class="account-aside__main" @click="aside.closeAside">
+         <NuxtLink to="/account" class="account-aside__main" @click="store.closeAside">
             <div class="circle">
                <AccountAvatar />
             </div>
             <div>
                <span>Андрей</span>
-               <span>+7 (960) 456-55-76</span>
+               <span>{{ store?.user?.phonenumber }}</span>
             </div>
             <ArrowIcon class="account-link__arrow" />
          </NuxtLink>
@@ -39,8 +39,8 @@
 import AccountAvatar from '@/assets/img/icons/account-avatar.svg'
 import ExitIcon from '@/assets/img/icons/exit.svg'
 import ArrowIcon from "@/assets/img/icons/arrow_down.svg"
-import { useAside } from '~/store/account';
-const aside = useAside()
+import { useAccount } from '~/store/account';
+const store = useAccount()
 const links = ref([
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),

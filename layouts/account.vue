@@ -13,8 +13,8 @@
    <AppFooter />
 </template>
 <script setup>
-import { useAside } from '~/store/account';
-const aside = useAside()
+import { useAccount } from '~/store/account';
+const aside = useAccount()
 
 </script>
 

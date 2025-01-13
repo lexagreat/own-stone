@@ -544,6 +544,7 @@
    // .document-item__header
 
    &__header {
+      flex: 1;
       display: flex;
       justify-content: space-between;
       gap: 24px;

@@ -20,6 +20,9 @@
    </UiModal>
 </template>
 <script setup>
+import { useAccount } from '~/store/account'
+const router = useRouter()
+const store = useAccount()
 const props = defineProps({
    phone: String
 })
@@ -29,4 +32,14 @@ const code = ref('')
 const onChangeCode = (value) => {
    code.value = value
 }
+watch(code, async (value) => {
+   if (String(value).length == 4) {
+      console.log(value);
+      let res = await store.sendCode(props.phone, value)
+      if (res?.status) {
+         emit('closePopup')
+         router.push('/account')
+      }
+   }
+})
 </script>

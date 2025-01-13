@@ -5,9 +5,9 @@
    </div>
 </template>
 <script setup>
-import { useAside } from '~/store/account';
+import { useAccount } from '~/store/account';
 const router = useRouter()
-const aside = useAside()
+const aside = useAccount()
 
 const goToAside = () => {
    aside.openAside()

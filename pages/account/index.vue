@@ -72,10 +72,13 @@
 </template>
 <script setup>
 import PlusImage from "@/assets/img/icons/account-plus-image.svg"
+import { useAccount } from '~/store/account'
+const router = useRouter()
+const store = useAccount()
 const surname = ref("")
 const name = ref("")
 const fatherName = ref("")
-const phone = ref("")
+const phone = ref(store?.user?.phonenumber)
 const wh = ref("")
 const tg = ref("")
 const reqs = ref([
@@ -96,9 +99,7 @@ const inn = ref("")
 const bik = ref("")
 const paymentAcc = ref("")
 const corrAcc = ref("")
-
-
-onMounted(() => {
-   console.log('mounted main');
+watch(() => store.user, () => {
+   console.log("store.user", store.user);
 })
 </script>

@@ -502,6 +502,21 @@ const getFiltersFromQuery = () => {
       });
       onSelectEntryOption(entrySettings.value.options.filter(item => item.name == (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"]))[0])
    }
+
+   if (route.query['filters[ap_tags][tag][$eq]']) {
+      if (Array.isArray(route.query['filters[ap_tags][tag][$eq]'])) {
+         checkedOptions.value = route.query['filters[ap_tags][tag][$eq]'].map(item => item)
+      } else {
+         checkedOptions.value = [route.query['filters[ap_tags][tag][$eq]']]
+      }
+   }
+   if (route.query['filters[apartaments][ap_tags][tag][$eq]']) {
+      if (Array.isArray(route.query['filters[apartaments][ap_tags][tag][$eq]'])) {
+         checkedOptions.value = route.query['filters[apartaments][ap_tags][tag][$eq]'].map(item => item)
+      } else {
+         checkedOptions.value = [route.query['filters[apartaments][ap_tags][tag][$eq]']]
+      }
+   }
 }
 const setCat = async () => {
 

@@ -18,7 +18,7 @@
                      </li>
                   </ul>
                </div>
-               <div class="favorite-page__main" v-if="products.length !== 0">
+               <div class="favorite-page__main">
                   <ul class="favorite-page__categories catalog-filter__categories" v-if="type !== 1">
                      <li v-for="(item, index) in categories" :key="index">
                         <input v-model="category" type="radio" :value="item.value"

@@ -17,15 +17,22 @@
    </UiModal>
 </template>
 <script setup>
+import { useAccount } from '~/store/account'
+
+const store = useAccount()
 const emit = defineEmits(['closePopup', 'openSmsModal'])
 const phone = ref('')
 const checked = ref(false)
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && phone.value.length > 5
+   return checked.value && phone.value.length == 18
 })
-const goToSms = () => {
-   emit("openSmsModal", phone.value)
+const goToSms = async () => {
+   let res = await store.getCode(phone.value)
+   console.log(res);
+   if (res?.status) {
+      emit("openSmsModal", phone.value)
+   }
 }
 </script>
