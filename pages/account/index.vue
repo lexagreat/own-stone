@@ -2,7 +2,7 @@
    <section class="account-profile">
       <AccountHeader>
          <h1 class="account-page__title">Профиль</h1>
-         <button class="account-profile__exit">Выйти</button>
+         <button class="account-profile__exit" @click="exit">Выйти</button>
       </AccountHeader>
       <div class="account-profile__main">
          <div class="account-profile__image">
@@ -102,4 +102,9 @@ const corrAcc = ref("")
 watch(() => store.user, () => {
    console.log("store.user", store.user);
 })
+
+const exit = () => {
+   store.exit()
+   router.push('/')
+}
 </script>

@@ -12,7 +12,7 @@
             </NuxtLink>
          </li>
          <li>
-            <button class="account-aside__link account-link account-aside__exit">
+            <button class="account-aside__link account-link account-aside__exit" @click="exit">
                <ExitIcon />
                <div class="account-link__info">
                   <span class="account-link__title">Выйти</span>
@@ -41,6 +41,7 @@ import ExitIcon from '@/assets/img/icons/exit.svg'
 import ArrowIcon from "@/assets/img/icons/arrow_down.svg"
 import { useAccount } from '~/store/account';
 const store = useAccount()
+const router = useRouter()
 const links = ref([
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),
@@ -60,4 +61,8 @@ const links = ref([
       to: "/account/info",
    },
 ])
+const exit = () => {
+   store.exit()
+   router.push('/')
+}
 </script>

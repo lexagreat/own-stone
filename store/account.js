@@ -33,6 +33,10 @@ export const useAccount = defineStore("useAccount", {
          localStorage.token = "";
          this.token = "";
       },
+      exit() {
+         this.removeToken();
+         this.user = null;
+      },
       async getMeInfo() {
          let response = await useBaseFetch("/users/me?pLevel=3", {
             headers: {

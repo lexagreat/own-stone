@@ -293,7 +293,7 @@
    }
 }
 .header__icons {
-   li:has(.header-profile) {
+   li.active:has(.header-profile) {
       @media (min-width: 1025px) {
          &:hover {
             .header-profile {
