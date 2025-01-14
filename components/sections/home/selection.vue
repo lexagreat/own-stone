@@ -17,11 +17,11 @@
                   </li>
                </ul>
                <CatalogFilters fromHome :type="type" :isOpenModal="isOpenModal" @changeType="onChangeType"
-                  @closeModal="isOpenModal = false" />
+                  @closeModal="isOpenModal = false" @search="onSearch" />
             </div>
             <div class="catalog-filters__controls">
                <UiButton class="black" @click="isOpenModal = true">
-                  <filterIcon />
+                  <FilterIcon />
                   Параметры
                </UiButton>
                <UiButton class="white map">
@@ -36,7 +36,7 @@
 <script setup>
 import FilterIcon from '@/assets/img/icons/filter.svg'
 const isOpenModal = ref(false)
-
+const router = useRouter()
 
 const types = ref([
    {
@@ -56,5 +56,10 @@ const type = ref("build")
 
 const onChangeType = (value) => {
    type.value = value
+}
+
+const onSearch = (url) => {
+   router.push(`/catalog/${type.value}${url}`)
+   console.log('SEARCH ON HOME PAGE', url, type.value);
 }
 </script>

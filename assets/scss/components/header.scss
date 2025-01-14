@@ -302,10 +302,10 @@
             }
          }
       }
-      @media (max-width: $tablet) {
-         .profile > .header-profile {
-            display: none;
-         }
+   }
+   @media (max-width: $tablet) {
+      .profile > .header-profile {
+         display: none;
       }
    }
 }

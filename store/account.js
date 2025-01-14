@@ -46,7 +46,8 @@ export const useAccount = defineStore("useAccount", {
             },
          });
          console.log(response);
-         if (response) {
+         if (response?.id) {
+            console.log("автоирзованы", response);
             this.user = response;
          }
          return response;

@@ -297,7 +297,7 @@ watch(isOpen, (value) => {
       background-color: white;
       border-radius: 4px;
       position: absolute;
-      top: 100%;
+      top: 100% !important;
       translate: 0 4px;
       left: 0;
       width: 271px;
@@ -316,6 +316,7 @@ watch(isOpen, (value) => {
          max-height: unset;
          translate: 0;
          opacity: 1;
+         top: 0 !important;
       }
    }
 

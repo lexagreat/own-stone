@@ -2,7 +2,7 @@
    <main class="main">
       <SectionsHomeHero :text="info.hero_text" :running="info.running_line" />
       <SectionsHomeParallax :info="info.paralax_media" />
-      <!-- <SectionsHomeSelection /> -->
+      <SectionsHomeSelection />
       <SectionsHomeConductor :info="info.home_conductor" />
       <SectionsHomeDownload :info="info.home_download" />
       <SectionsHomeFeatures :info="info.home_features" />

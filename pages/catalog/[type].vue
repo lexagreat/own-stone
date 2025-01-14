@@ -198,7 +198,7 @@ const search = async (url = searchUrl.value) => {
       searchUrl.value = url;
    }
    let searchingUrl = url + `&pagination[page]=${currentPage.value}`
-   let pageUrl = route.path + searchingUrl
+   let pageUrl = '/catalog/' + type + searchingUrl
    if (sortOption.value.length) {
       searchingUrl += `&sort=${sortOption.value}`
       pageUrl += `&sort=${sortOption.value}`

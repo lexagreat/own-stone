@@ -79,7 +79,7 @@
                <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
             </li>
             <li class="catalog-filter" v-if="!fromHome">
-               <span class="catalog-filter__title">Локация</span>
+               <span class="catalog-filter__title">Расположение</span>
                <UiSelect title="Локация" :settings="placementSettings" @selectOption="onSelectPlacementOption" />
             </li>
             <li class="catalog-filter" v-if="fromHome">
@@ -124,7 +124,7 @@
             </li>
          </ul>
          <div class="catalog-filters__sticky">
-            <UiButton class="black">Показать все</UiButton>
+            <UiButton class="black" @click="search">Показать все</UiButton>
          </div>
       </div>
    </div>
@@ -328,19 +328,15 @@ watch(() => props.isOpenModal, (value) => {
       bodyUnlock()
    }
 })
-watch(() => props.type, (value) => {
+watch(() => props.type, async (value) => {
+   console.log('change props type');
    myType.value = value
+   await setCat()
+
 })
 watch(myType, (value) => {
    emit("changeType", value)
 })
-
-// const categoryCard = computed(() => { // не нужно вроде
-//    if (props.type == 'secondary') {
-//       return 0
-//    }
-//    return category.value
-// })
 const filtersObject = computed(() => {
    let obj = {}
    obj.category = category.value
@@ -379,8 +375,7 @@ const filtersObject = computed(() => {
    return obj
 })
 const search = async () => {
-   // console.log('category', category.value);
-   // console.log("props.type", props.type);
+   emit("closeModal")
    if (props.type == 'secondary') {
       category.value = 1
    }
@@ -556,6 +551,10 @@ function setFiltersFromCat(obj) {
    console.log("2. set filters");
 }
 onMounted(async () => {
+   if (props.fromHome) {
+      await setCat()
+      return
+   }
    await setCat()
    getFiltersFromQuery()
    await search()
