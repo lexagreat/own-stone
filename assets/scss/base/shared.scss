@@ -254,11 +254,11 @@
          transition: $transition;
          fill: transparent;
       }
-   }
-   input:checked + label {
-      background-color: $black;
-      svg path {
-         fill: white;
+      &:has(input:checked) {
+         background-color: $black;
+         svg path {
+            fill: white;
+         }
       }
    }
 }

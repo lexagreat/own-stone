@@ -9,7 +9,10 @@
             <h1 class="sell-hero__title h1 light-title" v-html="info.title"></h1>
             <div class="sell-hero__main">
                <p>{{ info.desc }}</p>
-               <UiButton class="white">Стать партнером</UiButton>
+               <NuxtLink class="btn white" to="/account" v-if="account.user?.phonenumber">Стать партнером
+               </NuxtLink>
+               <UiButton class="white" @click="isOpenAuthModal = true" v-else>Стать партнером
+               </UiButton>
             </div>
          </div>
       </div>
@@ -17,6 +20,10 @@
 </template>
 <script setup>
 import { sharedParallaxAnimation } from '~/assets/js/animations';
+import { useAccount } from '~/store/account';
+
+const isOpenAuthModal = ref(false)
+const account = useAccount()
 const props = defineProps({
    info: Object
 })

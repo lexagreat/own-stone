@@ -4,8 +4,9 @@
          <div class="partners-calc__wrapper">
             <div class="partners-calc__header">
                <h2 class="partners-calc__title h1 light-title">рассчитать <span>комиссию</span> </h2>
-               <UiButton class="white">
-                  Стать партнером
+               <NuxtLink class="btn white" to="/account" v-if="account.user?.phonenumber">Стать партнером
+               </NuxtLink>
+               <UiButton class="white" @click="isOpenAuthModal = true" v-else>Стать партнером
                </UiButton>
             </div>
             <div class="partners-calc__main">
@@ -24,7 +25,14 @@
                <FormPartnerCalc />
             </div>
          </div>
+         <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
+            @open="isOpenAuthModal = true" />
       </div>
    </section>
 </template>
-<script setup></script>
+<script setup>
+import { useAccount } from '~/store/account';
+
+const isOpenAuthModal = ref(false)
+const account = useAccount()
+</script>

@@ -1,5 +1,6 @@
 <template>
    <main class="main">
+      <AppHead :seo="info.seo" />
       <SectionsPartnersHero :info="info.sell_hero" />
       <SectionsPartnersFeatures :info="info.partners_blocks" />
       <SectionsPartnersCollab :info="info.partners_collab" />

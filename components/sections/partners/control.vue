@@ -6,7 +6,10 @@
                <h2 class="sell-coop__title h1 dark-title" v-html="info.title">
                </h2>
                <p class="body-text" v-html="info.text"></p>
-               <NuxtLink to="/profile" class="btn black">Войти в личный кабинет</NuxtLink>
+               <NuxtLink class="btn black" to="/account" v-if="account.user?.phonenumber">Войти в личный кабинет
+               </NuxtLink>
+               <UiButton class="black" @click="isOpenAuthModal = true" v-else>Войти в личный кабинет
+               </UiButton>
             </div>
             <div class="sell-coop__visual">
                <div class="sell-coop__input">
@@ -21,11 +24,16 @@
                   <img :src="info?.picture.url" alt="">
                </div>
             </div>
+            <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
+               @open="isOpenAuthModal = true" />
          </div>
       </div>
    </section>
 </template>
 <script setup>
+import { useAccount } from '~/store/account'
+const isOpenAuthModal = ref(false)
+const account = useAccount()
 const props = defineProps({
    info: Object
 })

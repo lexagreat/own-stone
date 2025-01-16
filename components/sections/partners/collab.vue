@@ -4,8 +4,9 @@
          <div class="partners-collab__wrapper">
             <div class="partners-collab__header">
                <h2 class="partners-collab__title h1 dark-title" v-html="info.title"></h2>
-               <UiButton class="black">
-                  Стать партнером
+               <NuxtLink class="btn black" to="/account" v-if="account.user?.phonenumber">Стать партнером
+               </NuxtLink>
+               <UiButton class="black" @click="isOpenAuthModal = true" v-else>Стать партнером
                </UiButton>
             </div>
             <div class="partners-collab__main">
@@ -91,9 +92,13 @@
 </template>
 <script setup>
 import { accordion } from '~/utils/slideToggle';
+import { useAccount } from '~/store/account';
 const props = defineProps({
    info: Object
 })
+
+const isOpenAuthModal = ref(false)
+const account = useAccount()
 const output = ref(props.info.partners_collab_list[0].status_text)
 
 
