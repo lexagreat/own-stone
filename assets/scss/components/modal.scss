@@ -112,3 +112,85 @@
       }
    }
 }
+
+.meeting-form {
+   .modal__close {
+      background: rgba(255, 255, 255, 0.05) !important;
+      svg path {
+         fill: white !important;
+      }
+   }
+   // .meeting-form__content
+
+   &__content {
+      padding: 0 !important;
+      display: flex;
+      background-color: $black !important;
+   }
+
+   // .meeting-form__image
+
+   &__image {
+      flex: 0 0 460px;
+      width: 460px;
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+
+   // .meeting-form__wrapper
+
+   &__wrapper {
+      width: 470px;
+      flex: 0 0 470px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 40px;
+      .form-section__check {
+         color: rgba(255, 255, 255, 0.3) !important;
+         a {
+            color: rgba(255, 255, 255, 0.6) !important;
+         }
+      }
+   }
+
+   // .meeting-form__header
+
+   &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      p {
+         color: $white-50;
+      }
+   }
+
+   // .meeting-form__title
+
+   &__title {
+   }
+
+   // .meeting-form__main
+
+   &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+   }
+
+   // .meeting-form__inputs
+
+   &__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      .app-checkbox {
+         label {
+            border-color: #ffffff4d;
+         }
+      }
+   }
+}

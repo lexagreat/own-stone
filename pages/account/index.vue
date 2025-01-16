@@ -6,14 +6,15 @@
       </AccountHeader>
       <div class="account-profile__main">
          <div class="account-profile__image">
-            <input type="file" style="display: none;" id="account-profile__image">
+            <input type="file" style="display: none;" id="account-profile__image" @change="onChangeFile">
             <label for="account-profile__image">
                <div class="circle">
-                  <span>А</span>
+                  <img ref="filePreviewImg" v-if="store.user?.avatar?.url || avatar" :src="store.user?.avatar?.url"
+                     alt="">
+                  <span v-else-if="store.user?.firstname?.length">{{ store.user?.firstname[0] }}</span>
                </div>
                <PlusImage />
             </label>
-
          </div>
          <ul class="account-profile__inputs">
             <li>
@@ -26,7 +27,7 @@
                <FormInput placeholder="Отчество" v-model="fatherName" />
             </li>
             <li>
-               <FormInput placeholder="Номер телефона" v-model="phone" isPhone />
+               <FormInput placeholder="Номер телефона" v-model="phone" isPhone disabled />
             </li>
             <li>
                <FormInput placeholder="WhatsApp" v-model="wh" />
@@ -47,7 +48,18 @@
                </li>
             </ul>
          </div>
-         <ul class="account-requisites__inputs account-profile__inputs">
+         <ul class="account-requisites__inputs account-profile__inputs" v-if="currentReq">
+            <li>
+               <FormInput placeholder="Название банка" v-model="bankName" />
+            </li>
+            <li>
+               <FormInput placeholder="Номер карты" v-model="cardNumber" />
+            </li>
+            <li>
+               <FormInput placeholder="Имя и Фамилия" v-model="nameForCard" />
+            </li>
+         </ul>
+         <ul class="account-requisites__inputs account-profile__inputs" v-else>
             <li>
                <FormInput placeholder="Название организации" v-model="orgName" />
             </li>
@@ -63,10 +75,16 @@
             <li>
                <FormInput placeholder="Корреспондентский счет" v-model="corrAcc" />
             </li>
+            <li>
+               <UiSelect class="app-select" :settings="formSettings" @selectOption="onSelectFormOption" />
+            </li>
+            <li>
+               <UiSelect class="app-select" :settings="axisSettings" @selectOption="onSelectAxisOption" />
+            </li>
          </ul>
       </div>
       <div class="account-profile__footer">
-         <UiButton class="black account-requisites__save">Сохранить изменения</UiButton>
+         <UiButton class="black account-requisites__save" @click="save">Сохранить изменения</UiButton>
       </div>
    </section>
 </template>
@@ -75,12 +93,15 @@ import PlusImage from "@/assets/img/icons/account-plus-image.svg"
 import { useAccount } from '~/store/account'
 const router = useRouter()
 const store = useAccount()
-const surname = ref("")
-const name = ref("")
-const fatherName = ref("")
+const surname = ref(store?.user?.secondname)
+const name = ref(store?.user?.firstname)
+const fatherName = ref(store?.user?.lastname)
 const phone = ref(store?.user?.phonenumber)
-const wh = ref("")
-const tg = ref("")
+const wh = ref(store?.user?.whatsapp)
+const tg = ref(store?.user?.telegram)
+const bankName = ref(store?.user?.requisits_fiz_bank)
+const cardNumber = ref(store?.user?.requisits_fiz_cardnumber)
+const nameForCard = ref(store?.user?.requisits_fiz_name)
 const reqs = ref([
    {
       name: "Юридическое лицо",
@@ -94,17 +115,175 @@ const reqs = ref([
 const currentReq = ref(0)
 
 
-const orgName = ref("")
-const inn = ref("")
-const bik = ref("")
-const paymentAcc = ref("")
-const corrAcc = ref("")
-watch(() => store.user, () => {
-   console.log("store.user", store.user);
-})
+const orgName = ref(store?.user?.requisits_ul_organization)
+const inn = ref(store?.user?.requisits_ul_inn)
+const bik = ref(store?.user?.requisits_ul_bic)
+const paymentAcc = ref(store?.user?.requisits_ul_rbill)
+const corrAcc = ref(store?.user?.requisits_ul_corbill)
+const avatar = ref(null)
 
+
+const formSettings = ref({
+   options: [
+      {
+         name: "ООО",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "ИП",
+         value: 1,
+      },
+   ],
+   placeholder: ""
+})
+const form = ref('')
+function onSelectFormOption(option) {
+   form.value = option.name
+}
+const axisSettings = ref({
+   options: [
+      {
+         name: "ОСН",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "УСН",
+         value: 1,
+      },
+      {
+         name: "ПСН",
+         value: 2,
+      },
+   ],
+   placeholder: ""
+})
+const axis = ref('')
+
+function onSelectAxisOption(option) {
+   axis.value = option.name
+}
+
+
+
+const filePreviewImg = ref(null)
+
+
+
+
+function isFileSizeUnder5MB(fileSizeInBytes) {
+   const MAX_SIZE_IN_BYTES = 5 * 1024 * 1024; // 5 MB в байтах
+   return fileSizeInBytes < MAX_SIZE_IN_BYTES;
+}
+
+const onChangeFile = (e) => {
+   if (isFileSizeUnder5MB(e.target.files[0].size)) {
+      avatar.value = e.target.files[0]
+      const previewImg = filePreviewImg.value;
+      const file = e.target.files[0];
+      if (file) {
+         const reader = new FileReader();
+
+         reader.onload = function (event) {
+            previewImg.src = event.target.result;
+         };
+
+         reader.readAsDataURL(file); // Читаем содержимое файла как Data URL
+      }
+   } else {
+      console.log("Файл больше или равен 5 МБ.");
+   }
+}
 const exit = () => {
    store.exit()
    router.push('/')
 }
+
+
+const save = async () => {
+   let object = {
+      "firstname": name.value,
+      // "email": email.value,
+      "secondname": surname.value,
+      "lastname": fatherName.value,
+      "whatsapp": wh.value,
+      "telegram": tg.value,
+      "requisits_fiz_bank": bankName.value,
+      "requisits_fiz_cardnumber": cardNumber.value,
+      "requisits_fiz_name": nameForCard.value,
+      "requisits_ul_form": form.value,
+      "requisits_ul_system": axis.value,
+      "requisits_ul_organization": orgName.value,
+      "requisits_ul_inn": inn.value,
+      "requisits_ul_bic": bik.value,
+      "requisits_ul_rbill": paymentAcc.value,
+      "requisits_ul_corbill": corrAcc.value,
+   }
+   if (avatar.value) {
+      object.avatar = avatar.value
+   }
+   let response = await store.changeData(object)
+   console.log(response);
+}
+
+
+
+watch(() => store.user?.requisits_ul_form, (value) => {
+   formSettings.value.options.forEach(item => {
+      if (item.name == value) {
+         item.selected = true
+         onSelectFormOption(item)
+      } else {
+         item.selected = false
+      }
+   })
+})
+watch(() => store.user?.requisits_ul_system, (value) => {
+   axisSettings.value.options.forEach(item => {
+      if (item.name == value) {
+         item.selected = true
+         onSelectAxisOption(item)
+      } else {
+         item.selected = false
+      }
+   })
+})
+onMounted(() => {
+   if (store.user?.requisits_ul_system) {
+      axisSettings.value.options.forEach(item => {
+         if (item.name == store.user?.requisits_ul_system) {
+            item.selected = true
+            onSelectAxisOption(item)
+         } else {
+            item.selected = false
+         }
+      })
+   }
+   if (store.user?.requisits_ul_form) {
+      formSettings.value.options.forEach(item => {
+         if (item.name == store.user?.requisits_ul_form) {
+            item.selected = true
+            onSelectFormOption(item)
+         } else {
+            item.selected = false
+         }
+      })
+   }
+})
 </script>
+
+
+
+<style lang="scss">
+.account-profile__inputs {
+   .v-select {
+      max-width: 100%;
+
+      &__wrapper {
+
+         background: #f8f8f8;
+      }
+   }
+}
+</style>

@@ -19,7 +19,7 @@ import { vMaska } from "maska/vue"
 import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber } from "~/utils/formattingNumbers";
 const min = ref(5000000)
-const max = ref(450000000)
+const max = ref(1000000000)
 const minValue = ref(min.value)
 const maxValue = ref(min.value)
 const UpdateValues = (e) => {

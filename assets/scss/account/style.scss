@@ -65,6 +65,12 @@
       }
       .circle {
          --size: 50px;
+         overflow: hidden;
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
       }
       svg {
          width: 100%;
@@ -81,7 +87,8 @@
             font-size: 16px;
             font-weight: 500;
          }
-         span:nth-child(2) {
+         input {
+            background-color: transparent;
             color: $black-50;
             @include regular-13;
          }
@@ -331,6 +338,11 @@
       label {
          cursor: pointer;
       }
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
       svg {
          width: 24px;
          height: 24px;
@@ -340,6 +352,7 @@
          right: 0;
       }
       .circle {
+         overflow: hidden;
          --size: 100px;
          background-color: $black-15;
          color: $white;
@@ -507,7 +520,7 @@
       gap: 40px;
       align-items: center;
       display: grid;
-      grid-template-columns: 333px 90px 117px auto 173px;
+      grid-template-columns: 233px 190px 117px auto 173px;
       text-align: center;
       @media (max-width: 1440px) {
          gap: calc(20px + 20 * ((100vw - 1024px) / (1440 - 1024)));
@@ -631,7 +644,7 @@
    &__cats {
       gap: 40px;
       display: grid;
-      grid-template-columns: 333px 90px 117px auto 173px;
+      grid-template-columns: 233px 190px 117px auto 173px;
       text-align: center;
       @media (max-width: 1440px) {
          gap: calc(20px + 20 * ((100vw - 1024px) / (1440 - 1024)));

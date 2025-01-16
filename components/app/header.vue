@@ -64,7 +64,7 @@
                         <HeartIcon />
                      </NuxtLink>
                   </li>
-                  <li :class="{ active: !store.user }">
+                  <li :class="{ active: store.user?.phonenumber }">
                      <div class="circle profile" style="position: relative;">
                         <ProfileIcon @click="onClickProfile" />
                         <div class="header-profile">

@@ -17,7 +17,7 @@ export const useCatalog = defineStore("useCatalog", {
          console.log("response", response);
          return response;
       },
-      async getProducts(url, cat) {
+      async getProducts(url) {
          let base = "catalog";
          // if (object.type !== "Вторичная") {
          //    // project || apartaments
@@ -29,7 +29,7 @@ export const useCatalog = defineStore("useCatalog", {
          // } else {
          //    base = "apartments";
          // }
-         // console.log("search url", base + url);
+         console.log("search url", base + url);
          const response = await useBaseFetch(base + url);
          // console.log("Продукты по поиску", response.data);
          this.products = response.data;
@@ -39,7 +39,7 @@ export const useCatalog = defineStore("useCatalog", {
       },
       getUrl(object) {
          let resultString = "";
-         console.log("filters object", object);
+         // console.log("filters object", object);
          if (object.type !== "Вторичная") {
             // project || apartaments
             if (object.category == 0) {
@@ -286,7 +286,7 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
 
-      async getFiltersForCats(cat, t) {
+      async getFiltersForCats(cat, t, slug) {
          let types = {
             build: "Новостройки",
             commerce: "Коммерция",
@@ -304,6 +304,9 @@ export const useCatalog = defineStore("useCatalog", {
          }`;
          url += `&filters${this.makeSubStr(url)}[type_aparts]=${type}`;
          url += `&pagination[pageSize]=10000`;
+         if (slug) {
+            url += `&filters[proekty][slug]=${slug}`;
+         }
          const response = await useBaseFetch(base + url);
          let productsArr = [];
          if (cat == 0) {

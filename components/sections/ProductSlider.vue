@@ -17,7 +17,7 @@
                      slidesPerView: 4
                   }
                }">
-                  <SwiperSlide v-for="item in 8">
+                  <SwiperSlide v-for="item in products" :key="item">
                      <CatalogCardsObject :product="item" @click="openForm" v-if="category == 1" />
                      <CatalogCardsProject :product="item" v-else />
                   </SwiperSlide>
@@ -35,6 +35,7 @@ const props = defineProps({
       Number,
       default: 0
    },
+   products: Array
 })
 const swiperInst = ref(null)
 const onSwiper = (swiper) => {

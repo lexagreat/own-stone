@@ -41,17 +41,13 @@
                      <img v-if="item?.photo?.url" :src="item?.photo?.url" alt="">
                      <h3 class="h3" :class="{ 'light-title': index == 0, 'dark-title': index !== 0 }">{{ item?.title }}
                      </h3>
-                     <UiButton :class="{ white: index == 0, black: index !== 0 }">{{ item?.btn_text }}</UiButton>
+                     <UiButton :class="{ white: index == 0, black: index !== 0 }" @click="onBtnClick(item.modalname)">{{
+                        item?.btn_text }}</UiButton>
                   </li>
-                  <!-- <li class="contacts-hero__item">
-                     <h3 class="h3 dark-title">назначить встречу с персональным брокером</h3>
-                     <UiButton class="black">Назначить встречу</UiButton>
-                  </li>
-                  <li class="contacts-hero__item">
-                     <h3 class="h3 dark-title">Оцените качество работы наших брокеров</h3>
-                     <UiButton class="black">Оставить отзыв</UiButton>
-                  </li> -->
                </ul>
+               <ModalMakeReview :isOpen="isReviewModalOpen" @close-popup="isReviewModalOpen = false" />
+               <ModalTaxi :isOpen="isTaxiModalOpen" @close-popup="isTaxiModalOpen = false" />
+               <ModalMeeteing :isOpen="isMeetingModalOpen" @close-popup="isMeetingModalOpen = false" />
             </div>
          </div>
       </div>
@@ -61,18 +57,18 @@
 const props = defineProps({
    info: Object
 })
-const media = ref([
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/mail.svg'))),
-      to: ""
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/tg.svg'))),
-      to: ""
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/whatsapp.svg'))),
-      to: ""
+const isReviewModalOpen = ref(false)
+const isTaxiModalOpen = ref(false)
+const isMeetingModalOpen = ref(false)
+const onBtnClick = (name) => {
+   if (name == 'review') {
+      isReviewModalOpen.value = true
    }
-])
+   if (name == 'taxi') {
+      isTaxiModalOpen.value = true
+   }
+   if (name == 'meet') {
+      isMeetingModalOpen.value = true
+   }
+}
 </script>

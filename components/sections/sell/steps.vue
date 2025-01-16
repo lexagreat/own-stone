@@ -2,8 +2,7 @@
    <section class="sell-steps">
       <div class="container">
          <div class="sell-steps__wrapper">
-            <h2 class="sell-steps__title h1 dark-title">С нами просто: <br>
-               <span>все этапы под контролем</span>
+            <h2 class="sell-steps__title h1 dark-title" v-html="info.title">
             </h2>
             <ul class="sell-steps__items">
                <li class="sell-step" v-for="(item, index) in steps" :key="index">
@@ -15,29 +14,15 @@
                </li>
             </ul>
             <UiButton class="black">
-               Оставить заявку
+               {{ info.btn_name }}
             </UiButton>
          </div>
       </div>
    </section>
 </template>
 <script setup>
-const steps = ref([
-   {
-      title: "Консультация и оценка",
-      text: "Оставьте заявку на сайте и наши специалисты свяжутся с Вами в кратчайшие сроки",
-   },
-   {
-      title: "маркетинг и продвижение",
-      text: "Разработаем маркетинговый план и начнем активное продвижение недвижимости",
-   },
-   {
-      title: "показы и переговоры",
-      text: "Мы организуем показы Вашей недвижимости заинтересованным покупателям",
-   },
-   {
-      title: "документальное сопровождение",
-      text: "Осуществляем юридическое сопровождение сделки и послепродажное обслуживание",
-   },
-])
+const props = defineProps({
+   info: Object
+})
+const steps = ref(props.info.sell_steps_list)
 </script>

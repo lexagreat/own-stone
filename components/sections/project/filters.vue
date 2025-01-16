@@ -78,7 +78,7 @@
                            </ul>
                         </li>
                         <li class="catalog-filters__btns">
-                           <UiButton class="black">Показать все</UiButton>
+                           <UiButton class="black" @click="search">Показать все</UiButton>
                         </li>
                      </ul>
                   </div>
@@ -90,7 +90,7 @@
             </UiButton>
          </div>
       </div>
-      <SectionsProductSlider white-btns :category="1">
+      <SectionsProductSlider white-btns :category="category" :products="catalog.products">
          <slot />
       </SectionsProductSlider>
       <BannersProjectMoreInfo v-if="type !== 'commerce'" />
@@ -101,10 +101,14 @@ import MultiRangeSlider from "multi-range-slider-vue";
 import { formatNumber, formatPrice } from "~/utils/formattingNumbers";
 import ArrowDownIcon from '@/assets/img/icons/arrow_down.svg'
 import FilterIcon from '@/assets/img/icons/filter.svg'
+import { useCatalog } from "~/store/catalog";
+const catalog = useCatalog()
+const route = useRoute()
 const props = defineProps({
-   type: String
+   type: String,
+   projectSlug: String,
 })
-
+const category = ref(1)
 
 const isOpenModal = ref(false)
 const roomsChecked = ref([])
@@ -203,6 +207,106 @@ watch(() => isOpenModal, (value) => {
       bodyUnlock()
    }
 })
+const types = ref([
+   {
+      name: 'Новостройки',
+      value: "build",
+      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/new-buildings.svg'))),
+   },
+   {
+      name: 'Вторичная',
+      value: "secondary",
+      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
+   },
+   {
+      name: 'Коммерция',
+      value: "commerce",
+      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
+   },
+])
+const filtersObject = computed(() => {
+   let obj = {}
+   obj.category = category.value
+   obj.type = types.value.find(item => item.value == props.type).name
+   if (roomsChecked.value?.length) {
+      obj.rooms = roomsChecked.value
+   }
+   if (areaMinValue.value !== areaMin.value) {
+      obj.area = {}
+      obj.area.min = areaMinValue.value
+   }
+   if (areaMaxValue.value !== areaMax.value) {
+      if (!obj.area) {
+         obj.area = {}
+      }
+      obj.area.max = areaMaxValue.value
+   }
+   obj.repair = repairOption.value
+   if (priceMinValue.value !== priceMin.value) {
+      obj.price = {}
+      obj.price.min = priceMinValue.value
+   }
+   if (priceMaxValue.value !== priceMax.value) {
+      if (!obj.price) {
+         obj.price = {}
+      }
+      obj.price.max = priceMaxValue.value
+   }
+   obj.date = dateOption.value
+   obj.target = targetOption.value
+   obj.tags = checkedOptions.value
+   return obj
+})
+const search = async () => {
+   isOpenModal.value = false
+   // emit('setCat', category.value)
+   if (route.query["filters[category]"] == 'apartaments' && category.value == 0 || route.query["filters[category]"] == 'projects' && category.value == 1) {
+      await setCat()
+   }
+   // console.log('3. search');
+   const url = catalog.getUrl(filtersObject.value) + `&filters[proekty][slug]=${props.projectSlug}`
+
+   await catalog.getProducts(url)
+}
+const setCat = async () => {
+
+   let response = await catalog.getFiltersForCats(category.value, props.type, props.projectSlug);
+   console.log("1. filters from cat", response);
+   setFiltersFromCat(response)
+}
+
+function setFiltersFromCat(obj) {
+   // set ranges
+   priceMin.value = obj.ranges?.price?.min
+   priceMax.value = obj.ranges?.price?.max
+   priceMinValue.value = priceMin.value
+   priceMaxValue.value = priceMax.value
+   areaMin.value = Math.round(obj.ranges?.area?.min)
+   areaMax.value = Math.round(obj.ranges?.area?.max)
+   areaMinValue.value = areaMin.value
+   areaMaxValue.value = areaMax.value
+
+   // set repair
+   repairSettings.value.options = obj?.repair
+   // set sroks
+   dateSettings.value.options = obj?.sroks
+   // set target
+   targetSettings.value.options = obj?.target
+
+
+   options.value = obj?.tags
+
+   console.log("2. set filters");
+}
+
+
+onMounted(async () => {
+   await setCat()
+   await search()
+})
+
+
+
 </script>
 
 

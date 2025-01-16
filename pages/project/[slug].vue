@@ -10,9 +10,9 @@
          <h2 class="project-features__title h1 dark-title">преимущества</h2>
       </SectionsProjectFeatures>
 
-      <!-- <SectionsProjectFilters>
+      <SectionsProjectFilters type="build" :projectSlug="info.slug">
          ТИПЫ <span>планировок</span>
-      </SectionsProjectFilters> -->
+      </SectionsProjectFilters>
       <!-- <SectionsProjectBuyWays /> -->
       <!-- <SectionsProjectPosition /> -->
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />

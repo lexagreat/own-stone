@@ -24,11 +24,13 @@
       <div class="account-aside__footer">
          <NuxtLink to="/account" class="account-aside__main" @click="store.closeAside">
             <div class="circle">
-               <AccountAvatar />
+               <img ref="filePreviewImg" v-if="store.user?.avatar?.url" :src="store.user?.avatar?.url" alt="">
+               <AccountAvatar v-else />
             </div>
             <div>
-               <span>Андрей</span>
-               <span>{{ store?.user?.phonenumber }}</span>
+               <span>{{ store?.user?.firstname }}</span>
+               <input v-maska="'+7 (###) ###-##-##'" type="text" :value="store?.user?.phonenumber"
+                  style="pointer-events: none;">
             </div>
             <ArrowIcon class="account-link__arrow" />
          </NuxtLink>
@@ -36,24 +38,31 @@
    </aside>
 </template>
 <script setup>
+import { vMaska } from "maska/vue"
 import AccountAvatar from '@/assets/img/icons/account-avatar.svg'
 import ExitIcon from '@/assets/img/icons/exit.svg'
 import ArrowIcon from "@/assets/img/icons/arrow_down.svg"
 import { useAccount } from '~/store/account';
 const store = useAccount()
 const router = useRouter()
+const clientsLength = computed(() => {
+   return store.user?.clients?.length || 0;
+})
+const docsLength = computed(() => {
+   return store.user?.documents?.length || 0;
+})
 const links = ref([
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),
       title: "Мои клиенты",
       to: "/account/clients",
-      subtitle: "4 клиента"
+      subtitle: `${clientsLength.value} ${morph(clientsLength.value, ['клиент', 'клиента', 'клиентов'])}`
    },
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-doc.svg'))),
       title: "Документы",
       to: "/account/documents",
-      subtitle: "1 документ"
+      subtitle: `${docsLength.value} ${morph(docsLength.value, ['документ', 'документа', 'документов'])}`
    },
    {
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),

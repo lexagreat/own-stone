@@ -190,7 +190,6 @@ const repairSettings = ref({
 })
 const repairOption = ref(null)
 function onSelectRepairOption(option) {
-   console.log("select repair option", option);
    repairOption.value = option
 }
 const placementSettings = ref({
@@ -250,10 +249,6 @@ const targetSettings = ref({
          value: 0,
          selected: true
       },
-      {
-         name: "Важно",
-         value: 1,
-      },
    ],
    placeholder: ""
 })
@@ -267,10 +262,6 @@ const floorSettings = ref({
          name: "Не важно",
          value: 0,
          selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
@@ -329,7 +320,6 @@ watch(() => props.isOpenModal, (value) => {
    }
 })
 watch(() => props.type, async (value) => {
-   console.log('change props type');
    myType.value = value
    await setCat()
 
@@ -383,7 +373,7 @@ const search = async () => {
    if (route.query["filters[category]"] == 'apartaments' && category.value == 0 || route.query["filters[category]"] == 'projects' && category.value == 1) {
       await setCat()
    }
-   console.log('3. search');
+   // console.log('3. search');
    const url = catalog.getUrl(filtersObject.value)
    emit('search', url)
 }

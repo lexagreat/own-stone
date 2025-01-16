@@ -4,6 +4,17 @@ export default defineNuxtConfig({
    devtools: { enabled: true },
    app: {
       head: {
+         link: [
+            {
+               rel: "icon",
+               href: "/fav.svg",
+               type: "image/x-icon",
+            },
+            {
+               rel: "apple-touch-icon",
+               href: "/fav.svg",
+            },
+         ],
          meta: [
             {
                name: "viewport",

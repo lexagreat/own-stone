@@ -85,7 +85,6 @@ function selectOption(option) {
 // })
 
 watch(() => props.settings.options, (value) => {
-   console.log("props", value);
    value.forEach((item) => {
       if (item.selected) {
          selectOption(item);

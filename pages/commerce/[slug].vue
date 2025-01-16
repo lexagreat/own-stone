@@ -1,9 +1,9 @@
 <template>
    <main class="main">
       <SectionsProjectHero :info="info" />
-      <!-- <SectionsProjectFilters type="commerce" class="project-filters_commerce">
+      <SectionsProjectFilters type="commerce" :projectSlug="info.slug" class="project-filters_commerce">
          варианты <span>планировок</span>
-      </SectionsProjectFilters> -->
+      </SectionsProjectFilters>
       <SectionsProjectChars class="project-chars_commerce" :info="info">
          <h2 class="project-chars__title h1 dark-title" style="text-align: center;">Особенности <span>помещений</span>
          </h2>

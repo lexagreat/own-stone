@@ -3,10 +3,8 @@
       <div class="container">
          <div class="sell-coop__wrapper">
             <div class="sell-coop__main">
-               <h2 class="sell-coop__title h1 dark-title">прозрачность <span>сотрудничества</span></h2>
-               <p class="body-text">Заключим эксклюзивный договор, проведем глубокий анализ рынка, учтем состояние
-                  квартиры и другие технические параметры, а затем разработаем оптимальную стратегию продажи квартиры.
-                  Организуем максимальное количество показов и встреч с потенциальными покупателями.</p>
+               <h2 class="sell-coop__title h1 dark-title" v-html="info?.title"></h2>
+               <p class="body-text" v-html="info?.text"></p>
             </div>
             <div class="sell-coop__visual">
                <div class="sell-coop__input">
@@ -18,7 +16,7 @@
                   <span>{{ phrases[currentIndex] }}</span>
                </div>
                <div class="sell-coop__image">
-                  <img src="/public/img/sell/coop-tel.png" alt="">
+                  <img :src="info.picture.url" alt="">
                </div>
             </div>
          </div>
@@ -26,11 +24,11 @@
    </section>
 </template>
 <script setup>
-const phrases = ref([
-   "Эксклюзивный договор",
-   "Оптимальная стратегия",
-   "фраза номер 3",
-])
+const props = defineProps({
+   info: Object
+})
+const phrases = ref([])
+phrases.value = props.info.partners_control_list.map(item => item.text)
 const currentIndex = ref(0)
 const animatePhrases = () => {
    setInterval(() => {
