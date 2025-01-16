@@ -7,12 +7,16 @@
       </div>
       <div class="contacts-office__image">
          <img :src="info?.photo?.url" alt="">
-         <UiButton class="black">{{ info?.btn_text }}</UiButton>
+         <UiButton class="black" @click="isOpenModal = true">{{ info?.btn_text }}</UiButton>
       </div>
+      <ModalTeam :isOpen="isOpenModal" @close-popup="isOpenModal = false" />
    </section>
 </template>
 <script setup>
 const props = defineProps({
    info: Object
 })
+
+const isOpenModal = ref(false)
+
 </script>

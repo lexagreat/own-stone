@@ -37,8 +37,8 @@ const props = defineProps({
 })
 const emit = defineEmits(['closePopup'])
 const store = useAccount()
-const name = ref(computed(() => store.user?.firstname || ''))
-const phone = ref(computed(() => store.user?.phonenumber || ''))
+const name = ref("")
+const phone = ref("")
 const checked = ref(false)
 
 const isDisabledBtn = computed(() => {
