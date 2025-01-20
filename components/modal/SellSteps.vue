@@ -3,23 +3,24 @@
       <div class="modal__content object-form__content">
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
-            <h3 class="object-form__title h1 dark-title">Вызвать <span>машину</span></h3>
+            <h3 class="object-form__title h1 dark-title">Оставить <br> <span>заявку</span></h3>
+            <p class="body-text">Разработаем оптимальную стратегию продажи квартиры. Организуем максимальное количество
+               показов и встреч с потенциальными покупателями.</p>
          </div>
          <div class="object-form__main">
             <div class="object-form__inputs">
                <FormInput placeholder="Ваше имя" v-model="name" />
                <FormInput isPhone placeholder="Ваш номер телефона" v-model="phone" />
-               <FormInput placeholder="Ваш адрес" v-model="address" />
-               <FormInput placeholder="Тема визита" v-model="theme" />
+               <FormInput placeholder="E-mail" v-model="email" />
                <div class="form-section__check">
-                  <FormCheckbox v-model="checked" id="object-form__checksdadas" />
+                  <FormCheckbox v-model="checked" id="object-form__checksdadas312312312" />
                   <label for="object-form__check" style="cursor: pointer;">
                      <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
-                        </span>
+                     </span>
                   </label>
                </div>
             </div>
-            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить отзыв</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
          </div>
       </div>
    </UiModal>
@@ -34,30 +35,27 @@ const emit = defineEmits(['closePopup'])
 const store = useAccount()
 const name = ref("")
 const phone = ref("")
-const address = ref("")
-const theme = ref("")
+const email = ref("")
 const checked = ref(false)
 
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length == 18
+   return phone.value.length == 18 && name.value.length
 })
 const send = async () => {
    let object = {
-      subject: "Заявка на такси с сайта Own stone",
+      subject: "Оставить заявку с сайта Own stone",
       text: `
          Имя: ${name.value}
+         Email: ${email.value}
          Телефон: ${phone.value}
-         Адрес: ${address.value}
-         Тема визита: ${theme.value}
       `,
    }
    let response = await store.sendForm(object)
    console.log(response);
    if (response.status) {
-      name.value = store.user?.firstname || ""
-      phone.value = store.user?.phonenumber || ""
-      theme.value = ""
-      address.value = ""
+      name.value = ""
+      phone.value = ""
+      email.value = ""
       checked.value = false
       emit('closePopup')
    }

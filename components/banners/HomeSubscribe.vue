@@ -5,10 +5,11 @@
             <h2 class="home-subscribe__title h1" v-html="info.title"></h2>
             <div class="home-subscribe__main">
                <div class="home-subscribe__text body-text" v-html="info.desc"></div>
-               <UiButton class="white">
+               <UiButton class="white" @click="isModal = true">
                   Подписаться
                </UiButton>
             </div>
+            <ModalSubscribe :is-open="isModal" @close-popup="isModal = false" />
          </div>
       </div>
    </section>
@@ -18,4 +19,7 @@
 const props = defineProps({
    info: Object
 })
+
+
+const isModal = ref(false)
 </script>

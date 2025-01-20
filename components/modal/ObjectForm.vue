@@ -15,27 +15,30 @@
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="object-form__check" />
                   <label for="object-form__check" style="cursor: pointer;">
-                     <span>Я согласен с <NuxtLink to="/" target="_blank">политикой конфиденциальности</NuxtLink></span>
+                     <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
+                     </span>
                   </label>
                </div>
             </div>
-            <UiButton class="black">Оставить заявку</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
          </div>
          <div class="object-form__footer">
             <span class="body-text">Или свяжитесь с нами</span>
             <ul>
                <li>
-                  <NuxtLink to="" class="circle" target="_blank">
+                  <NuxtLink :to="contacts?.contacts_info?.contacts_info_links[1].href_attr" class="circle"
+                     target="_blank">
                      <TgIcon />
                   </NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="" class="circle" target="_blank">
+                  <NuxtLink :to="contacts?.contacts_info?.contacts_info_links[2].href_attr" class="circle"
+                     target="_blank">
                      <WhatsappIcon />
                   </NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="" class="circle" target="_blank">
+                  <NuxtLink :to="'tel:' + contacts?.contacts_info?.phonehumber" class="circle" target="_blank">
                      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Icons / phone">
                            <path id="Vector"
@@ -43,7 +46,6 @@
                               fill="#181818" />
                         </g>
                      </svg>
-
                   </NuxtLink>
                </li>
             </ul>
@@ -54,13 +56,41 @@
 <script setup>
 import TgIcon from '~/assets/img/icons/tg.svg'
 import WhatsappIcon from '~/assets/img/icons/whatsapp.svg'
-
+import { useAccount } from '~/store/account'
+import { useContacts } from '~/store/contacts'
+const store = useAccount()
+const contacts = useContacts()
 const props = defineProps({
-   isOpen: Boolean
+   isOpen: Boolean,
+   id: String
 })
 const emit = defineEmits(['closePopup'])
 
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)
+
+
+const isDisabledBtn = computed(() => {
+   return phone.value.length == 18 && name.value.length && checked.value
+})
+const send = async () => {
+   let object = {
+      subject: "Узнать подробнее про объект с сайта Own stone",
+      text: `
+         Имя: ${name.value}
+         Телефон: ${phone.value}
+         DocumentId: ${props.id}
+      `,
+      documentId: props.id
+   }
+   let response = await store.sendForm(object)
+   console.log(response);
+   if (response.status) {
+      name.value = ""
+      phone.value = ""
+      checked.value = false
+      emit('closePopup')
+   }
+}
 </script>

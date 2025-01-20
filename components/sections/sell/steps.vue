@@ -13,9 +13,10 @@
                   </div>
                </li>
             </ul>
-            <UiButton class="black">
+            <UiButton class="black" @click="isOpen = true">
                {{ info.btn_name }}
             </UiButton>
+            <ModalSellSteps :is-open="isOpen" @close-popup="isOpen = false" />
          </div>
       </div>
    </section>
@@ -25,4 +26,6 @@ const props = defineProps({
    info: Object
 })
 const steps = ref(props.info.sell_steps_list)
+
+const isOpen = ref(false)
 </script>

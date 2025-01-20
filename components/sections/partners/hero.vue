@@ -13,6 +13,7 @@
                </NuxtLink>
                <UiButton class="white" @click="isOpenAuthModal = true" v-else>Стать партнером
                </UiButton>
+               <ModalAuthCollection :is-open="isOpenAuthModal" @close="isOpenAuthModal = false" />
             </div>
          </div>
       </div>

@@ -34,7 +34,8 @@
                      <CatalogListsGrid :products="products" @openForm="onOpenForm" :category="category" />
 
                   </div>
-                  <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
+                  <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
+                     :id="currentProductForModal" />
                </div>
             </div>
          </div>
@@ -56,7 +57,9 @@ const path = ref([
    },
 ])
 const isOpenFormModal = ref(false)
-const onOpenForm = () => {
+const currentProductForModal = ref('')
+const onOpenForm = (id) => {
+   currentProductForModal.value = id;
    isOpenFormModal.value = true
 }
 const categories = ref([

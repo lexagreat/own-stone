@@ -8,7 +8,8 @@
             <div class="form-section__check">
                <FormCheckbox v-model="checked" id="form-section__check" />
                <label for="form-section__check" style="cursor: pointer;">
-                  <span>Я согласен с <NuxtLink to="/" target="_blank">политикой конфиденциальности</NuxtLink></span>
+                  <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
+                     </span>
                </label>
             </div>
          </div>

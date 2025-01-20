@@ -146,27 +146,31 @@
                            </NuxtLink>
                         </li>
                      </ul>
-                     <button>Назначить встречу</button>
+                     <button @click="isMeeting = true">Назначить встречу</button>
                   </div>
                </div>
             </div>
             <div class="footer__down">
                <div>
                   <span>©2024</span>
-                  <NuxtLink to="/">Политика конфиденциальности</NuxtLink>
+                  <NuxtLink to="/policy" target="_blank">Политика конфиденциальности</NuxtLink>
                </div>
                <div>
                   <p>
                      Instagram принадлежит Meta, признанной <br> экстремистской организацией, которая запрещена в РФ
                   </p>
-                  <span>Made by <NuxtLink to="/">Oktta</NuxtLink></span>
+                  <span>Made by <NuxtLink to="https://oktta.ru/" target="_blank">Oktta</NuxtLink></span>
                </div>
             </div>
          </div>
       </div>
+      <ModalMeeteing :isOpen="isMeeting" @closePopup="isMeeting = false" />
    </footer>
 </template>
 <script setup>
 import { useContacts } from './store/contacts';
 const contacts = useContacts()
+
+
+const isMeeting = ref(false)
 </script>

@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-card catalog-card_object" @click="emit('onForm')">
+   <div class="catalog-card catalog-card_object" @click=" emit('onForm', product.documentId)">
       <div class="catalog-card__gallery">
          <img :src="product?.preview_picture?.url" alt="">
          <div class="catalog-card__header">

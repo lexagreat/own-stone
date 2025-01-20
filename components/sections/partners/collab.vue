@@ -3,6 +3,8 @@
       <div class="container">
          <div class="partners-collab__wrapper">
             <div class="partners-collab__header">
+               <ModalAuthCollection :is-open="isOpenAuthModal" @close="isOpenAuthModal = false" />
+
                <h2 class="partners-collab__title h1 dark-title" v-html="info.title"></h2>
                <NuxtLink class="btn black" to="/account" v-if="account.user?.phonenumber">Стать партнером
                </NuxtLink>
@@ -22,8 +24,9 @@
                      </div>
                   </li>
                </ul>
-               <UiButton class="black">
-                  Стать партнером
+               <NuxtLink class="btn black" to="/account" v-if="account.user?.phonenumber">Стать партнером
+               </NuxtLink>
+               <UiButton class="black" @click="isOpenAuthModal = true" v-else>Стать партнером
                </UiButton>
                <div class="partners-collab__image">
                   <div class="partners-collab__visual">

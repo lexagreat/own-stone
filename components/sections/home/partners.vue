@@ -18,8 +18,10 @@
             </ul>
             <div class="home-partners__footer">
                <span class="body-text">{{ info.sub_text }}</span>
-               <UiButton class="black">
-                  Стать партнером
+               <ModalAuthCollection :is-open="isOpenAuthModal" @close="isOpenAuthModal = false" />
+               <NuxtLink class="btn black" to="/account" v-if="account.user?.phonenumber">Стать партнером
+               </NuxtLink>
+               <UiButton class="black" @click="isOpenAuthModal = true" v-else>Стать партнером
                </UiButton>
             </div>
          </div>
@@ -27,7 +29,11 @@
    </section>
 </template>
 <script setup>
+import { useAccount } from '~/store/account';
+
+const account = useAccount()
 const props = defineProps({
    info: Object
 })
+const isOpenAuthModal = ref(false)
 </script>

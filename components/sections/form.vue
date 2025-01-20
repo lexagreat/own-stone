@@ -18,9 +18,10 @@
                </ul>
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="formCheck" />
-                  <span>Я согласен с <NuxtLink to="/" target="_blank">политикой конфиденциальности</NuxtLink></span>
+                  <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
+                  </span>
                </div>
-               <UiButton class="black">Оставить заявку</UiButton>
+               <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
             </div>
          </div>
          <div class="form-section__map">
@@ -30,10 +31,36 @@
    </section>
 </template>
 <script setup>
+import { useAccount } from '~/store/account'
+
+const store = useAccount()
 const props = defineProps({
    info: Object
 })
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)
+
+
+
+const isDisabledBtn = computed(() => {
+   return checked.value && name.value.length && phone.value.length == 18
+})
+const send = async () => {
+   let object = {
+      subject: "Заявка с сайта Own stone",
+      text: `
+         Имя: ${name.value}
+         Телефон: ${phone.value}
+      `,
+   }
+   let response = await store.sendForm(object)
+   console.log(response);
+   if (response.status) {
+      name.value = store.user?.firstname || ""
+      phone.value = store.user?.phonenumber || ""
+      checked.value = false
+      emit('closePopup')
+   }
+}
 </script>

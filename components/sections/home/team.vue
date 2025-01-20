@@ -4,7 +4,7 @@
          <div class="home-team__header">
             <h2 class="home-team__title h1">команда <span>ownstone</span></h2>
             <div class="home-team__btns">
-               <UiButton class="black">Стать частью команды</UiButton>
+               <UiButton class="black" @click="isTeam = true">Стать частью команды</UiButton>
                <NuxtLink to="https://hh.ru/" class="btn white" target="_blank">Вакансии</NuxtLink>
             </div>
          </div>
@@ -20,10 +20,12 @@
             </li>
          </ul>
       </div>
+      <ModalTeam :is-open="isTeam" @close-popup="isTeam = false" />
    </section>
 </template>
 <script setup>
 const props = defineProps({
    team: Array
 })
+const isTeam = ref(false)
 </script>

@@ -2,6 +2,7 @@
    <header class="header lock-padding">
       <div class="container">
          <div class="header__wrapper">
+            <ModalOrderPhone :is-open="isOrderPhone" @close-popup="isOrderPhone = false" />
             <div class="header__info">
                <NuxtLink to="/" class="header__logo">
                   <LogoIcon />
@@ -35,7 +36,7 @@
             <div class="header__actions">
                <ul class="header__items">
                   <li>
-                     <NuxtLink to="/" class="header__call">
+                     <NuxtLink style="cursor: pointer;" class="header__call" @click.prevent="isOrderPhone = true">
                         Заказать звонок
                      </NuxtLink>
                   </li>
@@ -143,7 +144,7 @@
                      </li>
                   </ul>
                </ul>
-               <UiButton class="white">Заказать звонок</UiButton>
+               <UiButton class="white" @click="isOrderPhone = true">Заказать звонок</UiButton>
             </div>
          </div>
       </div>
@@ -173,7 +174,7 @@ watch(isBurgerOpen, (value) => {
    }
 })
 
-
+const isOrderPhone = ref(false)
 watch(() => route.fullPath, () => {
    isBurgerOpen.value = false
 })

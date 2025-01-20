@@ -60,7 +60,8 @@
                   <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
                      v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
-               <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false" />
+               <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
+                  :id="currentProductForModal" />
             </div>
          </div>
       </section>
@@ -85,7 +86,9 @@ const route = useRoute()
 const router = useRouter()
 let type = route.params.type
 const isOpenFormModal = ref(false)
-const onOpenForm = () => {
+const currentProductForModal = ref('')
+const onOpenForm = (id) => {
+   currentProductForModal.value = id;
    isOpenFormModal.value = true
 }
 const path = ref([

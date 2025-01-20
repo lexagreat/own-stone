@@ -1,7 +1,7 @@
 <template>
    <ul class="catalog-page__list">
       <li v-for="item in products">
-         <CatalogCardsObject :product="item" @onForm="emit('openForm')" v-if="category == 1" />
+         <CatalogCardsObject :product="item" @onForm="onForm" v-if="category == 1" />
          <CatalogCardsProject :product="item" v-else />
       </li>
    </ul>
@@ -12,4 +12,8 @@ const props = defineProps({
    products: Array
 })
 const emit = defineEmits(['openForm'])
+
+const onForm = (id) => {
+   emit('openForm', id)
+}
 </script>

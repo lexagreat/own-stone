@@ -31,9 +31,11 @@ const emit = defineEmits(['closePopup'])
 const swiper = ref(null)
 const onSwiper = (s) => {
    swiper.value = s
+   swiper.value.slideTo(props.currentIndex)
 }
 
 watch(() => props.currentIndex, () => {
+   console.log(props.currentIndex);
    swiper.value.slideTo(props.currentIndex)
 })
 </script>

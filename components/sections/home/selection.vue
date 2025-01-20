@@ -1,5 +1,5 @@
 <template>
-   <section class="selection-section">
+   <section class="selection-section" id='home-selection'>
       <div class="container">
          <div class="selection-section__wrapper">
             <div class="selection-section__header h1">

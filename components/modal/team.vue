@@ -4,6 +4,8 @@
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">стать частью <br /> <span>команды</span></h3>
+            <p class="body-text">Хотите стать частью команды OWNSTONE? Оставьте заявку и наш HR-cпециалист свяжется с
+               Вами!</p>
          </div>
          <div class="object-form__main">
             <div class="object-form__inputs">
@@ -14,7 +16,8 @@
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="object-form__checksdadas312312312" />
                   <label for="object-form__check" style="cursor: pointer;">
-                     <span>Я согласен с <NuxtLink to="/" target="_blank">политикой конфиденциальности</NuxtLink></span>
+                     <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
+                     </span>
                   </label>
                </div>
             </div>
