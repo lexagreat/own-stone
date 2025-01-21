@@ -1,13 +1,14 @@
 <template>
    <main class="main services-page">
       <SectionsBreadcrumbs :path="path" />
+      <ModalService :isOpen="isOpen" :index="current" @closePopup="isOpen = false" />
       <section class="services-section">
          <div class="services-section__bgs">
             <img class="services-section__bg" v-for="item in services" :key="item" :src="item.image" alt="">
          </div>
          <div class="services-section__card">
             <ul class="services-section__list">
-               <li class="services-section__item" v-for="item in services" :key="item">
+               <li class="services-section__item" v-for="(item, i) in services" :key="item">
                   <div class="services-section__header">
                      <div class="circle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -23,7 +24,7 @@
                         <h2 class="h1 dark-title" v-html="item.title"></h2>
                         <div class="services-section__description">
                            <div class="body-text" v-html="item.text"></div>
-                           <UiButton v-if="item?.isBtn" class="black">Оставить заявку</UiButton>
+                           <UiButton v-if="item?.isBtn" class="black" @click="onForm(i)">Оставить заявку</UiButton>
                         </div>
                      </div>
                   </div>
@@ -34,7 +35,7 @@
       <section class="services-mobile">
          <div class="container">
             <div class="services-section__bgs">
-               <img class="services-section__bg" v-for="item in services" :key="item" :src="item.image" alt="">
+               <img class="services-section__bg" v-for="(item, i) in services" :key="item" :src="item.image" alt="">
             </div>
             <div class="services-mobile__wrapper">
                <div class="services-mobile__header">
@@ -48,8 +49,7 @@
                         <h2 class="h1 dark-title" v-html="item.title"></h2>
                         <div class="services-section__description">
                            <div class="body-text" v-html="item.text"></div>
-                           <UiButton class="black">Оставить заявку</UiButton>
-
+                           <UiButton class="black" @click="onForm(i)">Оставить заявку</UiButton>
                         </div>
                      </SwiperSlide>
                   </template>
@@ -83,59 +83,12 @@ const services = info.services_page.map((item, i) => {
       isBtn: i ? true : false,
    }
 })
-// const services = ref([
-//    {
-//       image: "/img/services/service0.jpeg",
-//       title: "Услуги",
-//       text: "Мы предлагаем полный комплекс профессиональных услуг в сфере недвижимости, как на первичном, так и на вторичном рынке, работая с объектами жилого и коммерческого назначения."
-//    },
-//    {
-//       isBtn: true,
-//       image: "/img/services/service1.jpeg",
-//       title: "Покупка <span> недвижимости</span>",
-//       text: `<ul>
-//    <li>Выявление точного запроса </li>
-//    <li>Персонализированная подборка лотов </li>
-//    <li>Организация и проведение встреч на объекте </li>
-//    <li>Полное сопровождение сделки: подготовка документов, юридическая проверка, контроль на каждом этапе </li>
-//    <li>Одобрение ипотеки, подбор выгодной банковской программы </li>
-//    <li>Регистрация в Росреестре </li>
-// </ul>`
-//    },
-//    {
-//       isBtn: true,
-//       image: "/img/services/service2.jpeg",
-//       title: "Продажа <span> недвижимости</span>",
-//       text: `
-// <ul>
-//    <li>Аналитика по рынку: конкурентный анализ, локационный спрос, ценообразование </li>
-//    <li>Профессиональная оценка вашей недвижимости</li>
-//    <li>Организация фото и видео-съемки объекта</li>
-//    <li>Упаковка и размещение объявления </li>
-//    <li>Маркетинговая поддержка, продвижение </li>
-//    <li>Организация просмотров объекта</li>
-//    <li>Юридическое сопровождение сделки</li>
-// </ul>
-//       `
-//    },
-//    {
-//       isBtn: true,
-//       image: "/img/services/service3.jpeg",
-//       title: "Инвестиции <span> в недвижимость</span>",
-//       text: `
-// <ul>
-//    <li>Аналитика по рынку: конкурентный анализ, локационный спрос, ценообразование </li>
-//    <li>Профессиональная оценка вашей недвижимости</li>
-//    <li>Организация фото и видео-съемки объекта</li>
-//    <li>Упаковка и размещение объявления </li>
-//    <li>Маркетинговая поддержка, продвижение </li>
-//    <li>Организация просмотров объекта</li>
-//    <li>Юридическое сопровождение сделки</li>
-// </ul>
-//       `
-//    },
-// ])
-
+const isOpen = ref(false)
+const current = ref(0)
+const onForm = (i) => {
+   current.value = i - 1
+   isOpen.value = true
+}
 
 onMounted(() => {
    setTimeout(() => {

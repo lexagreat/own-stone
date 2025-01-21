@@ -21,7 +21,8 @@ import { formatNumber } from "~/utils/formattingNumbers";
 const min = ref(5000000)
 const max = ref(1000000000)
 const minValue = ref(min.value)
-const maxValue = ref(min.value)
+// const maxValue = ref(min.value)
+const maxValue = defineModel()
 const UpdateValues = (e) => {
    minValue.value = e.minValue
    maxValue.value = e.maxValue

@@ -194,3 +194,17 @@
       }
    }
 }
+.modal-success {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   // .modal-success__title
+
+   &__title {
+   }
+
+   // .modal-success__description
+
+   &__description {
+   }
+}

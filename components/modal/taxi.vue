@@ -1,6 +1,11 @@
 <template>
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="object-form">
-      <div class="modal__content object-form__content">
+      <div class="modal__content object-form__content" v-if="success">
+         <UiModalCloseBtn @click="emit('closePopup')" />
+         <ModalSucess title="Заявка <br> <span>отправлена</span>"
+            subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
+      </div>
+      <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Вызвать <span>машину</span></h3>
@@ -15,7 +20,7 @@
                   <FormCheckbox v-model="checked" id="object-form__checksdadas" />
                   <label for="object-form__check" style="cursor: pointer;">
                      <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
-                        </span>
+                     </span>
                   </label>
                </div>
             </div>
@@ -41,6 +46,8 @@ const checked = ref(false)
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length == 18
 })
+
+const success = ref(false)
 const send = async () => {
    let object = {
       subject: "Заявка на такси с сайта Own stone",
@@ -59,7 +66,11 @@ const send = async () => {
       theme.value = ""
       address.value = ""
       checked.value = false
-      emit('closePopup')
+      success.value = true
+      setTimeout(() => {
+         emit('closePopup')
+         success.value = false
+      }, 2000)
    }
 }
 

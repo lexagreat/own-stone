@@ -1,6 +1,11 @@
 <template>
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="object-form">
-      <div class="modal__content object-form__content">
+      <div class="modal__content object-form__content" v-if="success">
+         <UiModalCloseBtn @click="emit('closePopup')" />
+         <ModalSucess title="Заявка <span>отправлена</span>"
+            subtitle="В ближайшее время с Вами свяжется наш специалист" />
+      </div>
+      <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Оставить <span>заявку</span></h3>
@@ -16,7 +21,7 @@
                   <FormCheckbox v-model="checked" id="object-form__check" />
                   <label for="object-form__check" style="cursor: pointer;">
                      <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
-                        </span>
+                     </span>
                   </label>
                </div>
             </div>

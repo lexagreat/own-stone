@@ -1,6 +1,11 @@
 <template>
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="object-form">
-      <div class="modal__content object-form__content">
+      <div class="modal__content object-form__content" v-if="success">
+         <UiModalCloseBtn @click="emit('closePopup')" />
+         <ModalSucess title="Заявка <br> <span>отправлена</span>"
+            subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
+      </div>
+      <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Узнать <span>подробнее</span></h3>
@@ -74,6 +79,7 @@ const checked = ref(false)
 const isDisabledBtn = computed(() => {
    return phone.value.length == 18 && name.value.length && checked.value
 })
+const success = ref(false)
 const send = async () => {
    let object = {
       subject: "Узнать подробнее про объект с сайта Own stone",
@@ -90,7 +96,11 @@ const send = async () => {
       name.value = ""
       phone.value = ""
       checked.value = false
-      emit('closePopup')
+      success.value = true
+      setTimeout(() => {
+         emit('closePopup')
+         success.value = false
+      }, 2000)
    }
 }
 </script>

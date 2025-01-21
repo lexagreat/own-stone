@@ -1,6 +1,11 @@
 <template>
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="meeting-form">
-      <div class="modal__content meeting-form__content">
+      <div class="modal__content meeting-form__content" v-if="success" style="padding: 40px !important;">
+         <UiModalCloseBtn @click="emit('closePopup')" />
+         <ModalSucessDark title="Заявка <br> <span>отправлена</span>"
+            subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
+      </div>
+      <div class="modal__content meeting-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="meeting-form__image">
             <img src="/img/meeting.png" alt="">
@@ -24,7 +29,7 @@
                      </label>
                   </div>
                </div>
-               <UiButton class="white" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить отзыв</UiButton>
+               <UiButton class="white" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
             </div>
          </div>
       </div>
@@ -45,6 +50,9 @@ const checked = ref(false)
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length == 18
 })
+
+const success = ref(false)
+
 const send = async () => {
    let obj = {
       subject: "Заявка на встречу с сайта Own stone",
@@ -59,7 +67,11 @@ const send = async () => {
       name.value = store.user?.firstname || ""
       phone.value = store.user?.phonenumber || ""
       checked.value = false
-      emit('closePopup')
+      success.value = true
+      setTimeout(() => {
+         emit('closePopup')
+         success.value = false
+      }, 2000)
    }
 }
 

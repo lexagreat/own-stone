@@ -20,9 +20,9 @@
                         <span class="body-text">Расчет предварительный</span>
                      </div>
                   </div>
-                  <h4 class="h1 calc-card__price">2 000 000 ₽ </h4>
+                  <h4 class="h1 calc-card__price">{{ formatPrice(comission) }} </h4>
                </div>
-               <FormPartnerCalc />
+               <FormPartnerCalc v-model="price" />
             </div>
          </div>
          <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
@@ -32,7 +32,11 @@
 </template>
 <script setup>
 import { useAccount } from '~/store/account';
-
+const price = ref(5000000)
 const isOpenAuthModal = ref(false)
 const account = useAccount()
+
+const comission = computed(() => {
+   return ((price.value * 0.03) * 0.94) * 0.2
+})
 </script>

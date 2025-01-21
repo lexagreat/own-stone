@@ -48,11 +48,13 @@ export const useAccount = defineStore("useAccount", {
          });
          if (response?.id) {
             this.user = response;
-            this.user.clients = this.user.clients.filter(
-               (item, index, self) =>
-                  index ===
-                  self.findIndex((t) => t.documentId === item.documentId)
-            );
+            if (this.user?.clients?.length > 1) {
+               this.user.clients = this.user.clients.filter(
+                  (item, index, self) =>
+                     index ===
+                     self.findIndex((t) => t?.documentId === item?.documentId)
+               );
+            }
          }
          return response;
       },
@@ -98,10 +100,13 @@ export const useAccount = defineStore("useAccount", {
          if (response.status) {
             this.user.clients.push(response.response.data);
          }
-         this.user.clients = this.user.clients.filter(
-            (item, index, self) =>
-               index === self.findIndex((t) => t.documentId === item.documentId)
-         );
+         if (this.user.clients?.length > 1) {
+            this.user.clients = this.user.clients.filter(
+               (item, index, self) =>
+                  index ===
+                  self.findIndex((t) => t?.documentId === item?.documentId)
+            );
+         }
          return response;
       },
       async sendForm(obj) {
