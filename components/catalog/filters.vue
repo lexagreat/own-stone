@@ -78,14 +78,14 @@
                <span class="catalog-filter__title">Срок сдачи</span>
                <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
             </li>
-            <li class="catalog-filter" v-if="!fromHome">
+            <li class="catalog-filter">
                <span class="catalog-filter__title">Расположение</span>
                <UiSelect title="Локация" :settings="placementSettings" @selectOption="onSelectPlacementOption" />
             </li>
-            <li class="catalog-filter" v-if="fromHome">
+            <!-- <li class="catalog-filter" v-if="fromHome">
                <span class="catalog-filter__title">Расположение</span>
                <UiPlacementSelect title="Расположение" />
-            </li>
+            </li> -->
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
                <UiSelect title="Внутри транспортных колец" :settings="transportSettings"

@@ -9,10 +9,14 @@
                <div class="project-banner__image">
                   <img src="/img/project/banner-more-info.png" alt="">
                </div>
-               <UiButton class="white">Запланировать визит</UiButton>
+               <UiButton class="white" @click="isOpen = true">Запланировать визит</UiButton>
+               <ModalProjectVisit :is-open="isOpen" @closePopup="isOpen = false" />
             </div>
          </div>
       </div>
    </section>
 </template>
-<script setup></script>
+<script setup>
+const isOpen = ref(false)
+
+</script>

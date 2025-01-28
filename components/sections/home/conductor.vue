@@ -16,7 +16,8 @@
             <div class="home-conductor__slider">
                <Swiper :pagination="{
                   type: 'progressbar',
-               }" :modules="modules" :space-between="10" slides-per-view="auto" :speed="500">
+               }" :modules="modules" :mousewheel="{ enabled: true, forceToAxis: true }" :space-between="10"
+                  slides-per-view="auto" :speed="500">
 
                   <SwiperSlide v-for="item in filtered" :key="item" class="home-conductor__slide">
                      <div>
@@ -35,11 +36,11 @@
 </template>
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Mousewheel } from 'swiper/modules';
 const props = defineProps({
    info: Object
 })
-const modules = ref([Pagination])
+const modules = ref([Pagination, Mousewheel])
 const types = ref([
    {
       name: 'Новостройки',

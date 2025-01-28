@@ -6,7 +6,7 @@
          <div class="services-section__bgs">
             <img class="services-section__bg" v-for="item in services" :key="item" :src="item.image" alt="">
          </div>
-         <div class="services-section__card">
+         <div class="services-section__card" style="overflow: hidden;">
             <ul class="services-section__list">
                <li class="services-section__item" v-for="(item, i) in services" :key="item">
                   <div class="services-section__header">

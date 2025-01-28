@@ -34,7 +34,7 @@ items.value = props.info.home_features_list.map(item => {
    }
 })
 function animateNumber(index) {
-   let allTime = 5000;
+   let allTime = 1000;
    let interval = allTime / items.value[index].number;
    let timer = setInterval(() => {
       if (items.value[index].renderNumber == items.value[index].number - 1) {

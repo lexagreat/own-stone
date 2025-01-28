@@ -1,5 +1,6 @@
 <template>
    <section class="sell-calc">
+      <ModalSuccessModal :isOpen="success" @close-popup="success = false" />
       <div class="sell-calc__bg">
          <img src="/img/sell/calc.png" alt="">
       </div>
@@ -57,17 +58,34 @@
                            </li>
                         </template>
                      </ul>
-                     <ul class="calc-res__output">
-                        <li>
+                     <div class="calc-res__output">
+                        <!-- <li>
                            <span class="body-text">Диапазон цен</span>
                            <p>18 966 000 ₽ - 22 537 000 ₽ </p>
                         </li>
                         <li>
                            <span class="body-text">Цена за м2</span>
                            <p>199 600 ₽ - 281 700 ₽ </p>
-                        </li>
-                     </ul>
-                     <div class="calc-res__footer">
+                        </li> -->
+                        <p class="body-text" style="color: rgba(24, 24, 24, 0.50);">
+                           Оставьте свои контактные данные и наш специалист <br> свяжется с Вами
+                        </p>
+                        <div class="object-form__inputs">
+                           <FormInput placeholder="Ваше имя" v-model="name" />
+                           <FormInput isPhone placeholder="+7 (999) 999-99-99" v-model="phone" />
+                           <div class="form-section__check">
+                              <FormCheckbox v-model="checked" id="object-form__check" />
+                              <label for="object-form__check" style="cursor: pointer;">
+                                 <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности
+                                    </NuxtLink>
+                                 </span>
+                              </label>
+                           </div>
+                           <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить
+                           </UiButton>
+                        </div>
+                     </div>
+                     <!-- <div class="calc-res__footer">
                         <span>Для более точной оценки, свяжитесь с нами</span>
                         <ul>
                            <li v-for="item in media" :key="item">
@@ -76,7 +94,7 @@
                               </NuxtLink>
                            </li>
                         </ul>
-                     </div>
+                     </div> -->
                   </div>
                </div>
                <div class="sell-calc__form calc-form" v-else>
@@ -97,9 +115,9 @@
                      </ul>
                      <UiButton class="black" @click="currentStepForData++" v-if="currentStepForData == 0">Узнать цену
                      </UiButton>
-                     <UiButton class="transparent" v-else>Очистить</UiButton>
+                     <UiButton class="transparent" @click="clear" v-else>Очистить</UiButton>
                      <ul class="calc-res__output calc-inputs__res" v-if="currentStepForData == 1">
-                        <li>
+                        <!-- <li>
                            <span class="body-text">Цена за м2</span>
                            <p>199 600 ₽</p>
                         </li>
@@ -110,7 +128,21 @@
                         <li>
                            <span class="body-text">Диапазон цен</span>
                            <p>18 966 000 ₽ - 22 537 000 ₽ </p>
-                        </li>
+                        </li> -->
+                        <div class="object-form__inputs">
+                           <FormInput placeholder="Ваше имя" v-model="name" />
+                           <FormInput isPhone placeholder="+7 (999) 999-99-99" v-model="phone" />
+                           <div class="form-section__check">
+                              <FormCheckbox v-model="checked" id="object-form__check" />
+                              <label for="object-form__check" style="cursor: pointer;">
+                                 <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности
+                                    </NuxtLink>
+                                 </span>
+                              </label>
+                           </div>
+                           <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send2">Узнать цену
+                           </UiButton>
+                        </div>
                      </ul>
                   </div>
                </div>
@@ -122,21 +154,11 @@
 </template>
 <script setup>
 import { sharedParallaxAnimation } from '~/assets/js/animations';
-
-const media = ref([
-   {
-      icon: markRaw(defineAsyncComponent(() => import('~/assets/img/icons/tg-20.svg'))),
-      href: "/"
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('~/assets/img/icons/whatsapp-20.svg'))),
-      href: "/"
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('~/assets/img/icons/phone.svg'))),
-      href: "/"
-   },
-])
+import { useAccount } from '~/store/account';
+const store = useAccount()
+const name = ref('')
+const phone = ref('')
+const checked = ref(false)
 const methods = ref([
    {
       name: "По параметрам",
@@ -214,7 +236,7 @@ const steps = ref({
             checked: ""
          },
          {
-            title: "Результат оценки",
+            title: "Спасибо!",
          }
 
       ]
@@ -227,7 +249,6 @@ const minusStep = () => {
 }
 const plusStep = () => {
    currentStep.value++
-   console.log(steps.value);
 
 }
 const isDisabledNextStep = computed(() => {
@@ -251,13 +272,31 @@ const currentStepForData = ref(0)
 const roomsSettings = ref({
    options: [
       {
-         name: "2 комнаты",
+         name: "Студия",
          value: 0,
          selected: true
       },
       {
-         name: "3 комнаты",
+         name: "1 комната",
          value: 1,
+         selected: true
+      },
+      {
+         name: "2 комнаты",
+         value: 2,
+         selected: true
+      },
+      {
+         name: "3 комнаты",
+         value: 3,
+      },
+      {
+         name: "4 комнаты",
+         value: 4,
+      },
+      {
+         name: "4+ комнаты",
+         value: 5,
       },
    ],
    placeholder: ""
@@ -275,4 +314,77 @@ const onChangeRegion = (name) => {
 onMounted(() => {
    sharedParallaxAnimation(".sell-calc__bg img", ".sell-calc")
 })
+
+
+
+
+const isDisabledBtn = computed(() => {
+   return checked.value && name.value.length && phone.value.length == 18
+})
+
+
+const success = ref(false)
+const send = async () => {
+   let object = {
+      subject: "Оценить стоимость с сайта Own stone",
+      text: `
+         Имя: ${name.value}
+         Телефон: ${phone.value}
+         Кол-во комнат: ${steps.value.stepsList[0].checked}
+         Площадь квартиры: ${steps.value.stepsList[1].checked}
+         Округ: ${steps.value.stepsList[2].checked}
+      `,
+   }
+   let response = await store.sendForm(object)
+   console.log(response);
+   if (response.status) {
+      name.value = store.user?.firstname
+      phone.value = store.user?.phonenumber
+      checked.value = false
+      success.value = true
+      setTimeout(() => {
+         success.value = false
+      }, 2000)
+   }
+}
+const send2 = async () => {
+   let object = {
+      subject: "Оценить стоимость с сайта Own stone",
+      text: `
+         Имя: ${name.value}
+         Телефон: ${phone.value}
+         Кол-во комнат: ${roomsOption.value.name}
+         Площадь квартиры: ${size.value}
+         Адрес: ${address.value}
+      `,
+   }
+   let response = await store.sendForm(object)
+   console.log(response);
+   if (response.status) {
+      name.value = store.user?.firstname
+      phone.value = store.user?.phonenumber
+      address.value = ""
+      size.value = ''
+      checked.value = false
+      success.value = true
+      setTimeout(() => {
+         success.value = false
+      }, 2000)
+   }
+}
+const address = ref('')
+const size = ref('')
+const clear = () => {
+   address.value = ""
+   size.value = ''
+}
 </script>
+
+
+
+
+<style lang="scss">
+.calc-res__output .text-input input {
+   background: #F8F8F8;
+}
+</style>

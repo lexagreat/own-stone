@@ -1,4 +1,5 @@
 <template>
+   <UiLoader v-if="loading" />
    <main class="main catalog dark-page">
       <section class="catalog-hero">
          <SectionsBreadcrumbs :path="path" />
@@ -152,6 +153,7 @@ const views = ref([
 
    },
 ])
+const loading = ref(false)
 const currentView = ref("grid")
 const sortSettings = ref({
    options: [
@@ -197,6 +199,7 @@ const searchUrl = ref("")
 //    category.value = value
 // }
 const search = async (url = searchUrl.value) => {
+   loading.value = true
    if (url.length) {
       searchUrl.value = url;
    }
@@ -209,6 +212,7 @@ const search = async (url = searchUrl.value) => {
    router.push(pageUrl)
    await catalog.getProducts(searchingUrl)
    stopConditionForSearch.value = false
+   loading.value = false
 }
 const filters = ref({})
 const setCat = (cat) => {

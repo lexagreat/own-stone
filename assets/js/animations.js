@@ -127,12 +127,15 @@ export const servicesAnimation = () => {
             });
             slideShow(spoilers[0], 600);
             slideHide(spoilers[1], 600);
+            slideHide(spoilers[2], 600);
+            slideHide(spoilers[3], 600);
             headers[0].classList.add("hidden");
             headers[1].classList.remove("hidden");
             bgs[0].style.transform = `translate(0, ${-100 * this.ratio}%)`;
          }
          if (progress >= 0.25 && progress < 0.5) {
             slideHide(spoilers[0], 600);
+            slideHide(spoilers[3], 600);
             slideHide(spoilers[2], 600);
             slideShow(spoilers[1], 600);
             headers[0].classList.remove("hidden");
@@ -146,6 +149,7 @@ export const servicesAnimation = () => {
          }
          if (progress >= 0.5 && progress < 0.72) {
             slideHide(spoilers[1], 600);
+            slideHide(spoilers[0], 600);
             slideHide(spoilers[3], 600);
             slideShow(spoilers[2], 600);
             headers[1].classList.remove("hidden");
@@ -158,6 +162,8 @@ export const servicesAnimation = () => {
             }%)`;
          }
          if (progress >= 0.72) {
+            slideHide(spoilers[1], 600);
+            slideHide(spoilers[0], 600);
             slideHide(spoilers[2], 600);
             slideShow(spoilers[3], 600);
             headers[2].classList.remove("hidden");
