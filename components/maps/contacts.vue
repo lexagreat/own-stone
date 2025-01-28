@@ -32,6 +32,9 @@ onMounted(() => {
       });
       const marker = new mapgl.Marker(map, {
          coordinates: [55.31878, 25.23584],
+         icon: '/fav.svg', // Укажите URL вашей иконки
+         size: [40, 40], // Размер иконки (ширина и высота в пикселях)
+         anchor: [15, 15], // Точка привязки (по умолчанию центр)
       });
    };
    document.head.appendChild(script);
