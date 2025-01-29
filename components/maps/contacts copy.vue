@@ -1,24 +1,7 @@
 <template>
    <div class="map" id="map"></div>
-   <!-- <div id="container"></div> -->
 </template>
 <script setup>
-// onMounted(() => {
-//    var map;
-
-//    DG.then(function () {
-//       map = DG.map('map', {
-//          center: [54.98, 82.89],
-//          zoom: 13,
-//          style: 'e05ac437-fcc2-4845-ad74-b1de9ce07555',
-//       });
-
-//       DG.marker([54.98, 82.91]).addTo(map);
-//       DG.marker([54.98, 82.92]).addTo(map);
-//       DG.marker([54.98, 82.89]).addTo(map).bindPopup('Вы кликнули по мне!');
-//    });
-
-// })
 onMounted(() => {
    const script = document.createElement('script');
    script.src = 'https://mapgl.2gis.com/api/js/v1';
