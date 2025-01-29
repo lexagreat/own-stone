@@ -1,5 +1,5 @@
 <template>
-   <yandex-map :settings="{
+   <yandex-map real-settings-location :settings="{
       location: {
          center: [37.598672, 55.745838],
          zoom: 9,
@@ -22,17 +22,7 @@
          }
       }" />
       <yandex-map-placemark :settings="{
-         coordinates: [37.598672, 55.745838],
-         properties: {
-            hintContent: 'Это маркер!',
-            balloonContent: 'Кастомный маркер на карте'
-         },
-         options: {
-            iconLayout: 'default#image',
-            iconImageHref: '/fav.svg', // Картинка маркера
-            iconImageSize: [40, 40], // Размер
-            iconImageOffset: [-20, -40] // Смещение
-         }
+         coordinates: [37.598672, 55.745838]
       }" />
 
       <yandex-map-controls :settings="{ position: 'right' }">
