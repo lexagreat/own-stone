@@ -8,14 +8,17 @@
    }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
 
+      <!-- 🔹 Добавляем слой для объектов карты -->
+      <yandex-map-default-features-layer />
+
       <!-- Маркер -->
       <yandex-map-marker :settings="{
          coordinates: [55.745838, 37.598672],
          icon: {
             layout: 'default#image',
-            imageHref: 'https://cdn-icons-png.flaticon.com/128/684/684908.png', // URL иконки
+            imageHref: '/fav.svg', // URL иконки
             imageSize: [40, 40], // Размер иконки
-            imageOffset: [-20, -40] // Смещение, чтобы центрировать
+            imageOffset: [-20, -40] // Смещение
          }
       }" />
 
@@ -31,6 +34,7 @@ import {
    YandexMap,
    YandexMapControls,
    YandexMapDefaultSchemeLayer,
+   YandexMapDefaultFeaturesLayer, // 🔹 Импортируем слой объектов
    YandexMapZoomControl,
    YandexMapMarker
 } from "vue-yandex-maps";
