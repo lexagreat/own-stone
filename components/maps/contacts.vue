@@ -12,15 +12,15 @@
       <yandex-map-default-features-layer />
 
       <!-- Маркер -->
-      <!-- <yandex-map-marker :settings="{
+      <yandex-map-marker :settings="{
          coordinates: [37.598672, 55.745838],
          icon: {
             layout: 'default#image',
-            imageHref: 'https://cdn-icons-png.flaticon.com/128/684/684908.png', // URL иконки
+            imageHref: '/fav.svg', // URL иконки
             imageSize: [40, 40], // Размер иконки
             imageOffset: [-20, -40] // Смещение
          }
-      }" /> -->
+      }" />
       <yandex-map-placemark :settings="{
          coordinates: [37.598672, 55.745838],
          properties: {
