@@ -1,7 +1,7 @@
 <template>
    <yandex-map :settings="{
       location: {
-         center: [55.745838, 37.598672],
+         center: [37.598672, 55.745838],
          zoom: 9,
          duration: 2500
       }
@@ -14,12 +14,12 @@
       <!-- Маркер -->
       <yandex-map-marker :settings="{
          coordinates: [55.745838, 37.598672],
-         icon: {
-            layout: 'default#image',
-            imageHref: '/fav.svg', // URL иконки
-            imageSize: [40, 40], // Размер иконки
-            imageOffset: [-20, -40] // Смещение
-         }
+         // icon: {
+         //    layout: 'default#image',
+         //    imageHref: '/fav.svg', // URL иконки
+         //    imageSize: [40, 40], // Размер иконки
+         //    imageOffset: [-20, -40] // Смещение
+         // }
       }" />
 
       <yandex-map-controls :settings="{ position: 'right' }">
