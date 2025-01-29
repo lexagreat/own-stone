@@ -42,7 +42,6 @@ import {
    YandexMapControls,
    YandexMapDefaultSchemeLayer,
    YandexMapDefaultFeaturesLayer,
-   YandexMapZoomControl,
-   YandexMapPlacemark // 🔹 Используем Placemark
+   YandexMapZoomControl, k
 } from "vue-yandex-maps";
 </script>
