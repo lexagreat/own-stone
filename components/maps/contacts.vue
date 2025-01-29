@@ -33,15 +33,15 @@
          <yandex-map-zoom-control />
       </yandex-map-controls>
    </yandex-map>
+
 </template>
 
 <script setup>
 import {
-   VueYandexMaps,
    YandexMap,
    YandexMapControls,
    YandexMapDefaultSchemeLayer,
    YandexMapDefaultFeaturesLayer,
-   YandexMapZoomControl, k
+   YandexMapZoomControl,
 } from "vue-yandex-maps";
 </script>
