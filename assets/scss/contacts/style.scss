@@ -40,6 +40,11 @@
    // .contacts-hero__row
 
    &__row {
+      border-radius: 8px;
+      overflow: hidden;
+      @media (max-width: $tablet) {
+         border-radius: 0;
+      }
       display: flex;
       @media (max-width: $tablet) {
          flex-direction: column;
@@ -215,6 +220,8 @@
       @media (max-width: $tablet) {
          height: 510px;
          flex: 0 0 510px;
+         border-radius: 8px;
+         overflow: hidden;
       }
       @media (max-width: $mobile) {
          height: 340px;
