@@ -40,7 +40,6 @@ export default defineNuxtConfig({
       apikey: "bd41a6a2-c519-457e-9050-57a1ca739237",
       lang: "ru_RU",
       version: "2.1",
-      coordorder: "longlat", // 🛠 Важно для корректного порядка координат
    },
    vite: {
       plugins: [
