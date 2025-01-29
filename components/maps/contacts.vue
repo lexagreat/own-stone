@@ -1,31 +1,21 @@
 <template>
    <yandex-map :settings="{
       location: {
-         center: [37.598672, 55.745838],
+         center: [55.745838, 37.598672],
          zoom: 9,
          duration: 2500
       }
    }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
-      <yandex-map-default-features-layer />
 
-      <!-- 🔹 Дефолтный маркер -->
-      <yandex-map-placemark :settings="{
-         coordinates: [37.598672, 55.745838]
-      }" />
-
-      <!-- 🔹 Маркер с кастомной иконкой -->
-      <yandex-map-placemark :settings="{
-         coordinates: [37.598672, 55.745838],
-         properties: {
-            hintContent: 'Кастомный маркер',
-            balloonContent: 'Это мой маркер'
-         },
-         options: {
-            iconLayout: 'default#image',
-            iconImageHref: '/fav.svg', // Путь к иконке
-            iconImageSize: [40, 40],
-            iconImageOffset: [-20, -40]
+      <!-- Маркер -->
+      <yandex-map-marker :settings="{
+         coordinates: [55.745838, 37.598672],
+         icon: {
+            layout: 'default#image',
+            imageHref: 'https://cdn-icons-png.flaticon.com/128/684/684908.png', // URL иконки
+            imageSize: [40, 40], // Размер иконки
+            imageOffset: [-20, -40] // Смещение, чтобы центрировать
          }
       }" />
 
@@ -33,15 +23,15 @@
          <yandex-map-zoom-control />
       </yandex-map-controls>
    </yandex-map>
-
 </template>
 
 <script setup>
 import {
+   VueYandexMaps,
    YandexMap,
    YandexMapControls,
    YandexMapDefaultSchemeLayer,
-   YandexMapDefaultFeaturesLayer,
    YandexMapZoomControl,
+   YandexMapMarker
 } from "vue-yandex-maps";
 </script>
