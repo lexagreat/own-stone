@@ -26,9 +26,9 @@ export default defineNuxtConfig({
             },
          ],
          script: [
-            {
-               src: "https://maps.api.2gis.ru/2.0/loader.js?pkg=full",
-            },
+            // {
+            //    src: "https://maps.api.2gis.ru/2.0/loader.js?pkg=full",
+            // },
             // {
             //    src: "https://mapgl.2gis.com/api/js/v1",
             // },

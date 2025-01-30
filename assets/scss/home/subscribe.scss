@@ -9,6 +9,9 @@
       gap: 40px;
       justify-content: space-between;
       border-radius: 8px;
+      .btn {
+         width: fit-content;
+      }
    }
 
    // .home-subscribe__title

@@ -8,11 +8,14 @@
       <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
-            <h3 class="object-form__title h1 dark-title">Подписка <br> <span>на рассылку</span></h3>
+            <h3 class="object-form__title h1 dark-title">Получить <span>каталог</span></h3>
+            <p class="body-text"> Оставьте свои контактные данные и наш специалист свяжется с Вами для уточнения запроса
+            </p>
          </div>
          <div class="object-form__main">
             <div class="object-form__inputs">
-               <FormInput placeholder="E-mail" v-model="email" />
+               <FormInput placeholder="Ваше имя" v-model="name" />
+               <FormInput isPhone placeholder="Ваш номер телефона" v-model="phone" />
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="object-form__checksdadas312312312" />
                   <label for="object-form__check" style="cursor: pointer;">
@@ -21,8 +24,7 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" style="width: 100%;" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить
-            </UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
          </div>
       </div>
    </UiModal>
@@ -35,25 +37,28 @@ const props = defineProps({
 })
 const emit = defineEmits(['closePopup'])
 const store = useAccount()
-const email = ref("")
+const phone = ref("")
+const name = ref("")
 const checked = ref(false)
 
 const isDisabledBtn = computed(() => {
-   return validEmail(email.value) && checked.value
+   return phone.value.length == 18 && checked.value && name.value.length
 })
-
 const success = ref(false)
+
 const send = async () => {
    let object = {
-      subject: "Подписка на рассылку с сайта Own stone",
+      subject: "Скачать каталог с сайта Own stone",
       text: `
-         E-mail: ${email.value}
+         Имя: ${name.value}
+         Телефон: ${phone.value}
       `,
    }
    let response = await store.sendForm(object)
    console.log(response);
    if (response.status) {
-      email.value = ""
+      phone.value = ""
+      name.value = ""
       checked.value = false
       success.value = true
       setTimeout(() => {

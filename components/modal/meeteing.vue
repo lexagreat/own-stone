@@ -5,7 +5,7 @@
          <ModalSucessDark title="Заявка <br> <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
       </div>
-      <div class="modal__content meeting-form__content" v-else>
+      <div class="modal__content meeting-form__content" style="overflow: hidden;" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="meeting-form__image">
             <img src="/img/meeting.png" alt="">
@@ -76,3 +76,17 @@ const send = async () => {
 }
 
 </script>
+
+<style lang="scss">
+.meeting-form {
+   input {
+      background-color: transparent;
+      border: 1px solid #FFFFFF99;
+      color: #FFFF;
+
+      &::placeholder {
+         color: #FFFFFF4D;
+      }
+   }
+}
+</style>

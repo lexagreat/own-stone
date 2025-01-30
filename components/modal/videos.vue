@@ -22,8 +22,8 @@ const props = defineProps({
 })
 const breakpoints = ref({
    1024: {
-      slidesPerView: 2,
-      spaceBetween: 274
+      slidesPerView: 2.6,
+      spaceBetween: 200
    },
 })
 const emit = defineEmits(['closePopup'])

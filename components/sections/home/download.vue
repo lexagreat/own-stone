@@ -10,10 +10,11 @@
                <p class="body-text" v-html="info.text">
 
                </p>
-               <NuxtLink class="btn black" download :to="info.file[0].url" target="_blank">
+               <button class="btn black" @click="isOpen = true">
                   Скачать каталог
-               </NuxtLink>
+               </button>
             </div>
+            <ModalDownloadCatalog :is-open="isOpen" @close-popup="isOpen = false" />
          </div>
       </div>
    </section>
@@ -22,4 +23,5 @@
 const props = defineProps({
    info: Object
 })
+const isOpen = ref(false)
 </script>

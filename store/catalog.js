@@ -200,6 +200,7 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
+            selected: true,
          });
          return res;
       },
