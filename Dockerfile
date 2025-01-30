@@ -1,6 +1,4 @@
-ARG NODE_VERSION=18.14.2
-
-FROM node:18.20.5 as base
+FROM node:18 as base
 ENV NODE_ENV=production
 
 WORKDIR /var/www/own/data/www/own.okttastudio.ru
