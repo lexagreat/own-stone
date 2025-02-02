@@ -25,19 +25,13 @@ export default defineNuxtConfig({
                content: "telephone=no",
             },
          ],
-         script: [
-            // {
-            //    src: "https://maps.api.2gis.ru/2.0/loader.js?pkg=full",
-            // },
-            // {
-            //    src: "https://mapgl.2gis.com/api/js/v1",
-            // },
-         ],
+         script: [],
       },
    },
    modules: ["nuxt-swiper", "@pinia/nuxt", "vue-yandex-maps/nuxt"],
    yandexMaps: {
       apikey: "bd41a6a2-c519-457e-9050-57a1ca739237",
+      lang: "ru_RU",
    },
    vite: {
       plugins: [

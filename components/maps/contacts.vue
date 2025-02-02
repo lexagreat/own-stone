@@ -8,18 +8,25 @@
    }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
 
-      <!-- 🔹 Добавляем слой для объектов карты -->
       <yandex-map-default-features-layer />
 
-      <!-- Маркер -->
+
       <yandex-map-marker :settings="{
-         coordinates: [55.745838, 37.598672],
-         // icon: {
-         //    layout: 'default#image',
-         //    imageHref: '/fav.svg', // URL иконки
-         //    imageSize: [40, 40], // Размер иконки
-         //    imageOffset: [-20, -40] // Смещение
-         // }
+         coordinates: [37.598672, 55.745838],
+         icon: {
+            layout: 'default#image',
+            imageHref: 'https://own-admin.okttastudio.ru/uploads/parallax_f885095265.png',
+            imageSize: [30, 30],
+            imageOffset: [-15, -15]
+         },
+         zIndex: 999 // Поднимаем маркер выше
+      }" />
+
+
+      <YandexMapDefaultMarker :settings="{
+         coordinates: [37.598672, 55.745838],
+         // title: 'Склад',
+         // subtitle: 'Вход',
       }" />
 
       <yandex-map-controls :settings="{ position: 'right' }">
@@ -36,6 +43,8 @@ import {
    YandexMapDefaultSchemeLayer,
    YandexMapDefaultFeaturesLayer, // 🔹 Импортируем слой объектов
    YandexMapZoomControl,
+   YandexMapDefaultMarker,
    YandexMapMarker
 } from "vue-yandex-maps";
+
 </script>
