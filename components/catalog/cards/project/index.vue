@@ -1,12 +1,12 @@
 <template>
-   <div class="catalog-card with-hover" :class="{ 'project-card': type == 'row' }">
+   <div class="catalog-card with-hover" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
          <ul>
             <li v-for="(item, index) in product?.photos" :key="index" @mouseenter="onMouseenter(index)"></li>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
             <SwiperSlide v-for="photo in product?.photos" :key="photo">
-               <img :src="photo?.url" alt="">
+               <img :src="photo?.url" alt="" lazy ref="images">
             </SwiperSlide>
          </Swiper>
          <div class="catalog-card__header">
@@ -94,6 +94,7 @@ const props = defineProps({
    product: Object
 })
 
+
 const swiperInstance = ref(null)
 const onSwiper = (swiper) => {
    swiperInstance.value = swiper
@@ -107,9 +108,19 @@ const isCollapsed = ref(false)
 const setСollapse = () => {
    isCollapse.value = getIsCollapse()
 }
+const loading = ref(true)
+const images = ref([])
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
+   let tmp = 1;
+   images.value.forEach(item => {
+      item.onload = () => {
+         tmp++
+         loading.value = tmp < images.value.length
+
+      }
+   })
 })
 onBeforeUnmount(() => {
    window.removeEventListener('resize', setСollapse)
