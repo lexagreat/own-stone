@@ -1,4 +1,4 @@
-FROM node:19 as base
+FROM node:18 as base
 ENV NODE_ENV=production
 
 WORKDIR /var/www/own/data/www/own.okttastudio.ru
