@@ -1,8 +1,7 @@
 <template>
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="videos-modal">
       <div class="videos-modal__content modal__content">
-         <Swiper @swiper="onSwiper" :breakpoints="breakpoints" :slides-per-view="1" centered-slides :space-between="8"
-            loop>
+         <Swiper @swiper="onSwiper" :breakpoints="breakpoints" :slides-per-view="1" centered-slides :space-between="8">
             <SwiperSlide v-for="item in info">
                <UiSliderBtn prev @click="swiper.slidePrev()" />
                <UiModalCloseBtn @click="emit('closePopup')" />
