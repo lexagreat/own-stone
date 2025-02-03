@@ -61,6 +61,23 @@
          }
       }
    }
+   &.with-hover.apart:not(.project-card):has(.catalog-card__main:hover) {
+      .catalog-card {
+         &__gallery {
+            height: 187px;
+            @media (max-width: 1400px) {
+               height: calc(170px + 17 * ((100vw - 1024px) / (1400 - 1024)));
+            }
+         }
+      }
+      @media (max-width: $tablet) {
+         .catalog-card {
+            &__gallery {
+               height: 200px;
+            }
+         }
+      }
+   }
    &__gallery {
       transition: $transition;
       height: 288px;
@@ -144,6 +161,7 @@
       flex-wrap: wrap;
       z-index: 2;
       li {
+         text-transform: uppercase;
          border-radius: 30px;
          background: rgba(255, 255, 255, 0.2);
 
@@ -213,6 +231,7 @@
       // flex-wrap: wrap;
       row-gap: 4px;
       li {
+         text-transform: uppercase;
          // white-space: nowrap;
          height: 25px;
          display: flex;

@@ -1,5 +1,5 @@
 <template>
-   <UiLoader v-if="loading" />
+   <!-- <UiLoader v-if="loading" /> -->
    <main class="main catalog dark-page">
       <section class="catalog-hero">
          <SectionsBreadcrumbs :path="path" />
@@ -16,7 +16,7 @@
             </ul>
             <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
                @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
-               @setCat="setCat" />
+               @setCat="setCat" :loading="loading" />
          </div>
       </section>
       <section class="catalog-page">
@@ -153,7 +153,7 @@ const views = ref([
 
    },
 ])
-const loading = ref(false)
+const loading = ref(true)
 const currentView = ref("grid")
 const sortSettings = ref({
    options: [

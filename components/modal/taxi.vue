@@ -24,7 +24,7 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить отзыв</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
          </div>
       </div>
    </UiModal>

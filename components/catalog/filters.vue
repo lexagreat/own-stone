@@ -1,5 +1,6 @@
 <template>
-   <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog }">
+   <div class="catalog-filters scrollbar-none"
+      :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog, loading: loading }">
       <div class="catalog-filters__header">
          <button class="circle circle40" @click="emit('closeModal')">
             <ArrowDownIcon style="rotate: 90deg;" />
@@ -140,6 +141,7 @@ const props = defineProps({
    isOpenModal: Boolean,
    type: String,
    fromCatalog: Boolean,
+   loading: Boolean,
    fromHome: Boolean,
    products: Array,
    filters: Object
@@ -367,7 +369,7 @@ const filtersObject = computed(() => {
 const search = async () => {
    emit("closeModal")
    if (props.type == 'secondary') {
-      category.value = 1
+      category.value = 2
    }
    emit('setCat', category.value)
    if (route.query["filters[category]"] == 'apartaments' && category.value == 0 || route.query["filters[category]"] == 'projects' && category.value == 1) {
