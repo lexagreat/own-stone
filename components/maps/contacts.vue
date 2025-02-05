@@ -11,23 +11,10 @@
       <yandex-map-default-features-layer />
 
 
-      <yandex-map-marker :settings="{
-         coordinates: [37.598672, 55.745838],
-         icon: {
-            layout: 'default#image',
-            imageHref: 'https://own-admin.okttastudio.ru/uploads/parallax_f885095265.png',
-            imageSize: [30, 30],
-            imageOffset: [-15, -15]
-         },
-         zIndex: 999 // Поднимаем маркер выше
-      }" />
+      <yandex-map-marker position="top-center left-center" :settings="{ coordinates: [37.598672, 55.745838] }">
+         <img alt="" class="pin" src="/fav.svg" style="width: 30px;">
+      </yandex-map-marker>
 
-
-      <YandexMapDefaultMarker :settings="{
-         coordinates: [37.598672, 55.745838],
-         // title: 'Склад',
-         // subtitle: 'Вход',
-      }" />
 
       <yandex-map-controls :settings="{ position: 'right' }">
          <yandex-map-zoom-control />
@@ -46,5 +33,10 @@ import {
    YandexMapDefaultMarker,
    YandexMapMarker
 } from "vue-yandex-maps";
-
+let markerIcon = {
+   layout: 'default#image',
+   imageHref: 'https://own-admin.okttastudio.ru/uploads/parallax_f885095265.png',
+   imageSize: [30, 30],
+   imageOffset: [-15, -15],
+}
 </script>
