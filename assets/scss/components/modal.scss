@@ -51,8 +51,8 @@
    right: 16px;
    @media (max-width: $mobile) {
       --size: 40px !important;
-      top: 36px;
-      right: 36px;
+      top: 48px;
+      right: 12px;
    }
 }
 
@@ -126,6 +126,9 @@
       padding: 0 !important;
       display: flex;
       background-color: $black !important;
+      @media (max-width: $mobile) {
+         border-radius: 0 !important;
+      }
    }
 
    // .meeting-form__image
@@ -137,6 +140,9 @@
          width: 100%;
          height: 101%;
          object-fit: cover;
+      }
+      @media (max-width: $tablet) {
+         display: none;
       }
    }
 
@@ -154,6 +160,13 @@
          a {
             color: rgba(255, 255, 255, 0.6) !important;
          }
+      }
+      @media (max-width: $tablet) {
+         width: 100%;
+         flex: unset;
+         padding-left: 12px;
+         padding-right: 12px;
+         padding-top: 130px;
       }
    }
 
