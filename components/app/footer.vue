@@ -3,6 +3,13 @@
       <div class="container">
          <div class="footer__wrapper">
             <div class="footer__upper">
+               <button class="footer-up circle" @click="scrollToTop">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                     <path
+                        d="M6.00012 9.43701L9.90012 5.49951M9.90012 5.49951L13.8001 9.43701M9.90012 5.49951L9.90012 14.4995"
+                        stroke="white" />
+                  </svg>
+               </button>
                <div class="footer__main">
                   <div class="footer__left">
                      <NuxtLink class="footer__logo" to="/">
@@ -134,8 +141,8 @@
                </div>
                <div class="footer__contacts">
                   <div class="footer__place">
-                     <span class="footer__address" v-html="contacts.info?.contacts_info?.address_string"></span>
-                     <span class="footer__schedule" v-html="contacts.info?.contacts_info?.worktime"></span>
+                     <span class="footer__address">{{ contacts.info?.contacts_info?.address_string }}</span>
+                     <span class="footer__schedule">{{ contacts.info?.contacts_info?.worktime }}</span>
 
                   </div>
                   <div class="footer__media">
@@ -173,4 +180,12 @@ const contacts = useContacts()
 
 
 const isMeeting = ref(false)
+
+
+const scrollToTop = () => {
+   window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+   })
+}
 </script>

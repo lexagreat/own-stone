@@ -115,9 +115,9 @@
                   <NuxtLink to="/contacts">Контакты</NuxtLink>
                </li>
             </ul>
-            <div class="header__schedule">
-               <span v-html="contacts?.info?.contacts_info?.address_string"></span>
-               <span v-html="contacts?.info?.contacts_info?.worktime"></span>
+            <div class="header__schedule" style="flex: 1;">
+               <span>{{ contacts?.info?.contacts_info?.address_string }}</span>
+               <span>{{ contacts?.info?.contacts_info?.worktime }}</span>
             </div>
             <div class="header-menu__form">
                <span>Связаться с нами</span>

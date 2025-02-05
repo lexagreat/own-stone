@@ -34,13 +34,22 @@ items.value = props.info.home_features_list.map(item => {
    }
 })
 function animateNumber(index) {
-   let allTime = 100;
+   let allTime = 3000;
+   let step = 1;
+   if (index == 2) {
+      step = 5
+   }
    let interval = allTime / items.value[index].number;
    let timer = setInterval(() => {
       if (items.value[index].renderNumber == items.value[index].number - 1) {
          clearInterval(timer)
       }
-      items.value[index].renderNumber++
+
+      items.value[index].renderNumber += step;
+      if (index == 2 && Math.abs(items.value[index].renderNumber - items.value[index].number - 1) < 5) {
+         clearInterval(timer)
+         items.value[index].renderNumber = items.value[index].number
+      }
    }, interval)
 }
 onMounted(() => {

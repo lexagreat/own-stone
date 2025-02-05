@@ -8,7 +8,7 @@
       <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
-            <h3 class="object-form__title h1 dark-title">Заказать <br> звонок</h3>
+            <h3 class="object-form__title h1 dark-title">Заказать <span>звонок</span></h3>
             <p class="body-text">Укажите свой номер телефона и наш персональный брокер свяжется с Вами в течение 10
                минут</p>
          </div>
@@ -23,7 +23,7 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
          </div>
       </div>
    </UiModal>
@@ -60,7 +60,7 @@ const send = async () => {
       setTimeout(() => {
          emit('closePopup')
          success.value = false
-      }, 2000)
+      }, 3000)
    }
 }
 

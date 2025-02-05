@@ -28,6 +28,7 @@
             <MapsOffice />
          </div>
       </div>
+      <ModalSuccessModal :isOpen="success" @closePopup="success = false" />
    </section>
 </template>
 <script setup>
@@ -40,6 +41,7 @@ const props = defineProps({
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)
+const success = ref(false)
 
 
 
@@ -60,7 +62,11 @@ const send = async () => {
       name.value = store.user?.firstname || ""
       phone.value = store.user?.phonenumber || ""
       checked.value = false
-      emit('closePopup')
+      success.value = true
+      setTimeout(() => {
+         success.value = false
+      }, 2000)
+
    }
 }
 </script>

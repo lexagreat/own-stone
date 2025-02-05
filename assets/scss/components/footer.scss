@@ -13,6 +13,7 @@
    // .footer__upper
 
    &__upper {
+      position: relative;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
    }
@@ -235,4 +236,11 @@
          }
       }
    }
+}
+.footer-up {
+   position: absolute;
+   top: 0;
+   right: 0;
+   --size: 40px;
+   border: 1px solid $white-15;
 }
