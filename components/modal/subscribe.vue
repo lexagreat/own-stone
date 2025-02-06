@@ -8,7 +8,7 @@
       <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
-            <h3 class="object-form__title h1 dark-title">Подписка <br> <span>на рассылку</span></h3>
+            <h3 class="object-form__title h1 dark-title">Подписка <br class="pc-br"> <span>на рассылку</span></h3>
          </div>
          <div class="object-form__main">
             <div class="object-form__inputs">
@@ -64,3 +64,11 @@ const send = async () => {
 }
 
 </script>
+
+<style lang="scss" scoped>
+.pc-br {
+   @media(max-width: 1024px) {
+      display: none;
+   }
+}
+</style>

@@ -375,6 +375,9 @@
                   opacity: 1;
                }
             }
+            @media (max-width: $tablet) {
+               height: 100vh !important;
+            }
          }
       }
       .modal__close {

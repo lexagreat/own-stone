@@ -6,6 +6,11 @@
       display: flex;
       flex-direction: column;
       gap: 50px;
+      .catalog-filters__controls {
+         @media (max-width: $tablet) {
+            margin-top: -40px;
+         }
+      }
    }
 
    // .selection-section__header

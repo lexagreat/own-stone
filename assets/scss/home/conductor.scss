@@ -38,6 +38,17 @@
       input:checked + label {
          border-color: $black;
       }
+      @media (max-width: $mobile) {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         label {
+            padding: 0 6px;
+            font-size: 12px;
+            svg {
+               scale: 0.8;
+            }
+         }
+      }
    }
 
    // .home-conductor__slider
@@ -156,12 +167,18 @@
       margin: 100px 0;
       &__filters {
          margin: 30px 0;
-         flex-wrap: wrap;
+         // flex-wrap: wrap;
          label {
             height: 46px;
             gap: 4px;
-            padding: 0 10px;
+            padding: 0 6px;
+            font-size: 12px;
+            svg {
+               scale: 0.8;
+            }
          }
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
       }
       &__slider {
          .swiper-pagination {

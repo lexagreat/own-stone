@@ -18,6 +18,15 @@
       padding: 40px;
       border-radius: 8px;
       background-color: $light-grey;
+      button {
+         display: none;
+         @media (max-width: $mobile) {
+            display: block;
+            border-bottom: 1px solid $black;
+            width: fit-content;
+            @include button-name;
+         }
+      }
    }
 
    // .bosses-section__main
@@ -63,6 +72,15 @@
 
    &__text {
       @include regular-14;
+      @media (max-width: $mobile) {
+         display: -webkit-box;
+         -webkit-line-clamp: 4;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+         &.full {
+            -webkit-line-clamp: unset;
+         }
+      }
    }
 
    // .bosses-section__footer

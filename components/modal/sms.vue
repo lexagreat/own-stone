@@ -4,12 +4,12 @@
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="auth-modal__header">
             <h3 class="auth-modal__title h1 dark-title">ВВЕдите <br> <span>СМС-код</span></h3>
-            <p class="body-text">
+            <p class="body-text" style="color: #18181880;">
                Для подтверждения телефона введите код из смс, отправленного на номер:
             </p>
             <div class="sms-modal__row">
                <span>{{ phone }}</span>
-               <button @click="emit('changePhone')">Изменить</button>
+               <button @click="emit('changePhone')" style="color: #181818;">Изменить</button>
             </div>
          </div>
          <div class="sms-modal__main">

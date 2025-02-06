@@ -160,6 +160,7 @@ const sortSettings = ref({
       {
          name: "По рекомендации",
          value: '',
+         selected: true
       },
       {
          name: "Сначала новые",
@@ -186,7 +187,7 @@ const sortSettings = ref({
          value: 'square_apartament:desc',
       },
    ],
-   placeholder: "Выберите сортировку"
+   // placeholder: "Выберите сортировку"
 })
 const sortOption = ref('')
 function onSelectSortOption(option) {
@@ -230,6 +231,9 @@ const splicedProducts = computed(() => {
 })
 const currentPage = ref(1)
 
+watch(category, async () => {
+   catalog.products = []
+})
 watch(currentPage, async () => {
    if (stopConditionForSearch.value) return
    await search()

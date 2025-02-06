@@ -9,7 +9,7 @@
       <div class="modal__content object-form__content row" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__image">
-            <img src="/img/catalog-modal.png" alt="">
+            <img src="/img/catalog-modal.svg" alt="">
          </div>
          <div class="object-form__wrapper">
             <div class="object-form__header">

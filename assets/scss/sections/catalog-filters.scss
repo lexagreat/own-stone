@@ -85,6 +85,22 @@
    }
    &__radios {
       display: none;
+      @media (max-width: $mobile) {
+         display: grid !important;
+         grid-template-columns: repeat(3, 1fr);
+         // svg {
+         //    width: 14px;
+         //    height: 14px;
+         //    flex: 0 0 14px;
+         // }
+         label {
+            padding: 0 6px !important;
+            font-size: 12px !important;
+            svg {
+               scale: 0.8;
+            }
+         }
+      }
    }
    // .catalog-filters__items
 

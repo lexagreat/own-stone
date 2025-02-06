@@ -9,6 +9,7 @@
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Вызвать <span>машину</span></h3>
+            <p class="body-text">Запланируйте поездку на встречу и мы оплатим такси до нашего офиса</p>
          </div>
          <div class="object-form__main">
             <div class="object-form__inputs">

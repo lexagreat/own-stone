@@ -1,4 +1,5 @@
 <template>
+   <ModalDownloadCatalog :is-open="isOpen" @close-popup="isOpen = false" />
    <section class="home-download">
       <div class="container">
          <div class="home-download__wrapper">
@@ -14,7 +15,7 @@
                   Скачать каталог
                </button>
             </div>
-            <ModalDownloadCatalog :is-open="isOpen" @close-popup="isOpen = false" />
+
          </div>
       </div>
    </section>

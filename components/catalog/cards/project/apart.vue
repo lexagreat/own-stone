@@ -58,7 +58,7 @@
          </div>
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" :to="link">
+               <NuxtLink class="btn white" :to="'tel:' + product?.proekty?.phone">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <g id="Icons / phone">
                         <path id="Vector"
@@ -76,10 +76,10 @@
 </template>
 <script setup>
 import { vMaska } from "maska/vue"
+import IconMan from '@/assets/img/icons/catalog-card-man.svg'
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
-import IconPhone from '@/assets/img/icons/phone.svg'
 import { useFavorites } from '~/store/favorites';
 const favorites = useFavorites()
 const props = defineProps({
@@ -106,13 +106,18 @@ onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
    let tmp = 1;
-   images.value.forEach(item => {
-      item.onload = () => {
-         tmp++
-         loading.value = tmp < images.value.length
+   if (images.value?.length > 0) {
+      images.value.forEach(item => {
+         item.onload = () => {
+            tmp++
+            loading.value = tmp < images.value.length
 
-      }
-   })
+         }
+      })
+   } else {
+      loading.value = false
+
+   }
 })
 onBeforeUnmount(() => {
    window.removeEventListener('resize', setСollapse)
@@ -145,7 +150,7 @@ const liked = computed(() => {
 })
 
 
-const photos = computed(() => props.product.photos.slice(0, 3))
+const photos = computed(() => props.product.photos.length > 3 ? props.product.photos.slice(0, 3) : props.product.photos)
 </script>
 
 

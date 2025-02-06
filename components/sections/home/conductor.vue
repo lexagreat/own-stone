@@ -2,7 +2,7 @@
    <section class="home-conductor" style="margin-bottom: 100px;">
       <div class="container">
          <div class="home-conductor__wrapper">
-            <h2 class="home-conductor__title h1" v-html="info.title"></h2>
+            <h2 class="home-conductor__title h1 dark-title" v-html="info.title"></h2>
             <ul class="home-conductor__filters" style="display: flex;">
                <li v-for="(item, index) in types" :key="index">
                   <input v-model="type" type="radio" :value="item.name" :id="'conductorRadio' + item.value"

@@ -9,7 +9,7 @@
       <div class="review-medium__main body-text">
          <div class="review-medium__visible" v-html="info?.text"></div>
 
-         <button @click="emit('openModal', info)">Читать полностью</button>
+         <button @click="emit('openModal', info)" style="color: #181818;">Читать полностью</button>
       </div>
    </div>
 </template>

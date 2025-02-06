@@ -61,7 +61,8 @@
                <span class="border desktop"></span>
                <ul class="header__icons">
                   <li>
-                     <NuxtLink class="circle" to="/favorites">
+                     <NuxtLink class="circle" to="/favorites" style="position: relative;">
+                        <div class="circle favor" v-if="emptyFavor"></div>
                         <HeartIcon />
                      </NuxtLink>
                   </li>
@@ -159,6 +160,8 @@ import LogoIcon from '~/assets/img/icons/logo.svg'
 import { bodyLock, bodyUnlock } from '~/utils/bodyLocker'
 import { useContacts } from '~/store/contacts'
 import { useAccount } from '~/store/account'
+import { useFavorites } from '~/store/favorites'
+const favorites = useFavorites()
 const router = useRouter()
 const store = useAccount()
 const contacts = useContacts()
@@ -192,4 +195,18 @@ const onClickProfile = () => {
 const address = computed(() => {
    return contacts?.info?.contacts_info?.address_string.split(',').slice(1).join('')
 })
+
+const emptyFavor = computed(() => {
+   return favorites.build.projects.length || favorites.build.apartaments.length || favorites.commerce.projects.length || favorites.commerce.apartaments.length || favorites.secondary.length
+})
 </script>
+
+<style lang="scss">
+.circle.favor {
+   position: absolute;
+   top: 6px;
+   right: 6px;
+   background-color: #4F0014;
+   --size: 4px;
+}
+</style>

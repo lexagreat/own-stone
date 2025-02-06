@@ -73,9 +73,9 @@
             </ul>
             <div class="catalog-card__btns">
                <NuxtLink class="btn white" :to="link">Подробнее о проекте</NuxtLink>
-               <button class="circle">
+               <NuxtLink class="circle" :to="'tel:' + product.phone">
                   <IconPhone />
-               </button>
+               </NuxtLink>
             </div>
          </div>
       </div>
@@ -114,13 +114,18 @@ onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
    let tmp = 1;
-   images.value.forEach(item => {
-      item.onload = () => {
-         tmp++
-         loading.value = tmp < images.value.length
+   if (images.value?.length > 0) {
+      images.value.forEach(item => {
+         item.onload = () => {
+            tmp++
+            loading.value = tmp < images.value.length
 
-      }
-   })
+         }
+      })
+   } else {
+      loading.value = false
+
+   }
 })
 onBeforeUnmount(() => {
    window.removeEventListener('resize', setСollapse)
