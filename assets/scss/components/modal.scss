@@ -51,7 +51,8 @@
    right: 16px;
    @media (max-width: $mobile) {
       --size: 40px !important;
-      top: 48px;
+      // top: 48px;
+      top: 12px;
       right: 12px;
    }
 }

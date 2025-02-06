@@ -40,6 +40,11 @@
             height: 26px;
          }
       }
+      @media (max-width: $mobile) {
+         br {
+            display: none;
+         }
+      }
    }
 
    // .home-hero__btns
