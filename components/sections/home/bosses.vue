@@ -11,7 +11,8 @@
                      <span class="bosses-section__rang body-text">{{ item?.rank }}</span>
                      <h3 class="bosses-section__name h2">{{ item?.name }}</h3>
                      <p class="bosses-section__text" :class="{ full: isOpenText[index] }">{{ item?.text }}</p>
-                     <button @click="isOpenText[index] = true" v-if="!isOpenText[index]">Читать полностью</button>
+                     <button @click="isOpenText[index] = true" v-if="!isOpenText[index]" style="color: #181818;">Читать
+                        полностью</button>
                   </div>
                </div>
                <div class="bosses-section__footer">

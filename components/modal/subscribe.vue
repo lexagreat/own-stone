@@ -22,6 +22,7 @@
                </div>
             </div>
             <UiButton class="black" style="width: 100%;" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить
+               заявку
             </UiButton>
          </div>
       </div>

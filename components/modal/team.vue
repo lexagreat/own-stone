@@ -96,6 +96,10 @@ const send = async () => {
 .team-modal {
    .modal__content {
       width: 500px;
+
+      @media(max-width: 568px) {
+         width: 100%;
+      }
    }
 
    &__file {
