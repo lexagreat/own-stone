@@ -34,7 +34,7 @@ const onChangeCode = (value) => {
 }
 watch(code, async (value) => {
    if (String(value).length == 4) {
-      console.log(value);
+      // console.log(value);
       let res = await store.sendCode(props.phone, value)
       if (res?.status) {
          emit('closePopup')

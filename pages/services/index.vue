@@ -63,7 +63,7 @@
 import { servicesAnimation } from '~/assets/js/animations';
 import { Swiper, SwiperSlide } from 'swiper/vue'
 const { data: info } = await useBaseFetch('/servicespage/')
-console.log(info.services_page);
+// console.log(info.services_page);
 const path = ref([
    {
       name: "Главная",

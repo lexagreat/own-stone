@@ -80,7 +80,7 @@ const send = async () => {
       type: typeOption.value.name
    }
    let response = await store.addNewClient(object)
-   console.log(response);
+   // console.log(response);
    if (response.status) {
       fio.value = ""
       phone.value = ""

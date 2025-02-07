@@ -307,7 +307,7 @@ function onSelectRoomsOption(option) {
 }
 
 const onChangeRegion = (name) => {
-   console.log(name);
+   // console.log(name);
    steps.value.stepsList[2].checked = name
 }
 
@@ -336,7 +336,7 @@ const send = async () => {
       `,
    }
    let response = await store.sendForm(object)
-   console.log(response);
+   // console.log(response);
    if (response.status) {
       name.value = store.user?.firstname
       phone.value = store.user?.phonenumber
@@ -359,7 +359,7 @@ const send2 = async () => {
       `,
    }
    let response = await store.sendForm(object)
-   console.log(response);
+   // console.log(response);
    if (response.status) {
       name.value = store.user?.firstname
       phone.value = store.user?.phonenumber

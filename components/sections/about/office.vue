@@ -38,7 +38,7 @@
 import { useContacts } from '~/store/contacts';
 
 const contacts = useContacts()
-console.log(contacts.info);
+// console.log(contacts.info);
 const isOpen = ref(false)
 </script>
 

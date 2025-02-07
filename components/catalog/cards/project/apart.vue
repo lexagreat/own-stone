@@ -41,13 +41,18 @@
             <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽ </h4>
             <span class="catalog-card__price">{{ product?.description }} </span>
             <ul class="catalog-card__addresses">
-               <li v-if="product?.proekty?.metro_nearby?.length">
-                  <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
-                  </div>
-                  <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }} мин
-                  </span>
-                  <IconMan />
-               </li>
+               <div>
+                  <li v-if="product?.proekty?.metro_nearby?.length">
+                     <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+                     </div>
+                     <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }}
+                        мин
+                     </span>
+                     <IconMan />
+                  </li>
+               </div>
+               <div v-if="!product?.proekty?.metro_nearby?.length"></div>
+               <div v-if="!product?.proekty?.metro_nearby?.length"></div>
             </ul>
             <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

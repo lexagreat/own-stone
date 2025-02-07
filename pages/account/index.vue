@@ -192,7 +192,7 @@ const onChangeFile = (e) => {
          reader.readAsDataURL(file); // Читаем содержимое файла как Data URL
       }
    } else {
-      console.log("Файл больше или равен 5 МБ.");
+      // console.log("Файл больше или равен 5 МБ.");
    }
 }
 const exit = () => {
@@ -224,7 +224,7 @@ const save = async () => {
       object.avatar = avatar.value
    }
    let response = await store.changeData(object)
-   console.log(response);
+   // console.log(response);
 }
 
 

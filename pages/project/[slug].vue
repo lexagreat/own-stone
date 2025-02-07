@@ -37,5 +37,5 @@ if (!info.length) {
    })
 }
 info = info[0]
-console.log('project page info: ', info);
+// console.log('project page info: ', info);
 </script>

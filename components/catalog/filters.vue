@@ -426,7 +426,6 @@ const getFiltersFromQuery = () => {
             item.selected = false
          }
       });
-      console.log(repairSettings.value.options);
       onSelectRepairOption(repairSettings.value.options.filter(item => item.name == (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"]))[0])
    }
    if (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]) {
@@ -508,7 +507,7 @@ const getFiltersFromQuery = () => {
 const setCat = async () => {
 
    let response = await catalog.getFiltersForCats(category.value, props.type);
-   console.log("1. filters from cat", response);
+   // console.log("1. filters from cat", response);
    setFiltersFromCat(response)
 }
 
@@ -540,7 +539,7 @@ function setFiltersFromCat(obj) {
    // set entry
    options.value = obj?.tags
 
-   console.log("2. set filters");
+   // console.log("2. set filters");
 }
 onMounted(async () => {
    if (props.fromHome) {

@@ -10,8 +10,9 @@
                </div>
             </div>
             <div class="project-features__main">
-               <Swiper :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }" @swiper="onSwiper"
-                  slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop>
+               <Swiper class="pc" :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }"
+                  @swiper="onSwiper" slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop
+                  :speed="700">
                   <SwiperSlide v-for="item in items" :key="item">
                      <div class="project-feature" v-for="sub in item" :key="sub">
                         <img :src="sub?.picture[0].url" alt="">
@@ -22,6 +23,22 @@
                      <div class="project-feature" v-for="sub in item" :key="sub">
                         <img :src="sub?.picture[0].url" alt="">
                         <h3 class="h3">{{ sub.title }}</h3>
+                     </div>
+                  </SwiperSlide>
+               </Swiper>
+               <Swiper class="mobile" :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }"
+                  @swiper="onSwiper" slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop
+                  :speed="700" :freeMode="true">
+                  <SwiperSlide v-for="item in info" :key="item">
+                     <div class="project-feature">
+                        <img :src="item?.picture[0]?.url" alt="">
+                        <h3 class="h3">{{ item.title }}</h3>
+                     </div>
+                  </SwiperSlide>
+                  <SwiperSlide v-for="item in info" :key="item">
+                     <div class="project-feature">
+                        <img :src="item?.picture[0]?.url" alt="">
+                        <h3 class="h3">{{ item.title }}</h3>
                      </div>
                   </SwiperSlide>
                </Swiper>
@@ -63,3 +80,22 @@ for (let i = 0; i < props.info.length;) {
    takeOne = !takeOne;
 }
 </script>
+
+
+<style lang="scss" scoped>
+.mobile {
+   display: none;
+
+   @media(max-width: 568px) {
+      display: block;
+   }
+}
+
+.pc {
+   display: block;
+
+   @media(max-width: 568px) {
+      display: none;
+   }
+}
+</style>

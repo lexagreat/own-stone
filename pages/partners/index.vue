@@ -12,5 +12,5 @@
 </template>
 <script setup>
 const { data: info } = await useBaseFetch('/partnerspage')
-console.log(info);
+// console.log(info);
 </script>

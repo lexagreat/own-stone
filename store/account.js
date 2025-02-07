@@ -69,7 +69,7 @@ export const useAccount = defineStore("useAccount", {
             },
          });
          if (response.status) {
-            console.log("new user", response.responseupdate.data);
+            // console.log("new user", response.responseupdate.data);
             await this.getMeInfo();
          }
          return response;

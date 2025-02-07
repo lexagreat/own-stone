@@ -40,16 +40,20 @@
             <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
                ₽ </span>
             <ul class="catalog-card__addresses">
-               <li v-if="product?.address_short?.length">
-                  <IconAddress />
-                  <span>{{ product?.address_short }}</span>
-               </li>
-               <li v-if="product?.metro_nearby?.length">
-                  <div class="circle" :style="{ background: product?.metro_nearby[0].color }">
-                  </div>
-                  <span>{{ product?.metro_nearby[0].name }}, {{ product?.metro_nearby[0].time }} мин </span>
-                  <IconMan />
-               </li>
+               <div style="min-height: 13px;">
+                  <li v-if="product?.address_short?.length">
+                     <IconAddress />
+                     <span>{{ product?.address_short }}</span>
+                  </li>
+               </div>
+               <div style="min-height: 13px;">
+                  <li v-if="product?.metro_nearby?.length">
+                     <div class="circle" :style="{ background: product?.metro_nearby[0].color }">
+                     </div>
+                     <span>{{ product?.metro_nearby[0].name }}, {{ product?.metro_nearby[0].time }} мин </span>
+                     <IconMan />
+                  </li>
+               </div>
             </ul>
             <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

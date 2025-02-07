@@ -43,17 +43,28 @@ const minusPage = () => {
    if (canMakeLessPage.value) {
       currentPage.value--
    }
+   document.querySelector('.catalog-page').scrollIntoView({
+      top: 0,
+      behavior: 'smooth'
+   })
 }
 const plusPage = () => {
    if (canMakeMorePage.value) {
       currentPage.value++
-
    }
+   document.querySelector('.catalog-page').scrollIntoView({
+      top: 0,
+      behavior: 'smooth'
+   })
 }
 const setPage = (page) => {
    if (Number(page)) {
       currentPage.value = page
    }
+   document.querySelector('.catalog-page').scrollIntoView({
+      top: 0,
+      behavior: 'smooth'
+   })
 }
 const canMakeLessPage = computed(() => {
    return currentPage.value > 1

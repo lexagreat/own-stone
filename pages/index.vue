@@ -20,5 +20,5 @@
 </template>
 <script setup>
 const { data: info } = await useBaseFetch("/mainpage?pLevel=5")
-console.log(info);
+// console.log(info);
 </script>

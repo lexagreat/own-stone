@@ -271,7 +271,7 @@ const search = async () => {
 const setCat = async () => {
 
    let response = await catalog.getFiltersForCats(category.value, props.type, props.projectSlug);
-   console.log("1. filters from cat", response);
+   // console.log("1. filters from cat", response);
    setFiltersFromCat(response)
 }
 
@@ -296,7 +296,7 @@ function setFiltersFromCat(obj) {
 
    options.value = obj?.tags
 
-   console.log("2. set filters");
+   // console.log("2. set filters");
 }
 
 
@@ -321,6 +321,12 @@ onMounted(async () => {
    .swiper-slide {
       // max-width: 333px;
       margin-right: 8px !important;
+   }
+
+   @media(max-width: 568px) {
+      .product-slider__title {
+         margin: 0 auto;
+      }
    }
 }
 </style>

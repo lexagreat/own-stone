@@ -82,7 +82,7 @@ const send = async () => {
       `,
    }
    let response = await store.sendForm(object)
-   console.log(response);
+   // console.log(response);
    if (response.status) {
       name.value = store.user?.firstname || ""
       phone.value = store.user?.phonenumber || ""

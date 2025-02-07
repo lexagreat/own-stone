@@ -34,13 +34,13 @@ const onSwiper = (s) => {
 }
 
 watch(() => props.currentIndex, () => {
-   console.log(props.currentIndex);
+   // console.log(props.currentIndex);
    swiper.value.slideTo(props.currentIndex)
 
 })
 watch(() => props.isOpen, (value) => {
    const video = document.querySelectorAll('.videos-modal .swiper-slide video')[props.currentIndex]
-   console.log(video);
+   // console.log(video);
 
    if (!value) {
       video.pause()

@@ -16,5 +16,5 @@
 </template>
 <script setup>
 const { data: info } = await useBaseFetch('/sellpage')
-console.log(info);
+// console.log(info);
 </script>

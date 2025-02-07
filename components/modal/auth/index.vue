@@ -9,7 +9,7 @@
                <FormCheckbox v-model="checked" id="form-section__check" />
                <label for="form-section__check" style="cursor: pointer;">
                   <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
-                     </span>
+                  </span>
                </label>
             </div>
          </div>
@@ -31,7 +31,7 @@ const isDisabledBtn = computed(() => {
 })
 const goToSms = async () => {
    let res = await store.getCode(phone.value)
-   console.log(res);
+   // console.log(res);
    if (res?.status) {
       emit("openSmsModal", phone.value)
    }

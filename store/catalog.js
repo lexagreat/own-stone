@@ -14,7 +14,7 @@ export const useCatalog = defineStore("useCatalog", {
          const response = await useBaseFetch(base + url);
          this.products = this.products.concat(response.data);
          this.meta = response.meta;
-         console.log("response", response);
+         // console.log("response", response);
          return response;
       },
       async getProducts(url) {
@@ -29,12 +29,12 @@ export const useCatalog = defineStore("useCatalog", {
          // } else {
          //    base = "apartments";
          // }
-         console.log("search url", base + url);
+         // console.log("search url", base + url);
          const response = await useBaseFetch(base + url);
          // console.log("Продукты по поиску", response.data);
          this.products = response.data;
          this.meta = response.meta;
-         console.log("response", response);
+         // console.log("response", response);
          return response;
       },
       getUrl(object) {
@@ -115,7 +115,7 @@ export const useCatalog = defineStore("useCatalog", {
             )}[appointment]=${object.target?.name}`;
          }
          if (object.entry?.value) {
-            console.log("ENTRY");
+            // console.log("ENTRY");
             resultString += `&filters${this.makeSubStr(
                resultString
             )}[entrance]=${object.entry?.name}`;
@@ -283,7 +283,7 @@ export const useCatalog = defineStore("useCatalog", {
                value: index + 1,
             };
          });
-         console.log("tags", res);
+         // console.log("tags", res);
          return res;
       },
 
