@@ -186,6 +186,7 @@ export const servicesAnimation = () => {
    });
 };
 export const rewardsAnimmation = () => {
+   return;
    if (window.innerWidth > 1024) return;
    // Находим элемент
    const rewardsList = document.querySelector(".rewards-section__list");
