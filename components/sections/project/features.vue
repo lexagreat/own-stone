@@ -18,6 +18,12 @@
                         <h3 class="h3">{{ sub.title }}</h3>
                      </div>
                   </SwiperSlide>
+                  <SwiperSlide v-for="item in items" :key="item">
+                     <div class="project-feature" v-for="sub in item" :key="sub">
+                        <img :src="sub?.picture[0].url" alt="">
+                        <h3 class="h3">{{ sub.title }}</h3>
+                     </div>
+                  </SwiperSlide>
                </Swiper>
             </div>
          </div>

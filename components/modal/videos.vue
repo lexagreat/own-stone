@@ -45,8 +45,6 @@ watch(() => props.isOpen, (value) => {
    if (!value) {
       video.pause()
    } else {
-
-
       video.play()
    }
 })

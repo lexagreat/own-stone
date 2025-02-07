@@ -25,22 +25,53 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black">Оставить заявку</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
          </div>
       </div>
    </UiModal>
 </template>
 <script setup>
+import { useAccount } from '~/store/account'
 
 const props = defineProps({
    isOpen: Boolean,
    projectName: String
 })
 const emit = defineEmits(['closePopup'])
+const store = useAccount()
 
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)
 
 const project = ref(props.projectName)
+
+
+const isDisabledBtn = computed(() => {
+   return checked.value && name.value.length && phone.value.length == 18
+})
+const success = ref(false)
+
+const send = async () => {
+   let obj = {
+      subject: "Заявка на проект с сайта Own stone",
+      text: `
+         Имя: ${name.value}
+         Телефон: ${phone.value}
+         Проект: ${project.value}
+      `,
+   }
+   let response = await store.sendForm(obj)
+   console.log(response);
+   if (response.status) {
+      name.value = store.user?.firstname || ""
+      phone.value = store.user?.phonenumber || ""
+      checked.value = false
+      success.value = true
+      setTimeout(() => {
+         emit('closePopup')
+         success.value = false
+      }, 2000)
+   }
+}
 </script>

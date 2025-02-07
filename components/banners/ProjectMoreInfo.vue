@@ -7,7 +7,7 @@
             </h2>
             <div class="project-banner__main">
                <div class="project-banner__image">
-                  <img src="/img/project/banner-more-info.png" alt="">
+                  <img src="/img/project/banner-more-info.svg" alt="">
                </div>
                <UiButton class="white" @click="isOpen = true">Запланировать визит</UiButton>
                <ModalProjectVisit :is-open="isOpen" @closePopup="isOpen = false" />

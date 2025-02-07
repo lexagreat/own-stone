@@ -5,7 +5,6 @@ gsap.registerPlugin(ScrollTrigger);
 import { slideHide, slideShow } from "#build/imports";
 
 export const parallaxAnimation = () => {
-   return;
    // console.log("parallax anim");
    const section = document.querySelector(".parallax-section"); // Замените '.your-element' на ваш селектор
    gsap.to(".parallax-section div", {
@@ -20,8 +19,6 @@ export const parallaxAnimation = () => {
    });
 };
 export const sharedParallaxAnimation = (itemSelector, thriggerSelector) => {
-   return;
-
    gsap.to(itemSelector, {
       scrollTrigger: {
          trigger: thriggerSelector, // элемент, который должен запускать анимацию
@@ -34,8 +31,6 @@ export const sharedParallaxAnimation = (itemSelector, thriggerSelector) => {
    });
 };
 export const stickyForCursor = (sectionSelector, itemSelector) => {
-   return;
-
    const section = document.querySelector(sectionSelector);
    const circle = section.querySelector(itemSelector);
    section.onmouseenter = (event) => {
@@ -54,8 +49,6 @@ export const stickyForCursor = (sectionSelector, itemSelector) => {
    };
 };
 export const aboutValueAnim = () => {
-   return;
-
    const rows = document.querySelectorAll(".about-value__row");
 
    rows.forEach((row, index) => {
@@ -96,8 +89,6 @@ export const aboutValueAnim = () => {
 };
 
 export const servicesAnimation = () => {
-   return;
-
    const bgs = document.querySelectorAll(
       ".services-section .services-section__bg"
    );
@@ -186,7 +177,6 @@ export const servicesAnimation = () => {
    });
 };
 export const rewardsAnimmation = () => {
-   return;
    if (window.innerWidth > 1024) return;
    // Находим элемент
    const rewardsList = document.querySelector(".rewards-section__list");

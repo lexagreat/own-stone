@@ -6,7 +6,7 @@
          </div>
          <div class="list-object__info">
             <ul class="catalog-card__tags">
-               <li>{{ product?.proekty?.date_complete }}</li>
+               <li v-if="product?.proekty?.date_complete">{{ product?.proekty?.date_complete }}</li>
                <li>{{ product?.name }}</li>
             </ul>
             <ul class="list-object__tags">
@@ -37,11 +37,11 @@
       <div class="list-object__content">
          <ul class="catalog-card__banners">
             <li>{{ product?.floor }} ЭТАЖ</li>
-            <li>{{ product?.finishing }}</li>
+            <li v-if="product?.finishing">{{ product?.finishing }}</li>
             <li>ID {{ product?.id }}</li>
          </ul>
          <ul class="catalog-card__addresses">
-            <li>
+            <li v-if="product?.proekty?.address_short">
                <IconAddress />
                <span>{{ product?.proekty?.address_short }}</span>
             </li>

@@ -2,7 +2,8 @@
    <section class="home-conductor" style="margin-bottom: 100px;">
       <div class="container">
          <div class="home-conductor__wrapper">
-            <h2 class="home-conductor__title h1 dark-title" v-html="info.title"></h2>
+            <h2 class="home-conductor__title h1 dark-title pc" v-html="info.title"></h2>
+            <h2 class="home-conductor__title h1 dark-title mobile" v-html="info.title_mobile"></h2>
             <ul class="home-conductor__filters" style="display: flex;">
                <li v-for="(item, index) in types" :key="index">
                   <input v-model="type" type="radio" :value="item.name" :id="'conductorRadio' + item.value"
@@ -63,3 +64,22 @@ const filtered = computed(() => {
    return props.info.home_conductor_elements.filter(item => item.type == type.value)
 })
 </script>
+
+
+<style lang="scss" scoped>
+.mobile {
+   display: none;
+
+   @media(max-width: 568px) {
+      display: block;
+   }
+}
+
+.pc {
+   display: block;
+
+   @media(max-width: 568px) {
+      display: none;
+   }
+}
+</style>

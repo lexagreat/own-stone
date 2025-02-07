@@ -358,10 +358,22 @@
    background-color: $white;
    border-radius: 8px;
    // .list-object__main
-
+   .catalog-card__banners {
+      white-space: nowrap;
+      flex-wrap: wrap;
+      column-gap: 2px;
+      flex: 0 0 278px;
+      @media (max-width: $tablet) {
+         flex: unset;
+      }
+   }
    &__main {
+      flex: 0 0 459px;
       display: flex;
       gap: 18px;
+      @media (max-width: $tablet) {
+         flex: unset;
+      }
       .catalog-card__tags {
          position: relative;
          top: unset;
@@ -426,6 +438,9 @@
       align-items: center;
       .catalog-card__addresses {
          gap: 10px;
+      }
+      @media (max-width: 1439px) {
+         gap: 50px;
       }
    }
 

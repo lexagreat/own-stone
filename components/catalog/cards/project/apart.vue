@@ -146,7 +146,7 @@ const onLike = () => {
    favorites.toggle(props.product)
 }
 const liked = computed(() => {
-   return favorites.isContains(props.product?.slug, favorites.build.projects) || favorites.isContains(props.product?.slug, favorites.commerce.projects)
+   return favorites.isContains(props.product?.slug, favorites.secondary)
 })
 
 

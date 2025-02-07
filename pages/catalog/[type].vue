@@ -32,7 +32,7 @@
                   </div>
                   <UiButton class="white all-filters" @click="isFiltersOpen = true">
                      <IconFilter />
-                     <span>Все фильтры</span>
+                     <span>Фильтры</span>
                   </UiButton>
                   <div class="catalog-page__controls">
                      <ul class="catalog-page__views">

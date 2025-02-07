@@ -316,4 +316,11 @@ onMounted(async () => {
       fill: black;
    }
 }
+
+.project-selection {
+   .swiper-slide {
+      // max-width: 333px;
+      margin-right: 8px !important;
+   }
+}
 </style>
