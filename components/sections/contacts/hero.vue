@@ -12,7 +12,9 @@
                      <div class="contacts-hero__block">
                         <span class="contacts-hero__subtitle">Офлайн-пространство OWNSTONE</span>
                         <div>
-                           <p class="h4" v-html="info?.contacts_info.address_string"></p>
+                           <p class="h4">
+                              {{ city }}, <br> {{ address }}
+                           </p>
                            <p class="h4" v-html="info?.contacts_info.worktime"></p>
                         </div>
                      </div>
@@ -71,4 +73,21 @@ const onBtnClick = (name) => {
       isMeetingModalOpen.value = true
    }
 }
+const city = computed(() => {
+   return props.info?.contacts_info?.address_string.split(',')[0]
+})
+const address = computed(() => {
+   return props.info?.contacts_info?.address_string.split(',').slice(1).join('')
+})
 </script>
+
+
+<style lang="scss">
+.contacts-hero__item {
+   &:last-child {
+      .h3 {
+         max-width: unset;
+      }
+   }
+}
+</style>

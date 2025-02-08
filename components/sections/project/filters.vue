@@ -42,7 +42,7 @@
                         </li>
                         <li class="catalog-filter" v-if="type !== 'commerce'">
                            <span class="catalog-filter__title">Отделка</span>
-                           <UiSelect :settings="repairSettings" @selectOption="onSelectRepairOption" />
+                           <UiSelect title="Отделка" :settings="repairSettings" @selectOption="onSelectRepairOption" />
                         </li>
                         <li class="catalog-filter" id="priceRange">
                            <span class="catalog-filter__title">Стоимость за <b>все</b> м2</span>
@@ -59,11 +59,12 @@
                         </li>
                         <li class="catalog-filter" v-if="type == 'commerce'">
                            <span class="catalog-filter__title">Назначение</span>
-                           <UiSelect :settings="targetSettings" @selectOption="onSelectTargetOption" />
+                           <UiSelect title="Назначение" :settings="targetSettings"
+                              @selectOption="onSelectTargetOption" />
                         </li>
                         <li class="catalog-filter">
                            <span class="catalog-filter__title">Срок сдачи</span>
-                           <UiSelect :settings="dateSettings" @selectOption="onSelectDateOption" />
+                           <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
                         </li>
 
                         <li class="catalog-filter">
@@ -326,6 +327,16 @@ onMounted(async () => {
    @media(max-width: 568px) {
       .product-slider__title {
          margin: 0 auto;
+      }
+   }
+}
+
+@media(max-width: 1024px) {
+   .project-selection {
+      .catalog-filters {
+         .v-select__item {
+            text-align: left;
+         }
       }
    }
 }

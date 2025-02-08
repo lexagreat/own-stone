@@ -12,7 +12,7 @@
 
 
       <yandex-map-marker position="top-center left-center" :settings="{ coordinates: [37.598672, 55.745838] }">
-         <img alt="" class="pin" src="/fav.svg" style="width: 30px;">
+         <img alt="" class="pin" src="/fav.svg" style="width: 40px;">
       </yandex-map-marker>
 
 

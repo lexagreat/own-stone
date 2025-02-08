@@ -12,7 +12,7 @@
             </div>
             <div class="about-office__content">
                <div class="about-office__address">
-                  <p class="h4">{{ contacts?.info?.contacts_info?.address_string }}</p>
+                  <p class="h4">{{ city }}, <br> {{ address }}</p>
                   <span class="body-text">{{ contacts?.info?.contacts_info?.worktime }}</span>
                </div>
                <div class="about-office__taxi">
@@ -40,6 +40,13 @@ import { useContacts } from '~/store/contacts';
 const contacts = useContacts()
 // console.log(contacts.info);
 const isOpen = ref(false)
+
+const city = computed(() => {
+   return contacts?.info?.contacts_info?.address_string.split(',')[0]
+})
+const address = computed(() => {
+   return contacts?.info?.contacts_info?.address_string.split(',').slice(1).join('')
+})
 </script>
 
 

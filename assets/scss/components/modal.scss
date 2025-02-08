@@ -10,9 +10,9 @@
    // .auth-modal__content
 
    &__content {
-      min-width: 460px;
+      width: 460px;
       @media (max-width: $mobile) {
-         min-width: unset !important;
+         width: 100% !important;
          padding-top: 130px !important;
       }
    }

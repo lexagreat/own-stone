@@ -33,8 +33,14 @@
    &__main {
       .swiper-slide {
          width: fit-content;
+         @media (max-width: $mobile) {
+            height: auto;
+         }
          .catalog-card {
             --cardWidth: 100%;
+            @media (max-width: $mobile) {
+               height: 100%;
+            }
          }
       }
    }

@@ -34,13 +34,22 @@ res.value = props.items.map(item => {
    }
 })
 function animateNumber(index) {
-   let allTime = 5000;
+   let allTime = 3000;
+   let step = 1;
+   if (index == 2) {
+      step = 4
+   }
    let interval = allTime / res.value[index].number;
    let timer = setInterval(() => {
       if (res.value[index].renderNumber == res.value[index].number - 1) {
          clearInterval(timer)
       }
-      res.value[index].renderNumber++
+
+      res.value[index].renderNumber += step;
+      if (index == 2 && Math.abs(res.value[index].renderNumber - res.value[index].number - 1) < 5) {
+         clearInterval(timer)
+         res.value[index].renderNumber = res.value[index].number
+      }
    }, interval)
 }
 onMounted(() => {

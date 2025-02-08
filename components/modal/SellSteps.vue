@@ -26,7 +26,7 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
+            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>
          </div>
       </div>
    </UiModal>

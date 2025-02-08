@@ -112,26 +112,16 @@
                         <li>
                            <FormInput v-model="size" placeholder="Метраж" id="calcSize" />
                         </li>
-                     </ul>
-                     <UiButton class="black" @click="currentStepForData++" v-if="currentStepForData == 0">Узнать цену
-                     </UiButton>
-                     <UiButton class="transparent" @click="clear" v-else>Очистить</UiButton>
-                     <ul class="calc-res__output calc-inputs__res" v-if="currentStepForData == 1">
-                        <!-- <li>
-                           <span class="body-text">Цена за м2</span>
-                           <p>199 600 ₽</p>
-                        </li>
-                        <li>
-                           <span class="body-text">Цена</span>
-                           <p>20 700 000 ₽</p>
-                        </li>
-                        <li>
-                           <span class="body-text">Диапазон цен</span>
-                           <p>18 966 000 ₽ - 22 537 000 ₽ </p>
-                        </li> -->
-                        <div class="object-form__inputs">
+                        <li class="gc2">
                            <FormInput placeholder="Ваше имя" v-model="name" />
+                        </li>
+                        <li class="gc2">
                            <FormInput isPhone placeholder="+7 (999) 999-99-99" v-model="phone" />
+                        </li>
+                     </ul>
+                     <ul class="calc-res__output calc-inputs__res">
+
+                        <div class="object-form__inputs">
                            <div class="form-section__check">
                               <FormCheckbox v-model="checked" id="object-form__check" />
                               <label for="object-form__check" style="cursor: pointer;">
@@ -383,8 +373,16 @@ const clear = () => {
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .calc-res__output .text-input input {
    background: #F8F8F8;
+}
+
+.gc2 {
+   grid-column: span 2;
+
+   @media(max-width: 568px) {
+      grid-column: unset;
+   }
 }
 </style>

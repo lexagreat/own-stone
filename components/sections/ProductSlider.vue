@@ -18,10 +18,12 @@
                   }
                }">
                   <SwiperSlide v-for="item in products" :key="item">
-                     <CatalogCardsObject :product="item" @click="openForm" v-if="category == 1" />
+                     <CatalogCardsObject :product="item" @click="onOpenForm" v-if="category == 1" />
                      <CatalogCardsProject :product="item" v-else />
                   </SwiperSlide>
                </Swiper>
+               <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
+                  :id="currentProductForModal" />
             </div>
          </div>
       </div>
@@ -47,7 +49,11 @@ const slidePrev = () => {
 const slideNext = () => {
    swiperInst.value.slideNext()
 }
-const openform = () => {
+const currentProductForModal = ref('')
+const isOpenFormModal = ref(false)
 
+const onOpenForm = (id) => {
+   currentProductForModal.value = id;
+   isOpenFormModal.value = true
 }
 </script>

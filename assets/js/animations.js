@@ -187,7 +187,7 @@ export const rewardsAnimmation = () => {
       scrollLeft: maxScrollLeft,
       scrollTrigger: {
          trigger: ".about-rewards", // элемент, который должен запускать анимацию
-         start: "top 50%", // Когда верх элемента достигает 80% высоты экрана
+         start: "top 60%", // Когда верх элемента достигает 80% высоты экрана
          end: `top 10%`, // Используем высоту элемента для end
          // markers: true, // включить маркеры для визуальной отладки
          scrub: 1.5,
