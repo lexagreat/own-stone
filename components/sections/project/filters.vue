@@ -42,7 +42,7 @@
                         </li>
                         <li class="catalog-filter" v-if="type !== 'commerce'">
                            <span class="catalog-filter__title">Отделка</span>
-                           <UiSelect title="Отделка" :settings="repairSettings" @selectOption="onSelectRepairOption" />
+                           <UiCatalogSelect title="Отделка" :settings="repairSettings" v-model="repair" />
                         </li>
                         <li class="catalog-filter" id="priceRange">
                            <span class="catalog-filter__title">Стоимость за <b>все</b> м2</span>
@@ -59,12 +59,11 @@
                         </li>
                         <li class="catalog-filter" v-if="type == 'commerce'">
                            <span class="catalog-filter__title">Назначение</span>
-                           <UiSelect title="Назначение" :settings="targetSettings"
-                              @selectOption="onSelectTargetOption" />
+                           <UiCatalogSelect title="Назначение" :settings="targetSettings" v-model="target" />
                         </li>
                         <li class="catalog-filter">
                            <span class="catalog-filter__title">Срок сдачи</span>
-                           <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
+                           <UiCatalogSelect title="Срок сдачи" :settings="dateSettings" v-model="dates" />
                         </li>
 
                         <li class="catalog-filter">
@@ -119,59 +118,48 @@ const repairSettings = ref({
       {
          name: "Любая",
          value: 0,
-         selected: true
-      },
-      {
-         name: "Без ремонта",
-         value: 1,
-      },
-      {
-         name: "С ремонтом",
-         value: 2,
       },
    ],
    placeholder: ""
 })
-const repairOption = ref(null)
-function onSelectRepairOption(option) {
-   repairOption.value = option
-}
+const repair = ref([{
+   name: "Любая",
+   value: 0,
+}])
+
+
+
 const dateSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
 })
-const dateOption = ref(null)
-function onSelectDateOption(option) {
-   dateOption.value = option
-}
+const dates = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+
 const targetSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
 })
-const targetOption = ref(null)
-function onSelectTargetOption(option) {
-   targetOption.value = option
-}
+const target = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
 
 const priceMin = ref(0)
 const priceMax = ref(50000000)
@@ -242,7 +230,7 @@ const filtersObject = computed(() => {
       }
       obj.area.max = areaMaxValue.value
    }
-   obj.repair = repairOption.value
+   obj.repair = repair.value
    if (priceMinValue.value !== priceMin.value) {
       obj.price = {}
       obj.price.min = priceMinValue.value
@@ -253,8 +241,8 @@ const filtersObject = computed(() => {
       }
       obj.price.max = priceMaxValue.value
    }
-   obj.date = dateOption.value
-   obj.target = targetOption.value
+   obj.date = dates.value
+   obj.target = target.value
    obj.tags = checkedOptions.value
    return obj
 })
