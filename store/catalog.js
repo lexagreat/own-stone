@@ -39,7 +39,7 @@ export const useCatalog = defineStore("useCatalog", {
       },
       getUrl(object) {
          let resultString = "";
-         // console.log("filters object", object);
+         console.log("filters object", object);
          if (object.type !== "Вторичная") {
             // project || apartaments
             if (object.category == 0) {
@@ -83,43 +83,58 @@ export const useCatalog = defineStore("useCatalog", {
                resultString
             )}[square_apartament][$lte]=${object?.area?.max}`;
          }
-         // console.log("finishing", object?.repair?.value);
-         if (object.repair?.value) {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[finishing]=${object.repair?.name}`;
+         if (object.repair?.length && object.repair[0].value) {
+            object.repair.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[finishing]=${item.name}`;
+            });
          }
-         if (object.date?.value) {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[proekty][date_complete]=${object.date?.name}`;
+         if (object.date?.length && object.date[0].value) {
+            object.date.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[proekty][date_complete]=${item?.name}`;
+            });
          }
-         if (object.floor?.value) {
-            resultString += `&filters${this.makeSubStr(resultString)}[floor]=${
-               object.floor?.name
-            }`;
+         if (object.floor?.length && object.floor[0].value) {
+            object.floor.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[floor]=${item.name}`;
+            });
          }
-         if (object.placement?.value) {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[location]=${object.placement?.name}`;
+
+         if (object.placement?.length && object.placement[0].value) {
+            object.placement.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[location]=${item?.name}`;
+            });
          }
-         if (object.transport?.value) {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[ring_road]=${object.transport?.name}`;
+         if (object.transport?.length && object.transport[0].value) {
+            object.transport.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[ring_road]=${item.name}`;
+            });
          }
-         if (object.target?.value) {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[appointment]=${object.target?.name}`;
+
+         if (object.target?.length && object.target[0].value) {
+            object.target.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[appointment]=${item.name}`;
+            });
          }
-         if (object.entry?.value) {
-            // console.log("ENTRY");
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[entrance]=${object.entry?.name}`;
+         if (object.entry?.length && object.entry[0].value) {
+            object.entry.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[entrance]=${item.name}`;
+            });
          }
+
          // rooms
          if (object?.tags?.length) {
             object.tags.forEach((tag) => {
@@ -128,6 +143,7 @@ export const useCatalog = defineStore("useCatalog", {
                )}[ap_tags][tag][$eq]=${tag}`;
             });
          }
+         // console.log("result string", resultString);
          return resultString;
       },
       getRanges(arr) {
@@ -168,7 +184,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Любая",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -184,7 +199,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -200,7 +214,7 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
+            // selected: true,
          });
          return res;
       },
@@ -216,7 +230,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -232,7 +245,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -248,7 +260,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -264,7 +275,6 @@ export const useCatalog = defineStore("useCatalog", {
          res.unshift({
             name: "Не важно",
             value: 0,
-            selected: true,
          });
          return res;
       },
@@ -324,7 +334,7 @@ export const useCatalog = defineStore("useCatalog", {
          obj.target = this.getTarget(productsArr);
          obj.entry = this.getEntry(productsArr);
          obj.tags = this.getTags(productsArr);
-         // console.log("get filters for cat");
+         console.log("get filters for cat", obj);
          return obj;
       },
    },

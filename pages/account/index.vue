@@ -9,8 +9,7 @@
             <input type="file" style="display: none;" id="account-profile__image" @change="onChangeFile">
             <label for="account-profile__image">
                <div class="circle">
-                  <img ref="filePreviewImg" v-if="store.user?.avatar?.url || avatar" :src="store.user?.avatar?.url"
-                     alt="">
+                  <img v-if="store.user?.avatar?.url || preview" :src="store.user?.avatar?.url || preview" alt="">
                   <span v-else-if="store.user?.firstname?.length">{{ store.user?.firstname[0] }}</span>
                </div>
                <PlusImage />
@@ -97,6 +96,15 @@ const surname = ref(store?.user?.secondname)
 const name = ref(store?.user?.firstname)
 const fatherName = ref(store?.user?.lastname)
 const phone = ref(store?.user?.phonenumber)
+watch(() => store?.user?.phonenumber, (value) => {
+   phone.value = value
+   console.log('поменялся телефон', value);
+}, {
+   immediate: true
+})
+onMounted(() => {
+
+})
 const wh = ref(store?.user?.whatsapp)
 const tg = ref(store?.user?.telegram)
 const bankName = ref(store?.user?.requisits_fiz_bank)
@@ -166,8 +174,7 @@ function onSelectAxisOption(option) {
 }
 
 
-
-const filePreviewImg = ref(null)
+const preview = ref('')
 
 
 
@@ -180,13 +187,11 @@ function isFileSizeUnder5MB(fileSizeInBytes) {
 const onChangeFile = (e) => {
    if (isFileSizeUnder5MB(e.target.files[0].size)) {
       avatar.value = e.target.files[0]
-      const previewImg = filePreviewImg.value;
       const file = e.target.files[0];
       if (file) {
          const reader = new FileReader();
-
          reader.onload = function (event) {
-            previewImg.src = event.target.result;
+            preview.value = event.target.result
          };
 
          reader.readAsDataURL(file); // Читаем содержимое файла как Data URL

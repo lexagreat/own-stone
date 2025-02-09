@@ -111,6 +111,9 @@ const type = ref(0)
 watch(type, (value) => {
    if (value == 1) {
       category.value = 2
+   } else {
+      category.value = 0
+
    }
 })
 

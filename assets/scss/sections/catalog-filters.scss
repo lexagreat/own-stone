@@ -305,8 +305,10 @@
    // .catalog-filter__title
    &:has(.v-select) {
       flex: 0 0 220px;
+      width: 220px;
       @media (max-width: $tablet) {
          flex: unset;
+         width: unset;
       }
    }
    &__title {

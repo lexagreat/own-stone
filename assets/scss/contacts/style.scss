@@ -160,28 +160,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      @media (max-width: $tablet) {
-         grid-template-columns: repeat(2, 1fr);
-         li:nth-child(1) {
-            grid-column: span 2;
-            align-items: center;
-            .h3 {
-               max-width: 285px;
-               text-align: center;
-            }
-         }
-      }
-      @media (max-width: $mobile) {
-         display: flex;
-         flex-direction: column;
-         li {
-            height: 188px;
-            align-items: flex-start !important;
-            .h3 {
-               text-align: left !important;
-            }
-         }
-      }
+
       li {
          display: flex;
          flex-direction: column;
@@ -209,9 +188,40 @@
          }
          .btn {
             width: fit-content;
+            @media (max-width: $mobile) {
+               width: 156px;
+            }
          }
          .h3 {
             max-width: 285px;
+         }
+      }
+      @media (max-width: $tablet) {
+         grid-template-columns: repeat(2, 1fr);
+         li:nth-child(1) {
+            grid-column: span 2;
+            align-items: center;
+            .h3 {
+               max-width: 285px;
+               text-align: center;
+            }
+         }
+      }
+      @media (max-width: $mobile) {
+         display: flex;
+         flex-direction: column;
+         li {
+            height: 188px;
+            gap: 50px;
+            align-items: flex-start !important;
+            &:nth-child(1) {
+               .btn {
+                  width: fit-content;
+               }
+            }
+            .h3 {
+               text-align: left !important;
+            }
          }
       }
    }
@@ -272,12 +282,7 @@
          left: 50%;
          translate: -50% 0;
       }
-      @media (max-width: $mobile) {
-         gap: 430px;
-         .btn {
-            bottom: 30px;
-         }
-      }
+
       img {
          position: absolute;
          top: 0;
@@ -285,6 +290,13 @@
          width: 100%;
          height: 115%;
          object-fit: cover;
+      }
+      @media (max-width: $mobile) {
+         height: 430px;
+         flex: 0 0 430px;
+         .btn {
+            bottom: 30px;
+         }
       }
    }
 }

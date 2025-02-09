@@ -29,6 +29,11 @@
       @media (max-width: $mobile) {
          max-height: 640px;
          padding: 56px;
+         padding-left: 0;
+         padding-right: 0;
+      }
+      .btn {
+         min-width: 190px;
       }
    }
 

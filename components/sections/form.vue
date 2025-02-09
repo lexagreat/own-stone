@@ -25,7 +25,7 @@
             </div>
          </div>
          <div class="form-section__map">
-            <MapsOffice />
+            <MapsOffice :info="contacts?.info?.contacts_info?.contacts_map_coords" />
          </div>
       </div>
       <ModalSuccessModal :isOpen="success" @closePopup="success = false" />
@@ -33,7 +33,8 @@
 </template>
 <script setup>
 import { useAccount } from '~/store/account'
-
+import { useContacts } from '~/store/contacts'
+const contacts = useContacts()
 const store = useAccount()
 const props = defineProps({
    info: Object

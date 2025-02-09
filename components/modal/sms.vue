@@ -3,7 +3,7 @@
       <div class="auth-modal__content modal__content">
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="auth-modal__header">
-            <h3 class="auth-modal__title h1 dark-title">ВВЕдите <br> <span>СМС-код</span></h3>
+            <h3 class="auth-modal__title h1 dark-title">ВВЕдите <br class="pc"> <span>СМС-код</span></h3>
             <p class="body-text" style="color: #18181880;">
                Для подтверждения телефона введите код из смс, отправленного на номер:
             </p>
@@ -43,3 +43,12 @@ watch(code, async (value) => {
    }
 })
 </script>
+
+
+<style lang="scss" scoped>
+.pc {
+   @media(max-width: 568px) {
+      display: none;
+   }
+}
+</style>

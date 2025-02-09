@@ -1,21 +1,43 @@
 <template>
-   <div class="map" id="map" style="width:100%; height:100%"></div>
+   <yandex-map v-if="info?.length" :settings="{
+      location: {
+         center: JSON.parse(info[0]?.coords),
+         zoom: 9,
+         duration: 2500
+      },
+      mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
+   }">
+      <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
+
+      <yandex-map-default-features-layer />
+
+
+      <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(info[0]?.coords) }">
+         <img alt="" class="pin" src="/fav.svg" style="width: 40px;">
+      </yandex-map-marker>
+
+
+      <yandex-map-controls :settings="{ position: 'right' }">
+         <yandex-map-zoom-control />
+      </yandex-map-controls>
+   </yandex-map>
 </template>
+
 <script setup>
-// onMounted(() => {
-//    var map;
+import {
+   VueYandexMaps,
+   YandexMap,
+   YandexMapControls,
+   YandexMapDefaultSchemeLayer,
+   YandexMapDefaultFeaturesLayer, // 🔹 Импортируем слой объектов
+   YandexMapZoomControl,
+   YandexMapDefaultMarker,
+   YandexMapMarker
+} from "vue-yandex-maps";
+const props = defineProps({
+   info: Array
+})
 
-//    DG.then(function () {
-//       map = DG.map('map', {
-//          center: [54.98, 82.89],
-//          zoom: 13
-//       });
 
-//       DG.marker([54.98, 82.91]).addTo(map);
-//       DG.marker([54.98, 82.92]).addTo(map);
-//       DG.marker([54.98, 82.89]).addTo(map).bindPopup('Вы кликнули по мне!');
-//    });
-
-// })
 
 </script>

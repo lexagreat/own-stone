@@ -1,17 +1,18 @@
 <template>
-   <yandex-map :settings="{
+   <yandex-map v-if="info?.length" :settings="{
       location: {
-         center: [37.598672, 55.745838],
+         center: JSON.parse(info[0]?.coords),
          zoom: 9,
          duration: 2500
-      }
+      },
+      mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
    }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
 
       <yandex-map-default-features-layer />
 
 
-      <yandex-map-marker position="top-center left-center" :settings="{ coordinates: [37.598672, 55.745838] }">
+      <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(info[0]?.coords) }">
          <img alt="" class="pin" src="/fav.svg" style="width: 40px;">
       </yandex-map-marker>
 
@@ -33,10 +34,10 @@ import {
    YandexMapDefaultMarker,
    YandexMapMarker
 } from "vue-yandex-maps";
-let markerIcon = {
-   layout: 'default#image',
-   imageHref: 'https://own-admin.okttastudio.ru/uploads/parallax_f885095265.png',
-   imageSize: [30, 30],
-   imageOffset: [-15, -15],
-}
+const props = defineProps({
+   info: Array
+})
+
+
+
 </script>

@@ -2,7 +2,7 @@
    <UiModal @closePopup="emit('closePopup')" class="auth-modal">
       <div class="auth-modal__content modal__content">
          <UiModalCloseBtn @click="emit('closePopup')" />
-         <h3 class="auth-modal__title h1 dark-title">вход или <br> <span>регистрация</span></h3>
+         <h3 class="auth-modal__title h1 dark-title">вход или <br class="pc"> <span>регистрация</span></h3>
          <div class="auth-modal__main">
             <FormInput isPhone placeholder="Ваш номер телефона" v-model="phone" />
             <div class="form-section__check">
@@ -37,3 +37,12 @@ const goToSms = async () => {
    }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.pc {
+   @media(max-width: 568px) {
+      display: none;
+   }
+}
+</style>

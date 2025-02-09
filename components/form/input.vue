@@ -2,11 +2,12 @@
    <div class="text-input" ref="input">
 
       <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id"
-         @input="emit('update:modelValue', $event?.target?.value)" :value="7" v-maska="'+7 (###) ###-##-##'"
-         v-if="isPhone" />
+         @input="emit('update:modelValue', $event?.target?.value)" :value="props.modelValue || 7"
+         v-maska="'+7 (###) ###-##-##'" v-if="isPhone" />
       <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id"
          @input="emit('update:modelValue', $event?.target?.value)" :value="props.modelValue" v-maska="customMask"
          v-else-if="customMask?.length" />
+
       <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id"
          @input="emit('update:modelValue', $event?.target?.value)" :value="props.modelValue" v-else />
    </div>
@@ -19,6 +20,7 @@ let props = defineProps({
    modelValue: String,
    placeholder: String,
    customMask: String,
+   value: String,
    isPhone: {
       type: Boolean,
       default: false,

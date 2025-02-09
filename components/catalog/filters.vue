@@ -56,7 +56,7 @@
             </li>
             <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Отделка</span>
-               <UiSelect title="Отделка" :settings="repairSettings" @selectOption="onSelectRepairOption" />
+               <UiCatalogSelect title="Отделка" :settings="repairSettings" v-model="repair" />
             </li>
             <li class="catalog-filter" id="priceRange">
                <span class="catalog-filter__title">Стоимость за <b>все</b> м2</span>
@@ -73,15 +73,16 @@
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Назначение</span>
-               <UiSelect title="Назначение" :settings="targetSettings" @selectOption="onSelectTargetOption" />
+               <UiCatalogSelect title="Назначение" :settings="targetSettings" v-model="target" />
             </li>
             <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title">Срок сдачи</span>
-               <UiSelect title="Срок сдачи" :settings="dateSettings" @selectOption="onSelectDateOption" />
+
+               <UiCatalogSelect title="Срок сдачи" :settings="dateSettings" v-model="dates" />
             </li>
             <li class="catalog-filter">
                <span class="catalog-filter__title">Расположение</span>
-               <UiSelect title="Локация" :settings="placementSettings" @selectOption="onSelectPlacementOption" />
+               <UiCatalogSelect title="Расположение" :settings="placementSettings" v-model="placement" />
             </li>
             <!-- <li class="catalog-filter" v-if="fromHome">
                <span class="catalog-filter__title">Расположение</span>
@@ -89,16 +90,15 @@
             </li> -->
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
-               <UiSelect title="Внутри транспортных колец" :settings="transportSettings"
-                  @selectOption="onSelectTransportOption" />
+               <UiCatalogSelect title="Внутри транспортных колец" :settings="transportSettings" v-model="transport" />
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Этаж</span>
-               <UiSelect title="Этаж" :settings="floorSettings" @selectOption="onSelectFloorOption" />
+               <UiCatalogSelect title="Этаж" :settings="floorSettings" v-model="floor" />
             </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Вход</span>
-               <UiSelect title="Вход" :settings="entrySettings" @selectOption="onSelectEntryOption" />
+               <UiCatalogSelect title="Вход" :settings="entrySettings" v-model="entry" />
             </li>
             <li class="catalog-filter">
                <span class="catalog-filter__title"></span>
@@ -185,93 +185,103 @@ const repairSettings = ref({
       {
          name: "Любая",
          value: 0,
-         selected: true
       },
    ],
    placeholder: ""
 })
-const repairOption = ref(null)
-function onSelectRepairOption(option) {
-   repairOption.value = option
-}
+const repair = ref([{
+   name: "Любая",
+   value: 0,
+}])
+
+
+
+
+
 const placementSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
 })
-const placementOption = ref(null)
-function onSelectPlacementOption(option) {
-   placementOption.value = option
-}
+const placement = ref([{
+   name: "Не важно",
+   value: 0,
+}])
+
+
+
+
 const transportSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
-      },
-      {
-         name: "Важно",
-         value: 1,
       },
    ],
    placeholder: ""
 })
-const transportOption = ref(null)
-function onSelectTransportOption(option) {
-   transportOption.value = option
-}
+
+const transport = ref([{
+   name: "Не важно",
+   value: 0,
+}])
+
+
+
 const dateSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
       },
    ],
    placeholder: ""
 })
-const dateOption = ref(null)
-function onSelectDateOption(option) {
-   dateOption.value = option
-}
+const dates = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+
 const targetSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
       },
    ],
    placeholder: ""
 })
-const targetOption = ref(null)
-function onSelectTargetOption(option) {
-   targetOption.value = option
-}
+const target = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+
+
 const floorSettings = ref({
    options: [
       {
          name: "Не важно",
          value: 0,
-         selected: true
       },
    ],
    placeholder: ""
 })
-const floorOption = ref(null)
-function onSelectFloorOption(option) {
-   floorOption.value = option
-}
+const floor = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+
+
 const entrySettings = ref({
    options: [
       {
@@ -279,17 +289,15 @@ const entrySettings = ref({
          value: 0,
          selected: true
       },
-      {
-         name: "Важно",
-         value: 1,
-      },
    ],
    placeholder: ""
 })
-const entryOption = ref(null)
-function onSelectEntryOption(option) {
-   entryOption.value = option
-}
+const entry = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
 
 
 
@@ -346,7 +354,7 @@ const filtersObject = computed(() => {
       }
       obj.area.max = areaMaxValue.value
    }
-   obj.repair = repairOption.value
+   obj.repair = repair.value
    if (priceMinValue.value !== priceMin.value) {
       obj.price = {}
       obj.price.min = priceMinValue.value
@@ -357,12 +365,12 @@ const filtersObject = computed(() => {
       }
       obj.price.max = priceMaxValue.value
    }
-   obj.date = dateOption.value
-   obj.floor = floorOption.value
-   obj.placement = placementOption.value
-   obj.transport = transportOption.value
-   obj.target = targetOption.value
-   obj.entry = entryOption.value
+   obj.date = dates.value
+   obj.floor = floor.value
+   obj.placement = placement.value
+   obj.transport = transport.value
+   obj.target = target.value
+   obj.entry = entry.value
    obj.tags = checkedOptions.value
    return obj
 })
@@ -418,76 +426,191 @@ const getFiltersFromQuery = () => {
    if (route.query["filters[cost_total][$lte]"] || route.query["filters[apartaments][cost_total][$lte]"]) {
       priceMaxValue.value = +route.query["filters[cost_total][$lte]"] || +route.query["filters[apartaments][cost_total][$lte]"]
    }
-   if (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"]) {
-      repairSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectRepairOption(repairSettings.value.options.filter(item => item.name == (route.query["filters[finishing]"] || route.query["filters[apartaments][finishing]"]))[0])
+
+
+
+   if (route.query["filters[finishing]"]) {
+
+      if (Array.isArray(route.query["filters[finishing]"])) {
+         let arr = route.query["filters[finishing]"];
+         arr.forEach((q, i) => {
+            repair.value[i] = repairSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         repair.value[0] = repairSettings.value.options.find(item => item.name == route.query["filters[finishing]"])
+      }
    }
-   if (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]) {
-      dateSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectDateOption(dateSettings.value.options.filter(item => item.name == (route.query["filters[proekty][date_complete]"] || route.query["filters[apartaments][proekty][date_complete]"]))[0])
+   if (route.query["filters[apartaments][finishing]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][finishing]"])) {
+         let arr = route.query["filters[apartaments][finishing]"];
+         arr.forEach((q, i) => {
+            repair.value[i] = repairSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         repair.value[0] = repairSettings.value.options.find(item => item.name == route.query["filters[apartaments][finishing]"])
+      }
    }
-   if (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"]) {
-      floorSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectFloorOption(floorSettings.value.options.filter(item => item.name == (route.query["filters[floor]"] || route.query["filters[apartaments][floor]"]))[0])
+
+
+   if (route.query["filters[proekty][date_complete]"]) {
+
+      if (Array.isArray(route.query["filters[proekty][date_complete]"])) {
+         let arr = route.query["filters[proekty][date_complete]"];
+         arr.forEach((q, i) => {
+            dates.value[i] = dateSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         dates.value[0] = dateSettings.value.options.find(item => item.name == route.query["filters[proekty][date_complete]"])
+      }
    }
-   if (route.query["filters[location]"] || route.query["filters[apartaments][location]"]) {
-      placementSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[location]"] || route.query["filters[apartaments][location]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectPlacementOption(placementSettings.value.options.filter(item => item.name == (route.query["filters[location]"] || route.query["filters[apartaments][location]"]))[0])
+   if (route.query["filters[apartaments][proekty][date_complete]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][proekty][date_complete]"])) {
+         let arr = route.query["filters[apartaments][proekty][date_complete]"];
+         arr.forEach((q, i) => {
+            dates.value[i] = dateSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         dates.value[0] = dateSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][date_complete]"])
+      }
    }
-   if (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"]) {
-      transportSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectTransportOption(transportSettings.value.options.filter(item => item.name == (route.query["filters[ring_road]"] || route.query["filters[apartaments][ring_road]"]))[0])
+
+
+
+
+
+   if (route.query["filters[floor]"]) {
+
+      if (Array.isArray(route.query["filters[floor]"])) {
+         let arr = route.query["filters[floor]"];
+         arr.forEach((q, i) => {
+            floor.value[i] = floorSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         floor.value[0] = floorSettings.value.options.find(item => item.name == route.query["filters[floor]"])
+      }
    }
-   if (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"]) {
-      targetSettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectTargetOption(targetSettings.value.options.filter(item => item.name == (route.query["filters[appointment]"] || route.query["filters[apartaments][appointment]"]))[0])
+   if (route.query["filters[apartaments][floor]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][floor]"])) {
+         let arr = route.query["filters[apartaments][floor]"];
+         arr.forEach((q, i) => {
+            floor.value[i] = floorSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         floor.value[0] = floorSettings.value.options.find(item => item.name == route.query["filters[apartaments][floor]"])
+      }
    }
-   if (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"]) {
-      entrySettings.value.options.forEach(item => {
-         if (item.name == (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"])) {
-            item.selected = true
-         } else {
-            item.selected = false
-         }
-      });
-      onSelectEntryOption(entrySettings.value.options.filter(item => item.name == (route.query["filters[entrance]"] || route.query["filters[apartaments][entrance]"]))[0])
+
+
+
+
+
+   if (route.query["filters[location]"]) {
+
+      if (Array.isArray(route.query["filters[location]"])) {
+         let arr = route.query["filters[location]"];
+         arr.forEach((q, i) => {
+            placement.value[i] = placementSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[location]"])
+      }
    }
+   if (route.query["filters[apartaments][location]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][location]"])) {
+         let arr = route.query["filters[apartaments][location]"];
+         arr.forEach((q, i) => {
+            placement.value[i] = placementSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[apartaments][location]"])
+      }
+   }
+
+
+
+   if (route.query["filters[ring_road]"]) {
+
+      if (Array.isArray(route.query["filters[ring_road]"])) {
+         let arr = route.query["filters[ring_road]"];
+         arr.forEach((q, i) => {
+            transport.value[i] = transportSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         transport.value[0] = transportSettings.value.options.find(item => item.name == route.query["filters[ring_road]"])
+      }
+   }
+   if (route.query["filters[apartaments][ring_road]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][ring_road]"])) {
+         let arr = route.query["filters[apartaments][ring_road]"];
+         arr.forEach((q, i) => {
+            transport.value[i] = transportSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         transport.value[0] = transportSettings.value.options.find(item => item.name == route.query["filters[apartaments][ring_road]"])
+      }
+   }
+
+
+
+   if (route.query["filters[appointment]"]) {
+
+      if (Array.isArray(route.query["filters[appointment]"])) {
+         let arr = route.query["filters[appointment]"];
+         arr.forEach((q, i) => {
+            target.value[i] = targetSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         target.value[0] = targetSettings.value.options.find(item => item.name == route.query["filters[appointment]"])
+      }
+   }
+   if (route.query["filters[apartaments][appointment]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][appointment]"])) {
+         let arr = route.query["filters[apartaments][appointment]"];
+         arr.forEach((q, i) => {
+            target.value[i] = targetSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         target.value[0] = targetSettings.value.options.find(item => item.name == route.query["filters[apartaments][appointment]"])
+      }
+   }
+
+
+
+
+
+   if (route.query["filters[entrance]"]) {
+
+      if (Array.isArray(route.query["filters[entrance]"])) {
+         let arr = route.query["filters[entrance]"];
+         arr.forEach((q, i) => {
+            entry.value[i] = entrySettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         entry.value[0] = entrySettings.value.options.find(item => item.name == route.query["filters[entrance]"])
+      }
+   }
+   if (route.query["filters[apartaments][entrance]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][entrance]"])) {
+         let arr = route.query["filters[apartaments][entrance]"];
+         arr.forEach((q, i) => {
+            entry.value[i] = entrySettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         entry.value[0] = entrySettings.value.options.find(item => item.name == route.query["filters[apartaments][entrance]"])
+      }
+   }
+
+
+
+
+
 
    if (route.query['filters[ap_tags][tag][$eq]']) {
       if (Array.isArray(route.query['filters[ap_tags][tag][$eq]'])) {

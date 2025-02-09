@@ -2,8 +2,8 @@
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="object-form review">
       <div class="modal__content object-form__content" v-if="success">
          <UiModalCloseBtn @click="emit('closePopup')" />
-         <ModalSucess title="Заявка <span>отправлена</span>"
-            subtitle="В ближайшее время с Вами свяжется наш специалист" />
+         <ModalSucess title="Благодарим <br> за <span>вашу оценку</span>"
+            subtitle="Мы обработаем информацию в ближайшее время и свяжемся с вами при необходимости" />
       </div>
       <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />

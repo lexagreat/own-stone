@@ -2,8 +2,8 @@
    <UiModal :isOpen="isOpen" @closePopup="emit('closePopup')" class="object-form">
       <div class="modal__content object-form__content" v-if="success">
          <UiModalCloseBtn @click="emit('closePopup')" />
-         <ModalSucess title="Заявка <br> <span>отправлена</span>"
-            subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
+         <ModalSucess title="подписка <br> <span>оформлена</span>"
+            subtitle="Теперь Вы будете в курсе всех <br> уникальных предложений" />
       </div>
       <div class="modal__content object-form__content" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
@@ -43,7 +43,7 @@ const isDisabledBtn = computed(() => {
    return validEmail(email.value) && checked.value
 })
 
-const success = ref(false)
+const success = ref(true)
 const send = async () => {
    let object = {
       subject: "Подписка на рассылку с сайта Own stone",

@@ -40,6 +40,15 @@
    // .account-aside__footer
 
    &__footer {
+      .circle {
+         background-color: $black;
+         span {
+            color: $white !important;
+            font-size: 24px !important;
+            text-align: center !important;
+            translate: 0 -2px;
+         }
+      }
    }
    &__exit {
       border: 0 !important;
@@ -378,6 +387,12 @@
       .text-input {
          input {
             background: #f8f8f8;
+         }
+      }
+      .v-select {
+         height: 100%;
+         &__wrapper {
+            height: 100%;
          }
       }
       @media (max-width: $tablet) {

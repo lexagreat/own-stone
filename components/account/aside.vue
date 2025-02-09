@@ -25,7 +25,8 @@
          <NuxtLink to="/account" class="account-aside__main" @click="store.closeAside">
             <div class="circle">
                <img ref="filePreviewImg" v-if="store.user?.avatar?.url" :src="store.user?.avatar?.url" alt="">
-               <AccountAvatar v-else />
+               <span v-else-if="store?.user?.firstname?.length">{{ store?.user?.firstname[0] }}</span>
+               <!-- <span v-else>A</span> -->
             </div>
             <div>
                <span>{{ store?.user?.firstname }}</span>
@@ -39,7 +40,6 @@
 </template>
 <script setup>
 import { vMaska } from "maska/vue"
-import AccountAvatar from '@/assets/img/icons/account-avatar.svg'
 import ExitIcon from '@/assets/img/icons/exit.svg'
 import ArrowIcon from "@/assets/img/icons/arrow_down.svg"
 import { useAccount } from '~/store/account';
@@ -51,25 +51,46 @@ const clientsLength = computed(() => {
 const docsLength = computed(() => {
    return store.user?.documents?.length || 0;
 })
-const links = ref([
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),
-      title: "Мои клиенты",
-      to: "/account/clients",
-      subtitle: `${clientsLength.value} ${morph(clientsLength.value, ['клиент', 'клиента', 'клиентов'])}`
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-doc.svg'))),
-      title: "Документы",
-      to: "/account/documents",
-      subtitle: `${docsLength.value} ${morph(docsLength.value, ['документ', 'документа', 'документов'])}`
-   },
-   {
-      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),
-      title: "Информация",
-      to: "/account/info",
-   },
-])
+// const links = ref([
+//    {
+//       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),
+//       title: "Мои клиенты",
+//       to: "/account/clients",
+//       subtitle: `${clientsLength.value} ${morph(clientsLength.value, ['клиент', 'клиента', 'клиентов'])}`
+//    },
+//    {
+//       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-doc.svg'))),
+//       title: "Документы",
+//       to: "/account/documents",
+//       subtitle: `${docsLength.value} ${morph(docsLength.value, ['документ', 'документа', 'документов'])}`
+//    },
+//    {
+//       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),
+//       title: "Информация",
+//       to: "/account/info",
+//    },
+// ])
+const links = computed(() => {
+   return [
+      {
+         icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-users.svg'))),
+         title: "Мои клиенты",
+         to: "/account/clients",
+         subtitle: `${clientsLength.value} ${morph(clientsLength.value, ['клиент', 'клиента', 'клиентов'])}`
+      },
+      {
+         icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-doc.svg'))),
+         title: "Документы",
+         to: "/account/documents",
+         subtitle: `${docsLength.value} ${morph(docsLength.value, ['документ', 'документа', 'документов'])}`
+      },
+      {
+         icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),
+         title: "Информация",
+         to: "/account/info",
+      },
+   ]
+})
 const exit = () => {
    store.exit()
    router.push('/')
