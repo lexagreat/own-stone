@@ -460,6 +460,7 @@
    // .sell-portfolio__slide
 
    &__slide {
+      height: auto;
       display: flex !important;
       gap: 10px;
       @media (max-width: $tablet) {
