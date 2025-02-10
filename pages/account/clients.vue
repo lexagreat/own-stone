@@ -42,4 +42,9 @@ import { useAccount } from '~/store/account';
 
 const store = useAccount()
 const isOpen = ref(false)
+
+
+useHead({
+   title: 'Профиль | Клиенты'
+})
 </script>

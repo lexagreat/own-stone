@@ -105,7 +105,9 @@ const onSlideChange = (s) => {
       }
    })
 }
-
+useHead({
+   title: 'Услуги'
+})
 
 
 </script>

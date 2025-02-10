@@ -21,4 +21,7 @@
 <script setup>
 const { data: info } = await useBaseFetch("/mainpage?pLevel=5")
 // console.log(info);
+useHead({
+   title: 'Own stone'
+})
 </script>

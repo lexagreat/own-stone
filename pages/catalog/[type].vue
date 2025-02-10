@@ -110,15 +110,23 @@ const onChangeType = (value) => {
 const pageStaticInfo = {
    build: {
       title: "новостройки в москве <br> <span>бизнес и премиум-сегмент</span>",
+      pageTitle: "Новостройки в москве бизнес и премиум-сегмент",
    },
    secondary: {
       title: "Вторичная недвижимость <br><span>в москве</span>",
+      pageTitle: "Вторичная недвижимость в москве",
 
    },
    commerce: {
       title: "Коммерческая недвижимость <br><span>в москве</span>",
+      pageTitle: "Коммерческая недвижимость в москве",
    }
 }[type] || "404"
+
+useHead({
+   title: pageStaticInfo.pageTitle
+})
+
 if (pageStaticInfo == '404') {
    throw createError({
       statusCode: 404,

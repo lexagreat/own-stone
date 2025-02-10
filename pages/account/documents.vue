@@ -14,10 +14,10 @@
 import { useAccount } from '~/store/account';
 
 const store = useAccount()
-const docs = ref([
-   { name: "Разрешение на строительство" },
-   { name: "Проектная декларация" },
-   { name: "Извещение о начале строительства" },
-   { name: "Извещение о начале строительства" },
-])
+
+
+useHead({
+   title: 'Профиль | Документы'
+})
+
 </script>

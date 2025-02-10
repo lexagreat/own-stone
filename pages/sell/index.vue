@@ -17,4 +17,7 @@
 <script setup>
 const { data: info } = await useBaseFetch('/sellpage')
 // console.log(info);
+useHead({
+   title: 'Продать'
+})
 </script>

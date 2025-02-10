@@ -147,6 +147,10 @@ const products = computed(() => {
    }
    return arr
 })
+
+useHead({
+   title: 'Избранное'
+})
 </script>
 
 

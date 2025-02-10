@@ -33,4 +33,7 @@ if (!info.length) {
 }
 info = info[0]
 // console.log('project page info: ', info);
+useHead({
+   title: info?.name
+})
 </script>

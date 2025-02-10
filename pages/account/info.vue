@@ -32,4 +32,9 @@ onMounted(() => {
    accordion(".account-info__header", ".account-info__spoiler")
 
 })
+
+useHead({
+   title: 'Профиль | Информация'
+})
+
 </script>

@@ -276,6 +276,12 @@ onMounted(() => {
       })
    }
 })
+
+
+useHead({
+   title: 'Профиль'
+})
+
 </script>
 
 

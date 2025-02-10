@@ -18,4 +18,8 @@ const path = ref([
       to: ""
    },
 ])
+
+useHead({
+   title: 'Контакты'
+})
 </script>

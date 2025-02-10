@@ -664,4 +664,9 @@
       </section>
    </main>
 </template>
-<script setup></script>
+<script setup>
+useHead({
+   title: 'Политика в отношении обработки персональных данных'
+})
+
+</script>

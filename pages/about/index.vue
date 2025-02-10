@@ -13,4 +13,10 @@
 </template>
 <script setup>
 const { data: info } = await useBaseFetch('/aboutpage')
+
+
+
+useHead({
+   title: 'О компании'
+})
 </script>
