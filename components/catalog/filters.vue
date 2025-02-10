@@ -150,7 +150,7 @@ const props = defineProps({
    products: Array,
    filters: Object
 })
-const emit = defineEmits(["closeModal", "setCat", "changeType", "search",])
+const emit = defineEmits(["closeModal", "setCat", "changeType", "search", 'update:filtersCount'])
 const types = ref([
    {
       name: 'Новостройки',
@@ -782,12 +782,54 @@ const resetFilters = () => {
    ]
    roomsChecked.value = []
    checkedOptions.value = []
-
-
-
 }
+const filtersCount = computed(() => {
+   let int = 0;
+   if (roomsChecked.value?.length) {
+      int++
+   }
+   if (areaMinValue.value !== areaMin.value) {
+      int++
+   }
+   if (areaMaxValue.value !== areaMax.value) {
+      int++
+   }
+   if (priceMinValue.value !== priceMin.value) {
+      int++
+   }
+   if (priceMaxValue.value !== priceMax.value) {
+      int++
+   }
+   if (repair.value[0].value !== 0) {
+      int++
+   }
+   if (dates.value[0].value !== 0) {
+      int++
+   }
+   if (target.value[0].value !== 0) {
+      int++
+   }
+   if (entry.value[0].value !== 0) {
+      int++
+   }
+   if (transport.value[0].value !== 0) {
+      int++
+   }
+   if (floor.value[0].value !== 0) {
+      int++
+   }
+   if (entry.value[0].value !== 0) {
+      int++
+   }
+   if (checkedOptions.value.length) {
+      int++
+   }
+   return int
+})
 
-
+watch(filtersCount, (value) => {
+   emit('update:filtersCount', value)
+})
 </script>
 
 

@@ -16,7 +16,7 @@
             </ul>
             <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
                @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
-               @setCat="setCat" :loading="loading" v-model="sortOption" />
+               @setCat="setCat" :loading="loading" v-model="sortOption" @update:filtersCount="filtersCount = $event" />
          </div>
       </section>
       <section class="catalog-page">
@@ -33,6 +33,7 @@
                   <UiButton class="white all-filters" @click="isFiltersOpen = true">
                      <IconFilter />
                      <span>Фильтры</span>
+                     <i class="circle">{{ filtersCount }}</i>
                   </UiButton>
                   <div class="catalog-page__controls">
                      <ul class="catalog-page__views">
@@ -282,4 +283,6 @@ const mobileSort = () => {
 }
 
 
+
+const filtersCount = ref(0)
 </script>

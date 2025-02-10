@@ -83,10 +83,27 @@
       justify-content: space-between;
       align-items: flex-end;
       .all-filters {
+         position: relative;
          display: none;
          @media (max-width: $tablet) {
             display: flex;
             flex: 1;
+         }
+         i {
+            display: none !important;
+            @media (max-width: $tablet) {
+               display: flex !important;
+               position: absolute;
+               top: 0;
+               right: 0;
+               color: $white;
+               font-size: 11px;
+               font-style: normal;
+               font-weight: 500;
+               background-color: $black;
+               --size: 18px;
+               translate: 10% -10%;
+            }
          }
       }
    }
