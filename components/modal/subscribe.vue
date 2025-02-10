@@ -43,7 +43,7 @@ const isDisabledBtn = computed(() => {
    return validEmail(email.value) && checked.value
 })
 
-const success = ref(true)
+const success = ref(false)
 const send = async () => {
    let object = {
       subject: "Подписка на рассылку с сайта Own stone",

@@ -66,6 +66,7 @@ const onChangeFile = (e) => {
 const send = async () => {
    let object = {
       subject: "Стать частью команды с сайта Own stone",
+      file: file.value,
       text: `
          Имя: ${name.value}
          Телефон: ${phone.value}

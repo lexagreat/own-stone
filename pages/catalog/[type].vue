@@ -16,7 +16,7 @@
             </ul>
             <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
                @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
-               @setCat="setCat" :loading="loading" />
+               @setCat="setCat" :loading="loading" v-model="sortOption" />
          </div>
       </section>
       <section class="catalog-page">
@@ -24,11 +24,11 @@
             <div class="catalog-page__wrapper">
                <div class="catalog-page__header">
                   <div class="catalog-page__sort">
-                     <button class="circle mobile">
+                     <button class="circle mobile" @click="mobileSort">
                         <IconSort />
                      </button>
                      <span>Сортировка</span>
-                     <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" />
+                     <UiSelect title="sort" :settings="sortSettings" @selectOption="onSelectSortOption" />
                   </div>
                   <UiButton class="white all-filters" @click="isFiltersOpen = true">
                      <IconFilter />
@@ -275,4 +275,11 @@ watch(sortOption, async () => {
    if (stopConditionForSearch.value) return
    await search()
 })
+
+const mobileSort = () => {
+   isFiltersOpen.value = true
+   document.querySelector('.catalog-filters .sort .v-select').classList.add('open')
+}
+
+
 </script>

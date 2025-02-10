@@ -39,7 +39,7 @@ export const useCatalog = defineStore("useCatalog", {
       },
       getUrl(object) {
          let resultString = "";
-         console.log("filters object", object);
+         // console.log("filters object", object);
          if (object.type !== "Вторичная") {
             // project || apartaments
             if (object.category == 0) {
@@ -334,7 +334,7 @@ export const useCatalog = defineStore("useCatalog", {
          obj.target = this.getTarget(productsArr);
          obj.entry = this.getEntry(productsArr);
          obj.tags = this.getTags(productsArr);
-         console.log("get filters for cat", obj);
+         // console.log("get filters for cat", obj);
          return obj;
       },
    },

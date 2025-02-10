@@ -4,7 +4,8 @@
          <div class="selection-section__wrapper">
             <div class="selection-section__header h1">
                <h2 class="selection-section__title">подобрать недвижимость </h2>
-               <span class="selection-section__count">3 100 объектов </span>
+               <span class="selection-section__count">{{ formatNumber(count) }} {{ morph(count, ['объект', 'объекта',
+                  'объектов']) }} </span>
             </div>
             <div class="selection-section__main">
                <ul class="selection-section__radios">
@@ -57,7 +58,8 @@ const type = ref("build")
 const onChangeType = (value) => {
    type.value = value
 }
-
+let { result: count } = await useBaseFetch('/typescounter?type=apartament')
+console.log(count);
 const onSearch = (url) => {
    router.push(`/catalog/${type.value}${url}`)
    // console.log('SEARCH ON HOME PAGE', url, type.value);

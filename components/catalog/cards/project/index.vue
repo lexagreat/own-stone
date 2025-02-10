@@ -245,3 +245,12 @@ const link = computed(() => {
    return url
 })
 </script>
+
+
+
+
+<style lang="scss" scoped>
+.project-card {
+   height: 100%;
+}
+</style>

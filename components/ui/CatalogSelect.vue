@@ -11,14 +11,14 @@
       </div>
       <div class="v-select__content" ref="content">
          <div class="v-select__subheader">
-            <button class="circle circle40">
+            <button class="circle circle40" @click="closeSelect">
                <ArrowDownIcon style="rotate: 90deg;" />
             </button>
             <span>{{ title }}</span>
          </div>
          <ul class="v-select__list">
             <template v-for="(option, index) in settings.options" :key="index">
-               <li class="v-select__item" v-if="String(option?.name)?.length">
+               <li class="v-select__item" v-if="option?.name">
                   <label>
                      <input type="checkbox" :value="option.value" :name="title" style="display: none;"
                         :checked="modelValue.some(item => item.value == option.value)" @change="updateValue">
@@ -27,6 +27,9 @@
                </li>
             </template>
          </ul>
+         <div class="v-select__footer">
+            <UiButton class="black" @click="closeSelect">Применить</UiButton>
+         </div>
       </div>
    </div>
 </template>
@@ -108,6 +111,13 @@ function updateValue(event) {
       }
    }
 }
+
+
+
+
+const closeSelect = (e) => {
+   e.target.closest(".v-select.open").classList.remove('open')
+}
 </script>
 <style lang="scss" scoped>
 label {
@@ -140,7 +150,48 @@ label {
    white-space: nowrap;
    text-overflow: ellipsis;
    width: 100%;
+}
+
+.v-select__content {
+   display: flex;
+   flex-direction: column;
+}
+
+.v-select__list {
+   flex: 1;
+}
+
+.v-select.open {
+   .v-select__footer {
+      opacity: 1;
+      pointer-events: all;
+   }
+}
+
+.v-select__footer {
+   display: none;
+   opacity: 0;
+   pointer-events: none;
+   width: 100%;
+   height: 82px;
+   flex: 0 0 82px;
+   background-color: #F1F1F1;
+   position: sticky;
+   bottom: 0;
+   left: 0;
+   z-index: 2;
+   align-items: center;
+   justify-content: center;
+   translate: 0 25px;
+   border: 0;
+
+   .btn {
+      width: 100%;
+   }
 
 
+   @media(max-width: 1024px) {
+      display: flex;
+   }
 }
 </style>

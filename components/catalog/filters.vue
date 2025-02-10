@@ -23,12 +23,16 @@
             <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title"></span>
                <ul class="catalog-filter__categories">
+
                   <li v-for="(item, index) in categories" :key="index">
                      <input v-model="category" type="radio" :value="item.value" :id="'catalogFilterType' + item.value"
                         name="catalogFilterType">
                      <label :for="'catalogFilterType' + item.value">{{ item.name }}</label>
                   </li>
                </ul>
+            </li>
+            <li class="sort" style="display: none;">
+               <UiSelect title="sort" :settings="sortSettings" @selectOption="onSelectSortOption" />
             </li>
             <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Количество комнат</span>
@@ -337,6 +341,52 @@ watch(() => props.type, async (value) => {
 watch(myType, (value) => {
    emit("changeType", value)
 })
+const sortSettings = ref({
+   options: [
+      {
+         name: "По рекомендации",
+         value: '',
+         selected: true
+      },
+      {
+         name: "Сначала новые",
+         value: 'createdAt:asc',
+      },
+      {
+         name: "Сначала старые",
+         value: 'createdAt:desc',
+      },
+      {
+         name: "По возрастанию цены",
+         value: 'cost_total:asc',
+      },
+      {
+         name: "По убыванию цены",
+         value: 'cost_total:desc',
+      },
+      {
+         name: "По возрастанию площади",
+         value: 'square_apartament:asc',
+      },
+      {
+         name: "По убыванию площади",
+         value: 'square_apartament:desc',
+      },
+   ],
+   // placeholder: "Выберите сортировку"
+})
+const sortOption = defineModel()
+function onSelectSortOption(option) {
+   sortOption.value = option.value
+}
+
+
+
+
+watch(category, () => {
+   search()
+})
+
 const filtersObject = computed(() => {
    let obj = {}
    obj.category = category.value
@@ -681,6 +731,12 @@ onMounted(async () => {
 .all-filters {
    svg path {
       fill: black;
+   }
+}
+
+.sort {
+   &:has(.open) {
+      display: flex !important;
    }
 }
 </style>

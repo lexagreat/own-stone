@@ -187,6 +187,28 @@ onMounted(() => {
          padding: 0;
          border: 0;
       }
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      &::after {
+         content: "";
+         display: block;
+         width: 14px;
+         height: 14px;
+         flex: 0 0 14px;
+         background: url(@/assets/img/icons/check.svg) center / contain no-repeat;
+         transition: 0.3s;
+         opacity: 0;
+      }
+
+      &.active {
+         &::after {
+            opacity: 1;
+         }
+      }
    }
 }
 </style>

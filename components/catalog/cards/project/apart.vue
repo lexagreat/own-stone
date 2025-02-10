@@ -162,6 +162,8 @@ const photos = computed(() => props.product.photos.length > 3 ? props.product.ph
 <style lang="scss" scoped>
 .catalog-card {
    &.project-card {
+      height: 100%;
+
       .catalog-card {
          &__footer {
             flex: unset;
@@ -205,6 +207,37 @@ const photos = computed(() => props.product.photos.length > 3 ? props.product.ph
 
    &__footer {
       border-top: 0;
+   }
+}
+
+.apart.project-card {
+   max-height: 270px;
+
+   .catalog-card {
+
+      &__header {
+         display: flex;
+
+         .catalog-card__like {
+            display: none;
+         }
+      }
+
+      &__gallery {
+         height: 100%;
+      }
+
+      &__banners {
+         max-width: calc(100% - 35px);
+      }
+
+      &__price {
+         -webkit-line-clamp: 2;
+      }
+
+      &__footer {
+         border-top: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
+      }
    }
 }
 </style>
