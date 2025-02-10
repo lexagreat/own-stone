@@ -62,9 +62,6 @@ const breakpoints = {
 const onSwiper = (s) => {
    swiper.value = s;
 }
-const onPrev = () => {
-   console.log(swiper.value);
-}
 const items = [];
 let takeOne = false; // Флаг, который определяет, сколько элементов брать
 
