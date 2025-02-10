@@ -6,7 +6,7 @@
             <ArrowDownIcon style="rotate: 90deg;" />
          </button>
          <h3 class="catalog-filters__title">Фильтр</h3>
-         <button class="catalog-filters__reset">Сбросить все</button>
+         <button class="catalog-filters__reset" @click="resetFilters">Сбросить все</button>
       </div>
       <ul class="catalog-filters__radios">
          <li v-for="(item, index) in types" :key="index">
@@ -233,7 +233,6 @@ const transport = ref([{
    name: "Не важно",
    value: 0,
 }])
-
 
 
 const dateSettings = ref({
@@ -709,10 +708,14 @@ function setFiltersFromCat(obj) {
    targetSettings.value.options = obj?.target
    // set entry
    entrySettings.value.options = obj?.entry
+
+
+
+
+
    // set entry
    options.value = obj?.tags
 
-   // console.log("2. set filters");
 }
 onMounted(async () => {
    if (props.fromHome) {
@@ -724,6 +727,67 @@ onMounted(async () => {
    await search()
 
 })
+
+const resetFilters = () => {
+   // set ranges
+   priceMinValue.value = priceMin.value
+   priceMaxValue.value = priceMax.value
+   areaMinValue.value = areaMin.value
+   areaMaxValue.value = areaMax.value
+
+   // set repair
+   repair.value = [{
+      name: "Любая",
+      value: 0,
+   }]
+   // set sroks
+   dates.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+
+   // set floors
+   floor.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   // set location
+   placement.value = [{
+      name: "Не важно",
+      value: 0,
+   }]
+   // set transport
+   transport.value = [{
+      name: "Не важно",
+      value: 0,
+   }]
+
+   // set target
+   target.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   // set entry
+   entry.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   roomsChecked.value = []
+   checkedOptions.value = []
+
+
+
+}
+
+
 </script>
 
 
