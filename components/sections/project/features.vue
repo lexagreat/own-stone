@@ -27,8 +27,8 @@
                   </SwiperSlide>
                </Swiper>
                <Swiper class="mobile" :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }"
-                  @swiper="onSwiper" slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop
-                  :speed="700" :freeMode="true">
+                  slides-per-view="auto" :space-between="10" :breakpoints="breakpoints" loop :speed="700"
+                  :freeMode="true">
                   <SwiperSlide v-for="item in info" :key="item">
                      <div class="project-feature">
                         <img :src="item?.picture[0]?.url" alt="">
@@ -62,7 +62,9 @@ const breakpoints = {
 const onSwiper = (s) => {
    swiper.value = s;
 }
-
+const onPrev = () => {
+   console.log(swiper.value);
+}
 const items = [];
 let takeOne = false; // Флаг, который определяет, сколько элементов брать
 
