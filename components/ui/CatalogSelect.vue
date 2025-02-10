@@ -177,7 +177,7 @@ label {
    flex: 0 0 82px;
    background-color: #F1F1F1;
    position: sticky;
-   bottom: 0;
+   bottom: 75px;
    left: 0;
    z-index: 2;
    align-items: center;

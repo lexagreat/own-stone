@@ -85,6 +85,10 @@ export default {
    transition: 0.5s;
    overflow-y: auto;
    overflow-x: hidden;
+
+   @media(max-width: 1024px) {
+      height: 100vh;
+   }
 }
 
 .modal__content {
@@ -103,6 +107,10 @@ export default {
    -webkit-transition: 0.5s;
    -o-transition: 0.5s;
    transition: 0.5s;
+
+   @media(max-width: 1024px) {
+      border-radius: 0;
+   }
 }
 
 .modal__close {
