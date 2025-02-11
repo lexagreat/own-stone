@@ -1,6 +1,6 @@
 <template>
    <div class="code-input">
-      <input v-for="(item, index) in fields" ref="inputs" type="text" v-model="fields[index]" v-maska="'#'"
+      <input v-for="(item, index) in fields" ref="inputs" type="number" v-model="fields[index]" v-maska="'#'"
          @input="onInput(index)" @keydown.backspace="onBackspace(index)">
    </div>
 </template>

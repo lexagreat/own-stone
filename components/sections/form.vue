@@ -25,7 +25,7 @@
             </div>
          </div>
          <div class="form-section__map">
-            <MapsOffice :info="contacts?.info?.contacts_info?.contacts_map_coords" />
+            <MapsOffice :info="contacts?.info?.contacts_info" />
          </div>
       </div>
       <ModalSuccessModal :isOpen="success" @closePopup="success = false" />

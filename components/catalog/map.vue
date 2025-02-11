@@ -10,15 +10,15 @@
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
       <yandex-map-default-features-layer />
 
-      <!-- <template v-for="(item, index) in products" :key="index">
-         <yandex-map-marker v-if="item.coords && parseCoords(item.coords)" position="top-center left-center"
-            :settings="{ coordinates: parseCoords(item.coords) }" @click="toggleBalloon(index)">
-            <img alt="" class="pin" src="/map-marker.svg" style="width: 60px;">
-         </yandex-map-marker>
-      </template> -->
+      <!-- Кластеризатор с дополнительными настройками -->
       <yandex-map-clusterer :settings="{
-         gridSize: 64,
-         clusterDisableClickZoom: false
+         gridSize: 128,
+         clusterize: true,
+         minClusterSize: 2, // Можно уменьшить значение, чтобы кластеры создавались при меньшем количестве маркеров
+         clusterIconLayout: 'default#pieChart',
+         clusterIconContentLayout: 'default#pieChartWithCount',
+         hasHint: true,
+         maxZoom: 2 // Установите максимальный уровень зума, при котором кластеры показывают количество
       }">
          <template v-for="(item, index) in products" :key="index">
             <yandex-map-marker v-if="item.coords && parseCoords(item.coords)"
@@ -63,10 +63,10 @@ const parseCoords = (coords) => {
    }
 };
 
-// Проверка данных при загрузке
-onMounted(() => {
-   console.log("products:", props.products.map(item => item.coords));
-});
+// Функция для отображения балуна, если необходимо
+const toggleBalloon = (index) => {
+   console.log('Балун для маркера:', index);
+};
 </script>
 
 <style scoped>

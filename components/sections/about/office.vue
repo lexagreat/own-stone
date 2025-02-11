@@ -29,7 +29,8 @@
             </div>
          </div>
          <div class="form-section__map">
-            <MapsOffice />
+            <MapsOffice :info="contacts?.info?.contacts_info" />
+
          </div>
       </div>
    </section>

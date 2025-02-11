@@ -44,19 +44,19 @@
                      <ul class="header__icons">
                         <li>
 
-                           <a target="_blank" class="circle"
-                              :href="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                           <NuxtLink target="_blank" class="circle"
+                              :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
-                           </a>
+                           </NuxtLink>
                         </li>
                         <li>
 
 
-                           <a target="_blank" class="circle"
-                              :href="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+                           <NuxtLink target="_blank" class="circle"
+                              :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
 
-                           </a>
+                           </NuxtLink>
                         </li>
                      </ul>
                   </li>
@@ -132,19 +132,19 @@
                   </li>
                   <ul class="header__icons">
                      <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url?.length">
-                        <a target="_blank" class="circle"
-                           :href="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                        <NuxtLink target="_blank" class="circle"
+                           :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                            <!-- <TgIcon /> -->
                            <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
-                        </a>
+                        </NuxtLink>
                      </li>
                      <li v-if="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url?.length">
-                        <a target="_blank" class="circle"
-                           :href="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+                        <NuxtLink target="_blank" class="circle"
+                           :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
                            <!-- <WhatsappIcon /> -->
                            <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
 
-                        </a>
+                        </NuxtLink>
                      </li>
                   </ul>
                </ul>
