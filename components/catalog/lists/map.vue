@@ -73,11 +73,12 @@ const onForm = (id) => {
    background-color: #f1f1f1;
    display: flex;
    flex-direction: column;
-   align-items: center;
+   align-items: start;
    padding: 15px;
    gap: 15px;
    height: 100%;
    overflow: auto;
+   width: 100%;
 
    @media(max-width: 1024px) {
       background-color: #F8F8F8;
@@ -86,7 +87,10 @@ const onForm = (id) => {
    }
 
    &>li {
-      height: 100%;
+      width: 100%;
+      height: auto;
+
+      @media(max-width: 1024px) {}
 
       .catalog-card {
          @media(max-width: 1024px) {
@@ -112,7 +116,7 @@ const onForm = (id) => {
       position: absolute;
       top: 0;
       left: 0;
-      width: fit-content;
+      width: 363px;
       bottom: 0;
 
 
