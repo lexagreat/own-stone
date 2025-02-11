@@ -64,7 +64,8 @@
                   <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
                      v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
-               <CatalogMap v-if="currentView == 'map'" :products="catalog.products" />
+               <CatalogMap v-if="currentView == 'map'" :searchUrl="searchUrl" :products="catalog.products"
+                  :category="category" @openForm="onOpenForm" />
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
                   :id="currentProductForModal" />
             </div>

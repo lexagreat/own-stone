@@ -19,8 +19,8 @@
       <div class="catalog-card__main">
          <div class="catalog-card__content">
             <ul class="catalog-card__banners">
-               <li>{{ product?.floor }} ЭТАЖ</li>
-               <li>{{ product?.finishing }}</li>
+               <li v-if="product?.floor">{{ product?.floor }} ЭТАЖ</li>
+               <li v-if="product?.finishing?.length">{{ product?.finishing }}</li>
                <li>ID {{ product?.id }}</li>
             </ul>
             <h4 class="catalog-card__title">{{ formatPrice(product?.cost_total) }}</h4>

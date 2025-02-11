@@ -19,17 +19,6 @@ export const useCatalog = defineStore("useCatalog", {
       },
       async getProducts(url) {
          let base = "catalog";
-         // if (object.type !== "Вторичная") {
-         //    // project || apartaments
-         //    if (object.category == 0) {
-         //       base = "projects";
-         //    } else {
-         //       base = "apartaments";
-         //    }
-         // } else {
-         //    base = "apartments";
-         // }
-         // console.log("search url", base + url);
          const response = await useBaseFetch(base + url);
          // console.log("Продукты по поиску", response.data);
          this.products = response.data;
@@ -296,7 +285,6 @@ export const useCatalog = defineStore("useCatalog", {
          // console.log("tags", res);
          return res;
       },
-
       async getFiltersForCats(cat, t, slug) {
          let types = {
             build: "Новостройки",

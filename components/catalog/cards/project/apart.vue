@@ -155,7 +155,7 @@ const liked = computed(() => {
 })
 
 
-const photos = computed(() => props.product.photos.length > 3 ? props.product.photos.slice(0, 3) : props.product.photos)
+const photos = computed(() => props.product?.photos?.length > 3 ? props.product.photos.slice(0, 3) : props.product.photos)
 </script>
 
 

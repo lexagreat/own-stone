@@ -31,6 +31,7 @@ const emit = defineEmits(['closePopup', 'changePhone'])
 const code = ref('')
 const onChangeCode = (value) => {
    code.value = value
+   console.log(value);
 }
 watch(code, async (value) => {
    if (String(value).length == 4) {
