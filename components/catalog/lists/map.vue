@@ -89,7 +89,9 @@ const onForm = (id) => {
       height: 100%;
 
       .catalog-card {
-         height: 100%;
+         @media(max-width: 1024px) {
+            height: 100%;
+         }
       }
    }
 
