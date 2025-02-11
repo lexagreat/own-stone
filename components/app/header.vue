@@ -43,12 +43,15 @@
                   <li>
                      <ul class="header__icons">
                         <li>
+                           {{ contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr }}
                            <NuxtLink target="_blank" class="circle"
                               :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
                            </NuxtLink>
                         </li>
                         <li>
+                           {{ contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr }}
+
                            <NuxtLink target="_blank" class="circle"
                               :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
