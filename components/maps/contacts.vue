@@ -21,11 +21,11 @@
       <template v-for="(item, index) in info?.contacts_map_coords" :key="index">
          <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item.coords) }"
             @click="toggleBalloon(index)">
-            <img alt="" class="pin" src="/map-marker.svg" style="width: 60px;">
 
             <div v-if="activeMarker === index" class="balloon" :style="getBalloonStyle(JSON.parse(item.coords))">
                {{ info?.address_string }}
             </div>
+            <img alt="" class="pin" src="/map-marker.svg" style="width: 60px; height: 72px;" v-else>
          </yandex-map-marker>
       </template>
 
@@ -62,14 +62,9 @@ const toggleBalloon = (index) => {
 // Определяем стиль балуна (можно улучшить)
 const getBalloonStyle = (coords) => {
    return {
-      position: "absolute",
       // left: `${coords[0]}px`,
       // top: `${coords[1]}px`,
-      background: "white",
-      padding: "10px",
-      borderRadius: "8px",
-      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-      cursor: "pointer"
+
    };
 };
 
@@ -84,10 +79,27 @@ const getBalloonStyle = (coords) => {
 
 .balloon {
    position: absolute;
-   background: white;
+   background: #181818;
+   color: white;
    padding: 10px;
-   border-radius: 8px;
-   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-   white-space: nowrap;
+   border-radius: 4px;
+   cursor: pointer;
+   width: 164px;
+   top: 0;
+   left: 0;
+   translate: -50% -50%;
+
+   &::after {
+      content: "";
+      display: block;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+      width: 20px;
+      aspect-ratio: 2;
+      background-color: #181818;
+      position: absolute;
+      top: 98%;
+      left: 50%;
+      translate: -50% 0;
+   }
 }
 </style>
