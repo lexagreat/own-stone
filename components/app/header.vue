@@ -43,20 +43,20 @@
                   <li>
                      <ul class="header__icons">
                         <li>
-                           {{ contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr }}
-                           <NuxtLink target="_blank" class="circle"
-                              :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+
+                           <a target="_blank" class="circle"
+                              :href="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
-                           </NuxtLink>
+                           </a>
                         </li>
                         <li>
-                           {{ contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr }}
 
-                           <NuxtLink target="_blank" class="circle"
-                              :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+
+                           <a target="_blank" class="circle"
+                              :href="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
 
-                           </NuxtLink>
+                           </a>
                         </li>
                      </ul>
                   </li>
@@ -127,24 +127,24 @@
                <span>Связаться с нами</span>
                <ul>
                   <li>
-                     <NuxtLink :to="'tel:' + contacts?.info?.contacts_info?.phonenumber">{{
-                        contacts?.info?.contacts_info?.phonenumber }}</NuxtLink>
+                     <a :href="'tel:' + contacts?.info?.contacts_info?.phonenumber">{{
+                        contacts?.info?.contacts_info?.phonenumber }}</a>
                   </li>
                   <ul class="header__icons">
                      <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url?.length">
-                        <NuxtLink target="_blank" class="circle"
-                           :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                        <a target="_blank" class="circle"
+                           :href="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                            <!-- <TgIcon /> -->
                            <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
-                        </NuxtLink>
+                        </a>
                      </li>
                      <li v-if="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url?.length">
-                        <NuxtLink target="_blank" class="circle"
-                           :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+                        <a target="_blank" class="circle"
+                           :href="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
                            <!-- <WhatsappIcon /> -->
                            <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
 
-                        </NuxtLink>
+                        </a>
                      </li>
                   </ul>
                </ul>
