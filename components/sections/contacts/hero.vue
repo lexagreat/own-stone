@@ -35,7 +35,7 @@
                      </div>
                   </div>
                   <div class="contacts-hero__map">
-                     <MapsContacts :info="info?.contacts_info?.contacts_map_coords" />
+                     <MapsContacts :info="info?.contacts_info" />
                   </div>
                </div>
                <ul class="contacts-hero__list">

@@ -9,6 +9,9 @@
       justify-content: center;
       gap: 60px;
       padding-bottom: 60px;
+      @media (max-width: $mobile) {
+         min-height: calc(100dvh - 60px - 56px);
+      }
    }
 
    // .home-hero__title

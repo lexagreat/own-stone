@@ -36,6 +36,7 @@
                      <i class="circle">{{ filtersCount }}</i>
                   </UiButton>
                   <div class="catalog-page__controls">
+
                      <ul class="catalog-page__views">
                         <li v-for="item in views" :key="item">
                            <input v-model="currentView" type="radio" name="catalogViews" :value="item.value"
@@ -45,13 +46,14 @@
                            </label>
                         </li>
                      </ul>
-                     <UiButton class="catalog-page__map white">
+                     <UiButton class="catalog-page__map white" :class="{ active: currentView == 'map' }"
+                        @click="currentView = 'map'">
                         <IconGeo />
                         <span>На карте</span>
                      </UiButton>
                   </div>
                </div>
-               <div class="catalog-page__main">
+               <div class="catalog-page__main" v-if="currentView !== 'map'">
                   <CatalogListsGrid :products="splicedProducts[0]" @openForm="onOpenForm" v-if="currentView == 'grid'"
                      :category="category" />
                   <CatalogListsColumn :products="splicedProducts[0]" @openForm="onOpenForm"
@@ -62,13 +64,15 @@
                   <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
                      v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
+               <CatalogMap v-if="currentView == 'map'" :products="catalog.products" />
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
                   :id="currentProductForModal" />
             </div>
          </div>
       </section>
 
-      <CatalogPagination :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage" @showMore="onShowMore" />
+      <CatalogPagination v-if="currentView !== 'map'" :pages="catalog?.meta?.pagination?.pageCount"
+         v-model="currentPage" @showMore="onShowMore" />
       <!-- <SectionsProductSlider>
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
@@ -103,6 +107,8 @@ const path = ref([
       to: ""
    },
 ])
+
+
 const onChangeType = (value) => {
    type = value
 }
@@ -293,4 +299,20 @@ const mobileSort = () => {
 
 
 const filtersCount = ref(0)
+
+
 </script>
+
+
+<style lang="scss">
+.catalog-page__map {
+   &.active {
+      background-color: #181818 !important;
+      color: white !important;
+
+      svg path {
+         fill: white !important;
+      }
+   }
+}
+</style>

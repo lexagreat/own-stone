@@ -10,7 +10,7 @@
                         <ArrowDownIcon style="rotate: 90deg;" />
                      </button>
                      <h3 class="catalog-filters__title">Фильтр</h3>
-                     <button class="catalog-filters__reset">Сбросить все</button>
+                     <button class="catalog-filters__reset" @click="resetFitlers">Сбросить все</button>
                   </div>
                   <div class="catalog-filters__content">
                      <ul class="catalog-filters__items">
@@ -127,7 +127,13 @@ const repair = ref([{
    value: 0,
 }])
 
-
+watch(isOpenModal, (value) => {
+   if (value) {
+      bodyLock()
+   } else {
+      bodyUnlock()
+   }
+})
 
 const dateSettings = ref({
    options: [
@@ -180,12 +186,6 @@ const UpdateAreas = (e) => {
 
 
 const options = ref([
-   {
-      name: "NEW",
-      value: 0,
-
-   },
-
 ])
 const checkedOptions = ref([])
 
@@ -293,38 +293,32 @@ onMounted(async () => {
    await setCat()
    await search()
 })
-const filtersCount = computed(() => {
-   let int = 0;
-   if (roomsChecked.value?.length) {
-      int++
-   }
-   if (areaMinValue.value !== areaMin.value) {
-      int++
-   }
-   if (areaMaxValue.value !== areaMax.value) {
-      int++
-   }
-   if (priceMinValue.value !== priceMin.value) {
-      int++
-   }
-   if (priceMaxValue.value !== priceMax.value) {
-      int++
-   }
-   if (repair.value[0].value !== 0) {
-      int++
-   }
-   if (dates.value[0].value !== 0) {
-      int++
-   }
-   if (repaitargetr.value[0].value !== 0) {
-      int++
-   }
-   if (checkedOptions.value.length) {
-      int++
-   }
-   return int
-})
+const resetFitlers = () => {
+   priceMinValue.value = priceMin.value
+   priceMaxValue.value = priceMax.value
+   areaMinValue.value = areaMin.value
+   areaMaxValue.value = areaMax.value
 
+   target.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   dates.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   repair.value = [{
+      name: "Любая",
+      value: 0,
+   }]
+
+   roomsChecked.value = []
+   checkedOptions.value = []
+}
 
 </script>
 

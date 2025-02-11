@@ -44,3 +44,13 @@ onMounted(() => {
    sharedParallaxAnimation(".sell-hero__image img", ".sell-hero")
 })
 </script>
+
+
+
+<style lang="scss">
+.sell-hero {
+   &:has(.modal.open) {
+      z-index: 123;
+   }
+}
+</style>

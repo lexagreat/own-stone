@@ -39,7 +39,7 @@
          border-color: $black;
       }
       @media (max-width: $mobile) {
-         display: grid;
+         display: grid !important;
          grid-template-columns: repeat(3, 1fr);
          label {
             padding: 0 6px;

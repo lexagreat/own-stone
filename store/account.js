@@ -23,6 +23,7 @@ export const useAccount = defineStore("useAccount", {
          if (response?.status) {
             this.saveToken(response.data.token);
             await this.getMeInfo();
+            await this.getFaq();
          }
          return response;
       },

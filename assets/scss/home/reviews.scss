@@ -2,7 +2,9 @@
    overflow: hidden;
    padding-bottom: var(--margin);
    // .home-reviews__wrapper
-
+   &:has(.modal.open) {
+      z-index: 123;
+   }
    &__wrapper {
    }
 

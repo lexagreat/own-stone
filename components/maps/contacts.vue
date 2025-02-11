@@ -1,7 +1,7 @@
 <template>
-   <yandex-map v-if="info?.length" :settings="{
+   <yandex-map ref="map" v-if="info?.contacts_map_coords?.length" :settings="{
       location: {
-         center: JSON.parse(info[0]?.coords),
+         center: JSON.parse(info?.contacts_map_coords[0]?.coords),
          zoom: 9,
          duration: 2500
       },
@@ -12,9 +12,22 @@
       <yandex-map-default-features-layer />
 
 
-      <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(info[0]?.coords) }">
+      <!-- <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(info[0]?.coords) }">
          <img alt="" class="pin" src="/map-marker.svg" style="width: 60px;">
-      </yandex-map-marker>
+
+      </yandex-map-marker> -->
+
+
+      <template v-for="(item, index) in info?.contacts_map_coords" :key="index">
+         <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item.coords) }"
+            @click="toggleBalloon(index)">
+            <img alt="" class="pin" src="/map-marker.svg" style="width: 60px;">
+
+            <div v-if="activeMarker === index" class="balloon" :style="getBalloonStyle(JSON.parse(item.coords))">
+               {{ info?.address_string }}
+            </div>
+         </yandex-map-marker>
+      </template>
 
 
       <yandex-map-controls :settings="{ position: 'right' }">
@@ -35,9 +48,46 @@ import {
    YandexMapMarker
 } from "vue-yandex-maps";
 const props = defineProps({
-   info: Array
+   info: Object
 })
 
+// Отслеживание активного маркера
+const activeMarker = ref(null);
+
+// Открытие/закрытие балуна
+const toggleBalloon = (index) => {
+   activeMarker.value = activeMarker.value === index ? null : index;
+};
+
+// Определяем стиль балуна (можно улучшить)
+const getBalloonStyle = (coords) => {
+   return {
+      position: "absolute",
+      // left: `${coords[0]}px`,
+      // top: `${coords[1]}px`,
+      background: "white",
+      padding: "10px",
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+      cursor: "pointer"
+   };
+};
 
 
 </script>
+
+
+<style lang="scss">
+.pin {
+   cursor: pointer;
+}
+
+.balloon {
+   position: absolute;
+   background: white;
+   padding: 10px;
+   border-radius: 8px;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   white-space: nowrap;
+}
+</style>
