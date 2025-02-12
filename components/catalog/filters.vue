@@ -140,7 +140,7 @@
             </li>
             <li class="catalog-filters__btns">
                <UiButton class="white map" v-if="!fromCatalog" @click="search('map')">
-                  <img src="@/assets/img/icons/btn-map.png" alt="">
+                  <img src="/img/btn-map.svg" alt="">
                   <span>На карте</span>
                </UiButton>
                <UiButton class="black" @click="search">Показать все</UiButton>

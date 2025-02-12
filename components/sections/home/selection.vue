@@ -27,7 +27,7 @@
                   Параметры
                </UiButton>
                <UiButton class="white map" @click="isSearchingMap = true">
-                  <img src="@/assets/img/icons/btn-map.png" alt="">
+                  <img src="/img/btn-map.svg" alt="">
                   <span>На карте</span>
                </UiButton>
             </div>
