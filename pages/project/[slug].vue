@@ -10,7 +10,7 @@
          <h2 class="project-features__title h1 dark-title">преимущества</h2>
       </SectionsProjectFeatures>
 
-      <SectionsProjectFilters type="build" :projectSlug="info.slug">
+      <SectionsProjectFilters type="build" :projectSlug="info.slug" :count="info?.apartaments?.length">
          ТИПЫ <span>планировок</span>
       </SectionsProjectFilters>
       <!-- <SectionsProjectBuyWays /> -->
@@ -29,7 +29,7 @@
 </template>
 <script setup>
 const route = useRoute()
-let { data: info } = await useBaseFetch(`/projects/?pLevel=3&filters[slug]=${route.params.slug}`)
+let { data: info } = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
 if (!info.length) {
    throw createError({
       statusCode: 404,

@@ -23,8 +23,17 @@
                <div class="project-about__slider">
                   <Swiper :modules="[Pagination, Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }"
                      @swiper="onSwiper" :slides-per-view="1" :pagination="true">
-                     <SwiperSlide v-for="item in info.about_slider[tab]?.gallery">
+                     <SwiperSlide v-for="(item, index) in info.about_slider[tab]?.gallery">
                         <img :src="item.url" alt="">
+                        <ul class="home-team__dots">
+                           <li v-for="item in info.about_slider[tab]?.as_gallery_pin[index]?.pin"
+                              class="home-team__item" :style="item.line_style">
+                              <div class="home-team__dot"></div>
+                              <div class="home-team__modal">
+                                 <span>{{ item.text }}</span>
+                              </div>
+                           </li>
+                        </ul>
                      </SwiperSlide>
                   </Swiper>
                   <UiSliderBtn prev transparent @click="SwiperInst.slidePrev()" />

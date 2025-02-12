@@ -16,21 +16,22 @@
             </ul>
             <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
                @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
-               @setCat="setCat" :loading="loading" v-model="sortOption" @update:filtersCount="filtersCount = $event" />
+               @setCat="setCat" v-model:loading="loading" v-model="sortOption"
+               @update:filtersCount="filtersCount = $event" />
          </div>
       </section>
       <section class="catalog-page">
          <div class="container">
             <div class="catalog-page__wrapper">
                <div class="catalog-page__header">
-                  <div class="catalog-page__sort">
+                  <div class="catalog-page__sort" :class="{ dis: loading }">
                      <button class="circle mobile" @click="mobileSort">
                         <IconSort />
                      </button>
                      <span>Сортировка</span>
                      <UiSelect title="sort" :settings="sortSettings" @selectOption="onSelectSortOption" />
                   </div>
-                  <UiButton class="white all-filters" @click="isFiltersOpen = true">
+                  <UiButton class="white all-filters" @click="isFiltersOpen = true" :class="{ dis: loading }">
                      <IconFilter />
                      <span>Фильтры</span>
                      <i class="circle">{{ filtersCount }}</i>
@@ -41,19 +42,19 @@
                         <li v-for="item in views" :key="item">
                            <input v-model="currentView" type="radio" name="catalogViews" :value="item.value"
                               :id="'catalogViews' + item.value">
-                           <label class="circle" :for="'catalogViews' + item.value">
+                           <label class="circle" :for="'catalogViews' + item.value" @click="catalog.isMap = false">
                               <component :is="item.icon" />
                            </label>
                         </li>
                      </ul>
-                     <UiButton class="catalog-page__map white" :class="{ active: currentView == 'map' }"
-                        @click="currentView = 'map'">
+                     <UiButton class="catalog-page__map white" :class="{ active: catalog.isMap }"
+                        @click="catalog.isMap = true">
                         <IconGeo />
                         <span>На карте</span>
                      </UiButton>
                   </div>
                </div>
-               <div class="catalog-page__main" v-if="currentView !== 'map'">
+               <div class="catalog-page__main" v-if="!catalog.isMap">
                   <CatalogListsGrid :products="splicedProducts[0]" @openForm="onOpenForm" v-if="currentView == 'grid'"
                      :category="category" />
                   <CatalogListsColumn :products="splicedProducts[0]" @openForm="onOpenForm"
@@ -64,16 +65,16 @@
                   <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
                      v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
-               <CatalogMap v-if="currentView == 'map'" :searchUrl="searchUrl" :products="catalog.products"
-                  :category="category" @openForm="onOpenForm" />
+               <CatalogMap v-if="catalog.isMap" :searchUrl="searchUrl" :products="catalog.products" :category="category"
+                  @openForm="onOpenForm" />
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
                   :id="currentProductForModal" />
             </div>
          </div>
       </section>
 
-      <CatalogPagination v-if="currentView !== 'map'" :pages="catalog?.meta?.pagination?.pageCount"
-         v-model="currentPage" @showMore="onShowMore" />
+      <CatalogPagination v-if="!catalog.isMap" :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage"
+         @showMore="onShowMore" />
       <!-- <SectionsProductSlider>
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
@@ -171,6 +172,13 @@ const views = ref([
 ])
 const loading = ref(true)
 const currentView = ref("grid")
+watch(() => catalog.isMap, (value) => {
+   if (value) {
+      currentView.value = ''
+   }
+}, {
+   immediate: true
+})
 const sortSettings = ref({
    options: [
       {
@@ -291,7 +299,9 @@ watch(sortOption, async () => {
    if (stopConditionForSearch.value) return
    await search()
 })
-
+onBeforeRouteLeave(() => {
+   catalog.isMap = false
+})
 const mobileSort = () => {
    isFiltersOpen.value = true
    document.querySelector('.catalog-filters .sort .v-select').classList.add('open')
@@ -315,5 +325,9 @@ const filtersCount = ref(0)
          fill: white !important;
       }
    }
+}
+
+.dis {
+   pointer-events: none;
 }
 </style>

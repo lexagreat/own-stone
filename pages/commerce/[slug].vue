@@ -1,7 +1,8 @@
 <template>
    <main class="main">
       <SectionsProjectHero :info="info" />
-      <SectionsProjectFilters type="commerce" :projectSlug="info.slug" class="project-filters_commerce">
+      <SectionsProjectFilters type="commerce" :projectSlug="info.slug" class="project-filters_commerce"
+         :count="info?.apartaments?.length">
          варианты <span>планировок</span>
       </SectionsProjectFilters>
       <SectionsProjectChars class="project-chars_commerce" :info="info">

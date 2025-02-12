@@ -115,7 +115,7 @@ onMounted(() => {
    max-width: fit-content;
 
    &.open {
-      z-index: 11;
+      z-index: 110;
 
       .v-select__backdrop {
          display: block;

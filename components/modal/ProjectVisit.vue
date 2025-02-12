@@ -26,7 +26,8 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" style="width: 100%;" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить
+            <UiButton class="black" style="width: 100%;" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить
+               заявку
             </UiButton>
          </div>
 

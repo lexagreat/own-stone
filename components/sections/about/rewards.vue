@@ -55,3 +55,15 @@ onMounted(() => {
    rewardsAnimmation()
 })
 </script>
+
+
+
+<style lang="scss">
+@media(max-width: 568px) {
+   .about-rewards {
+      .rewards-section__title span {
+         display: block;
+      }
+   }
+}
+</style>

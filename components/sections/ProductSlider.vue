@@ -19,6 +19,7 @@
                }">
                   <SwiperSlide v-for="item in products" :key="item">
                      <CatalogCardsObject :product="item" @click="onOpenForm" v-if="category == 1" />
+                     <CatalogCardsProjectApart :product="item" v-else-if="category == 2" />
                      <CatalogCardsProject :product="item" v-else />
                   </SwiperSlide>
                </Swiper>

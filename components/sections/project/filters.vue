@@ -3,7 +3,12 @@
       <div class="container">
          <div class="project-selection__wrapper">
             <div class="project-selection__filters project-filters">
-               <h2 class="project-filters__title h1 dark-title">подобрать <span>квартиру</span></h2>
+               <h2 class="project-filters__title h1 dark-title pc">подобрать <span>квартиру</span></h2>
+               <h2 class="project-filters__title h1 dark-title mob">
+                  подобрать квартиру
+                  <span>{{ formatNumber(count) }} {{ morph(count, ['предложение', 'предложения', 'предложений'])
+                     }}</span>
+               </h2>
                <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal }">
                   <div class="catalog-filters__header">
                      <button class="circle circle40" @click="isOpenModal = false">
@@ -107,6 +112,7 @@ const route = useRoute()
 const props = defineProps({
    type: String,
    projectSlug: String,
+   count: Number
 })
 const category = ref(1)
 
@@ -246,6 +252,7 @@ const filtersObject = computed(() => {
    obj.tags = checkedOptions.value
    return obj
 })
+const first = ref(true)
 const search = async () => {
    isOpenModal.value = false
    // emit('setCat', category.value)
@@ -256,6 +263,13 @@ const search = async () => {
    const url = catalog.getUrl(filtersObject.value) + `&filters[proekty][slug]=${props.projectSlug}`
 
    await catalog.getProducts(url)
+
+   if (!first.value) {
+      document.querySelector('.project-selection .product-slider').scrollIntoView({
+         behavior: 'smooth'
+      })
+   }
+
 }
 const setCat = async () => {
 
@@ -288,10 +302,10 @@ function setFiltersFromCat(obj) {
    // console.log("2. set filters");
 }
 
-
 onMounted(async () => {
    await setCat()
    await search()
+   first.value = false;
 })
 const resetFitlers = () => {
    priceMinValue.value = priceMin.value
@@ -331,6 +345,32 @@ const resetFitlers = () => {
 }
 
 .project-selection {
+   .mob {
+      display: none;
+   }
+
+   .catalog-filter__title,
+   .v-select__wrapper {
+      text-align: left;
+   }
+
+   @media(max-width: 1024px) {
+      .mob {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+
+         span {
+            color: rgba(#181818, 0.15);
+         }
+      }
+
+      .pc {
+         display: none;
+      }
+   }
+
    .swiper-slide {
       // max-width: 333px;
       margin-right: 8px !important;

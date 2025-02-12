@@ -7,7 +7,7 @@
       <SectionsSellPortfolio :info="info.sell_portfolio" />
       <SectionsHomeReviews :info="info.reviews" />
       <section class="project-sliders">
-         <SectionsProductSlider :products="info.sell_projects_slider.apartmanets" :category="1" white-btns>
+         <SectionsProductSlider :products="info.sell_projects_slider.apartmanets" :category="2" white-btns>
             <div v-html="info.sell_projects_slider.title"></div>
          </SectionsProductSlider>
       </section>

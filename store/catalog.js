@@ -2,6 +2,7 @@ export const useCatalog = defineStore("useCatalog", {
    state: () => ({
       products: [],
       meta: {},
+      isMap: false,
    }),
    actions: {
       makeSubStr(string) {

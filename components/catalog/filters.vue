@@ -121,7 +121,7 @@
                </ul>
             </li>
             <li class="catalog-filters__btns">
-               <UiButton class="white map" v-if="!fromCatalog">
+               <UiButton class="white map" v-if="!fromCatalog" @click="search('map')">
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
@@ -145,8 +145,8 @@ const props = defineProps({
    isOpenModal: Boolean,
    type: String,
    fromCatalog: Boolean,
-   loading: Boolean,
    fromHome: Boolean,
+   isSearchingMap: Boolean,
    products: Array,
    filters: Object
 })
@@ -375,15 +375,20 @@ const sortSettings = ref({
    // placeholder: "Выберите сортировку"
 })
 const sortOption = defineModel()
+const loading = defineModel('loading')
+
 function onSelectSortOption(option) {
    sortOption.value = option.value
+   emit('closeModal')
 }
 
 
 
 
 watch(category, () => {
-   search()
+   if (!props.fromHome) {
+      search()
+   }
 })
 
 const filtersObject = computed(() => {
@@ -423,7 +428,7 @@ const filtersObject = computed(() => {
    obj.tags = checkedOptions.value
    return obj
 })
-const search = async () => {
+const search = async (map) => {
    emit("closeModal")
    if (props.type == 'secondary') {
       category.value = 2
@@ -433,7 +438,11 @@ const search = async () => {
       await setCat()
    }
    // console.log('3. search');
-   const url = catalog.getUrl(filtersObject.value)
+   let url = catalog.getUrl(filtersObject.value)
+   if (map) {
+      catalog.isMap = true
+      // url += "&map=true"
+   }
    emit('search', url)
 }
 const getFiltersFromQuery = () => {
@@ -677,7 +686,7 @@ const getFiltersFromQuery = () => {
    }
 }
 const setCat = async () => {
-
+   loading.value = true
    let response = await catalog.getFiltersForCats(category.value, props.type);
    // console.log("1. filters from cat", response);
    setFiltersFromCat(response)
@@ -715,6 +724,8 @@ function setFiltersFromCat(obj) {
 
    // set entry
    options.value = obj?.tags
+
+   loading.value = false
 
 }
 onMounted(async () => {
@@ -829,6 +840,13 @@ const filtersCount = computed(() => {
 
 watch(filtersCount, (value) => {
    emit('update:filtersCount', value)
+})
+
+
+watch(() => props.isSearchingMap, (value) => {
+   if (value) {
+      search('map')
+   }
 })
 </script>
 

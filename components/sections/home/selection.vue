@@ -18,14 +18,15 @@
                   </li>
                </ul>
                <CatalogFilters fromHome :type="type" :isOpenModal="isOpenModal" @changeType="onChangeType"
-                  @closeModal="isOpenModal = false" @search="onSearch" />
+                  @closeModal="isOpenModal = false" v-model:loading="loading" @search="onSearch"
+                  :isSearchingMap="isSearchingMap" />
             </div>
             <div class="catalog-filters__controls">
                <UiButton class="black" @click="isOpenModal = true">
                   <FilterIcon />
                   Параметры
                </UiButton>
-               <UiButton class="white map">
+               <UiButton class="white map" @click="isSearchingMap = true">
                   <img src="@/assets/img/icons/btn-map.png" alt="">
                   <span>На карте</span>
                </UiButton>
@@ -59,9 +60,12 @@ const onChangeType = (value) => {
    type.value = value
 }
 let { result: count } = await useBaseFetch('/typescounter?type=apartament')
-console.log(count);
 const onSearch = (url) => {
    router.push(`/catalog/${type.value}${url}`)
    // console.log('SEARCH ON HOME PAGE', url, type.value);
 }
+
+
+const isSearchingMap = ref(false)
+const loading = ref(true)
 </script>

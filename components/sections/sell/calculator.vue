@@ -110,7 +110,7 @@
                            <UiSelect :settings="roomsSettings" @selectOption="onSelectRoomsOption" />
                         </li>
                         <li>
-                           <FormInput v-model="size" placeholder="Метраж" id="calcSize" />
+                           <FormInput v-model="size" placeholder="Площадь, м²" id="calcSize" />
                         </li>
                         <li class="gc2">
                            <FormInput placeholder="Ваше имя" v-model="name" />
@@ -383,6 +383,12 @@ const clear = () => {
 
    @media(max-width: 568px) {
       grid-column: unset;
+   }
+}
+
+.sell-calc {
+   .v-select {
+      font-size: 16px;
    }
 }
 </style>
