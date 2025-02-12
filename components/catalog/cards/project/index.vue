@@ -25,7 +25,12 @@
       <div class="catalog-card__main">
          <div class="catalog-card__content">
             <ul class="catalog-card__banners">
-               <li>{{ product?.date_complete }}</li>
+               <li v-if="product?.date_complete">{{ product?.date_complete }}</li>
+               <li>{{ product?.apartaments?.length }} лотов</li>
+               <li>ID {{ product?.id }}</li>
+            </ul>
+            <ul class="list-object__tags" v-if="type == 'row'">
+               <li v-if="product?.date_complete">{{ product?.date_complete }}</li>
                <li>{{ product?.apartaments?.length }} лотов</li>
                <li>ID {{ product?.id }}</li>
             </ul>
@@ -252,5 +257,35 @@ const link = computed(() => {
 <style lang="scss" scoped>
 .project-card {
    height: 100%;
+}
+
+.list-object__tags {
+   display: none;
+
+   @media(max-width: 568px) {
+      display: flex;
+      width: calc(100% - 38px);
+
+
+
+      li:nth-child(3) {
+         height: 21px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: #F3F3F3;
+         color: #181818;
+         font-size: 13px;
+         border-radius: 30px;
+         padding: 0 8px;
+         border: 0;
+      }
+   }
+}
+
+@media(max-width: 568px) {
+   .project-card .catalog-card__banners {
+      display: none;
+   }
 }
 </style>

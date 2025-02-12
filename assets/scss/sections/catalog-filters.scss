@@ -504,3 +504,19 @@
       left: 100%;
    }
 }
+
+#priceRange {
+   .catalog-filter__title {
+      input {
+         display: none;
+      }
+      label {
+         transition: $transition;
+         border-bottom: 1px solid transparent;
+      }
+      label:has(input:checked) {
+         color: $black;
+         border-color: $black;
+      }
+   }
+}

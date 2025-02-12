@@ -28,8 +28,8 @@ export const useCatalog = defineStore("useCatalog", {
          return response;
       },
       getUrl(object) {
-         let resultString = "";
          // console.log("filters object", object);
+         let resultString = "";
          if (object.type !== "Вторичная") {
             // project || apartaments
             if (object.category == 0) {
@@ -63,6 +63,18 @@ export const useCatalog = defineStore("useCatalog", {
                resultString
             )}[cost_total][$lte]=${object?.price?.max}`;
          }
+
+         if (object?.priceForOne?.min) {
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[cost_total_m2][$gte]=${object?.priceForOne?.min}`;
+         }
+         if (object?.priceForOne?.max) {
+            resultString += `&filters${this.makeSubStr(
+               resultString
+            )}[cost_total_m2][$lte]=${object?.priceForOne?.max}`;
+         }
+
          if (object?.area?.min) {
             resultString += `&filters${this.makeSubStr(
                resultString
@@ -138,13 +150,23 @@ export const useCatalog = defineStore("useCatalog", {
       },
       getRanges(arr) {
          let prices = arr.map((item) => +item.cost_total);
+         let pricesForOne = arr.map((item) => +item.cost_total_m2);
          let areas = arr.map((item) => +item.square_apartament);
+
          let priceMin = 0;
          let priceMax = 0;
          if (prices.length > 0) {
             priceMin = Math.min(...prices);
             priceMax = Math.max(...prices);
          }
+
+         let priceForOneMin = 0;
+         let priceForOneMax = 0;
+         if (pricesForOne.length > 0) {
+            priceForOneMin = Math.min(...pricesForOne);
+            priceForOneMax = Math.max(...pricesForOne);
+         }
+
          let areaMin = 0;
          let areaMax = 0;
          if (areas.length > 0) {
@@ -159,6 +181,10 @@ export const useCatalog = defineStore("useCatalog", {
             price: {
                min: priceMin,
                max: priceMax,
+            },
+            priceForOne: {
+               min: priceForOneMin,
+               max: priceForOneMax,
             },
          };
       },

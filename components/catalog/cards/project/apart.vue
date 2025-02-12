@@ -30,6 +30,12 @@
                <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
                <li>ID {{ product?.id }}</li>
             </ul>
+            <ul class="list-object__tags" v-if="type == 'row'">
+               <li>{{ product?.count_rooms }} {{ morph(+product?.count_rooms, ['комната', 'комнаты', 'комнат']) }}</li>
+               <li>{{ product?.square_apartament }}м<sup>2</sup></li>
+               <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
+               <li>ID {{ product?.id }}</li>
+            </ul>
             <button class="catalog-card__like" @click="onLike" :class="{ active: liked }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
@@ -61,6 +67,25 @@
                </svg>
             </button>
          </div>
+         <div class="catalog-card__footer">
+            <div class="catalog-card__btns">
+               <NuxtLink class="btn white" :to="'tel:' + product?.proekty?.phone">
+                  <p>
+                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Icons / phone">
+                           <path id="Vector"
+                              d="M17.5 13.6833V16.63C17.5001 16.841 17.4202 17.0441 17.2763 17.1985C17.1325 17.3528 16.9355 17.4469 16.725 17.4617C16.3608 17.4867 16.0633 17.5 15.8333 17.5C8.46917 17.5 2.5 11.5308 2.5 4.16667C2.5 3.93667 2.5125 3.63917 2.53833 3.275C2.5531 3.06454 2.64715 2.86751 2.8015 2.72367C2.95585 2.57984 3.15902 2.4999 3.37 2.5H6.31667C6.42003 2.4999 6.51975 2.53822 6.59644 2.60752C6.67313 2.67682 6.72133 2.77215 6.73167 2.875C6.75083 3.06667 6.76833 3.21917 6.785 3.335C6.9506 4.49077 7.28999 5.61487 7.79167 6.66917C7.87083 6.83583 7.81917 7.035 7.66917 7.14167L5.87083 8.42667C6.97038 10.9887 9.01212 13.0305 11.5742 14.13L12.8575 12.335C12.91 12.2617 12.9865 12.2091 13.0737 12.1864C13.161 12.1637 13.2535 12.1723 13.335 12.2108C14.3892 12.7116 15.513 13.0501 16.6683 13.215C16.7842 13.2317 16.9367 13.25 17.1267 13.2683C17.2294 13.2789 17.3245 13.3271 17.3936 13.4038C17.4628 13.4805 17.5001 13.5801 17.5 13.6833Z"
+                              fill="black" />
+                        </g>
+                     </svg>
+
+                     <input type="text" :value="product?.proekty?.phone" v-maska="'+7 (###) ###-##-##'" disabled>
+                  </p>
+               </NuxtLink>
+            </div>
+         </div>
+      </div>
+      <div class="apart-mobile">
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
             <div class="catalog-card__btns">
                <NuxtLink class="btn white" :to="'tel:' + product?.proekty?.phone">
@@ -167,8 +192,11 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
       height: 100%;
 
       .catalog-card {
+
+
          &__footer {
             flex: unset;
+            padding-top: 24px;
          }
 
          &__content {
@@ -185,6 +213,63 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
             -webkit-box-orient: vertical;
             /* Вертикальная ориентация */
             /* Обрезаем всё за пределами блока */
+         }
+
+         &__banners {
+            li:last-child {
+               border: 0;
+            }
+         }
+
+         @media(max-width: 568px) {
+            &__main {
+               padding: 10px;
+               padding-left: 0;
+            }
+
+            &__tags {
+               display: none;
+            }
+
+            &__banners {
+               display: none;
+            }
+
+            &__footer {
+               border: 0 !important;
+            }
+         }
+      }
+
+      @media(max-width: 568px) {
+         gap: 10px;
+      }
+   }
+
+   .list-object__tags {
+      display: none;
+
+      @media(max-width: 568px) {
+         display: flex;
+         width: calc(100% - 38px);
+
+         li:nth-child(3) {
+            &::after {
+               display: none;
+            }
+         }
+
+         li:nth-child(4) {
+            height: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F3F3F3;
+            color: #181818;
+            font-size: 13px;
+            border-radius: 30px;
+            padding: 0 8px;
+            border: 0;
          }
       }
    }
@@ -229,6 +314,14 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
 
       &__gallery {
          height: 100%;
+
+         @media(max-width: 1024px) {
+            height: 250px;
+         }
+
+         @media(max-width: 568px) {
+            height: 170px;
+         }
       }
 
       &__banners {
@@ -243,6 +336,14 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
          border-top: 1px solid var(--black-15, rgba(24, 24, 24, 0.15));
       }
    }
+
+   .catalog-card__main {
+      .catalog-card__footer {
+         @media(max-width: 1024px) {
+            display: none !important;
+         }
+      }
+   }
 }
 
 .btn {
@@ -252,6 +353,32 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
       justify-content: center;
       gap: 10px;
       translate: 5px 0;
+   }
+}
+
+
+.apart.project-card {
+   @media(max-width: 1024px) {
+      flex-wrap: wrap;
+
+   }
+}
+
+.apart-mobile {
+   display: none;
+
+   @media(max-width: 1024px) {
+      display: block;
+      flex: 0 0 100%;
+
+      .catalog-card__footer {
+         padding-top: 0 !important;
+      }
+
+      .catalog-card__btns {
+         padding: 20px 10px;
+         padding-top: 10px;
+      }
    }
 }
 </style>

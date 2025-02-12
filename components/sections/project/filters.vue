@@ -50,8 +50,27 @@
                            <UiCatalogSelect title="Отделка" :settings="repairSettings" v-model="repair" />
                         </li>
                         <li class="catalog-filter" id="priceRange">
-                           <span class="catalog-filter__title">Стоимость за <b>все</b> м2</span>
-                           <div class="catalog-range">
+                           <span class="catalog-filter__title">Стоимость за
+                              <label>
+                                 <input v-model="priceType" type="radio" name="priceType" :value="0">
+                                 все
+                              </label>
+                              <label>
+                                 <input v-model="priceType" type="radio" name="priceType" :value="1">
+                                 м2
+                              </label>
+
+                           </span>
+                           <div class="catalog-range" v-if="priceType">
+                              <div class="catalog-range__output">
+                                 <span>{{ formatPrice(priceForOneMinValue) }}</span>
+                                 <span>{{ formatPrice(priceForOneMaxValue) }}</span>
+                              </div>
+                              <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
+                                 :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue"
+                                 @input="UpdateForOnePrices" />
+                           </div>
+                           <div class="catalog-range" v-else>
                               <div class="catalog-range__output">
                                  <!-- <input type="number" v-model="priceMinValue"> -->
                                  <span>{{ formatPrice(priceMinValue) }}</span>
@@ -181,6 +200,29 @@ const UpdatePrices = (e) => {
    priceMinValue.value = e.minValue
    priceMaxValue.value = e.maxValue
 }
+
+const priceForOneMin = ref(0)
+const priceForOneMax = ref(50000000)
+const priceForOneMinValue = ref(priceForOneMin.value)
+const priceForOneMaxValue = ref(priceForOneMax.value)
+const UpdateForOnePrices = (e) => {
+   priceForOneMinValue.value = e.minValue
+   priceForOneMaxValue.value = e.maxValue
+}
+
+const priceType = ref(0)
+watch(priceType, (value) => {
+   if (value) {
+      priceMinValue.value = priceMin.value
+      priceMaxValue.value = priceMax.value
+   } else {
+      priceForOneMinValue.value = priceForOneMin.value
+      priceForOneMaxValue.value = priceForOneMax.value
+   }
+})
+
+
+
 const areaMin = ref(0)
 const areaMax = ref(500)
 const areaMinValue = ref(areaMin.value)
@@ -247,6 +289,19 @@ const filtersObject = computed(() => {
       }
       obj.price.max = priceMaxValue.value
    }
+
+   if (priceForOneMinValue.value !== priceForOneMin.value) {
+      obj.priceForOne = {}
+      obj.priceForOne.min = priceForOneMinValue.value
+   }
+   if (priceForOneMaxValue.value !== priceForOneMax.value) {
+      if (!obj.priceForOne) {
+         obj.priceForOne = {}
+      }
+      obj.priceForOne.max = priceForOneMaxValue.value
+   }
+
+
    obj.date = dates.value
    obj.target = target.value
    obj.tags = checkedOptions.value
@@ -284,6 +339,13 @@ function setFiltersFromCat(obj) {
    priceMax.value = obj.ranges?.price?.max
    priceMinValue.value = priceMin.value
    priceMaxValue.value = priceMax.value
+
+   priceForOneMin.value = obj.ranges?.priceForOne?.min
+   priceForOneMax.value = obj.ranges?.priceForOne?.max
+   priceForOneMinValue.value = priceForOneMin.value
+   priceForOneMaxValue.value = priceForOneMax.value
+
+
    areaMin.value = Math.round(obj.ranges?.area?.min)
    areaMax.value = Math.round(obj.ranges?.area?.max)
    areaMinValue.value = areaMin.value
@@ -310,6 +372,10 @@ onMounted(async () => {
 const resetFitlers = () => {
    priceMinValue.value = priceMin.value
    priceMaxValue.value = priceMax.value
+
+   priceForOneMinValue.value = priceForOneMin.value
+   priceForOneMaxValue.value = priceForOneMax.value
+
    areaMinValue.value = areaMin.value
    areaMaxValue.value = areaMax.value
 
