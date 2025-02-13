@@ -159,7 +159,7 @@
             </div>
             <div class="footer__down">
                <div>
-                  <span>©2024</span>
+                  <span>©2025</span>
                   <NuxtLink to="/policy" target="_blank">Политика конфиденциальности</NuxtLink>
                </div>
                <div>

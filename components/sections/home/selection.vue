@@ -27,7 +27,7 @@
                   Параметры
                </UiButton>
                <UiButton class="white map" @click="isSearchingMap = true">
-                  <img src="/img/btn-map.svg" alt="">
+                  <img src="/img/btn-map.png" alt="" class="circle">
                   <span>На карте</span>
                </UiButton>
             </div>
@@ -69,3 +69,14 @@ const onSearch = (url) => {
 const isSearchingMap = ref(false)
 const loading = ref(true)
 </script>
+
+
+<style lang="scss" scoped>
+.map {
+   overflow: hidden;
+
+   .circle {
+      --size: 32px;
+   }
+}
+</style>

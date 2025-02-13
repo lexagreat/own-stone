@@ -17,12 +17,13 @@
                      </div>
                      <div class="calc-card__info">
                         <h4 class="h4">Ваша комиссия</h4>
-                        <span class="body-text">Расчет предварительный</span>
+                        <span class="body-text">Расчет предварительный </span>
                      </div>
                   </div>
                   <h4 class="h1 calc-card__price">{{ formatPrice(comission) }} </h4>
                </div>
                <FormPartnerCalc v-model="price" />
+
             </div>
          </div>
          <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"

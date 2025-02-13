@@ -140,7 +140,7 @@
             </li>
             <li class="catalog-filters__btns">
                <UiButton class="white map" v-if="!fromCatalog" @click="search('map')">
-                  <img src="/img/btn-map.svg" alt="">
+                  <img src="/img/btn-map.png" alt="" class="circle">
                   <span>На карте</span>
                </UiButton>
                <UiButton class="black" @click="search">Показать все</UiButton>
@@ -940,6 +940,14 @@ watch(() => props.isSearchingMap, (value) => {
 .sort {
    &:has(.open) {
       display: flex !important;
+   }
+}
+
+.map {
+   overflow: hidden;
+
+   .circle {
+      --size: 32px;
    }
 }
 </style>
