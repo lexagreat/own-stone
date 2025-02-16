@@ -48,7 +48,7 @@
                         </li>
                      </ul>
                      <UiButton class="catalog-page__map white" :class="{ active: catalog.isMap }"
-                        @click="catalog.isMap = true">
+                        @click="catalog.isMap = true, console.log('clicked map')">
                         <IconGeo />
                         <span>На карте</span>
                      </UiButton>

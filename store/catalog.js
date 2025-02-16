@@ -99,6 +99,20 @@ export const useCatalog = defineStore("useCatalog", {
                )}[proekty][date_complete]=${item?.name}`;
             });
          }
+         if (object.projects?.length && object.projects[0].value) {
+            object.projects.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[proekty][name]=${item?.name}`;
+            });
+         }
+         if (object.metro?.length && object.metro[0].value) {
+            object.metro.forEach((item) => {
+               resultString += `&filters${this.makeSubStr(
+                  resultString
+               )}[proekty][metro_nearby][name]=${item?.name}`;
+            });
+         }
          if (object.floor?.length && object.floor[0].value) {
             object.floor.forEach((item) => {
                resultString += `&filters${this.makeSubStr(
@@ -234,6 +248,44 @@ export const useCatalog = defineStore("useCatalog", {
          });
          return res;
       },
+      getProjectsNames(arr) {
+         let res = [...new Set(arr.map((item) => item.proekty.name))].map(
+            (item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            }
+         );
+         res.unshift({
+            name: "Не важно",
+            value: 0,
+            selected: true,
+         });
+         return res;
+      },
+      getMetro(arr) {
+         const res = [
+            ...new Map(
+               arr
+                  .flatMap((item) => item.proekty.metro_nearby) // Объединяем все metro_nearby в один массив
+                  .map((obj) => [obj.id, obj]) // Создаём массив [id, объект] для Map
+            ).values(), // Оставляем только уникальные объекты
+         ].map((item, index) => {
+            return {
+               name: item.name,
+               color: item.color,
+               value: index + 1,
+            };
+         });
+         res.unshift({
+            name: "Не важно",
+            color: "",
+            value: 0,
+         });
+         console.log("metro", res);
+         return res;
+      },
       getLocation(arr) {
          let res = [...new Set(arr.map((item) => item.location))]
             .filter((item) => item !== null)
@@ -312,6 +364,7 @@ export const useCatalog = defineStore("useCatalog", {
          // console.log("tags", res);
          return res;
       },
+
       async getFiltersForCats(cat, t, slug) {
          let types = {
             build: "Новостройки",
@@ -349,6 +402,8 @@ export const useCatalog = defineStore("useCatalog", {
          obj.target = this.getTarget(productsArr);
          obj.entry = this.getEntry(productsArr);
          obj.tags = this.getTags(productsArr);
+         obj.projects = this.getProjectsNames(productsArr);
+         obj.metro = this.getMetro(productsArr);
          // console.log("get filters for cat", obj);
          return obj;
       },

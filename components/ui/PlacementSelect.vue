@@ -36,7 +36,7 @@
                <ul class="v-select__list" v-if="searchedItems.length">
                   <li class="v-select__item" :class="{ active: option?.selected }"
                      v-for="(option, index) in searchedItems" :key="index" @click="selectOption(option)">
-                     <span class="circle" v-if="option?.color" :style="{ background: option.color }"></span>
+                     <!-- <span class="circle" v-if="option?.color" :style="{ background: option.color }"></span> -->
                      {{ option.name }}
                   </li>
                </ul>
@@ -52,8 +52,14 @@
 import ArrowDownIcon from "@/assets/img/icons/arrow_down.svg"
 import SearchIcon from "@/assets/img/icons/search.svg"
 const props = defineProps({
-   title: String
+   title: String,
+   placementOptions: Array,
+   projectsOptions: Array,
+   metroOptions: Array,
 })
+const placementValue = defineModel('placement')
+const projectsValue = defineModel('projects')
+const metroValue = defineModel('metro')
 
 const isOpen = ref(false)
 const tab = ref(0)
@@ -62,55 +68,12 @@ const data = ref([
    {
       tabName: "Проект",
       searchValue: ref(""),
-      items: [
-         {
-            name: "Не важно",
-            value: 0,
-            selected: true,
-         },
-         {
-            name: "WOW",
-            value: 1,
-         },
-         {
-            name: "Luzhniki Collection",
-            value: 2,
-         },
-         {
-            name: "Shagal",
-            value: 3,
-         },
-         {
-            name: "Primavera",
-            value: 4,
-         },
-      ]
+      items: []
    },
    {
       tabName: "Округ",
       searchValue: ref(""),
-      items: [
-         {
-            name: "Не важно",
-            value: 0,
-         },
-         {
-            name: "ЦАО",
-            value: 1,
-         },
-         {
-            name: "ЗАО",
-            value: 2,
-         },
-         {
-            name: "САО",
-            value: 3,
-         },
-         {
-            name: "СВАО",
-            value: 4,
-         },
-      ]
+      items: []
    },
    {
       tabName: "Район",
@@ -141,32 +104,7 @@ const data = ref([
    {
       tabName: "Метро",
       searchValue: ref(""),
-      items: [
-         {
-            name: "Не важно",
-            value: 0,
-         },
-         {
-            name: "Академическая",
-            color: "#ED9120",
-            value: 1,
-         },
-         {
-            name: "Бауманская",
-            color: "#0078BE",
-            value: 2,
-         },
-         {
-            name: "Звенигородская",
-            color: "#494D4E",
-            value: 3,
-         },
-         {
-            name: "Кожуховская",
-            color: "#99CC01",
-            value: 4,
-         },
-      ]
+      items: []
    },
 ])
 const content = ref(null)
@@ -183,14 +121,52 @@ function selectOption(option) {
    data.value[tab.value].items.forEach(item => {
       if (item.name === option.name) {
          item.selected = !item.selected
+      } else {
+         if (option.value == 0) {
+            item.selected = false
+         }
       }
    })
+   if (option.value) {
+      data.value[tab.value].items[0].selected = false
+   }
+   setValues()
 }
 watch(isOpen, (value) => {
    if (document.querySelector('.catalog-filters')) {
       let top = document.querySelector('.catalog-filters').scrollTop
       content.value.style.top = top + "px"
    }
+})
+
+
+watch(() => props.placementOptions, () => {
+   setOptions()
+}, {
+   deep: true
+})
+watch(() => props.projectsOptions, () => {
+   setOptions()
+}, {
+   deep: true
+})
+watch(() => props.metroOptions, () => {
+   setOptions()
+}, {
+   deep: true
+})
+const setOptions = () => {
+   data.value[0].items = props?.projectsOptions;
+   data.value[1].items = props?.placementOptions;
+   data.value[3].items = props?.metroOptions;
+}
+const setValues = () => {
+   projectsValue.value = data.value[0].items.filter(item => item.selected)
+   placementValue.value = data.value[1].items.filter(item => item.selected)
+   metroValue.value = data.value[3].items.filter(item => item.selected)
+}
+onMounted(() => {
+   setOptions()
 })
 </script>
 <style lang="scss">

@@ -102,14 +102,16 @@
 
                <UiCatalogSelect title="Срок сдачи" :settings="dateSettings" v-model="dates" />
             </li>
-            <li class="catalog-filter">
+            <!-- <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Расположение</span>
                <UiCatalogSelect title="Расположение" :settings="placementSettings" v-model="placement" />
-            </li>
-            <!-- <li class="catalog-filter" v-if="fromHome">
-               <span class="catalog-filter__title">Расположение</span>
-               <UiPlacementSelect title="Расположение" />
             </li> -->
+            <li class="catalog-filter" ъ>
+               <span class="catalog-filter__title">Расположение</span>
+               <UiPlacementSelect title="Расположение" :placementOptions="placementSettings.options"
+                  v-model:placement="placement" :projectsOptions="projectsSettings.options" v-model:projects="projects"
+                  :metroOptions="metroSettings.options" v-model:metro="metro" />
+            </li>
             <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Внутри транспортных колец</span>
                <UiCatalogSelect title="Внутри транспортных колец" :settings="transportSettings" v-model="transport" />
@@ -320,6 +322,40 @@ const entry = ref([
    },
 ])
 
+const projectsSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+   ],
+   placeholder: ""
+})
+const projects = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+const metroSettings = ref({
+   options: [
+      {
+         name: "Не важно",
+         value: 0,
+         selected: true
+      },
+   ],
+   placeholder: ""
+})
+const metro = ref([
+   {
+      name: "Не важно",
+      value: 0,
+   },
+])
+
+
 
 
 const priceMin = ref(0)
@@ -479,9 +515,11 @@ const filtersObject = computed(() => {
    obj.target = target.value
    obj.entry = entry.value
    obj.tags = checkedOptions.value
+   obj.projects = projects.value
+   obj.metro = metro.value
    return obj
 })
-const search = async (map) => {
+const search = async (map = false) => {
    emit("closeModal")
    if (props.type == 'secondary') {
       category.value = 2
@@ -492,7 +530,8 @@ const search = async (map) => {
    }
    // console.log('3. search');
    let url = catalog.getUrl(filtersObject.value)
-   if (map) {
+   if (map == 'map') {
+      console.log('map is true', map);
       catalog.isMap = true
       // url += "&map=true"
    }
@@ -603,6 +642,53 @@ const getFiltersFromQuery = () => {
       }
    }
 
+   if (route.query["filters[proekty][name]"]) {
+
+      if (Array.isArray(route.query["filters[proekty][name]"])) {
+         let arr = route.query["filters[proekty][name]"];
+         arr.forEach((q, i) => {
+            projects.value[i] = projectsSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         projects.value[0] = projectsSettings.value.options.find(item => item.name == route.query["filters[proekty][name]"])
+      }
+   }
+
+   if (route.query["filters[apartaments][proekty][name]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][proekty][name]"])) {
+         let arr = route.query["filters[apartaments][proekty][name]"];
+         arr.forEach((q, i) => {
+            projects.value[i] = projectsSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         projects.value[0] = projectsSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][name]"])
+      }
+   }
+
+   if (route.query["filters[proekty][metro_nearby][name]"]) {
+
+      if (Array.isArray(route.query["filters[proekty][metro_nearby][name]"])) {
+         let arr = route.query["filters[proekty][metro_nearby][name]"];
+         arr.forEach((q, i) => {
+            metro.value[i] = metroSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         metro.value[0] = metroSettings.value.options.find(item => item.name == route.query["filters[proekty][metro_nearby][name]"])
+      }
+   }
+
+   if (route.query["filters[apartaments][proekty][metro_nearby][name]"]) {
+
+      if (Array.isArray(route.query["filters[apartaments][proekty][metro_nearby][name]"])) {
+         let arr = route.query["filters[apartaments][proekty][metro_nearby][name]"];
+         arr.forEach((q, i) => {
+            metro.value[i] = metroSettings.value.options.find(item => item.name == q)
+         })
+      } else {
+         metro.value[0] = metroSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][metro_nearby][name]"])
+      }
+   }
 
 
 
@@ -793,6 +879,11 @@ function setFiltersFromCat(obj) {
    // set entry
    entrySettings.value.options = obj?.entry
 
+   // set entry
+   projectsSettings.value.options = obj?.projects
+   // set entry
+   metroSettings.value.options = obj?.metro
+
 
 
 
@@ -865,6 +956,12 @@ const resetFilters = () => {
    ]
    // set entry
    entry.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   projects.value = [
       {
          name: "Не важно",
          value: 0,

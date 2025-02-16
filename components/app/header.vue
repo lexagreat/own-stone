@@ -42,14 +42,15 @@
                   </li>
                   <li>
                      <ul class="header__icons">
-                        <li>
+
+                        <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr?.length">
 
                            <NuxtLink target="_blank" class="circle"
                               :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
                               <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
                            </NuxtLink>
                         </li>
-                        <li>
+                        <li v-if="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr?.length">
 
 
                            <NuxtLink target="_blank" class="circle"
@@ -131,6 +132,7 @@
                         contacts?.info?.contacts_info?.phonenumber }}</a>
                   </li>
                   <ul class="header__icons">
+
                      <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url?.length">
                         <NuxtLink target="_blank" class="circle"
                            :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">

@@ -78,6 +78,7 @@ const mask = computed(() => {
 const onChangeInput = (e) => {
    let result = e.target.value.replace(/ /g, "");
    if (+result > maxValue.value) return
+   console.log(+result);
    maxValue.value = +result
 }
 </script>

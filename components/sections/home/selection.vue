@@ -62,7 +62,7 @@ const onChangeType = (value) => {
 let { result: count } = await useBaseFetch('/typescounter?type=apartament')
 const onSearch = (url) => {
    router.push(`/catalog/${type.value}${url}`)
-   // console.log('SEARCH ON HOME PAGE', url, type.value);
+   console.log('SEARCH ON HOME PAGE', url);
 }
 
 

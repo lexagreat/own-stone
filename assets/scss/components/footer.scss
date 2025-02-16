@@ -102,6 +102,11 @@
       ul {
          display: flex;
          gap: 12px;
+         li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
       }
       button {
          @include button-name;
