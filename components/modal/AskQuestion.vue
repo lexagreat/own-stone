@@ -50,7 +50,7 @@ const question = ref("")
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length == 18 && question.value.length
+   return checked.value && name.value.length && phone.value.length >= 17 && question.value.length
 })
 
 

@@ -1031,6 +1031,114 @@
       }
    }
 }
+.buy-ways {
+   // .buy-ways__banner
+
+   &__banner {
+   }
+}
+.buy-banner {
+   background-color: #f1f1f1;
+   padding: 35px;
+   flex: 1;
+   border-radius: 8px;
+   height: fit-content;
+   @media (max-width: $mobile) {
+      padding: 20px 12px;
+   }
+   // .buy-banner__header
+
+   &__header {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: $mobile) {
+         flex-direction: column;
+         gap: 20px;
+         .first {
+            width: 200px;
+         }
+         .second {
+            margin: 0 auto;
+            width: 210px;
+            display: block;
+         }
+      }
+   }
+
+   // .buy-banner__title
+
+   &__title {
+   }
+
+   // .buy-banner__image
+
+   &__image {
+   }
+
+   // .buy-banner__main
+
+   &__main {
+      margin-top: 20px;
+      margin-bottom: 30px;
+      @media (max-width: $mobile) {
+         margin-top: 30px;
+      }
+   }
+
+   // .buy-banner__list
+
+   &__list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding-bottom: 20px;
+      border-bottom: 1px solid $black-15;
+      @media (max-width: $mobile) {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 15px;
+      }
+      li {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+         span {
+            @include body-text;
+            color: $black-50;
+         }
+         p {
+            @include h3;
+            color: $black;
+            text-transform: unset;
+         }
+         @media (max-width: $mobile) {
+            gap: 8px;
+            p {
+               font-size: 18px;
+            }
+         }
+      }
+   }
+
+   // .buy-banner__descripiton
+
+   &__descripiton {
+      padding-top: 20px;
+      color: $black-50;
+      font-family: $fontArial;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 21px;
+      letter-spacing: 0%;
+   }
+
+   // .buy-banner__footer
+
+   &__footer {
+      .btn {
+         width: 100%;
+      }
+   }
+}
+
 .ipoteka-card {
    border-radius: 8px;
    background: var(--Brand-Light-Gray, #f1f1f1);

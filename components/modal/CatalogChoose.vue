@@ -54,7 +54,7 @@ const phone = ref(store.user?.phonenumber)
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length == 18
+   return checked.value && name.value.length && phone.value.length >= 17
 })
 
 

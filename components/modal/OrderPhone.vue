@@ -40,7 +40,7 @@ const phone = ref("")
 const checked = ref(false)
 
 const isDisabledBtn = computed(() => {
-   return phone.value.length == 18 && checked.value
+   return phone.value.length >= 17 && checked.value
 })
 const success = ref(false)
 

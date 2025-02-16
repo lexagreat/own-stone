@@ -7,11 +7,15 @@
 </template>
 <script setup>
 import { useFavorites } from './store/favorites';
-const favorites = useFavorites()
 import { useContacts } from './store/contacts';
+import { useRecently } from './store/recently';
 const contacts = useContacts()
+const recentlyStore = useRecently()
+const favorites = useFavorites()
+
 onMounted(() => {
    favorites.getFromLS()
+   recentlyStore.getFromLS()
 })
 
 contacts.getInfo()

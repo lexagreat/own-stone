@@ -27,7 +27,7 @@ const checked = ref(false)
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && phone.value.length == 18
+   return checked.value && phone.value.length >= 17
 })
 const goToSms = async () => {
    let res = await store.getCode(phone.value)

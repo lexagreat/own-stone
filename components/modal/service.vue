@@ -58,7 +58,7 @@ const items = ref([
    },
 ])
 const isDisabledBtn = computed(() => {
-   return phone.value.length == 18 && name.value.length && checked.value
+   return phone.value.length >= 17 && name.value.length && checked.value
 })
 const send = async () => {
    let object = {

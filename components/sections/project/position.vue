@@ -21,7 +21,7 @@
                </ul>
                <div class="project-position__map">
                   <MapsCatsSelect :settings="cats" @selectOption="onSelectCat" />
-                  <MapsProject />
+                  <MapsProject :info="contacts?.info?.contacts_info" />
                </div>
 
             </div>
@@ -31,6 +31,8 @@
    </section>
 </template>
 <script setup>
+import { useContacts } from '~/store/contacts';
+const contacts = useContacts()
 const cats = ref({
    options: [
       {
@@ -96,4 +98,7 @@ const currentCat = ref("Все объекты")
 function onSelectCat(option) {
    currentCat.value = option.name
 }
+
+
+
 </script>

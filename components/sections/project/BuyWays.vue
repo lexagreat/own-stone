@@ -1,5 +1,6 @@
 <template>
    <section class="buy-ways">
+      <ModalIpoteka :tab="tab" :is-open="isOpenModal" @close-popup="isOpenModal = false" />
       <div class="container">
          <div class="buy-ways__wrapper">
             <h2 class="buy-ways__title h1 dark-title">способы <span>покупки</span></h2>
@@ -12,24 +13,18 @@
                   </li>
                </ul>
                <div class="buy-ways__row">
-                  <div class="buy-ways__form" ref="form">
+                  <div class="buy-ways__form">
                      <h3 class="buy-ways__subtitle">{{ tab == 0 ? 'Ипотека' : 'Рассрочка' }}</h3>
                      <ul class="buy-ways__filters">
                         <li>
                            <span>Проект</span>
-                           <UiSelect :settings="projectSettings" @selectOption="onSelectProjectOption" />
+                           <FormInput v-model="project" disabled />
                         </li>
-                        <li v-if="tab == 0">
-                           <span>Программа ипотеки</span>
-                           <UiSelect :settings="ipotekaSettings" @selectOption="onSelectIpotekaOption" />
-                        </li>
+
                         <li>
                            <span>Стоимость недвижимости</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatPrice(priceMinValue) }}</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ formatPrice(priceMaxValue) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
@@ -40,9 +35,6 @@
                            <span>Первоначальный взнос</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatPrice(initialMinValue) }}</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ formatPrice(initialMaxValue) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="10000"
@@ -51,57 +43,62 @@
                         </li>
                         <li>
                            <span>Срок</span>
-                           <div class="catalog-range">
+                           <div class="catalog-range srok">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatPrice(dateMinValue) }}</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <span>{{ formatPrice(dateMaxValue) }}</span>
+                                 <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
                               </div>
-                              <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="10000"
+                              <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="1"
                                  :minValue="dateMinValue" :maxValue="dateMaxValue" @input="UpdateDate" />
                            </div>
 
                         </li>
-                        <li v-if="tab == 0">
-                           <span>Банки</span>
-                           <UiSelect :settings="banksSettings" @selectOption="onSelectBanksOption" />
-                        </li>
                      </ul>
-                     <UiButton class="black">Оставить заявку</UiButton>
                   </div>
-                  <div class="buy-ways__content" :style="{ height: formHeight + 'px' }" v-if="tab == 0">
-                     <BannersIpoteka />
-                     <div class="buy-ways__items">
-                        <div class="buy-ways__cats">
-                           <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" />
-                           <span class="desktop">Ставка</span>
-                           <span class="desktop">Срок</span>
-                           <span class="desktop">Ежемесячный платеж</span>
-                           <span>15 предложений</span>
+                  <div class="buy-ways__banner buy-banner">
+                     <div class="buy-banner__header">
+                        <h4 class="buy-banner__title h3" v-if="tab == 0">Поможем выгодно приобрести <br> недвижимость
+                        </h4>
+                        <h4 class="buy-banner__title h3" v-else>Подберём выгодную <br> банковскую программу</h4>
+                        <div class="buy-banner__image">
+                           <img class="first" src="/img/project/ipoteka.svg" alt="" v-if="tab == 0">
+                           <img class="second" src="/img/project/rassrochka.svg" alt="" v-else>
                         </div>
-
-                        <ul class="buy-ways__list scrollbar-none">
-                           <li v-for="item in 10" :key="item">
-                              <CardsBuyWaysIpoteka />
-                           </li>
-                        </ul>
                      </div>
-                  </div>
-                  <div class="buy-ways__content" v-else>
-                     <div class="buy-ways__items">
-                        <div class="buy-ways__cats buy-ways__cats_instal">
-                           <span>Срок</span>
-                           <span>Первый взнос</span>
-                           <span>Ставка</span>
-                           <span>Периодичность платежей</span>
-                           <span>Сумма платежа </span>
-                        </div>
-                        <ul class="buy-ways__list buy-ways__list_instal scrollbar-none">
-                           <li v-for="item in 20" :key="item">
-                              <CardsBuyWaysInstallment />
+                     <div class="buy-banner__main">
+                        <ul class="buy-banner__list" v-if="tab == 0">
+                           <li>
+                              <span>Ежемесячный платеж</span>
+                              <p>от 135 605 ₽</p>
+                           </li>
+                           <li>
+                              <span>Сумма кредита</span>
+                              <p>23 300 000 ₽</p>
+                           </li>
+                           <li>
+                              <span>Процентная ставка</span>
+                              <p style="color: #18181880;">от 11,04 %</p>
                            </li>
                         </ul>
+                        <ul class="buy-banner__list" v-else>
+                           <li>
+                              <span>Первый взнос</span>
+                              <p>от 40 % </p>
+                           </li>
+                           <li>
+                              <span>Сумма платежа</span>
+                              <p>от 219 300 ₽ </p>
+                           </li>
+                           <li>
+                              <span>Процентная ставка</span>
+                              <p style="color: #18181880;">от 0 % </p>
+                           </li>
+                        </ul>
+                        <p class="buy-banner__descripiton">
+                           Данный расчёт является примерным. Для получения более <br> точной информации, оставьте заявку
+                        </p>
+                     </div>
+                     <div class="buy-banner__footer">
+                        <UiButton class="black" @click="isOpenModal = true">Оставить заявку</UiButton>
                      </div>
                   </div>
                </div>
@@ -112,6 +109,9 @@
 </template>
 <script setup>
 import MultiRangeSlider from "multi-range-slider-vue";
+const props = defineProps({
+   name: String
+})
 const tabs = ref([
    {
       name: "Рассчитайте ипотеку",
@@ -124,95 +124,7 @@ const tabs = ref([
 ])
 const tab = ref(0)
 
-
-const projectSettings = ref({
-   options: [
-      {
-         name: "Luzhniki Collection",
-         value: 0,
-         selected: true
-      },
-      {
-         name: "Luzhniki Collection 1",
-         value: 1,
-      },
-      {
-         name: "Luzhniki Collection 2",
-         value: 2,
-      },
-   ],
-   placeholder: ""
-})
-const projectOption = ref(null)
-function onSelectProjectOption(option) {
-   projectOption.value = option
-}
-const ipotekaSettings = ref({
-   options: [
-      {
-         name: "Все программы",
-         value: 0,
-         selected: true
-      },
-      {
-         name: "Все программы 1",
-         value: 1,
-      },
-      {
-         name: "Все программы 2",
-         value: 2,
-      },
-   ],
-   placeholder: ""
-})
-const ipotekaOption = ref(null)
-function onSelectIpotekaOption(option) {
-   ipotekaOption.value = option
-}
-const banksSettings = ref({
-   options: [
-      {
-         name: "Все банки",
-         value: 0,
-         selected: true
-      },
-      {
-         name: "Все банки 1",
-         value: 1,
-      },
-      {
-         name: "Все банки 2",
-         value: 2,
-      },
-   ],
-   placeholder: ""
-})
-const banksOption = ref(null)
-function onSelectBanksOption(option) {
-   banksOption.value = option
-}
-const sortSettings = ref({
-   options: [
-      {
-         name: "По умолчанию",
-         value: 0,
-         selected: true
-      },
-      {
-         name: "По убыванию",
-         value: 1,
-      },
-      {
-         name: "По возрастанию",
-         value: 2,
-      },
-   ],
-   placeholder: ""
-})
-const sortOption = ref(null)
-function onSelectSortOption(option) {
-   sortOption.value = option
-}
+const project = ref(props.name)
 
 
 const priceMin = ref(0)
@@ -232,7 +144,7 @@ const UpdateInitial = (e) => {
    initialMaxValue.value = e.maxValue
 }
 const dateMin = ref(0)
-const dateMax = ref(50000000)
+const dateMax = ref(30)
 const dateMinValue = ref(dateMin.value)
 const dateMaxValue = ref(dateMax.value)
 const UpdateDate = (e) => {
@@ -240,11 +152,31 @@ const UpdateDate = (e) => {
    dateMaxValue.value = e.maxValue
 }
 
+const isOpenModal = ref(false)
 
-
-const formHeight = ref(0)
-const form = ref(null)
-onMounted(() => {
-   formHeight.value = form.value.clientHeight;
-})
 </script>
+
+
+
+<style lang="scss">
+.buy-ways {
+   .catalog-range {
+      &__output {
+         span {
+            grid-column: span 2;
+            border: 0;
+            width: 100%;
+         }
+      }
+
+      .multi-range-slider {
+         width: 100%;
+         translate: -1px;
+      }
+
+      .thumb-left {
+         display: none;
+      }
+   }
+}
+</style>

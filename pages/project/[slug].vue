@@ -1,6 +1,7 @@
 <template>
    <main class="main">
       <SectionsProjectHero :info="info" />
+
       <SectionsProjectAbout :info="info" />
       <SectionsProjectChars :info="info">
          <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ
@@ -13,8 +14,8 @@
       <SectionsProjectFilters type="build" :projectSlug="info.slug" :count="info?.apartaments?.length">
          ТИПЫ <span>планировок</span>
       </SectionsProjectFilters>
-      <!-- <SectionsProjectBuyWays /> -->
-      <!-- <SectionsProjectPosition /> -->
+      <SectionsProjectBuyWays :name="info?.name" />
+      <SectionsProjectPosition />
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <!-- <section class="project-sliders">
@@ -25,9 +26,12 @@
             Вы ранее <span>смотрели</span>
          </SectionsProductSlider>
       </section> -->
+
    </main>
 </template>
 <script setup>
+import { useRecently } from '~/store/recently'
+const recentlyStore = useRecently()
 const route = useRoute()
 let { data: info } = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
 if (!info.length) {
@@ -37,8 +41,13 @@ if (!info.length) {
    })
 }
 info = info[0]
+onMounted(() => {
+   recentlyStore.add(info)
+})
 // console.log('project page info: ', info);
 useHead({
    title: info.name
 })
+
+const recently = computed(() => recentlyStore.PRODUCTS);
 </script>

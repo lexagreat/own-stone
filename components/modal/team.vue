@@ -57,7 +57,7 @@ const about = ref("")
 const checked = ref(false)
 const file = ref(null)
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length == 18
+   return checked.value && name.value.length && phone.value.length >= 17
 })
 const success = ref(false)
 const onChangeFile = (e) => {
