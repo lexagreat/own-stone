@@ -37,8 +37,8 @@
             height: auto;
          }
          .catalog-card {
-            --cardWidth: 100%;
             @media (max-width: $mobile) {
+               --cardWidth: 100%;
                height: 100%;
             }
          }

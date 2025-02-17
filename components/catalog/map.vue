@@ -174,6 +174,6 @@ const onForm = (id) => {
    display: flex;
    justify-content: center;
    align-items: center;
-   border-radius: 5
+   border-radius: 5px;
 }
 </style>

@@ -283,7 +283,6 @@ export const useCatalog = defineStore("useCatalog", {
             color: "",
             value: 0,
          });
-         console.log("metro", res);
          return res;
       },
       getLocation(arr) {

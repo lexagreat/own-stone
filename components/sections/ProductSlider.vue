@@ -57,4 +57,12 @@ const onOpenForm = (id) => {
    currentProductForModal.value = id;
    isOpenFormModal.value = true
 }
+
+watch(() => props.products, () => {
+   setTimeout(() => {
+      swiperInst.value.updateSlides()
+
+   }, 0)
+
+})
 </script>

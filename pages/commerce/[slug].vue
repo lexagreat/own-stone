@@ -13,7 +13,8 @@
          v-if="info.advantages?.length">
          <h2 class="project-features__title h1 light-title">преимущества</h2>
       </SectionsProjectFeatures>
-      <!-- <SectionsProjectPosition class="commerce-position" /> -->
+      <SectionsProjectPosition class="commerce-position" :info="info?.locations_map"
+         v-if="info?.locations_map?.length" />
       <!-- <SectionsProjectBuyWays class="buy-ways_commerce" /> -->
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <!-- <section class="project-sliders">
@@ -24,6 +25,9 @@
    </main>
 </template>
 <script setup>
+import { useRecently } from '~/store/recently'
+
+const recentlyStore = useRecently()
 const route = useRoute()
 let { data: info } = await useBaseFetch(`/projects/?pLevel=3&filters[slug]=${route.params.slug}`)
 if (!info.length) {
@@ -34,6 +38,10 @@ if (!info.length) {
 }
 info = info[0]
 // console.log('project page info: ', info);
+onMounted(async () => {
+   recentlyStore.add(route.params.slug)
+   await recentlyStore.getProducts()
+})
 useHead({
    title: info?.name
 })

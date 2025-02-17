@@ -15,17 +15,18 @@
          ТИПЫ <span>планировок</span>
       </SectionsProjectFilters>
       <SectionsProjectBuyWays :name="info?.name" />
-      <SectionsProjectPosition />
+      <SectionsProjectPosition :info="info?.locations_map" v-if="info?.locations_map?.length" />
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
-      <!-- <section class="project-sliders">
-         <SectionsProductSlider>
+      <section class="project-sliders">
+         <!-- <SectionsProductSlider>
             похожие <span>предложения</span>
-         </SectionsProductSlider>
-         <SectionsProductSlider>
+         </SectionsProductSlider> -->
+         <SectionsProductSlider :category="0"
+            :products="recentlyStore.products.filter(item => item.slug !== route.params.slug)">
             Вы ранее <span>смотрели</span>
          </SectionsProductSlider>
-      </section> -->
+      </section>
 
    </main>
 </template>
@@ -41,13 +42,11 @@ if (!info.length) {
    })
 }
 info = info[0]
-onMounted(() => {
-   recentlyStore.add(info)
+onMounted(async () => {
+   recentlyStore.add(route.params.slug)
+   await recentlyStore.getProducts()
 })
-// console.log('project page info: ', info);
 useHead({
    title: info.name
 })
-
-const recently = computed(() => recentlyStore.PRODUCTS);
 </script>

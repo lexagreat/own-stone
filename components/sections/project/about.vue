@@ -36,8 +36,10 @@
                         </ul>
                      </SwiperSlide>
                   </Swiper>
-                  <UiSliderBtn prev transparent @click="SwiperInst.slidePrev()" />
-                  <UiSliderBtn next transparent @click="SwiperInst.slideNext()" />
+                  <UiSliderBtn prev transparent @click="SwiperInst.slidePrev()"
+                     v-if="info.about_slider[tab]?.gallery?.length > 1" />
+                  <UiSliderBtn next transparent @click="SwiperInst.slideNext()"
+                     v-if="info.about_slider[tab]?.gallery?.length > 1" />
                </div>
 
             </div>

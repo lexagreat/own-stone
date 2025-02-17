@@ -1,7 +1,7 @@
 <template>
-   <yandex-map ref="map" v-if="info?.contacts_map_coords?.length" :settings="{
+   <yandex-map v-if="info[0]?.coords?.length" :settings="{
       location: {
-         center: JSON.parse(info?.contacts_map_coords[0]?.coords),
+         center: center,
          zoom: 9,
          duration: 2500
       },
@@ -12,22 +12,34 @@
       <yandex-map-default-features-layer />
 
 
-      <!-- <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(info[0]?.coords) }">
-         <img alt="" class="pin" src="/map-marker.svg" style="width: 60px;">
+      <!-- Кластеризатор с дополнительными настройками -->
+      <yandex-map-clusterer :settings="{
 
-      </yandex-map-marker> -->
+      }">
+         <template v-for="(item, index) in info" :key="index">
+            <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item?.coords) }"
+               @click="toggleBalloon(index)">
 
-
-      <template v-for="(item, index) in info?.contacts_map_coords" :key="index">
-         <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item.coords) }"
-            @click="toggleBalloon(index)">
-
-            <div v-if="activeMarker === index" class="balloon">
+               <!-- <div v-if="activeMarker === index" class="balloon">
                {{ info?.address_string }}
+            </div> -->
+               <div class="circle pin">
+                  <component :is="item.icon" />
+               </div>
+               <!-- <img alt="" class="pin" src="/map-marker.svg" style="width: 60px; height: 72px;"> -->
+            </yandex-map-marker>
+         </template>
+
+         <template #cluster="{ length, clusterer, coordinates }">
+            <div class="cluster">
+               <div class="marker circle">
+                  {{ length }}
+               </div>
             </div>
-            <img alt="" class="pin" src="/map-marker.svg" style="width: 60px; height: 72px;" v-else>
-         </yandex-map-marker>
-      </template>
+         </template>
+      </yandex-map-clusterer>
+
+
 
 
       <yandex-map-controls :settings="{ position: 'right' }">
@@ -45,10 +57,12 @@ import {
    YandexMapDefaultFeaturesLayer, // 🔹 Импортируем слой объектов
    YandexMapZoomControl,
    YandexMapDefaultMarker,
-   YandexMapMarker
+   YandexMapMarker,
+   YandexMapClusterer
 } from "vue-yandex-maps";
 const props = defineProps({
-   info: Object
+   info: Array,
+   center: Array
 })
 
 // Отслеживание активного маркера
@@ -59,12 +73,18 @@ const toggleBalloon = (index) => {
    activeMarker.value = activeMarker.value === index ? null : index;
 };
 
+
+
+
 </script>
 
 
 <style lang="scss">
 .pin {
    cursor: pointer;
+   --size: 48px;
+   background-color: #181818;
+
 }
 
 .balloon {
@@ -91,5 +111,17 @@ const toggleBalloon = (index) => {
       left: 50%;
       translate: -50% 0;
    }
+}
+
+.marker {
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   background-color: #181818;
+   color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
 }
 </style>

@@ -126,6 +126,14 @@
             border-color: rgba(24, 24, 24, 0.15);
          }
       }
+      @media (max-width: $mobile) {
+         --cardHeight: unset;
+         .catalog-card__main {
+            .catalog-card__footer {
+               display: none;
+            }
+         }
+      }
    }
    &__gallery {
       transition: $transition;
@@ -358,6 +366,10 @@
       transition: $transition;
       padding: 15px;
       padding-top: 18px;
+      @media (max-width: $mobile) {
+         top: 0;
+         border-color: $black-15;
+      }
       ul {
          font-family: $fontMontreal;
          font-size: 13px;

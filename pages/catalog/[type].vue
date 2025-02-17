@@ -75,10 +75,10 @@
 
       <CatalogPagination v-if="!catalog.isMap" :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage"
          @showMore="onShowMore" />
-      <!-- <SectionsProductSlider>
+      <SectionsProductSlider :category="0" :products="recentlyStore.products">
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
-      <SectionsProductSlider>
+      <!-- <SectionsProductSlider>
          Вам <span>подходит</span>
       </SectionsProductSlider> -->
    </main>
@@ -88,6 +88,8 @@ import IconFilter from '@/assets/img/icons/filter.svg'
 import IconSort from '@/assets/img/icons/sort.svg'
 import IconGeo from "@/assets/img/icons/geo.svg"
 import { useCatalog } from '~/store/catalog';
+import { useRecently } from '~/store/recently';
+const recentlyStore = useRecently()
 // Получаем параметр type из маршрута
 const catalog = useCatalog()
 const route = useRoute()
@@ -279,7 +281,7 @@ const onShowMore = async () => {
    await catalog.showMore(searchingUrl)
    stopConditionForSearch.value = false
 }
-onMounted(() => {
+onMounted(async () => {
    if (route.query['pagination[page]']) {
       currentPage.value = route.query['pagination[page]']
    }
@@ -293,6 +295,7 @@ onMounted(() => {
       });
       onSelectSortOption(sortSettings.value.options.filter(item => item.value == route.query.sort)[0])
    }
+   await recentlyStore.getProducts()
 
 })
 watch(sortOption, async () => {
