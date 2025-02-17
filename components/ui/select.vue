@@ -53,7 +53,7 @@ const output = ref(null)
 function toggleOptions(event) {
    if (document.querySelector('.catalog-filters')) {
       let top = document.querySelector('.catalog-filters').scrollTop
-      content.value.style.top = top + "px"
+      content.value.style.top = top + "px !important"
    }
    if (!props.settings.options.length) return
    event.target.closest(".v-select").classList.toggle("open");

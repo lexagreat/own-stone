@@ -109,7 +109,9 @@ function selectOption(option) {
 watch(isOpen, (value) => {
    if (document.querySelector('.catalog-filters')) {
       let top = document.querySelector('.catalog-filters').scrollTop
-      content.value.style.top = top + "px"
+      if (window?.innerWidth <= 1024) {
+         content.value.style.top = top + "px"
+      }
    }
 })
 
@@ -247,7 +249,7 @@ onMounted(() => {
       background-color: white;
       border-radius: 4px;
       position: absolute;
-      top: 100% !important;
+      top: 100%;
       translate: 0 4px;
       left: 0;
       width: 271px;
@@ -266,7 +268,7 @@ onMounted(() => {
          max-height: unset;
          translate: 0;
          opacity: 1;
-         top: 0 !important;
+         top: 0;
       }
    }
 
