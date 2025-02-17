@@ -178,11 +178,13 @@ const getIcon = (id) => {
    return res;
 }
 const currentCatItems = computed(() => {
+   console.log(filteredCats.value.options.find(item => item.name == currentCat.value).items);
    return filteredCats.value.options.find(item => item.name == currentCat.value).items.map(item => {
       return {
          id: item.id,
          coords: item.coords,
-         icon: getIcon(item.id)
+         icon: getIcon(item.id),
+         title: item.title
       }
    })
 

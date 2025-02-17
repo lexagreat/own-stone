@@ -78,9 +78,9 @@
       <SectionsProductSlider :category="0" :products="recentlyStore.products">
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
-      <!-- <SectionsProductSlider>
+      <SectionsProductSlider :category="0" :products="recentlyStore.same">
          Вам <span>подходит</span>
-      </SectionsProductSlider> -->
+      </SectionsProductSlider>
    </main>
 </template>
 <script setup>
@@ -296,6 +296,8 @@ onMounted(async () => {
       onSelectSortOption(sortSettings.value.options.filter(item => item.value == route.query.sort)[0])
    }
    await recentlyStore.getProducts()
+   await recentlyStore.getSameProducts()
+
 
 })
 watch(sortOption, async () => {

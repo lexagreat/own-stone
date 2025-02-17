@@ -2,6 +2,7 @@ export const useRecently = defineStore("useRecently", {
    state: () => ({
       slugs: [],
       products: [],
+      same: [],
    }),
    actions: {
       add(slug) {
@@ -26,6 +27,16 @@ export const useRecently = defineStore("useRecently", {
             },
          });
          this.products = res.items;
+      },
+      async getSameProducts() {
+         let res = await useBaseFetch("/for-yous", {
+            method: "POST",
+            body: {
+               slugs: this.PRODUCTS,
+            },
+         });
+         console.log(res.items);
+         this.same = res.items;
       },
    },
    getters: {

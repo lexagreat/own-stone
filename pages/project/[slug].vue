@@ -19,9 +19,9 @@
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <section class="project-sliders">
-         <!-- <SectionsProductSlider>
+         <SectionsProductSlider :products="recentlyStore.same.filter(item => item.slug !== route.params.slug)">
             похожие <span>предложения</span>
-         </SectionsProductSlider> -->
+         </SectionsProductSlider>
          <SectionsProductSlider :category="0"
             :products="recentlyStore.products.filter(item => item.slug !== route.params.slug)">
             Вы ранее <span>смотрели</span>
@@ -45,6 +45,7 @@ info = info[0]
 onMounted(async () => {
    recentlyStore.add(route.params.slug)
    await recentlyStore.getProducts()
+   await recentlyStore.getSameProducts()
 })
 useHead({
    title: info.name

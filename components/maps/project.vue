@@ -20,13 +20,13 @@
             <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item?.coords) }"
                @click="toggleBalloon(index)">
 
-               <!-- <div v-if="activeMarker === index" class="balloon">
-               {{ info?.address_string }}
-            </div> -->
-               <div class="circle pin">
+               <div v-if="activeMarker === index && item.title?.length" class="balloon">
+                  {{ item.title }}
+               </div>
+               <div class="circle pin" v-else>
                   <component :is="item.icon" />
                </div>
-               <!-- <img alt="" class="pin" src="/map-marker.svg" style="width: 60px; height: 72px;"> -->
+
             </yandex-map-marker>
          </template>
 
