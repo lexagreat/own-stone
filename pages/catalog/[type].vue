@@ -29,7 +29,7 @@
                         <IconSort />
                      </button>
                      <span>Сортировка</span>
-                     <UiSelect title="sort" :settings="sortSettings" @selectOption="onSelectSortOption" />
+                     <UiSelect title="Сортировка" :settings="sortSettings" @selectOption="onSelectSortOption" />
                   </div>
                   <UiButton class="white all-filters" @click="isFiltersOpen = true" :class="{ dis: loading }">
                      <IconFilter />

@@ -84,6 +84,7 @@ onBeforeUnmount(() => {
    display: flex;
 
    &>p {
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: end;
@@ -129,6 +130,7 @@ onBeforeUnmount(() => {
       }
 
       li {
+         cursor: pointer;
          height: 42px;
          display: flex;
          align-items: center;

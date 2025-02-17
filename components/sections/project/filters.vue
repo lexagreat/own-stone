@@ -51,13 +51,11 @@
                         </li>
                         <li class="catalog-filter" id="priceRange">
                            <span class="catalog-filter__title">Стоимость за
-                              <label>
-                                 <input v-model="priceType" type="radio" name="priceType" :value="0">
-                                 все
-                              </label>
+                              <label><input v-model="priceType" type="radio" name="priceType"
+                                    :value="0"><span>все</span></label>
                               <label>
                                  <input v-model="priceType" type="radio" name="priceType" :value="1">
-                                 м2
+                                 <span>м2</span>
                               </label>
 
                            </span>

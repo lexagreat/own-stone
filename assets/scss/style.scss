@@ -13,3 +13,7 @@
 @import "./services/style";
 @import "./error/style";
 @import "./document/style";
+
+label {
+   cursor: pointer;
+}

@@ -511,12 +511,19 @@
          display: none;
       }
       label {
-         transition: $transition;
-         border-bottom: 1px solid transparent;
+         span {
+            transition: $transition;
+            border-bottom: 1px solid transparent;
+         }
+      }
+      label + label {
+         margin-left: 3px;
       }
       label:has(input:checked) {
-         color: $black;
-         border-color: $black;
+         span {
+            color: $black;
+            border-color: $black;
+         }
       }
    }
 }

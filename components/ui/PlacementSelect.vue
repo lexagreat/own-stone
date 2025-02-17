@@ -76,32 +76,6 @@ const data = ref([
       items: []
    },
    {
-      tabName: "Район",
-      searchValue: ref(""),
-      items: [
-         {
-            name: "Не важно",
-            value: 0,
-         },
-         {
-            name: "Академический",
-            value: 1,
-         },
-         {
-            name: "Арбат",
-            value: 2,
-         },
-         {
-            name: "Аэропорт",
-            value: 3,
-         },
-         {
-            name: "Басманный",
-            value: 4,
-         },
-      ]
-   },
-   {
       tabName: "Метро",
       searchValue: ref(""),
       items: []
@@ -158,12 +132,12 @@ watch(() => props.metroOptions, () => {
 const setOptions = () => {
    data.value[0].items = props?.projectsOptions;
    data.value[1].items = props?.placementOptions;
-   data.value[3].items = props?.metroOptions;
+   data.value[2].items = props?.metroOptions;
 }
 const setValues = () => {
    projectsValue.value = data.value[0].items.filter(item => item.selected)
    placementValue.value = data.value[1].items.filter(item => item.selected)
-   metroValue.value = data.value[3].items.filter(item => item.selected)
+   metroValue.value = data.value[2].items.filter(item => item.selected)
 }
 onMounted(() => {
    setOptions()
