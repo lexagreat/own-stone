@@ -2,7 +2,7 @@
    <yandex-map v-if="info[0]?.coords?.length" :settings="{
       location: {
          center: center,
-         zoom: 9,
+         zoom: 12,
          duration: 2500
       },
       mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
@@ -79,7 +79,7 @@ const toggleBalloon = (index) => {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pin {
    cursor: pointer;
    --size: 48px;
@@ -94,7 +94,7 @@ const toggleBalloon = (index) => {
    padding: 10px;
    border-radius: 4px;
    cursor: pointer;
-   width: 164px;
+   width: fit-content;
    top: 0;
    left: 0;
    translate: -50% -50%;

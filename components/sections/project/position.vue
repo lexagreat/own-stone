@@ -22,6 +22,7 @@
                </ul>
                <div class="project-position__map">
                   <MapsCatsSelect :settings="filteredCats" @selectOption="onSelectCat" />
+
                   <MapsProject :info="currentCatItems"
                      :center="JSON.parse(filteredCats.options[0]?.items[0]?.coords)" />
                </div>
@@ -185,6 +186,12 @@ const currentCatItems = computed(() => {
          coords: item.coords,
          icon: getIcon(item.id),
          title: item.title
+      }
+   }).filter(item => {
+      try {
+         return Boolean(JSON.parse(item?.coords));
+      } catch {
+         return false;
       }
    })
 

@@ -6,7 +6,7 @@
                <h2 class="product-slider__title h1 dark-title">
                   <slot />
                </h2>
-               <div class="product-slider__btns">
+               <div class="product-slider__btns" v-if="products?.length > 4">
                   <UiSliderBtn prev @click="slidePrev" :white="whiteBtns" />
                   <UiSliderBtn next @click="slideNext" :white="whiteBtns" />
                </div>

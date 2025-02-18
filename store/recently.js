@@ -35,7 +35,6 @@ export const useRecently = defineStore("useRecently", {
                slugs: this.PRODUCTS,
             },
          });
-         console.log(res.items);
          this.same = res.items;
       },
    },
