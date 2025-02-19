@@ -21,7 +21,7 @@
             <ul class="catalog-card__banners">
                <li v-if="product?.floor">{{ product?.floor }} ЭТАЖ</li>
                <li v-if="product?.finishing?.length">{{ product?.finishing }}</li>
-               <li>ID {{ product?.id }}</li>
+               <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <h4 class="catalog-card__title">{{ formatPrice(product?.cost_total) }}</h4>
             <span class="catalog-card__price">{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }} комнатная

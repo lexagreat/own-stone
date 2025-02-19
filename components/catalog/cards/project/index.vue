@@ -26,13 +26,13 @@
          <div class="catalog-card__content">
             <ul class="catalog-card__banners">
                <li v-if="product?.date_complete">{{ product?.date_complete }}</li>
-               <li>{{ product?.apartaments?.length }} лотов</li>
-               <li>ID {{ product?.id }}</li>
+               <!-- <li>{{ product?.apartaments?.length }} лотов</li> -->
+               <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <ul class="list-object__tags" v-if="type == 'row'">
                <li v-if="product?.date_complete">{{ product?.date_complete }}</li>
-               <li>{{ product?.apartaments?.length }} лотов</li>
-               <li>ID {{ product?.id }}</li>
+               <!-- <li>{{ product?.apartaments?.length }} лотов</li> -->
+               <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <button class="catalog-card__like" @click="onLike" :class="{ active: liked }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

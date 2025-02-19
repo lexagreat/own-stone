@@ -175,5 +175,7 @@ const onForm = (id) => {
    justify-content: center;
    align-items: center;
    border-radius: 5px;
+   top: 100px;
+   translate: -50% -50%;
 }
 </style>

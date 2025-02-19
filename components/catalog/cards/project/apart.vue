@@ -28,13 +28,13 @@
                <li>{{ product?.count_rooms }} {{ morph(+product?.count_rooms, ['комната', 'комнаты', 'комнат']) }}</li>
                <li>{{ product?.square_apartament }}м<sup>2</sup></li>
                <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
-               <li>ID {{ product?.id }}</li>
+               <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <ul class="list-object__tags" v-if="type == 'row'">
                <li>{{ product?.count_rooms }} {{ morph(+product?.count_rooms, ['комната', 'комнаты', 'комнат']) }}</li>
                <li>{{ product?.square_apartament }}м<sup>2</sup></li>
                <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
-               <li>ID {{ product?.id }}</li>
+               <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <button class="catalog-card__like" @click="onLike" :class="{ active: liked }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -45,7 +45,7 @@
             </button>
             <!-- <h4 class="catalog-card__title">{{ product?.name }}</h4> -->
             <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽ </h4>
-            <span class="catalog-card__price">{{ product?.description }} </span>
+            <span class="catalog-card__price" style="min-height: 16px;">{{ product?.description }} </span>
             <ul class="catalog-card__addresses">
                <div>
                   <li v-if="product?.proekty?.metro_nearby?.length">

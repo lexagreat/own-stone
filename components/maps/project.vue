@@ -137,5 +137,6 @@ const toggleBalloon = (index) => {
    justify-content: center;
    align-items: center;
    border-radius: 50%;
+   translate: -50% -50%;
 }
 </style>

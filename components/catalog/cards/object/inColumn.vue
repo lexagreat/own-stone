@@ -38,7 +38,7 @@
          <ul class="catalog-card__banners">
             <li>{{ product?.floor }} ЭТАЖ</li>
             <li v-if="product?.finishing">{{ product?.finishing }}</li>
-            <li>ID {{ product?.id }}</li>
+            <!-- <li>ID {{ product?.id }}</li> -->
          </ul>
          <ul class="catalog-card__addresses">
             <li v-if="product?.proekty?.address_short">
@@ -62,7 +62,7 @@
                   stroke="white" />
             </svg>
          </button>
-         <span>ID {{ product?.id }}</span>
+         <!-- <span>ID {{ product?.id }}</span> -->
       </div>
    </div>
 </template>
