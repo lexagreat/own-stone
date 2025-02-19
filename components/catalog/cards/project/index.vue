@@ -245,7 +245,7 @@ const link = computed(() => {
    if (!props.product?.apartaments?.length) {
       return ''
    }
-   props.product?.apartaments[0]?.type_aparts !== 'Новостройки' ? base = '/commerce/' : '';
+   props.product?.apartaments[0]?.type_aparts == 'Коммерция' ? base = '/commerce/' : '';
    let url = base + props.product?.slug
    return url
 })
