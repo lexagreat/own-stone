@@ -127,6 +127,7 @@ onBeforeUnmount(() => {
       &.open {
          opacity: 1;
          pointer-events: all;
+         z-index: 2;
       }
 
       li {

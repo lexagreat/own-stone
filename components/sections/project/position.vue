@@ -1,11 +1,12 @@
 <template>
    <section class="project-position">
+      <ModalExcursion :project="project" :isOpen="isOpen" :image="image" @closePopup="isOpen = false" />
       <div class="container">
          <div class="project-position__wrapper">
             <div class="project-position__header">
-               <h2 class="project-position__title light-title h1">Расположение
+               <h2 class="project-position__title light-title h1">Расположение {{ projectCoords }}
                </h2>
-               <UiButton class="white">Записаться на экскурсию</UiButton>
+               <UiButton class="white" @click="isOpen = true">Записаться на экскурсию</UiButton>
             </div>
             <div class="project-position__main">
                <ul class="project-position__categories">
@@ -23,8 +24,7 @@
                <div class="project-position__map">
                   <MapsCatsSelect :settings="filteredCats" @selectOption="onSelectCat" />
 
-                  <MapsProject :info="currentCatItems"
-                     :center="JSON.parse(filteredCats.options[0]?.items[0]?.coords)" />
+                  <MapsProject :info="currentCatItems" :center="JSON.parse(currentCatItems[0].coords)" />
                </div>
 
             </div>
@@ -35,7 +35,11 @@
 </template>
 <script setup>
 const props = defineProps({
-   info: Array
+   info: Array,
+   image: String,
+   project: String,
+   projectCoords: String
+
 })
 const cats = ref({
    options: [
@@ -179,8 +183,7 @@ const getIcon = (id) => {
    return res;
 }
 const currentCatItems = computed(() => {
-   console.log(filteredCats.value.options.find(item => item.name == currentCat.value).items);
-   return filteredCats.value.options.find(item => item.name == currentCat.value).items.map(item => {
+   let arr = filteredCats.value.options.find(item => item.name == currentCat.value).items.map(item => {
       return {
          id: item.id,
          coords: item.coords,
@@ -194,6 +197,16 @@ const currentCatItems = computed(() => {
          return false;
       }
    })
+   arr.unshift({
+      coords: props.projectCoords,
+      icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/project-map-icon.svg'))),
+      title: props.project
+   })
+
+   return arr;
 
 })
+
+
+const isOpen = ref(false)
 </script>

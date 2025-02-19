@@ -13,8 +13,8 @@
          v-if="info.advantages?.length">
          <h2 class="project-features__title h1 light-title">преимущества</h2>
       </SectionsProjectFeatures>
-      <SectionsProjectPosition class="commerce-position" :info="info?.locations_map"
-         v-if="info?.locations_map?.length" />
+      <SectionsProjectPosition class="commerce-position" :info="info?.locations_map" v-if="info?.locations_map?.length"
+         :projectCoords="info?.coords" :project="info?.name" />
       <!-- <SectionsProjectBuyWays class="buy-ways_commerce" /> -->
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <!-- <section class="project-sliders">

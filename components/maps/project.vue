@@ -20,10 +20,10 @@
             <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item?.coords) }"
                @click="toggleBalloon(index)">
 
-               <div v-if="activeMarker === index && item.title?.length" class="balloon">
+               <div v-if="activeMarker === index && item.title?.length" class="balloon" :class="{ project: !item?.id }">
                   {{ item.title }}
                </div>
-               <div class="circle pin" v-else>
+               <div class="circle pin" :class="{ project: !item?.id }" v-else>
                   <component :is="item.icon" />
                </div>
 
@@ -85,6 +85,11 @@ const toggleBalloon = (index) => {
    --size: 48px;
    background-color: #181818;
 
+   &.project {
+      background-color: unset;
+
+
+   }
 }
 
 .balloon {
@@ -98,6 +103,15 @@ const toggleBalloon = (index) => {
    top: 0;
    left: 0;
    translate: -50% -50%;
+
+   &.project {
+      background: #4F0014;
+
+      &::after {
+         background-color: #4F0014;
+
+      }
+   }
 
    &::after {
       content: "";
