@@ -4,7 +4,7 @@
       <div class="container">
          <div class="project-position__wrapper">
             <div class="project-position__header">
-               <h2 class="project-position__title light-title h1">Расположение {{ projectCoords }}
+               <h2 class="project-position__title light-title h1">Расположение
                </h2>
                <UiButton class="white" @click="isOpen = true">Записаться на экскурсию</UiButton>
             </div>
