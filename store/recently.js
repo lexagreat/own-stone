@@ -16,7 +16,9 @@ export const useRecently = defineStore("useRecently", {
          if (!localStorage.getItem("recentlyItems")) {
             return;
          }
-         this.slugs = JSON.parse(localStorage.getItem("recentlyItems"));
+         this.slugs = [
+            ...new Set(JSON.parse(localStorage.getItem("recentlyItems"))),
+         ];
          await this.getProducts();
       },
       async getProducts() {

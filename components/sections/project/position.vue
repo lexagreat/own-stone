@@ -173,6 +173,8 @@ const filteredCats = computed(() => {
       options: cats.value.options.filter(item => item.items.length > 0)
    }
 })
+
+
 const getIcon = (id) => {
    let res = markRaw(defineAsyncComponent(() => import('@/assets/img/icons/position1.svg')))
    cats.value.options.slice(1).forEach(cat => {

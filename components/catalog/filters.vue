@@ -41,7 +41,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
@@ -50,9 +50,10 @@
                <div class="catalog-range">
                   <div class="catalog-range__output">
                      <!-- <input type="number" v-model="priceMinValue"> -->
-                     <span>{{ formatNumber(areaMinValue) }}</span>
-                     <!-- <input type="number" v-model="priceMaxValue"> -->
-                     <span>{{ formatNumber(areaMaxValue) }}</span>
+                     <input type="number" v-model="areaMinValue">
+                     <!-- <span>{{ formatNumber(areaMinValue) }}</span> -->
+                     <input type="number" v-model="areaMaxValue">
+                     <!-- <span>{{ formatNumber(areaMaxValue) }}</span> -->
                   </div>
                   <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="10" :minValue="areaMinValue"
                      :maxValue="areaMaxValue" @input="UpdateAreas" />
@@ -84,10 +85,11 @@
                </div>
                <div class="catalog-range" v-else>
                   <div class="catalog-range__output">
-                     <!-- <input type="number" v-model="priceMinValue"> -->
-                     <span>{{ formatPrice(priceMinValue) }}</span>
-                     <!-- <input type="number" v-model="priceMaxValue"> -->
-                     <span>{{ formatPrice(priceMaxValue) }}</span>
+                     <input type="number" v-model="priceMinValue">
+
+                     <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
+                     <input type="number" v-model="priceMaxValue">
+                     <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
                   </div>
                   <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                      :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
