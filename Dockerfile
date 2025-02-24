@@ -6,7 +6,7 @@ WORKDIR /var/www/fastuser/data/www/ownstone-frontend
 # build
 FROM base as build
 
-COPY --link package*.json ./
+COPY --link package.json yarn.lock ./
 RUN yarn install --production=false
 
 COPY --link . .
