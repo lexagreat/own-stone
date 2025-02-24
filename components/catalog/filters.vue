@@ -41,7 +41,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                     }}</label>
+                        }}</label>
                   </li>
                </ul>
             </li>
@@ -88,7 +88,8 @@
                      <input type="number" v-model="priceMinValue">
 
                      <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
-                     <input type="number" v-model="priceMaxValue">
+                     <!-- <input type="number" v-model="priceMaxValue"> -->
+                     <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceMaxValue">
                      <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
                   </div>
                   <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"

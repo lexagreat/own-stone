@@ -2,7 +2,7 @@
    <yandex-map v-if="info[0]?.coords?.length" :settings="{
       location: {
          center: center,
-         zoom: 13,
+         zoom: 14,
          duration: 2500
       },
       mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)

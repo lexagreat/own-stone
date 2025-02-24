@@ -1,7 +1,6 @@
 <template>
    <main class="main">
       <SectionsProjectHero :info="info" />
-
       <SectionsProjectAbout :info="info" />
       <SectionsProjectChars :info="info">
          <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ

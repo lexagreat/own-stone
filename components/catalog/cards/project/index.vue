@@ -53,9 +53,13 @@
                </div>
                <div style="min-height: 13px;">
                   <li v-if="product?.metro_nearby?.length">
-                     <div class="circle" :style="{ background: product?.metro_nearby[0].color }">
+                     <div style="flex: 0 0 12px;display: flex;align-items: center;
+                     justify-content: center;
+                     height: 12px;">
+                        <div class="circle" :style="{ background: product?.metro_nearby[0].color }">
+                        </div>
                      </div>
-                     <span>{{ product?.metro_nearby[0].name }}, {{ product?.metro_nearby[0].time }} мин </span>
+                     <span>{{ product?.metro_nearby[0].name }}, {{ product?.metro_nearby[0].time_foot }} мин </span>
                      <IconMan />
                   </li>
                </div>
