@@ -1,5 +1,5 @@
 <template>
-   <div class="catalog-card with-hover" :class="{ 'project-card': type == 'row', loading: loading }">
+   <div class="catalog-card with-hover aft" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
          <ul>
             <li v-for="(item, index) in product?.photos" :key="index" @mouseenter="onMouseenter(index)"></li>
@@ -259,6 +259,22 @@ const link = computed(() => {
 
 
 <style lang="scss" scoped>
+.aft {
+   .catalog-card__footer {
+      &::after {
+         content: "";
+         display: block;
+         width: 100%;
+         height: 30px;
+         background-color: transparent;
+         position: absolute;
+         top: 100%;
+         left: 0;
+      }
+
+   }
+}
+
 .project-card {
    height: 100%;
 }
