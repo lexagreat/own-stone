@@ -5,6 +5,7 @@
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li>{{ product?.proekty?.date_complete }}</li>
+
                <li>{{ product?.name }}</li>
             </ul>
             <button class="catalog-card__like" @click.stop="onLike" :class="{ active: liked }">
@@ -62,3 +63,14 @@ const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.apartaments) || favorites.isContains(props.product?.slug, favorites.commerce.apartaments) || favorites.isContains(props.product?.slug, favorites.secondary)
 })
 </script>
+
+<style lang="scss" scoped>
+.catalog-card {
+   &__price {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+   }
+}
+</style>
