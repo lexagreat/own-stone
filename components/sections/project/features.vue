@@ -16,13 +16,13 @@
                   <SwiperSlide v-for="item in items" :key="item">
                      <div class="project-feature" v-for="sub in item" :key="sub">
                         <img :src="sub?.picture[0].url" alt="">
-                        <h3 class="h3">{{ sub.title }}</h3>
+                        <h3 class="h3" v-html="sub.title"></h3>
                      </div>
                   </SwiperSlide>
                   <SwiperSlide v-for="item in items" :key="item">
                      <div class="project-feature" v-for="sub in item" :key="sub">
                         <img :src="sub?.picture[0].url" alt="">
-                        <h3 class="h3">{{ sub.title }}</h3>
+                        <h3 class="h3" v-html="sub.title"></h3>
                      </div>
                   </SwiperSlide>
                </Swiper>
@@ -32,13 +32,13 @@
                   <SwiperSlide v-for="item in info" :key="item">
                      <div class="project-feature">
                         <img :src="item?.picture[0]?.url" alt="">
-                        <h3 class="h3">{{ item.title }}</h3>
+                        <h3 class="h3" v-html="item.title"></h3>
                      </div>
                   </SwiperSlide>
                   <SwiperSlide v-for="item in info" :key="item">
                      <div class="project-feature">
                         <img :src="item?.picture[0]?.url" alt="">
-                        <h3 class="h3">{{ item.title }}</h3>
+                        <h3 class="h3" v-html="item.title"></h3>
                      </div>
                   </SwiperSlide>
                </Swiper>

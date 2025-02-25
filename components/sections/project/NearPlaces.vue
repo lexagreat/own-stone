@@ -12,10 +12,10 @@
             <div class="near-places__main">
                <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10">
                   <SwiperSlide v-for="item in info" :key="item">
-                     <img :src="item?.picture.url" alt="">
+                     <img :src="item?.picture?.url" alt="">
                      <ul>
                         <li>
-                           <span>{{ item.time }}</span>
+                           <span>{{ item.time_car }}</span>
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"
                               fill="none">
                               <path
