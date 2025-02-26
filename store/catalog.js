@@ -271,13 +271,15 @@ export const useCatalog = defineStore("useCatalog", {
                   .flatMap((item) => item.proekty.metro_nearby) // Объединяем все metro_nearby в один массив
                   .map((obj) => [obj.id, obj]) // Создаём массив [id, объект] для Map
             ).values(), // Оставляем только уникальные объекты
-         ].map((item, index) => {
-            return {
-               name: item.name,
-               color: item.color,
-               value: index + 1,
-            };
-         });
+         ]
+            .map((item, index) => {
+               return {
+                  name: item.name,
+                  color: item.color,
+                  value: index + 1,
+               };
+            })
+            .filter((item) => item.name);
          res.unshift({
             name: "Не важно",
             color: "",

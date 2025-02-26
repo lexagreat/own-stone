@@ -159,6 +159,12 @@ label {
 
 .v-select__list {
    flex: 1;
+
+   @media(max-width: 568px) {
+      overflow: scroll;
+      /* height: 100px; */
+      flex: 0 0 calc(100% - 250px);
+   }
 }
 
 .v-select.open {

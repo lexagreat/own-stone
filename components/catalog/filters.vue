@@ -32,7 +32,7 @@
                </ul>
             </li>
             <li class="sort" style="display: none;">
-               <UiSelect title="sort" :settings="sortSettings" @selectOption="onSelectSortOption" />
+               <UiSelect title="Сортировка" :settings="sortSettings" @selectOption="onSelectSortOption" />
             </li>
             <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Количество комнат</span>
@@ -41,7 +41,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
