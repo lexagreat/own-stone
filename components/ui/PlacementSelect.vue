@@ -269,6 +269,7 @@ onMounted(() => {
          translate: 0;
          opacity: 1;
          top: 0;
+         padding-bottom: 70px !important;
       }
    }
 
