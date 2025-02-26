@@ -214,7 +214,7 @@ onMounted(() => {
    &__item {
       padding-bottom: 14px;
       border-bottom: 1px solid #0000001A;
-      justify-content: flex-start;
+      justify-content: flex-start !important;
 
       &:last-child {
          padding: 0;
