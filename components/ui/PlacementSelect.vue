@@ -36,7 +36,7 @@
                <ul class="v-select__list" v-if="searchedItems.length">
                   <li class="v-select__item" :class="{ active: option?.selected }"
                      v-for="(option, index) in searchedItems" :key="index" @click="selectOption(option)">
-                     <!-- <span class="circle" v-if="option?.color" :style="{ background: option.color }"></span> -->
+                     <span class="circle" v-if="option?.color" :style="{ background: option.color }"></span>
                      {{ option.name }}
                   </li>
                </ul>
@@ -214,6 +214,7 @@ onMounted(() => {
    &__item {
       padding-bottom: 14px;
       border-bottom: 1px solid #0000001A;
+      justify-content: flex-start;
 
       &:last-child {
          padding: 0;
@@ -332,6 +333,7 @@ onMounted(() => {
          translate: unset;
          padding: 0;
          gap: 0;
+         margin-top: 24px;
       }
 
       .v-select__item {
