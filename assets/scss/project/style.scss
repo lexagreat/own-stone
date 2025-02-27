@@ -224,6 +224,9 @@
    &__description {
       // max-width: 789px;
       flex: 0 1 789px;
+      pre {
+         font-family: $fontArial !important;
+      }
       &.active {
          .body-text {
             -webkit-line-clamp: unset;
