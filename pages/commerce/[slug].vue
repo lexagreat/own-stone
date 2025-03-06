@@ -15,7 +15,7 @@
       </SectionsProjectFeatures>
       <SectionsProjectPosition class="commerce-position" :info="info?.locations_map" v-if="info?.locations_map?.length"
          :projectCoords="info?.coords" :project="info?.name" />
-      <!-- <SectionsProjectBuyWays class="buy-ways_commerce" /> -->
+      <SectionsProjectBuyWays class="buy-ways_commerce" :name="info?.name" />
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <!-- <section class="project-sliders">
          <SectionsProductSlider>

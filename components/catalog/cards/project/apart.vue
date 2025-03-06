@@ -48,8 +48,9 @@
             <span class="catalog-card__price" style="min-height: 16px;">{{ product?.description }} </span>
             <ul class="catalog-card__addresses">
                <div>
-                  <li v-if="product?.proekty?.metro_nearby?.length">
-                     <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+                  <li v-if="product?.proekty?.metro_nearby?.length" style="height: 18px;">
+                     <div class="circle"
+                        :style="{ background: product?.proekty?.metro_nearby[0]?.metro_branch?.color_code }">
                      </div>
                      <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }}
                         мин
@@ -57,8 +58,8 @@
                      <IconMan />
                   </li>
                </div>
-               <div v-if="!product?.proekty?.metro_nearby?.length"></div>
-               <div v-if="!product?.proekty?.metro_nearby?.length"></div>
+               <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div>
+               <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div>
             </ul>
             <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

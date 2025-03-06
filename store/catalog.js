@@ -275,7 +275,7 @@ export const useCatalog = defineStore("useCatalog", {
             .map((item, index) => {
                return {
                   name: item.name,
-                  color: item.color,
+                  color: item?.metro_branch?.color_code,
                   value: index + 1,
                };
             })

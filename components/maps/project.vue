@@ -1,5 +1,5 @@
 <template>
-   <yandex-map v-if="info[0]?.coords?.length" :settings="{
+   <yandex-map :settings="{
       location: {
          center: center,
          zoom: 14,
@@ -17,8 +17,8 @@
 
       }">
          <template v-for="(item, index) in info" :key="index">
-            <yandex-map-marker position="top-center left-center" :settings="{ coordinates: JSON.parse(item?.coords) }"
-               @click="toggleBalloon(index)">
+            <yandex-map-marker position="top-center left-center" v-if="JSON.parse(item?.coords)"
+               :settings="{ coordinates: JSON.parse(item?.coords) }" @click="toggleBalloon(index)">
 
                <div v-if="activeMarker === index && item.title?.length" class="balloon" :class="{ project: !item?.id }">
                   {{ item.title }}
@@ -73,7 +73,15 @@ const toggleBalloon = (index) => {
    activeMarker.value = activeMarker.value === index ? null : index;
 };
 
-
+// watch(() => props.info, (value) => {
+//    console.log(props.center);
+//    value.forEach(item => {
+//       console.log(JSON.parse(item?.coords));
+//    })
+// }, {
+//    deep: true,
+//    immediate: true
+// })
 
 
 </script>

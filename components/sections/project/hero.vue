@@ -40,7 +40,8 @@
                   </li>
                   <li v-if="info.metro_nearby[0]">
                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <rect x="2" y="2" width="8" height="8" rx="4" :fill="info.metro_nearby[0]?.color" />
+                        <rect x="2" y="2" width="8" height="8" rx="4"
+                           :fill="info.metro_nearby[0]?.metro_branch?.color_code" />
                      </svg>
                      {{ info.metro_nearby[0]?.name }}, {{ info.metro_nearby[0]?.time_foot ?
                         info.metro_nearby[0]?.time_foot : info.metro_nearby[0]?.time_car }} мин

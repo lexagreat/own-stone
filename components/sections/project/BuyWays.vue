@@ -1,6 +1,5 @@
 <template>
    <section class="buy-ways">
-      <ModalIpoteka :tab="tab" :is-open="isOpenModal" @close-popup="isOpenModal = false" />
       <div class="container">
          <div class="buy-ways__wrapper">
             <h2 class="buy-ways__title h1 dark-title">способы <span>покупки</span></h2>
@@ -13,18 +12,24 @@
                   </li>
                </ul>
                <div class="buy-ways__row">
-                  <div class="buy-ways__form">
+                  <div class="buy-ways__form" ref="form">
                      <h3 class="buy-ways__subtitle">{{ tab == 0 ? 'Ипотека' : 'Рассрочка' }}</h3>
                      <ul class="buy-ways__filters">
                         <li>
                            <span>Проект</span>
-                           <FormInput v-model="project" disabled />
+                           <FormInput placeholder="Проект" v-model="projectValue" />
                         </li>
-
+                        <li v-if="tab == 0">
+                           <span>Программа ипотеки</span>
+                           <UiCatalogSelect :settings="ipotekaSettings" v-model="ipoteka" />
+                        </li>
                         <li>
                            <span>Стоимость недвижимости</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
+                                 <!-- <input type="number" v-model="priceMinValue"> -->
+                                 <span>{{ formatPrice(priceMinValue) }}</span>
+                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ formatPrice(priceMaxValue) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
@@ -35,16 +40,22 @@
                            <span>Первоначальный взнос</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <span>{{ formatPrice(initialMaxValue) }}</span>
+                                 <!-- <input type="number" v-model="priceMinValue"> -->
+                                 <span>{{ initialMinValue }} %</span>
+                                 <!-- <input type="number" v-model="priceMaxValue"> -->
+                                 <span>{{ initialMaxValue }} %</span>
                               </div>
-                              <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="10000"
+                              <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="1"
                                  :minValue="initialMinValue" :maxValue="initialMaxValue" @input="UpdateInitial" />
                            </div>
                         </li>
                         <li>
                            <span>Срок</span>
-                           <div class="catalog-range srok">
+                           <div class="catalog-range">
                               <div class="catalog-range__output">
+                                 <!-- <input type="number" v-model="priceMinValue"> -->
+                                 <span>{{ dateMinValue }} {{ morph(dateMinValue, ['год', 'года', 'лет']) }}</span>
+                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="1"
@@ -52,53 +63,46 @@
                            </div>
 
                         </li>
+                        <li v-if="tab == 0">
+                           <span>Банки</span>
+                           <UiCatalogSelect :settings="banksSettings" v-model="banks" />
+
+                        </li>
                      </ul>
+                     <UiButton class="black" @click="search">Показать предложения</UiButton>
                   </div>
-                  <div class="buy-ways__banner buy-banner">
-                     <div class="buy-banner__header">
-                        <h4 class="buy-banner__title h3" v-if="tab == 0">Поможем выгодно приобрести <br> недвижимость
-                        </h4>
-                        <h4 class="buy-banner__title h3" v-else>Подберём выгодную <br> банковскую программу</h4>
-                        <div class="buy-banner__image">
-                           <img class="first" src="/img/project/ipoteka.svg" alt="" v-if="tab == 0">
-                           <img class="second" src="/img/project/rassrochka.svg" alt="" v-else>
+                  <div class="buy-ways__content" :style="{ height: formHeight + 'px' }" v-if="tab == 0">
+                     <BannersIpoteka />
+                     <div class="buy-ways__items">
+                        <div class="buy-ways__cats">
+                           <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" />
+                           <span class="desktop">Ставка</span>
+                           <span class="desktop">Срок</span>
+                           <span class="desktop">Ежемесячный платеж</span>
+                           <span>15 предложений</span>
                         </div>
-                     </div>
-                     <div class="buy-banner__main">
-                        <ul class="buy-banner__list" v-if="tab == 0">
-                           <li>
-                              <span>Ежемесячный платеж</span>
-                              <p>от 135 605 ₽</p>
-                           </li>
-                           <li>
-                              <span>Сумма кредита</span>
-                              <p>23 300 000 ₽</p>
-                           </li>
-                           <li>
-                              <span>Процентная ставка</span>
-                              <p style="color: #18181880;">от 11,04 %</p>
+
+                        <ul class="buy-ways__list scrollbar-none">
+                           <li v-for="(item, index) in items" :key="index">
+                              <CardsBuyWaysIpoteka :info="item" />
                            </li>
                         </ul>
-                        <ul class="buy-banner__list" v-else>
-                           <li>
-                              <span>Первый взнос</span>
-                              <p>от 40 % </p>
-                           </li>
-                           <li>
-                              <span>Сумма платежа</span>
-                              <p>от 219 300 ₽ </p>
-                           </li>
-                           <li>
-                              <span>Процентная ставка</span>
-                              <p style="color: #18181880;">от 0 % </p>
+                     </div>
+                  </div>
+                  <div class="buy-ways__content" v-else>
+                     <div class="buy-ways__items">
+                        <div class="buy-ways__cats buy-ways__cats_instal">
+                           <span>Срок</span>
+                           <span>Первый взнос</span>
+                           <span>Ставка</span>
+                           <span>Периодичность платежей</span>
+                           <span>Сумма платежа </span>
+                        </div>
+                        <ul class="buy-ways__list buy-ways__list_instal scrollbar-none">
+                           <li v-for="item in rassr" :key="item">
+                              <CardsBuyWaysInstallment :info="item" />
                            </li>
                         </ul>
-                        <p class="buy-banner__descripiton">
-                           Данный расчёт является примерным. Для получения более <br> точной информации, оставьте заявку
-                        </p>
-                     </div>
-                     <div class="buy-banner__footer">
-                        <UiButton class="black" @click="isOpenModal = true">Оставить заявку</UiButton>
                      </div>
                   </div>
                </div>
@@ -109,9 +113,11 @@
 </template>
 <script setup>
 import MultiRangeSlider from "multi-range-slider-vue";
+import { useBanks } from "~/store/banks";
 const props = defineProps({
    name: String
 })
+const bankStore = useBanks()
 const tabs = ref([
    {
       name: "Рассчитайте ипотеку",
@@ -123,8 +129,42 @@ const tabs = ref([
    },
 ])
 const tab = ref(0)
+const projectValue = ref(props.name)
 
-const project = ref(props.name)
+const ipotekaSettings = ref({
+   options: [],
+   placeholder: ""
+})
+const ipoteka = ref([])
+
+const banksSettings = ref({
+   options: [
+   ],
+   placeholder: ""
+})
+const banks = ref([])
+const sortSettings = ref({
+   options: [
+      {
+         name: "По умолчанию",
+         value: 0,
+         selected: true
+      },
+      {
+         name: "По убыванию",
+         value: 1,
+      },
+      {
+         name: "По возрастанию",
+         value: 2,
+      },
+   ],
+   placeholder: ""
+})
+const sortOption = ref(null)
+function onSelectSortOption(option) {
+   sortOption.value = option
+}
 
 
 const priceMin = ref(0)
@@ -136,7 +176,7 @@ const UpdatePrices = (e) => {
    priceMaxValue.value = e.maxValue
 }
 const initialMin = ref(0)
-const initialMax = ref(50000000)
+const initialMax = ref(100)
 const initialMinValue = ref(initialMin.value)
 const initialMaxValue = ref(initialMax.value)
 const UpdateInitial = (e) => {
@@ -144,7 +184,7 @@ const UpdateInitial = (e) => {
    initialMaxValue.value = e.maxValue
 }
 const dateMin = ref(0)
-const dateMax = ref(30)
+const dateMax = ref(36)
 const dateMinValue = ref(dateMin.value)
 const dateMaxValue = ref(dateMax.value)
 const UpdateDate = (e) => {
@@ -152,7 +192,101 @@ const UpdateDate = (e) => {
    dateMaxValue.value = e.maxValue
 }
 
-const isOpenModal = ref(false)
+
+
+const formHeight = ref(0)
+const form = ref(null)
+const filtersObject = computed(() => {
+   let obj = {}
+
+
+   if (priceMinValue.value !== priceMin.value) {
+      obj.price = {}
+      obj.price.min = priceMinValue.value
+   }
+   if (priceMaxValue.value !== priceMax.value) {
+      if (!obj.price) {
+         obj.price = {}
+      }
+      obj.price.max = priceMaxValue.value
+   }
+   if (initialMinValue.value !== initialMin.value) {
+      obj.initial = {}
+      obj.initial.min = initialMinValue.value
+   }
+   if (initialMaxValue.value !== initialMax.value) {
+      if (!obj.initial) {
+         obj.initial = {}
+      }
+      obj.initial.max = initialMaxValue.value
+   }
+   if (dateMinValue.value !== dateMin.value) {
+      obj.date = {}
+      obj.date.min = dateMinValue.value
+   }
+   if (dateMaxValue.value !== dateMax.value) {
+      if (!obj.date) {
+         obj.date = {}
+      }
+      obj.date.max = dateMaxValue.value
+   }
+
+   obj.banks = banks.value
+   obj.programms = ipoteka.value
+   return obj
+})
+
+const setFilters = async () => {
+   let data = await bankStore.getFilters()
+   banksSettings.value.options = data.titles
+   ipotekaSettings.value.options = data.programms
+   banks.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+   ipoteka.value = [
+      {
+         name: "Не важно",
+         value: 0,
+      },
+   ]
+
+
+
+
+   priceMin.value = data.amount.min
+   priceMinValue.value = data.amount.min
+   priceMax.value = data.amount.max
+   priceMaxValue.value = data.amount.max
+
+   initialMin.value = data.cash.min
+   initialMinValue.value = data.cash.min
+   initialMax.value = data.cash.max
+   initialMaxValue.value = data.cash.max
+
+   dateMin.value = data.period.min
+   dateMinValue.value = data.period.min
+   dateMax.value = data.period.max
+   dateMaxValue.value = data.period.max
+}
+const search = async () => {
+   let response = await bankStore.getList(bankStore.getUrl(filtersObject.value))
+   console.log('result', response);
+   items.value = response
+}
+onMounted(async () => {
+   await setFilters()
+   await search()
+   // formHeight.value = form.value.clientHeight;
+})
+const items = ref([])
+const rassr = computed(() => {
+   if (!items.value.length) return []
+   return items.value.flatMap((item) => item.bank_programs)
+})
+
 
 </script>
 
@@ -160,22 +294,32 @@ const isOpenModal = ref(false)
 
 <style lang="scss">
 .buy-ways {
-   .catalog-range {
-      &__output {
-         span {
-            grid-column: span 2;
-            border: 0;
-            width: 100%;
-         }
+   .v-select {
+      max-width: 377px;
+
+      @media(max-width: 1024px) {
+         max-width: calc(100vw - 40px - 70px);
       }
 
-      .multi-range-slider {
-         width: 100%;
-         translate: -1px;
+      @media(max-width: 568px) {
+         max-width: calc(100vw - 48px);
       }
 
-      .thumb-left {
-         display: none;
+      &__wrapper {
+         height: 56px;
+      }
+
+      &__input {
+         font-size: 16px;
+      }
+
+      &__list {
+         max-height: 400px;
+         overflow: auto;
+      }
+
+      &__footer {
+         display: none !important;
       }
    }
 }

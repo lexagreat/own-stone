@@ -56,7 +56,7 @@
                      <div style="flex: 0 0 12px;display: flex;align-items: center;
                      justify-content: center;
                      height: 12px;">
-                        <div class="circle" :style="{ background: product?.metro_nearby[0].color }">
+                        <div class="circle" :style="{ background: product?.metro_nearby[0]?.metro_branch?.color_code }">
                         </div>
                      </div>
                      <span>{{ product?.metro_nearby[0].name }}, {{ product?.metro_nearby[0].time_foot }} мин </span>

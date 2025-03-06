@@ -25,7 +25,8 @@
                   <span>{{ product?.proekty?.address_short }}</span>
                </li>
                <li v-if="product?.proekty?.metro_nearby?.length">
-                  <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+                  <div class="circle"
+                     :style="{ background: product?.proekty?.metro_nearby[0]?.metro_branch?.color_code }">
                   </div>
                   <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }} мин
                   </span>
@@ -46,7 +47,7 @@
                <span>{{ product?.proekty?.address_short }}</span>
             </li>
             <li v-if="product?.proekty?.metro_nearby?.length">
-               <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0].color }">
+               <div class="circle" :style="{ background: product?.proekty?.metro_nearby[0]?.metro_branch?.color_code }">
                </div>
                <span>{{ product?.proekty?.metro_nearby[0].name }}, {{ product?.proekty?.metro_nearby[0].time }} мин
                </span>

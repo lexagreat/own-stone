@@ -23,7 +23,6 @@
                </ul>
                <div class="project-position__map">
                   <MapsCatsSelect :settings="filteredCats" @selectOption="onSelectCat" />
-
                   <MapsProject :info="currentCatItems" :center="JSON.parse(currentCatItems[0].coords)" />
                </div>
 
