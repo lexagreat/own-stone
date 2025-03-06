@@ -85,22 +85,22 @@ export const useBanks = defineStore("useBanks", {
             });
          }
          if (object?.price?.min) {
-            resultString += `&filters[bank_programs][maxamount][$gte]=${object?.price?.min}`;
+            resUrl += `&filters[bank_programs][maxamount][$gte]=${object?.price?.min}`;
          }
          if (object?.price?.max) {
-            resultString += `&filters[bank_programs][maxamount][$lte]=${object?.price?.max}`;
+            resUrl += `&filters[bank_programs][maxamount][$lte]=${object?.price?.max}`;
          }
          if (object?.initial?.min) {
-            resultString += `&filters[bank_programs][mincash][$gte]=${object?.initial?.min}`;
+            resUrl += `&filters[bank_programs][mincash][$gte]=${object?.initial?.min}`;
          }
          if (object?.initial?.max) {
-            resultString += `&filters[bank_programs][mincash][$lte]=${object?.initial?.max}`;
+            resUrl += `&filters[bank_programs][mincash][$lte]=${object?.initial?.max}`;
          }
          if (object?.date?.min) {
-            resultString += `&filters[bank_programs][maxperiod][$gte]=${object?.date?.min}`;
+            resUrl += `&filters[bank_programs][maxperiod][$gte]=${object?.date?.min}`;
          }
          if (object?.date?.max) {
-            resultString += `&filters[bank_programs][maxperiod][$lte]=${object?.date?.max}`;
+            resUrl += `&filters[bank_programs][maxperiod][$lte]=${object?.date?.max}`;
          }
          return resUrl;
       },

@@ -904,12 +904,20 @@
       .v-select {
          max-width: unset;
       }
+      .thumb.thumb-left {
+         display: none;
+      }
+      .multi-range-slider {
+         width: 100%;
+         translate: -0.1px;
+      }
       .catalog-range {
          &__output {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            // display: grid;
+            // grid-template-columns: repeat(2, 1fr);
             span {
+               border-right: 0 !important;
                width: 100% !important;
             }
          }
@@ -1214,6 +1222,7 @@
    // .ipoteka-card__item
 
    &__item {
+      white-space: nowrap;
       color: var(--black-100, #181818);
       font-family: $fontMontreal;
       font-size: 16px;
@@ -1225,7 +1234,11 @@
    }
    &__btn {
       flex: 1;
+      flex: 0 0 145px;
       justify-self: end;
+      @media (max-width: $tablet) {
+         flex: unset;
+      }
    }
    &__price {
       color: var(--black-100, #181818);

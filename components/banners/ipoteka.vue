@@ -6,8 +6,10 @@
       <div class="ipoteka-banner__main">
          <div class="ipoteka-banner__text h4">Подберём выгодную банковскую программу и поможем с одобрением ипотеки
          </div>
-         <UiButton class="white">Узнать подробнее</UiButton>
+         <UiButton class="white" @click="emit('form')">Узнать подробнее</UiButton>
       </div>
    </div>
 </template>
-<script setup></script>
+<script setup>
+const emit = defineEmits(['form'])
+</script>

@@ -1,9 +1,9 @@
 <template>
    <div class="ipoteka-card">
       <div class="ipoteka-card__main">
-         <div class="ipoteka-card__image circle">
+         <!-- <div class="ipoteka-card__image circle">
             <IpotekaIcon />
-         </div>
+         </div> -->
          <div class="ipoteka-card__info">
             <span class="ipoteka-card__item">{{ info?.bank_programs?.length }} {{ morph(info?.bank_programs?.length,
                ['предложение', 'предложения', 'предложений']) }} </span>
@@ -21,18 +21,18 @@
          </li>
          <li>
             <span>Ежемесячный платеж</span>
-            <span>от 218 480 ₽/мес</span>
+            <span>от {{ formatPrice(platezh) }}/мес</span>
          </li>
       </ul>
       <span class="ipoteka-card__item">от {{ Math.ceil(stavka) }}%</span>
       <span class="ipoteka-card__item">до {{ srok }} {{ morph(srok, ['год', 'года', 'лет']) }}</span>
       <span class="ipoteka-card__item">от {{ formatPrice(platezh) }}/мес</span>
-      <UiButton class="transparent ipoteka-card__btn">Подробнее</UiButton>
+      <UiButton class="transparent ipoteka-card__btn" @click="emit('form', info)">Оставить заявку</UiButton>
    </div>
 </template>
 <script setup>
 import IpotekaIcon from '@/assets/img/icons/ipoteka-card.svg'
-
+const emit = defineEmits(['form'])
 const props = defineProps({
    info: Object
 })

@@ -1,5 +1,6 @@
 <template>
    <section class="buy-ways">
+      <ModalBuyways :is-open="isOpenModal" @close-popup="isOpenModal = false" :info="formInfo" />
       <div class="container">
          <div class="buy-ways__wrapper">
             <h2 class="buy-ways__title h1 dark-title">способы <span>покупки</span></h2>
@@ -17,7 +18,7 @@
                      <ul class="buy-ways__filters">
                         <li>
                            <span>Проект</span>
-                           <FormInput placeholder="Проект" v-model="projectValue" />
+                           <FormInput placeholder="Проект" v-model="projectValue" disabled />
                         </li>
                         <li v-if="tab == 0">
                            <span>Программа ипотеки</span>
@@ -27,9 +28,6 @@
                            <span>Стоимость недвижимости</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatPrice(priceMinValue) }}</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ formatPrice(priceMaxValue) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
@@ -40,9 +38,6 @@
                            <span>Первоначальный взнос</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ initialMinValue }} %</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ initialMaxValue }} %</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="1"
@@ -53,9 +48,6 @@
                            <span>Срок</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ dateMinValue }} {{ morph(dateMinValue, ['год', 'года', 'лет']) }}</span>
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
                                  <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
                               </div>
                               <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="1"
@@ -72,19 +64,21 @@
                      <UiButton class="black" @click="search">Показать предложения</UiButton>
                   </div>
                   <div class="buy-ways__content" :style="{ height: formHeight + 'px' }" v-if="tab == 0">
-                     <BannersIpoteka />
+                     <BannersIpoteka @form="onForm" />
                      <div class="buy-ways__items">
                         <div class="buy-ways__cats">
                            <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" />
                            <span class="desktop">Ставка</span>
                            <span class="desktop">Срок</span>
                            <span class="desktop">Ежемесячный платеж</span>
-                           <span>15 предложений</span>
+                           <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
+                              'предложений'])
+                           }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">
                            <li v-for="(item, index) in items" :key="index">
-                              <CardsBuyWaysIpoteka :info="item" />
+                              <CardsBuyWaysIpoteka :info="item" @form="onForm" />
                            </li>
                         </ul>
                      </div>
@@ -286,8 +280,22 @@ const rassr = computed(() => {
    if (!items.value.length) return []
    return items.value.flatMap((item) => item.bank_programs)
 })
+const currentBank = ref(0)
+const isOpenModal = ref(false)
+const formInfo = computed(() => {
+   return {
+      project: props.name,
+      price: priceMaxValue.value,
+      initial: initialMaxValue.value,
+      srok: dateMaxValue.value,
+      bank: currentBank.value
+   }
+})
+const onForm = (data) => {
 
-
+   currentBank.value = data?.id
+   isOpenModal.value = true
+}
 </script>
 
 
@@ -320,6 +328,12 @@ const rassr = computed(() => {
 
       &__footer {
          display: none !important;
+      }
+   }
+
+   &__cats {
+      .v-select__wrapper {
+         width: fit-content;
       }
    }
 }
