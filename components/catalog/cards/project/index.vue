@@ -24,7 +24,7 @@
       </div>
       <div class="catalog-card__main">
          <div class="catalog-card__content">
-            <ul class="catalog-card__banners">
+            <ul class="catalog-card__banners" style="height: 25px;">
                <li v-if="product?.date_complete">{{ product?.date_complete }}</li>
                <!-- <li>{{ product?.apartaments?.length }} лотов</li> -->
                <!-- <li>ID {{ product?.id }}</li> -->

@@ -92,6 +92,7 @@
          .catalog-card {
             &__gallery {
                height: 215px;
+               flex: 0 0 215px;
             }
          }
       }
@@ -138,6 +139,7 @@
    &__gallery {
       transition: $transition;
       height: 288px;
+      // flex: 0 0 288px;
       position: relative;
       & > ul {
          position: absolute;
@@ -192,6 +194,7 @@
       }
       @media (max-width: 1400px) {
          height: calc(208px + 80 * ((100vw - 1024px) / (1400 - 1024)));
+         flex: 0 0 calc(208px + 80 * ((100vw - 1024px) / (1400 - 1024)));
       }
    }
 
@@ -482,6 +485,7 @@
       --cardHeight: unset;
       &__gallery {
          height: 215px;
+         flex: 0 0 215px;
       }
       &__title {
          font-size: 24px;
