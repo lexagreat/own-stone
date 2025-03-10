@@ -67,13 +67,13 @@
                      <BannersIpoteka @form="onForm" />
                      <div class="buy-ways__items">
                         <div class="buy-ways__cats">
-                           <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" />
+                           <!-- <UiSelect :settings="sortSettings" @selectOption="onSelectSortOption" /> -->
                            <span class="desktop">Ставка</span>
                            <span class="desktop">Срок</span>
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                           }}</span>
+                              }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">
@@ -94,7 +94,7 @@
                         </div>
                         <ul class="buy-ways__list buy-ways__list_instal scrollbar-none">
                            <li v-for="item in rassr" :key="item">
-                              <CardsBuyWaysInstallment :info="item" />
+                              <CardsBuyWaysInstallment :info="item" @form="onForm" />
                            </li>
                         </ul>
                      </div>
@@ -302,6 +302,13 @@ const onForm = (data) => {
 
 <style lang="scss">
 .buy-ways {
+   &__form {
+      .catalog-range__output {
+         display: grid;
+         grid-template-columns: 1fr !important;
+      }
+   }
+
    .v-select {
       max-width: 377px;
 

@@ -27,12 +27,14 @@
             <span>{{ formatPrice(platezh) }}</span>
          </li>
       </ul>
+      <button class="btn transparent ipoteka-card__btn" @click="emit('form', info)">Оставить заявку</button>
    </div>
 </template>
 <script setup>
 const props = defineProps({
    info: Object
 })
+const emit = defineEmits(['form'])
 const platezh = computed(() => {
    const ezhemes_stavka = props.info.percentrate / 12 / 100;
    const obch_stavka = Math.pow((1 + ezhemes_stavka), props.info.maxperiod * 12);
