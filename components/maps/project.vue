@@ -2,7 +2,7 @@
    <yandex-map :settings="{
       location: {
          center: center,
-         zoom: 14,
+         zoom: 17,
          duration: 2500
       },
       mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
