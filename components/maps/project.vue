@@ -2,7 +2,7 @@
    <yandex-map :settings="{
       location: {
          center: center,
-         zoom: 17,
+         zoom: 14,
          duration: 2500
       },
       mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
@@ -12,12 +12,25 @@
       <yandex-map-default-features-layer />
 
 
+      <yandex-map-marker position="top-center left-center" v-if="JSON.parse(projectMarker?.coords)"
+         :settings="{ coordinates: JSON.parse(projectMarker?.coords) }" @click="toggleBalloon(index)">
+
+         <div v-if="activeMarker === index && projectMarker.title?.length" class="balloon project">
+            {{ projectMarker.title }}
+         </div>
+         <div class="circle pin project" v-else>
+            <component :is="projectMarker.icon" />
+         </div>
+
+      </yandex-map-marker>
+
+
       <!-- Кластеризатор с дополнительными настройками -->
       <yandex-map-clusterer :settings="{
 
       }">
          <template v-for="(item, index) in info" :key="index">
-            <yandex-map-marker position="top-center left-center" v-if="JSON.parse(item?.coords)"
+            <yandex-map-marker position="top-center left-center" v-if="JSON.parse(item?.coords) && item?.id"
                :settings="{ coordinates: JSON.parse(item?.coords) }" @click="toggleBalloon(index)">
 
                <div v-if="activeMarker === index && item.title?.length" class="balloon" :class="{ project: !item?.id }">
@@ -72,17 +85,9 @@ const activeMarker = ref(null);
 const toggleBalloon = (index) => {
    activeMarker.value = activeMarker.value === index ? null : index;
 };
-
-// watch(() => props.info, (value) => {
-//    console.log(props.center);
-//    value.forEach(item => {
-//       console.log(JSON.parse(item?.coords));
-//    })
-// }, {
-//    deep: true,
-//    immediate: true
-// })
-
+const projectMarker = computed(() => {
+   return props.info.find(item => !item.id)
+})
 
 </script>
 
