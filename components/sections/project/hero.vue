@@ -24,7 +24,9 @@
                <ul class="project-hero__banners">
                   <li>ID {{ info.id }}</li>
                </ul>
-               <h1 class="project-hero__title h1 light-title">{{ info.name }} <span>в хамовниках</span></h1>
+               <h1 class="project-hero__title h1 light-title">{{ info.name }} <br> <span
+                     v-if="info.second_name?.length">{{ info.second_name }}</span>
+               </h1>
                <UiButton class="white" @click="isOpenFormModal = true">Оставить заявку</UiButton>
             </div>
             <div class="project-hero__footer">

@@ -1,6 +1,7 @@
 <template>
-   <div class="catalog-filters scrollbar-none"
-      :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog, loading: loading }">
+   <UiLoader v-if="loading && fromCatalog" />
+   <!-- .catalog-filters.loading  чтоб был скелетон-->
+   <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog }">
       <div class="catalog-filters__header">
          <button class="circle circle40" @click="emit('closeModal')">
             <ArrowDownIcon style="rotate: 90deg;" />
@@ -41,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                     }}</label>
+                        }}</label>
                   </li>
                </ul>
             </li>
