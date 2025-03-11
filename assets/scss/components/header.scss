@@ -95,6 +95,12 @@
       @include button-name;
       color: $black;
       border-bottom: 1px solid $black;
+      transition: $transition;
+      @media (hover: hover) {
+         &:hover {
+            border-color: transparent;
+         }
+      }
    }
    // .header__icons
 
