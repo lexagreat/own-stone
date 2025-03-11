@@ -292,8 +292,8 @@ const formInfo = computed(() => {
    }
 })
 const onForm = (data) => {
-
-   currentBank.value = data?.id
+   console.log(data);
+   currentBank.value = data?.bank_title
    isOpenModal.value = true
 }
 </script>

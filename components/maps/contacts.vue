@@ -7,7 +7,7 @@
       },
       mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
    }">
-      <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
+      <yandex-map-default-scheme-layer :settings="{ theme: 'light' }" />
 
       <yandex-map-default-features-layer />
 

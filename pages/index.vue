@@ -1,6 +1,6 @@
 <template>
    <main class="main">
-      <SectionsHomeHero :text="info.hero_text" :running="info.running_line" />
+      <SectionsHomeHero :text="info?.hero_text" :running="info.running_line" />
       <SectionsHomeParallax :info="info.paralax_media" />
       <SectionsHomeSelection />
       <SectionsHomeConductor :info="info.home_conductor" />

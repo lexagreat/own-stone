@@ -37,7 +37,8 @@
                   </label>
                </div>
             </div>
-            <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить</UiButton>
+            <UiButton class="black" :loading="loading" :class="{ disabled: !isDisabledBtn }" @click="send">Отправить
+            </UiButton>
          </div>
       </div>
    </UiModal>
@@ -56,6 +57,7 @@ const email = ref("")
 const about = ref("")
 const checked = ref(false)
 const file = ref(null)
+const loading = ref(false)
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length >= 17
 })
@@ -74,6 +76,7 @@ const send = async () => {
          О себе: ${about.value}
       `,
    }
+   loading.value = true
    let response = await store.sendForm(object)
    // console.log(response);
    if (response.status) {
@@ -84,13 +87,17 @@ const send = async () => {
       about.value = ""
       checked.value = false
       success.value = true
+      loading.value = false
       setTimeout(() => {
          emit('closePopup')
          success.value = false
       }, 5000)
    }
 }
+watch(() => props.isOpen, () => {
+   success.value = false;
 
+})
 </script>
 
 <style lang="scss" scoped>

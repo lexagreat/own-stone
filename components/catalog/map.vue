@@ -8,7 +8,7 @@
          },
          mapsRenderWaitDuration: 5000
       }">
-         <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
+         <yandex-map-default-scheme-layer :settings="{ theme: 'light' }" />
          <yandex-map-default-features-layer />
 
          <!-- Кластеризатор с дополнительными настройками -->

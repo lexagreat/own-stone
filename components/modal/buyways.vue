@@ -51,7 +51,7 @@ const isDisabledBtn = computed(() => {
 const success = ref(false)
 const send = async () => {
    let object = {
-      subject: "Заявка на такси с сайта Own stone",
+      subject: "Заявку на ипотеку с сайта Own stone",
       text: `
          Имя: ${name.value}
          Телефон: ${phone.value}

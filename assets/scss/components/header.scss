@@ -66,6 +66,13 @@
       a {
          color: $black;
          @include regular-13;
+         transition: $transition;
+         border-bottom: 1px solid transparent;
+         @media (hover: hover) {
+            &:hover {
+               border-color: $black;
+            }
+         }
       }
    }
 
