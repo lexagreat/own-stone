@@ -19,12 +19,14 @@
          v-if="info?.locations_map?.length" :projectCoords="info?.coords" />
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
-      <section class="project-sliders">
-         <SectionsProductSlider :products="recentlyStore.same.filter(item => item.slug !== route.params.slug)">
+      <section class="project-sliders"
+         v-if="recentlyStore.same.filter(item => item.slug !== route.params.slug).length || recentlyStore.products.filter(item => item.slug !== route.params.slug).length">
+         <SectionsProductSlider v-if="recentlyStore.same.filter(item => item.slug !== route.params.slug).length"
+            :products="recentlyStore.same.filter(item => item.slug !== route.params.slug)">
             похожие <span>предложения</span>
          </SectionsProductSlider>
-         <SectionsProductSlider :category="0"
-            :products="recentlyStore.products.filter(item => item.slug !== route.params.slug)">
+         <SectionsProductSlider v-if="recentlyStore.products.filter(item => item.slug !== route.params.slug).length"
+            :category="0" :products="recentlyStore.products.filter(item => item.slug !== route.params.slug)">
             Вы ранее <span>смотрели</span>
          </SectionsProductSlider>
       </section>

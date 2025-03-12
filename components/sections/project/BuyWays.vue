@@ -28,7 +28,9 @@
                            <span>Стоимость недвижимости</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <span>{{ formatPrice(priceMaxValue) }}</span>
+                                 <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
+                                 <input type="number" v-model="priceMaxValue">
+
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
@@ -38,7 +40,9 @@
                            <span>Первоначальный взнос</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <span>{{ initialMaxValue }} %</span>
+                                 <!-- <span>{{ initialMaxValue }} %</span> -->
+                                 <input type="number" v-model="initialMaxValue">
+
                               </div>
                               <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="1"
                                  :minValue="initialMinValue" :maxValue="initialMaxValue" @input="UpdateInitial" />
@@ -48,7 +52,9 @@
                            <span>Срок</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
+                                 <!-- <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span> -->
+                                 <input type="number" v-model="dateMaxValue">
+
                               </div>
                               <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="1"
                                  :minValue="dateMinValue" :maxValue="dateMaxValue" @input="UpdateDate" />
@@ -73,7 +79,7 @@
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                              }}</span>
+                           }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">
@@ -306,6 +312,11 @@ const onForm = (data) => {
       .catalog-range__output {
          display: grid;
          grid-template-columns: 1fr !important;
+
+         input {
+            width: 100% !important;
+            border-right: 0 !important;
+         }
       }
    }
 
