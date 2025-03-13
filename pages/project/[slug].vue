@@ -2,7 +2,7 @@
    <main class="main">
       <SectionsProjectHero :info="info" />
       <SectionsProjectAbout :info="info" />
-      <SectionsProjectChars :info="info">
+      <SectionsProjectChars :info="info" class="project-chars_commerce">
          <h2 class="project-chars__title h1 dark-title">ХАРАКТЕРИСТИКИ
          </h2>
       </SectionsProjectChars :info="info">
