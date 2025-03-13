@@ -6,7 +6,7 @@
          },
       }">
          <Swiper :modules="[Pagination, Autoplay]" :pagination="{ el: pagination }" :slides-per-view="1" :autoplay="{
-            delay: 1500,
+            delay: 15000,
             enadled: true
          }" :speed="700">
             <SwiperSlide v-for="item in info.detail_picture" :key="item">

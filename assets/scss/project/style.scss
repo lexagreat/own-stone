@@ -126,7 +126,8 @@
    // .project-hero__footer
 
    &__footer {
-      max-width: 567px;
+      // max-width: 567px;
+      max-width: calc(100vw - (100vw - 1340px));
       align-items: flex-end;
       display: flex;
       justify-content: space-between;
@@ -134,10 +135,12 @@
       position: absolute;
       bottom: 70px;
       left: calc((100vw - 1340px) / 2);
+      right: calc((100vw - 1340px) / 2);
       @media (max-width: 1440px) {
          width: calc(100% - 2 * var(--containerPadding));
          left: var(--containerPadding);
          right: var(--containerPadding);
+         max-width: unset;
       }
    }
    &__pagination {
