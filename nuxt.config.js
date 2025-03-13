@@ -58,6 +58,7 @@ export default defineNuxtConfig({
          pages: true,
          commons: true,
       },
+      transpile: ["@fancyapps/ui"],
    },
    nitro: {
       // оптимизация
