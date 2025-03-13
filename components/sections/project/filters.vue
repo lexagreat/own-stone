@@ -7,7 +7,7 @@
                <h2 class="project-filters__title h1 dark-title mob">
                   подобрать квартиру
                   <span>{{ formatNumber(count) }} {{ morph(count, ['предложение', 'предложения', 'предложений'])
-                     }}</span>
+                  }}</span>
                </h2>
                <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal }">
                   <div class="catalog-filters__header">
@@ -28,7 +28,7 @@
                                     :id="'catalogFilterRooms' + item" name="catalogFilterRooms">
                                  <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+"
                                     : ""
-                                    }}</label>
+                                 }}</label>
                               </li>
                            </ul>
                         </li>
@@ -88,14 +88,14 @@
                            <UiCatalogSelect title="Срок сдачи" :settings="dateSettings" v-model="dates" />
                         </li>
 
-                        <li class="catalog-filter">
+                        <li class="catalog-filter" v-if="options.length">
                            <span class="catalog-filter__title"></span>
                            <ul class="catalog-filter__options catalog-filter__rooms">
                               <li v-for="item in options">
                                  <input v-model="checkedOptions" type="checkbox" :value="item.value"
                                     :id="'catalogFilterOptions' + item.value" name="catalogFilterOptions">
                                  <label class="circle" :for="'catalogFilterOptions' + item.value">{{ item.name
-                                    }}</label>
+                                 }}</label>
                               </li>
                            </ul>
                         </li>

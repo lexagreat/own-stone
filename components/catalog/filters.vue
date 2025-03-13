@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
@@ -128,7 +128,7 @@
                <span class="catalog-filter__title">Вход</span>
                <UiCatalogSelect title="Вход" :settings="entrySettings" v-model="entry" />
             </li>
-            <li class="catalog-filter">
+            <li class="catalog-filter" v-if="options.length">
                <span class="catalog-filter__title"></span>
                <ul class="catalog-filter__options catalog-filter__rooms">
                   <li v-for="item in options" :key="item">
