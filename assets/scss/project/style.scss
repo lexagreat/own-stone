@@ -619,7 +619,7 @@
 
 .near-places {
    background-color: $black;
-   padding-top: var(--margin);
+   padding-top: calc(var(--margin) - 80px);
    padding-bottom: 80px;
    overflow: hidden;
    @media (max-width: $tablet) {
@@ -1034,7 +1034,7 @@
       display: flex;
       gap: 10px;
       flex-direction: column;
-      height: 562px;
+      height: 585px;
       overflow: auto; /* Добавляет скролл, если содержимое превышает доступное пространство */
       &_instal {
          height: calc(609px - 36px);

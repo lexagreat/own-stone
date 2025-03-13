@@ -1,13 +1,21 @@
 <template>
    <section class="project-hero">
-      <Swiper :modules="[Pagination, Autoplay]" :pagination="{ el: pagination }" :slides-per-view="1" :autoplay="{
-         delay: 1500,
-         enadled: true
-      }" :speed="700">
-         <SwiperSlide v-for="item in info.detail_picture" :key="item">
-            <img :src="item.url" alt="">
-         </SwiperSlide>
-      </Swiper>
+      <ModalFancybox :options="{
+         Carousel: {
+            infinite: true,
+         },
+      }">
+         <Swiper :modules="[Pagination, Autoplay]" :pagination="{ el: pagination }" :slides-per-view="1" :autoplay="{
+            delay: 1500,
+            enadled: true
+         }" :speed="700">
+            <SwiperSlide v-for="item in info.detail_picture" :key="item">
+               <a data-fancybox="gallery" :href="item.url">
+                  <img :src="item.url" alt="">
+               </a>
+            </SwiperSlide>
+         </Swiper>
+      </ModalFancybox>
       <div class="container">
          <div class="project-hero__wrapper">
             <div class="project-hero__header">

@@ -69,7 +69,7 @@
                      </ul>
                      <UiButton class="black" @click="search">Показать предложения</UiButton>
                   </div>
-                  <div class="buy-ways__content" :style="{ height: formHeight + 'px' }" v-if="tab == 0">
+                  <div class="buy-ways__content" v-if="tab == 0">
                      <BannersIpoteka @form="onForm" />
                      <div class="buy-ways__items">
                         <div class="buy-ways__cats">
@@ -79,7 +79,7 @@
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                           }}</span>
+                              }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">

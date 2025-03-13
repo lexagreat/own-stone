@@ -14,10 +14,11 @@
          ТИПЫ <span>планировок</span>
       </SectionsProjectFilters>
       <SectionsProjectBuyWays :name="info?.name" />
-      <SectionsProjectPosition :project="info.name"
+      <SectionsProjectPosition class="commerce-position" :project="info.name"
          :image="info.detail_picture?.length ? info.detail_picture[0]?.url : ''" :info="info?.locations_map"
          v-if="info?.locations_map?.length" :projectCoords="info?.coords" />
       <SectionsProjectNearPlaces :info="info.place_nearby" v-if="info.place_nearby?.length" />
+
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <section class="project-sliders"
          v-if="recentlyStore.same.filter(item => item.slug !== route.params.slug).length || recentlyStore.products.filter(item => item.slug !== route.params.slug).length">
