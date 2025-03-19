@@ -11,7 +11,7 @@
          </div>
       </div>
       <div class="home-team__image">
-         <img src="/img/home/team.png" alt="">
+         <img :src="image.url" alt="">
          <ul class="home-team__dots">
             <li v-for="item in team" :key="item" class="home-team__item" :style="item.line_style">
                <div class="home-team__dot"></div>
@@ -28,6 +28,7 @@
 const props = defineProps({
    team: Array,
    info: Object,
+   image: Object
 })
 const isTeam = ref(false)
 </script>

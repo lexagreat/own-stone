@@ -7,7 +7,7 @@
       <SectionsHomeDownload :info="info.home_download" />
       <SectionsHomeFeatures :info="info.home_features" />
       <SectionsHomeBosses :info="info.bosses_section" />
-      <SectionsHomeTeam :team="info.home_team" :info="info?.home_team_title" />
+      <SectionsHomeTeam :team="info.home_team" :info="info?.home_team_title" :image="info?.home_team_photo" />
       <SectionsHomeRewards :info="info.rewards_section" />
       <SectionsHomeOffice :info="info.home_office" />
       <SectionsHomeMedia :info="info.home_media" />
