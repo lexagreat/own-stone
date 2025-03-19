@@ -72,6 +72,9 @@
             padding-right: 12px;
          }
       }
+      .swiper-slide {
+         width: fit-content;
+      }
       .swiper-pagination {
          position: relative;
          top: unset;
@@ -92,7 +95,7 @@
    // .home-conductor__slide
 
    &__slide {
-      max-width: 333px;
+      width: 333px;
       height: 400px !important;
       position: relative;
       display: flex !important;
@@ -186,7 +189,7 @@
          }
       }
       &__slide {
-         max-width: 285px;
+         width: 285px;
          height: 360px !important;
       }
       &__subtitle {
