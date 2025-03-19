@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                     }}</label>
+                        }}</label>
                   </li>
                </ul>
             </li>
@@ -724,26 +724,26 @@ const getFiltersFromQuery = () => {
 
 
 
-   if (route.query["filters[location]"]) {
+   if (route.query["filters[proekty][district]"]) {
 
-      if (Array.isArray(route.query["filters[location]"])) {
-         let arr = route.query["filters[location]"];
+      if (Array.isArray(route.query["filters[proekty][district]"])) {
+         let arr = route.query["filters[proekty][district]"];
          arr.forEach((q, i) => {
             placement.value[i] = placementSettings.value.options.find(item => item.name == q)
          })
       } else {
-         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[location]"])
+         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[proekty][district]"])
       }
    }
-   if (route.query["filters[apartaments][location]"]) {
+   if (route.query["filters[apartaments][proekty][district]"]) {
 
-      if (Array.isArray(route.query["filters[apartaments][location]"])) {
-         let arr = route.query["filters[apartaments][location]"];
+      if (Array.isArray(route.query["filters[apartaments][proekty][district]"])) {
+         let arr = route.query["filters[apartaments][proekty][district]"];
          arr.forEach((q, i) => {
             placement.value[i] = placementSettings.value.options.find(item => item.name == q)
          })
       } else {
-         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[apartaments][location]"])
+         placement.value[0] = placementSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][district]"])
       }
    }
 

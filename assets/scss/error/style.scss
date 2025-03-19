@@ -83,5 +83,13 @@
             padding-right: 0;
          }
       }
+      svg {
+         width: 20px;
+         height: 20px;
+         flex: 0 0 20px;
+      }
+      svg path {
+         fill: #181818 !important;
+      }
    }
 }

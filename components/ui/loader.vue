@@ -1,9 +1,13 @@
 <template>
    <div class="loader-wrapper">
-      <div class="loader"></div>
+      <!-- <div class="loader"></div> -->
+      <LogoIcon />
    </div>
 </template>
-<script setup></script>
+<script setup>
+import LogoIcon from '~/assets/img/icons/logo.svg'
+
+</script>
 
 
 <style lang="scss">

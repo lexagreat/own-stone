@@ -125,7 +125,7 @@ export const useCatalog = defineStore("useCatalog", {
             object.placement.forEach((item) => {
                resultString += `&filters${this.makeSubStr(
                   resultString
-               )}[location]=${item?.name}`;
+               )}[proekty][district]=${item?.name}`;
             });
          }
          if (object.transport?.length && object.transport[0].value) {
@@ -288,7 +288,7 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getLocation(arr) {
-         let res = [...new Set(arr.map((item) => item.location))]
+         let res = [...new Set(arr.map((item) => item.proekty.district))]
             .filter((item) => item !== null)
             .map((item, index) => {
                return {
@@ -303,7 +303,7 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getTransport(arr) {
-         let res = [...new Set(arr.map((item) => item.ring_road))]
+         let res = [...new Set(arr.map((item) => item.proekty.ring_road))]
             .filter((item) => item !== null)
             .map((item, index) => {
                return {

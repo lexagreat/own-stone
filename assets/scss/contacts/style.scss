@@ -276,6 +276,15 @@
       height: 741px;
       flex: 0 0 741px;
       overflow: hidden;
+      .marquee-0 {
+         height: 100%;
+         & > .marquee {
+            height: 741px;
+            @media (max-width: $mobile) {
+               height: 430px;
+            }
+         }
+      }
       .btn {
          position: absolute;
          bottom: 40px;
@@ -288,7 +297,7 @@
          top: 0;
          left: 0;
          width: 100%;
-         height: 115%;
+         height: 100%;
          object-fit: cover;
       }
       @media (max-width: $mobile) {
