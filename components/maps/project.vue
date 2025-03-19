@@ -3,10 +3,13 @@
       location: {
          center: center,
          zoom: 14,
-         duration: 2500
+         duration: 2500,
       },
-      mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
+      behaviors: enabledBehaviors,
+      mapsRenderWaitDuration: 5000, // Increase timeout duration (default is 2000ms)
+
    }">
+      <yandex-map-listener :settings="{ onWheel: onUpdate }" />
       <yandex-map-default-scheme-layer :settings="{ theme: 'light' }" />
 
       <yandex-map-default-features-layer />
@@ -71,7 +74,8 @@ import {
    YandexMapZoomControl,
    YandexMapDefaultMarker,
    YandexMapMarker,
-   YandexMapClusterer
+   YandexMapClusterer,
+   YandexMapListener
 } from "vue-yandex-maps";
 const props = defineProps({
    info: Array,
@@ -88,7 +92,7 @@ const toggleBalloon = (index) => {
 const projectMarker = computed(() => {
    return props.info.find(item => !item.id)
 })
-
+const enabledBehaviors = ref(['drag', 'pinchZoom', 'dblClick']);
 </script>
 
 

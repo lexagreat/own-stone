@@ -59,6 +59,14 @@
          a {
             color: $white;
             @include regular-13;
+            border-bottom: 1px solid transparent;
+            transition: $transition;
+
+            @media (hover: hover) {
+               &:hover {
+                  border-color: $white;
+               }
+            }
          }
       }
    }
@@ -112,6 +120,13 @@
          @include button-name;
          color: $white;
          border-bottom: 1px solid $white;
+         transition: $transition;
+
+         @media (hover: hover) {
+            &:hover {
+               border-color: transparent;
+            }
+         }
       }
    }
 

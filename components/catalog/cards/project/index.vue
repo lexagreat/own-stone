@@ -2,12 +2,18 @@
    <div class="catalog-card with-hover aft" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
          <ul>
-            <li v-for="(item, index) in product?.photos" :key="index" @mouseenter="onMouseenter(index)"></li>
+            <template v-for="(item, index) in product?.photos" :key="index">
+               <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
+
+            </template>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
-            <SwiperSlide v-for="photo in product?.photos" :key="photo">
-               <img :src="photo?.url" alt="" lazy ref="images">
-            </SwiperSlide>
+            <template v-for="(photo, index) in product?.photos" :key="photo">
+
+               <SwiperSlide v-if="index < 3">
+                  <img :src="photo?.url" alt="" lazy ref="images">
+               </SwiperSlide>
+            </template>
          </Swiper>
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
