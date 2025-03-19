@@ -19,7 +19,6 @@
                   type: 'progressbar',
                }" :modules="modules" :mousewheel="{ enabled: true, forceToAxis: true }" :space-between="10"
                   slides-per-view="auto" :speed="500">
-
                   <SwiperSlide v-for="item in filtered" :key="item">
                      <NuxtLink :to="item?.url" class="home-conductor__slide">
                         <div>
@@ -27,7 +26,7 @@
                               <li v-for="banner in item.labels.split(',')">{{ banner }}</li>
                            </ul>
                         </div>
-                        <img :src="item?.picture.url" alt="">
+                        <img :src="item?.picture?.url" alt="">
                         <h3 class="home-conductor__subtitle h3">{{ item.title }}</h3>
                      </NuxtLink>
                   </SwiperSlide>
