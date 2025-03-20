@@ -9,6 +9,9 @@
                   <transition name="fade">
                      <button @click="isTextFull = true" v-if="!isTextFull">Читать полностью</button>
                   </transition>
+                  <transition name="fade">
+                     <button @click="isTextFull = false" v-if="isTextFull">Свернуть</button>
+                  </transition>
 
                </div>
             </div>
