@@ -81,7 +81,7 @@
          </div>
          <div class="catalog-card__footer">
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" :to="'tel:' + product?.proekty?.phone">
+               <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
                   <p>
                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Icons / phone">
@@ -91,7 +91,8 @@
                         </g>
                      </svg>
 
-                     <input type="text" :value="product?.proekty?.phone" v-maska="'+7 (###) ###-##-##'" disabled>
+                     <input type="text" :value="contactsStore?.info?.contacts_info?.phonenumber"
+                        v-maska="'+7 (###) ###-##-##'" disabled>
                   </p>
                </NuxtLink>
             </div>
@@ -100,7 +101,7 @@
       <div class="apart-mobile">
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" :to="'tel:' + product?.proekty?.phone">
+               <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
                   <p>
                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Icons / phone">
@@ -110,7 +111,8 @@
                         </g>
                      </svg>
 
-                     <input type="text" :value="product?.proekty?.phone" v-maska="'+7 (###) ###-##-##'" disabled>
+                     <input type="text" :value="contactsStore?.info?.contacts_info?.phonenumber"
+                        v-maska="'+7 (###) ###-##-##'" disabled>
                   </p>
                </NuxtLink>
             </div>
@@ -120,10 +122,11 @@
 </template>
 <script setup>
 import { vMaska } from "maska/vue"
-
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
 import { useFavorites } from '~/store/favorites';
+import { useContacts } from '~/store/contacts';
+const contactsStore = useContacts()
 const favorites = useFavorites()
 const props = defineProps({
    type: String,

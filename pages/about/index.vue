@@ -1,7 +1,7 @@
 <template>
    <main class="main">
       <SectionsAboutHero :text="info.about_hero_text" />
-      <SectionsAboutVideo :video="info.about_video.url" />
+      <SectionsAboutVideo v-if="info?.about_video?.url?.length" :video="info.about_video.url" />
       <SectionsAboutMission :title="info.about_mission_title" :items="info.home_features" />
       <SectionsAboutValue :info="info.about_value" />
       <SectionsHomeBosses :info="info.about_bosses" />

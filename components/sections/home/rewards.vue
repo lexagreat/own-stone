@@ -11,7 +11,8 @@
                <li v-for="(item, index) in info.rewards_section_images" :key="item">
                   <NuxtLink to="/" @mouseover="show(index)" @mouseleave="hide(index)">
                      <img :src="item?.rewards_img?.url" alt="" :ref="images[index]">
-                     <img :src="item?.rewards_img_hover?.url" alt="" class="hidden" :ref="hiddenImages[index]">
+                     <img :src="item?.rewards_img_hover?.url || item?.rewards_img?.url" alt="" class="hidden"
+                        :ref="hiddenImages[index]">
                   </NuxtLink>
                </li>
             </ul>

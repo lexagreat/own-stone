@@ -103,7 +103,7 @@
             </ul>
             <div class="catalog-card__btns">
                <NuxtLink class="btn white" :to="link">Подробнее о проекте</NuxtLink>
-               <NuxtLink class="circle" :to="'tel:' + product.phone">
+               <NuxtLink class="circle" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
                   <IconPhone />
                </NuxtLink>
             </div>
@@ -117,6 +117,8 @@ import { Pagination } from 'swiper/modules';
 import IconAddress from '@/assets/img/icons/catalog-card-address.svg'
 import IconPhone from '@/assets/img/icons/phone.svg'
 import { useFavorites } from '~/store/favorites';
+import { useContacts } from '~/store/contacts';
+const contactsStore = useContacts()
 const favorites = useFavorites()
 const props = defineProps({
    type: String,
