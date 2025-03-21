@@ -6,12 +6,12 @@
                <h2 class="project-about__title h1 dark-title">о проекте</h2>
                <div class="project-about__description" v-if="info?.description?.length" :class="{ active: isTextFull }">
                   <div class="body-text" v-html="'<pre>' + info.description + '</pre>'"></div>
-                  <transition name="fade">
-                     <button @click="isTextFull = true" v-if="!isTextFull">Читать полностью</button>
-                  </transition>
-                  <transition name="fade">
-                     <button @click="isTextFull = false" v-if="isTextFull">Свернуть</button>
-                  </transition>
+                  <!-- <transition name="fade"> -->
+                  <button @click="isTextFull = true" v-if="!isTextFull">Читать полностью</button>
+                  <!-- </transition> -->
+                  <!-- <transition name="fade"> -->
+                  <button @click="isTextFull = false" v-if="isTextFull">Свернуть</button>
+                  <!-- </transition> -->
 
                </div>
             </div>
