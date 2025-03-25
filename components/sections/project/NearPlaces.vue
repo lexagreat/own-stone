@@ -10,7 +10,8 @@
                </div>
             </div>
             <div class="near-places__main">
-               <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10">
+               <Swiper @swiper="onSwiper" :modules="[Mousewheel]" :mousewheel="{ enabled: true, forceToAxis: true }"
+                  slides-per-view="auto" :space-between="10">
                   <SwiperSlide v-for="item in info" :key="item">
                      <img :src="item?.picture?.url" alt="">
                      <ul>
@@ -43,6 +44,7 @@
 </template>
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Mousewheel } from 'swiper/modules';
 const props = defineProps({
    info: Array
 })

@@ -1,4 +1,5 @@
 <template>
+
    <yandex-map :settings="{
       location: {
          center: center,

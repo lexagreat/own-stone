@@ -601,6 +601,9 @@
       font-size: 18px;
       font-weight: 500;
       line-height: 115%; /* 20.7px */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
       @media (max-width: $mobile) {
          font-size: 14px;
       }
@@ -618,6 +621,9 @@
       padding: 16px;
       &__header {
          gap: 7px;
+         flex: 0 0 calc(100% - 25px);
+         width: calc(100% - 25px);
+
          a {
             width: 20px;
             height: 20px;
@@ -629,7 +635,8 @@
       }
       &__title {
          padding-right: 25px;
-         flex: unset;
+         flex: 0 0 calc(100% - 25px);
+         width: calc(100% - 25px);
       }
    }
 }

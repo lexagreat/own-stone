@@ -1,7 +1,7 @@
 <template>
    <div class="document-item">
       <div class="document-item__header">
-         <span class="document-item__title">{{ info.name }}</span>
+         <span class="document-item__title">{{ name }}</span>
          <NuxtLink :to="info.url" download target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                <g clip-path="url(#clip0_1122_1262)">
@@ -48,4 +48,7 @@ function convertKbToMb(kb) {
    const mb = kb / 1024;
    return mb.toFixed(2);
 }
+const name = computed(() => {
+   return props.info.name.replaceAll("_", " ")
+})
 </script>
