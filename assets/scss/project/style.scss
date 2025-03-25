@@ -302,6 +302,10 @@
 
    &__slider {
       position: relative;
+      height: 725px;
+      .swiper {
+         height: 100%;
+      }
       .swiper-button-prev,
       .swiper-button-next {
          position: absolute !important;
@@ -315,6 +319,7 @@
          right: 28px !important;
       }
       .swiper-slide {
+         height: auto;
          border-radius: 8px;
          overflow: hidden;
          img {
@@ -347,6 +352,12 @@
          @media (max-width: $tablet) {
             display: none;
          }
+      }
+      @media (max-width: $tablet) {
+         height: 400px;
+      }
+      @media (max-width: $mobile) {
+         height: 220px;
       }
    }
 }
