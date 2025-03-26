@@ -78,15 +78,18 @@
                </span>
                <div class="catalog-range" v-if="priceType">
                   <div class="catalog-range__output">
-                     <span>{{ formatPrice(priceForOneMinValue) }}</span>
+                     <!-- <span>{{ formatPrice(priceForOneMinValue) }}</span>
                      <span>{{ formatPrice(priceForOneMaxValue) }}</span>
+                      -->
+                     <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMinValue">
+                     <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMaxValue">
                   </div>
                   <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
                      :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue" @input="UpdateForOnePrices" />
                </div>
                <div class="catalog-range" v-else>
                   <div class="catalog-range__output">
-                     <input type="number" v-model="priceMinValue">
+                     <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceMinValue">
 
                      <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
                      <!-- <input type="number" v-model="priceMaxValue"> -->
