@@ -36,10 +36,12 @@
                            <span class="catalog-filter__title">Площадь, м2</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
+                                 <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="areaMinValue">
+                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="areaMaxValue">
                                  <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatNumber(areaMinValue) }}</span>
+                                 <!-- <span>{{ formatNumber(areaMinValue) }}</span> -->
                                  <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <span>{{ formatNumber(areaMaxValue) }}</span>
+                                 <!-- <span>{{ formatNumber(areaMaxValue) }}</span> -->
                               </div>
                               <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="10"
                                  :minValue="areaMinValue" :maxValue="areaMaxValue" @input="UpdateAreas" />
@@ -61,8 +63,11 @@
                            </span>
                            <div class="catalog-range" v-if="priceType">
                               <div class="catalog-range__output">
-                                 <span>{{ formatPrice(priceForOneMinValue) }}</span>
-                                 <span>{{ formatPrice(priceForOneMaxValue) }}</span>
+                                 <input type="number" inputmode="numeric" pattern="[0-9]*"
+                                    v-model="priceForOneMinValue">
+                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMaxValue">
+                                 <!-- <span>{{ formatPrice(priceForOneMinValue) }}</span>
+                                 <span>{{ formatPrice(priceForOneMaxValue) }}</span> -->
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
                                  :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue"
@@ -70,10 +75,12 @@
                            </div>
                            <div class="catalog-range" v-else>
                               <div class="catalog-range__output">
+                                 <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceMinValue">
+                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceMaxValue">
                                  <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <span>{{ formatPrice(priceMinValue) }}</span>
+                                 <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
                                  <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <span>{{ formatPrice(priceMaxValue) }}</span>
+                                 <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />

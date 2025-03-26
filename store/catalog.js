@@ -362,7 +362,7 @@ export const useCatalog = defineStore("useCatalog", {
                value: index + 1,
             };
          });
-         // console.log("tags", res);
+         console.log("tags", res);
          return res;
       },
 
@@ -402,6 +402,7 @@ export const useCatalog = defineStore("useCatalog", {
          obj.transport = this.getTransport(productsArr);
          obj.target = this.getTarget(productsArr);
          obj.entry = this.getEntry(productsArr);
+
          obj.tags = this.getTags(productsArr);
          obj.projects = this.getProjectsNames(productsArr);
          obj.metro = this.getMetro(productsArr);
