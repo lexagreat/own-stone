@@ -1,7 +1,7 @@
 <template>
    <div class="wrapper lock-padding">
       <NuxtLayout>
-         <transition name="page" mode="out-in">
+         <transition name="page">
             <NuxtPage />
          </transition>
       </NuxtLayout>
@@ -35,28 +35,28 @@ contacts.getInfo()
 .page-enter-from,
 .page-leave-to {
    opacity: 0;
-// &::before {
-//    content: "";
-//    display: block;
-// position: fixed;
-// top: 0;
-// left: 0;
-// width: 100vw;
-// height: 100vh;
-// z-index: 101;
-// backdrop-filter: white;
-// }
-//    &::after {
-//       content: "";
-//       display: block;
-//       position: fixed;
-//       top: 50%;
-//       left: 50%;
-//       translate: -50% -50%;
-//       background: url(@/assets/img/icons/logo.svg) center / contain no-repeat;
-//       width: 200px;
-//       height: 200px;
-// z-index: 102;
-//    }
+   // &::before {
+   //    content: "";
+   //    display: block;
+   // position: fixed;
+   // top: 0;
+   // left: 0;
+   // width: 100vw;
+   // height: 100vh;
+   // z-index: 101;
+   // backdrop-filter: white;
+   // }
+   //    &::after {
+   //       content: "";
+   //       display: block;
+   //       position: fixed;
+   //       top: 50%;
+   //       left: 50%;
+   //       translate: -50% -50%;
+   //       background: url(@/assets/img/icons/logo.svg) center / contain no-repeat;
+   //       width: 200px;
+   //       height: 200px;
+   // z-index: 102;
+   //    }
 }
 </style>

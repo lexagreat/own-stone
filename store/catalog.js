@@ -156,7 +156,7 @@ export const useCatalog = defineStore("useCatalog", {
             object.tags.forEach((tag) => {
                resultString += `&filters${this.makeSubStr(
                   resultString
-               )}[ap_tags][tag][$eq]=${tag}`;
+               )}[proekty][ap_tags][tag][$eq]=${tag}`;
             });
          }
          // console.log("result string", resultString);
@@ -203,14 +203,14 @@ export const useCatalog = defineStore("useCatalog", {
          };
       },
       getFinishing(arr) {
-         let res = [...new Set(arr.map((item) => item.finishing))].map(
-            (item, index) => {
+         let res = [...new Set(arr.map((item) => item.finishing))]
+            .map((item, index) => {
                return {
                   name: item,
                   value: index + 1,
                };
-            }
-         );
+            })
+            .filter((item) => item.name);
          res.unshift({
             name: "Любая",
             value: 0,
@@ -225,6 +225,7 @@ export const useCatalog = defineStore("useCatalog", {
                   value: index + 1,
                };
             })
+            .filter((item) => item.name)
             .sort((a, b) => a.name - b.name);
          res.unshift({
             name: "Не важно",
@@ -233,14 +234,14 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getSroks(arr) {
-         let res = [
-            ...new Set(arr.map((item) => item.proekty.date_complete)),
-         ].map((item, index) => {
-            return {
-               name: item,
-               value: index + 1,
-            };
-         });
+         let res = [...new Set(arr.map((item) => item?.proekty?.date_complete))]
+            .map((item, index) => {
+               return {
+                  name: item,
+                  value: index + 1,
+               };
+            })
+            .filter((item) => item.name);
          res.unshift({
             name: "Не важно",
             value: 0,
@@ -249,14 +250,14 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getProjectsNames(arr) {
-         let res = [...new Set(arr.map((item) => item.proekty.name))].map(
-            (item, index) => {
+         let res = [...new Set(arr.map((item) => item?.proekty?.name))]
+            .map((item, index) => {
                return {
                   name: item,
                   value: index + 1,
                };
-            }
-         );
+            })
+            .filter((item) => item.name);
          res.unshift({
             name: "Не важно",
             value: 0,
@@ -268,13 +269,13 @@ export const useCatalog = defineStore("useCatalog", {
          const res = [
             ...new Map(
                arr
-                  .flatMap((item) => item.proekty.metro_nearby) // Объединяем все metro_nearby в один массив
-                  .map((obj) => [obj.id, obj]) // Создаём массив [id, объект] для Map
+                  .flatMap((item) => item?.proekty?.metro_nearby) // Объединяем все metro_nearby в один массив
+                  .map((obj) => [obj?.id, obj]) // Создаём массив [id, объект] для Map
             ).values(), // Оставляем только уникальные объекты
          ]
             .map((item, index) => {
                return {
-                  name: item.name,
+                  name: item?.name,
                   color: item?.metro_branch?.color_code,
                   value: index + 1,
                };
@@ -285,11 +286,12 @@ export const useCatalog = defineStore("useCatalog", {
             color: "",
             value: 0,
          });
+
          return res;
       },
       getLocation(arr) {
-         let res = [...new Set(arr.map((item) => item.proekty.district))]
-            .filter((item) => item !== null)
+         let res = [...new Set(arr.map((item) => item?.proekty?.district))]
+            .filter((item) => item)
             .map((item, index) => {
                return {
                   name: item,
@@ -300,17 +302,19 @@ export const useCatalog = defineStore("useCatalog", {
             name: "Не важно",
             value: 0,
          });
+         console.log("location", res);
          return res;
       },
       getTransport(arr) {
-         let res = [...new Set(arr.map((item) => item.proekty.ring_road))]
-            .filter((item) => item !== null)
+         let res = [...new Set(arr.map((item) => item?.proekty?.ring_road))]
+            .filter((item) => item)
             .map((item, index) => {
                return {
                   name: item,
                   value: index + 1,
                };
-            });
+            })
+            .filter((item) => item);
          res.unshift({
             name: "Не важно",
             value: 0,
@@ -319,7 +323,7 @@ export const useCatalog = defineStore("useCatalog", {
       },
       getTarget(arr) {
          let res = [...new Set(arr.map((item) => item.appointment))]
-            .filter((item) => item !== null)
+            .filter((item) => item)
             .map((item, index) => {
                return {
                   name: item,
@@ -351,7 +355,7 @@ export const useCatalog = defineStore("useCatalog", {
          let res = [
             ...new Set(
                arr
-                  .map((item) => item.ap_tags)
+                  .map((item) => item.proekty.ap_tags)
                   .filter((item) => item !== null && item.length !== 0)
                   .flat()
                   .map((item) => item.tag)
@@ -406,7 +410,7 @@ export const useCatalog = defineStore("useCatalog", {
          obj.tags = this.getTags(productsArr);
          obj.projects = this.getProjectsNames(productsArr);
          obj.metro = this.getMetro(productsArr);
-         // console.log("get filters for cat", obj);
+         console.log("get filters for cat", obj);
          return obj;
       },
    },

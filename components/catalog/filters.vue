@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
@@ -832,18 +832,18 @@ const getFiltersFromQuery = () => {
 
 
 
-   if (route.query['filters[ap_tags][tag][$eq]']) {
-      if (Array.isArray(route.query['filters[ap_tags][tag][$eq]'])) {
-         checkedOptions.value = route.query['filters[ap_tags][tag][$eq]'].map(item => item)
+   if (route.query['filters[proekty][ap_tags][tag][$eq]']) {
+      if (Array.isArray(route.query['filters[proekty][ap_tags][tag][$eq]'])) {
+         checkedOptions.value = route.query['filters[proekty][ap_tags][tag][$eq]'].map(item => item)
       } else {
-         checkedOptions.value = [route.query['filters[ap_tags][tag][$eq]']]
+         checkedOptions.value = [route.query['filters[proekty][ap_tags][tag][$eq]']]
       }
    }
-   if (route.query['filters[apartaments][ap_tags][tag][$eq]']) {
-      if (Array.isArray(route.query['filters[apartaments][ap_tags][tag][$eq]'])) {
-         checkedOptions.value = route.query['filters[apartaments][ap_tags][tag][$eq]'].map(item => item)
+   if (route.query['filters[apartaments][proekty][ap_tags][tag][$eq]']) {
+      if (Array.isArray(route.query['filters[apartaments][proekty][ap_tags][tag][$eq]'])) {
+         checkedOptions.value = route.query['filters[apartaments][proekty][ap_tags][tag][$eq]'].map(item => item)
       } else {
-         checkedOptions.value = [route.query['filters[apartaments][ap_tags][tag][$eq]']]
+         checkedOptions.value = [route.query['filters[apartaments][proekty][ap_tags][tag][$eq]']]
       }
    }
 }

@@ -268,6 +268,9 @@ watch(() => catalog.meta?.pagination?.total, (value) => {
    if (stopConditionForSearch.value) return
    currentPage.value = 1
 })
+watch(() => route.params.type, () => {
+   location.reload()
+})
 const stopConditionForSearch = ref(true)
 
 const onShowMore = async () => {
