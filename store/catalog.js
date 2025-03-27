@@ -352,10 +352,11 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getTags(arr) {
+         console.log(arr);
          let res = [
             ...new Set(
                arr
-                  .map((item) => item.proekty.ap_tags)
+                  .map((item) => item?.proekty?.ap_tags || item.ap_tags)
                   .filter((item) => item !== null && item.length !== 0)
                   .flat()
                   .map((item) => item.tag)
