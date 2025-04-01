@@ -76,7 +76,7 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const type = ref('Коммерция')
+const type = ref('Новостройки')
 
 const filtered = computed(() => {
    return props.info?.home_conductor_elements?.filter(item => item.type == type.value) || [];
