@@ -34,7 +34,7 @@
                   </div>
                </div>
                <ul class="v-select__list" v-if="searchedItems.length">
-                  <li class="v-select__item" :class="{ active: option?.selected }"
+                  <li class="v-select__item" :class="{ active: isSelected(option) }"
                      v-for="(option, index) in searchedItems" :key="index" @click="selectOption(option)">
                      <span class="circle" v-if="option?.color" :style="{ background: option.color }"></span>
                      {{ option.name }}
@@ -88,8 +88,9 @@ const searchedItems = computed(() => {
    })
 })
 const choosedValue = computed(() => {
-   let arr = data.value.map(tab => tab.items).flat().filter((item) => item.selected).map(item => item.name).join(", ")
-   return arr
+   // let arr = data.value.map(tab => tab.items).flat().filter((item) => item.selected).map(item => item.name).join(", ")
+   // return arr
+   return projectsValue.value.concat(placementValue.value).concat(metroValue.value).map(item => item.name).join(', ')
 })
 function selectOption(option) {
    data.value[tab.value].items.forEach(item => {
@@ -115,7 +116,9 @@ watch(isOpen, (value) => {
    }
 })
 
-
+const isSelected = (option) => {
+   return placementValue.value.some(item => item.name == option.name) || projectsValue.value.some(item => item.name == option.name) || metroValue.value.some(item => item.name == option.name)
+}
 watch(() => props.placementOptions, () => {
    setOptions()
 }, {

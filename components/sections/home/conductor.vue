@@ -14,7 +14,22 @@
                   </label>
                </li>
             </ul>
-            <div class="home-conductor__slider">
+
+            <div class="home-conductor__forms scrollbar-none" v-if="type == 'Коммерция'">
+               <div class="home-conductor__form conductor-form" v-for="(item, index) in items" :key="index"
+                  :class="{ dark: index == 1 }">
+                  <div class="conductor-form__main">
+                     <div class="conductor-form__title h2">{{ item.title }}</div>
+                     <div class="conductor-form__desc body-text" v-html="item.text"></div>
+                     <UiButton @click="isMeeting = true" :class="{ black: index == 0, white: index == 1 }">Оставить
+                        заявку</UiButton>
+                  </div>
+                  <div class=" conductor-form__image">
+                     <img :src="item.image" alt="">
+                  </div>
+               </div>
+            </div>
+            <div class="home-conductor__slider" v-else>
                <Swiper :pagination="{
                   type: 'progressbar',
                }" :modules="modules" :mousewheel="{ enabled: true, forceToAxis: true }" :space-between="10"
@@ -32,6 +47,7 @@
                   </SwiperSlide>
                </Swiper>
             </div>
+            <ModalMeeteing :isOpen="isMeeting" @closePopup="isMeeting = false" />
          </div>
       </div>
    </section>
@@ -60,10 +76,25 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const type = ref('Новостройки')
+const type = ref('Коммерция')
+
 const filtered = computed(() => {
-   return props.info.home_conductor_elements.filter(item => item.type == type.value)
-})
+   return props.info?.home_conductor_elements?.filter(item => item.type == type.value) || [];
+});
+
+const items = ref([
+   {
+      title: "РИТЕЙЛ",
+      text: "Если Вам нужна помощь в выборе объекта - оставьте заявку и мы с Вами свяжемся в ближайшее время",
+      image: "/img/home/conductor-form1.png"
+   },
+   {
+      title: "Офисы",
+      text: "Если Вам нужна помощь в выборе объекта - оставьте заявку и мы с Вами свяжемся в ближайшее время",
+      image: "/img/home/conductor-form2.png"
+   },
+])
+const isMeeting = ref(false)
 </script>
 
 

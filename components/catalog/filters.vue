@@ -657,6 +657,7 @@ const getFiltersFromQuery = () => {
             projects.value[i] = projectsSettings.value.options.find(item => item.name == q)
          })
       } else {
+
          projects.value[0] = projectsSettings.value.options.find(item => item.name == route.query["filters[proekty][name]"])
       }
    }
@@ -669,6 +670,7 @@ const getFiltersFromQuery = () => {
             projects.value[i] = projectsSettings.value.options.find(item => item.name == q)
          })
       } else {
+         console.log(projectsSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][name]"]));
          projects.value[0] = projectsSettings.value.options.find(item => item.name == route.query["filters[apartaments][proekty][name]"])
       }
    }
