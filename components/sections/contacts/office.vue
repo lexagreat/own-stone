@@ -6,7 +6,7 @@
          <p class="body-text" v-html="info?.text"></p>
       </div>
       <div class="contacts-office__image">
-         <div class="marquee-0">
+         <!-- <div class="marquee-0">
             <div class="marquee marquee-b2b">
                <div class="marquee__group">
                   <img :src="info?.photo?.url" alt="">
@@ -15,6 +15,56 @@
                   <li class="running-line__item">
                      <img :src="info?.photo?.url" alt="">
                   </li>
+               </div>
+            </div>
+         </div> -->
+         <div class="marquee-0">
+            <div class="marquee marquee-b2b">
+               <div class="marquee__group">
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/1.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/2.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/3.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/4.jpg" alt="">
+                     </div>
+                  </li>
+
+               </div>
+               <div aria-hidden="true" class="marquee__group">
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/1.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/2.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/3.jpg" alt="">
+                     </div>
+                  </li>
+                  <li class="running-line__item">
+                     <div>
+                        <img src="/img/contacts/4.jpg" alt="">
+                     </div>
+                  </li>
+
                </div>
             </div>
 
