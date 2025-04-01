@@ -1,6 +1,7 @@
 <template>
    <div class="catalog-card with-hover aft" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
+         <UiLoader v-if="!product?.photos?.length" />
          <ul>
             <template v-for="(item, index) in product?.photos" :key="index">
                <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
@@ -9,12 +10,12 @@
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
             <template v-for="(photo, index) in product?.photos" :key="photo">
-
                <SwiperSlide v-if="index < 3">
                   <img :src="photo?.url" alt="" lazy ref="images">
                </SwiperSlide>
             </template>
          </Swiper>
+
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li v-for="tag in tags" :key="tag">{{ tag }}</li>
@@ -89,12 +90,14 @@
             </button>
          </div>
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
+
             <ul>
-               <template v-for="arr in apartsRooms" :key="arr">
+               <template v-for="(arr, index) in filteredApartsRooms" :key="arr">
                   <li v-if="arr?.length">
                      <p>
+                        <span v-if="arr[0].isStud">Студия ({{ arr?.length }})</span>
                         <span v-if="arr[0].count_rooms <= 5">{{ arr[0]?.count_rooms }}-комн. ({{ arr?.length }})</span>
-                        <span v-else>5+ комн. ({{ arr?.length }})</span>
+                        <span v-else-if="arr[0].count_rooms > 5 && !arr[0].isStud">5+ комн. ({{ arr?.length }})</span>
                         <span>от {{ getMinArea(arr) }} м<sup>2</sup></span>
                      </p>
                      <span> от {{ formatPrice(getMinPrice(arr)) }}</span>
@@ -243,7 +246,29 @@ const apartsRooms = computed(() => {
    })
    return arr
 })
+
+const filteredApartsRooms = computed(() => {
+   let resArr = apartsRooms.value;
+   let fivePlusItems = apartsRooms.value[apartsRooms.value.length - 1]
+   if (fivePlusItems?.length) {
+      let studiosArr = []
+      fivePlusItems.forEach((item) => {
+         if (item.square_apartament < getMinArea(apartsRooms.value[0])) {
+            item.isStud = true
+            studiosArr.push(item)
+            resArr[resArr.length - 1] = resArr[resArr.length - 1].filter(ap => ap.id !== item.id)
+         }
+      })
+      if (studiosArr.length) {
+         resArr.unshift(studiosArr)
+      }
+   }
+   return resArr
+})
 const getMinPrice = (arr) => {
+   if (!arr || !arr.length) {
+      return 0
+   }
    let res = 0;
    let prices = arr.map((item) => +item.cost_total);
    // let areas = arr.map((item) => +item.square_apartament);
@@ -251,6 +276,9 @@ const getMinPrice = (arr) => {
    return res
 }
 const getMinArea = (arr) => {
+   if (!arr || !arr.length) {
+      return 0
+   }
    let res = 0;
    let areas = arr.map((item) => +item.square_apartament);
    res = Math.min(...areas);
@@ -318,6 +346,15 @@ const link = computed(() => {
          padding: 0 8px;
          border: 0;
       }
+   }
+}
+
+.catalog-card {
+   .loader-wrapper {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
    }
 }
 

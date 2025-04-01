@@ -302,7 +302,6 @@ export const useCatalog = defineStore("useCatalog", {
             name: "Не важно",
             value: 0,
          });
-         console.log("location", res);
          return res;
       },
       getTransport(arr) {
@@ -313,8 +312,7 @@ export const useCatalog = defineStore("useCatalog", {
                   name: item,
                   value: index + 1,
                };
-            })
-            .filter((item) => item);
+            });
          res.unshift({
             name: "Не важно",
             value: 0,
@@ -352,7 +350,6 @@ export const useCatalog = defineStore("useCatalog", {
          return res;
       },
       getTags(arr) {
-         console.log(arr);
          let res = [
             ...new Set(
                arr
@@ -367,7 +364,6 @@ export const useCatalog = defineStore("useCatalog", {
                value: index + 1,
             };
          });
-         console.log("tags", res);
          return res;
       },
 
@@ -411,7 +407,7 @@ export const useCatalog = defineStore("useCatalog", {
          obj.tags = this.getTags(productsArr);
          obj.projects = this.getProjectsNames(productsArr);
          obj.metro = this.getMetro(productsArr);
-         console.log("get filters for cat", obj);
+         // console.log("get filters for cat", obj);
          return obj;
       },
    },

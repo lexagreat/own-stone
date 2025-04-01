@@ -1,7 +1,16 @@
 <template>
-   <div class="list-object">
+   <div class="list-object" @click="clickHandler">
       <div class="list-object__main">
          <div class="list-object__image">
+            <!-- <ModalFancybox class="fancy" :options="{
+               Image: {
+                  zoom: true, // Включаем зум
+               },
+            }">
+               <a data-fancybox="gallery" :href="product?.preview_picture?.url">
+                  <img :src="product?.preview_picture?.url" alt="">
+               </a>
+            </ModalFancybox> -->
             <img :src="product?.preview_picture?.url" alt="">
          </div>
          <div class="list-object__info">
@@ -101,11 +110,27 @@ const favorites = useFavorites()
 const props = defineProps({
    product: Object
 })
+const emit = defineEmits(["onForm"])
+
 const onLike = () => {
    favorites.toggle(props.product)
 }
 const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.apartaments) || favorites.isContains(props.product?.slug, favorites.commerce.apartaments) || favorites.isContains(props.product?.slug, favorites.secondary)
 })
+const clickHandler = (e) => {
+   // if (!e.target.closest('.fancy')) {
+   emit('onForm', props.product.documentId)
 
+   // }
+}
 </script>
+
+
+
+<style lang="scss" scoped>
+.fancy {
+   width: 100%;
+   height: 100%;
+}
+</style>

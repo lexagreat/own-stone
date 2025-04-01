@@ -280,9 +280,16 @@
          height: 100%;
          & > .marquee {
             aspect-ratio: calc(32033 / 6142);
+            // height: 400px;
             // @media (max-width: $mobile) {
             //    height: 430px;
             // }
+         }
+      }
+      .marquee-container {
+         height: 400px;
+         * {
+            height: 100%;
          }
       }
       .btn {

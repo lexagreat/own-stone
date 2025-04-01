@@ -31,5 +31,4 @@ const props = defineProps({
 })
 
 const isOpenModal = ref(false)
-
 </script>

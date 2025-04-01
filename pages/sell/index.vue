@@ -7,7 +7,7 @@
       <SectionsSellPortfolio :info="info.sell_portfolio" />
       <SectionsHomeReviews :info="info.reviews" />
       <section class="project-sliders">
-         <SectionsProductSlider :products="info.sell_projects_slider.apartmanets" :category="2" white-btns>
+         <SectionsProductSlider :products="lots" :category="2" white-btns>
             <div v-html="info.sell_projects_slider.title"></div>
          </SectionsProductSlider>
       </section>
@@ -17,6 +17,8 @@
 <script setup>
 const { data: info } = await useBaseFetch('/sellpage')
 // console.log(info);
+const { data: lots } = await useBaseFetch('/apartaments?filters[parser_type]=cian&filters[parser_type]=avito&pLevel=2')
+console.log("lots", lots);
 useHead({
    title: 'Продать'
 })

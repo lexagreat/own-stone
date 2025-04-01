@@ -1,7 +1,17 @@
 <template>
-   <div class="catalog-card catalog-card_object" @click=" emit('onForm', product.documentId)">
+   <div class="catalog-card catalog-card_object" @click="clickHandler">
       <div class="catalog-card__gallery">
-         <img :src="product?.preview_picture?.url" alt="">
+         <!-- <ModalFancybox class="fancy" :options="{
+            Image: {
+               zoom: true, // Включаем зум
+            },
+         }">
+            <a data-fancybox="gallery" :href="product?.preview_picture?.url">
+               <img :src="product?.preview_picture?.url" alt="">
+            </a>
+         </ModalFancybox> -->
+         <UiLoader v-if="!product?.preview_picture?.url" />
+         <img v-else :src="product?.preview_picture?.url" alt="">
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li>{{ product?.proekty?.date_complete }}</li>
@@ -76,15 +86,40 @@ const onLike = () => {
 const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.apartaments) || favorites.isContains(props.product?.slug, favorites.commerce.apartaments) || favorites.isContains(props.product?.slug, favorites.secondary)
 })
+const clickHandler = (e) => {
+   // if (!e.target.closest('.fancy')) {
+   emit('onForm', props.product.documentId)
+
+   // }
+}
 </script>
 
 <style lang="scss" scoped>
 .catalog-card {
+   .fancy {
+      width: 100%;
+      height: 100%;
+
+      button {
+         width: 100%;
+         height: 100%;
+      }
+   }
+
    &__price {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
+   }
+}
+
+.catalog-card {
+   .loader-wrapper {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
    }
 }
 </style>

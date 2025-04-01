@@ -80,8 +80,10 @@
       .catalog-card {
          &__gallery {
             height: 71px;
+            flex: 0 0 71px; // new
             @media (max-width: 1400px) {
                height: calc(60px + 11 * ((100vw - 1024px) / (1400 - 1024)));
+               flex: 0 0 calc(60px + 11 * ((100vw - 1024px) / (1400 - 1024))); // new
             }
          }
          &__footer {
@@ -101,8 +103,10 @@
       .catalog-card {
          &__gallery {
             height: 180px;
+            flex: 0 0 180px; // new
             @media (max-width: 1400px) {
                height: calc(170px + 10 * ((100vw - 1024px) / (1400 - 1024)));
+               flex: 0 0 calc(170px + 10 * ((100vw - 1024px) / (1400 - 1024))); // new
             }
          }
          &__footer {
@@ -113,6 +117,7 @@
          .catalog-card {
             &__gallery {
                height: 200px;
+               flex: 0 0 200px; // new
             }
          }
       }
@@ -122,6 +127,7 @@
       .catalog-card {
          &__gallery {
             height: 247px;
+            flex: 0 0 247px; // new
          }
          &__footer {
             border-color: rgba(24, 24, 24, 0.15);
@@ -136,10 +142,16 @@
          }
       }
    }
+   &.project-card {
+      .catalog-card__gallery {
+         flex: 0 0 77px !important;
+         max-height: 180px;
+      }
+   }
    &__gallery {
       transition: $transition;
       height: 288px;
-      // flex: 0 0 288px;
+      flex: 0 0 288px; // new
       position: relative;
       & > ul {
          position: absolute;

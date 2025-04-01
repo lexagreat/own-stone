@@ -1,6 +1,7 @@
 <template>
    <div class="catalog-card with-hover apart" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
+         <UiLoader v-if="!photos?.length" />
          <ul>
             <li v-for="(item, index) in photos" :key="index" @mouseenter="onMouseenter(index)"></li>
          </ul>
@@ -45,7 +46,7 @@
             </button>
             <!-- <h4 class="catalog-card__title">{{ product?.name }}</h4> -->
             <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽ </h4>
-            <span class="catalog-card__price" style="min-height: 16px;">{{ product?.description }} </span>
+            <span class="catalog-card__price" style="min-height: 57px;">{{ product?.description }} </span>
             <ul class="catalog-card__addresses">
                <div>
                   <li v-if="product?.proekty?.metro_nearby[0]" style="height: 18px;">
@@ -70,7 +71,7 @@
                   </li>
                </div>
                <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div>
-               <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div>
+               <!-- <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div> -->
             </ul>
             <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -151,7 +152,7 @@ const images = ref([])
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
-   let tmp = 1;
+   let tmp = 2;
    if (images.value?.length > 0) {
       images.value.forEach(item => {
          item.onload = () => {
@@ -205,12 +206,18 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
    &.project-card {
       height: 100%;
 
+      .swiper {
+         @media(min-width: 1440px) {
+            width: 300px;
+         }
+      }
+
       .catalog-card {
 
 
          &__footer {
             flex: unset;
-            padding-top: 24px;
+            padding-top: 9px;
          }
 
          &__content {
@@ -290,12 +297,19 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
 
    &__price {
       pointer-events: none;
-      white-space: nowrap;
+      // white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: block;
+      white-space: unset;
+      -webkit-line-clamp: 3;
+      /* Число отображаемых строк */
+      display: -webkit-box;
+      /* Включаем флексбоксы */
+      -webkit-box-orient: vertical;
+      // display: block;
       width: 100%;
       font-size: 16px;
+      line-height: calc(19 / 16);
    }
 
    &__banners {
@@ -310,6 +324,16 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
 
    &__footer {
       border-top: 0;
+      padding-top: 0;
+   }
+}
+
+.catalog-card {
+   .loader-wrapper {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
    }
 }
 
@@ -392,6 +416,16 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
       .catalog-card__btns {
          padding: 20px 10px;
          padding-top: 10px;
+      }
+   }
+}
+
+.apart {
+   .catalog-card {
+      &__gallery {
+         @media(max-width: 568px) {
+            flex: 0 0 77px !important;
+         }
       }
    }
 }

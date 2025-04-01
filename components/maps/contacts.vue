@@ -2,10 +2,11 @@
    <yandex-map ref="map" v-if="info?.contacts_map_coords?.length" :settings="{
       location: {
          center: JSON.parse(info?.contacts_map_coords[0]?.coords),
-         zoom: 9,
+         zoom: 17,
          duration: 2500
       },
-      mapsRenderWaitDuration: 5000 // Increase timeout duration (default is 2000ms)
+      mapsRenderWaitDuration: 5000, // Increase timeout duration (default is 2000ms)
+      behaviors: enabledBehaviors,
    }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'light' }" />
 
@@ -67,6 +68,7 @@ const getBalloonStyle = (coords) => {
 
    };
 };
+const enabledBehaviors = ref(['drag', 'pinchZoom', 'dblClick']);
 
 
 </script>
