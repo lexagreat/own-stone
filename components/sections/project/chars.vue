@@ -10,7 +10,7 @@
                </li>
                <li v-if="info.properties.find(item => item.title == 'Класс')">
                   <span>Класс</span>
-                  <p>{{ info.properties.find(item => item.title == 'Класс')?.desc }}</p>
+                  <p>{{info.properties.find(item => item.title == 'Класс')?.desc}}</p>
                </li>
                <li>
                   <span>Застройщик</span>
@@ -20,13 +20,13 @@
                   <span>Стоимость лотов</span>
                   <p>от {{ formatPrice(apartamentsMinPrice) }}</p>
                </li>
-               <li>
+               <li v-if="finishing.length">
                   <span>Тип отделки</span>
                   <p> {{ finishing }}</p>
                </li>
                <li v-if="info.properties.find(item => item.title == 'Этажи')">
                   <span>Этажи</span>
-                  <p>{{ info.properties.find(item => item.title == 'Этажи')?.desc }}</p>
+                  <p>{{info.properties.find(item => item.title == 'Этажи')?.desc}}</p>
                </li>
                <li>
                   <span>Всего лотов</span>
@@ -34,7 +34,7 @@
                </li>
                <li v-if="info.properties.find(item => item.title == 'Высота потолков')">
                   <span>Высота потолков</span>
-                  <p>{{ info.properties.find(item => item.title == 'Высота потолков')?.desc }}</p>
+                  <p>{{info.properties.find(item => item.title == 'Высота потолков')?.desc}}</p>
                </li>
                <li>
                   <span>Площадь лотов</span>
@@ -42,7 +42,7 @@
                </li>
                <li v-if="info.properties.find(item => item.title == 'Паркинг')">
                   <span>Паркинг</span>
-                  <p>{{ info.properties.find(item => item.title == 'Паркинг')?.desc }}</p>
+                  <p>{{info.properties.find(item => item.title == 'Паркинг')?.desc}}</p>
                </li>
             </ul>
          </div>
@@ -61,7 +61,10 @@ const apartamentsMinArea = computed(() => {
    return Math.min(...props.info.apartaments.map((item) => +item.square_apartament))
 })
 
-let finishing = [...new Set(props.info.apartaments.map((item) => item.finishing))].map(
-   (item) => item
-).join(", ");
+// let finishing = [...new Set(props.info.apartaments.map((item) => item.finishing))].map(
+//    (item) => item
+// ).join(", ");
+let finishing = computed(() => {
+   return props.info.finishing.map(item => item.finishing).join(', ')
+})
 </script>
