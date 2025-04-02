@@ -49,9 +49,6 @@ export default {
    watch: {
       isOpen(value) {
          if (value) {
-            window.scrollBy({
-               top: 3
-            })
             this.bodyLock();
          } else {
             this.bodyUnlock();

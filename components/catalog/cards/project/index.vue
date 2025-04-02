@@ -311,7 +311,7 @@ const link = computed(() => {
          content: "";
          display: block;
          width: 100%;
-         height: 30px;
+         height: 100px;
          background-color: transparent;
          position: absolute;
          top: 100%;

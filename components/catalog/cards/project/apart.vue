@@ -46,7 +46,7 @@
             </button>
             <!-- <h4 class="catalog-card__title">{{ product?.name }}</h4> -->
             <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽ </h4>
-            <span class="catalog-card__price" style="min-height: 57px;">{{ product?.description }} </span>
+            <span class="catalog-card__price" style="min-height: 57px;" v-html="product?.description"></span>
             <ul class="catalog-card__addresses">
                <div>
                   <li v-if="product?.proekty?.metro_nearby[0]" style="height: 18px;">

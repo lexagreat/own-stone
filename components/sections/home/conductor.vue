@@ -86,12 +86,12 @@ const items = ref([
    {
       title: "РИТЕЙЛ",
       text: "Если Вам нужна помощь в выборе объекта - оставьте заявку и мы с Вами свяжемся в ближайшее время",
-      image: "/img/home/conductor-form1.png"
+      image: "/img/home/conductor-form1-new.png"
    },
    {
       title: "Офисы",
       text: "Если Вам нужна помощь в выборе объекта - оставьте заявку и мы с Вами свяжемся в ближайшее время",
-      image: "/img/home/conductor-form2.png"
+      image: "/img/home/conductor-form2-new.png"
    },
 ])
 const isMeeting = ref(false)
