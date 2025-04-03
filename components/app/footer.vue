@@ -153,7 +153,7 @@
                            </NuxtLink>
                         </li>
                      </ul>
-                     <button @click="isMeeting = true">Назначить встречу</button>
+                     <button @click="isMeeting = true">Записаться на встречу</button>
                   </div>
                </div>
             </div>

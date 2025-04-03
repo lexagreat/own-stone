@@ -1,5 +1,6 @@
 <template>
-   <div class="catalog-card with-hover aft" :class="{ 'project-card': type == 'row', loading: loading }">
+   <div class="catalog-card with-hover aft"
+      :class="{ 'project-card': type == 'row', loading: loading, 'full-image-hide': filteredApartsRooms.length > 5 }">
       <div class="catalog-card__gallery">
          <UiLoader v-if="!product?.photos?.length" />
          <ul>
@@ -52,7 +53,7 @@
             <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
                ₽ </span>
             <ul class="catalog-card__addresses">
-               <div style="min-height: 13px;">
+               <div style="min-height: 13px;" v-if="product?.address_short?.length">
                   <li v-if="product?.address_short?.length">
                      <IconAddress />
                      <span>{{ product?.address_short }}</span>
@@ -81,6 +82,7 @@
                      </svg>
                   </li>
                </div>
+               <div style="min-height: 13px;" v-if="!product?.address_short?.length"></div>
             </ul>
             <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -93,7 +95,7 @@
 
             <ul>
                <template v-for="(arr, index) in filteredApartsRooms" :key="arr">
-                  <li v-if="arr?.length">
+                  <li>
                      <p>
                         <span v-if="arr[0].isStud">Студия ({{ arr?.length }})</span>
                         <span v-if="arr[0].count_rooms <= 5">{{ arr[0]?.count_rooms }}-комн. ({{ arr?.length }})</span>
@@ -263,7 +265,7 @@ const filteredApartsRooms = computed(() => {
          resArr.unshift(studiosArr)
       }
    }
-   return resArr
+   return resArr.filter(arr => arr.length)
 })
 const getMinPrice = (arr) => {
    if (!arr || !arr.length) {

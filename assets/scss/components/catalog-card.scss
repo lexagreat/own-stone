@@ -75,7 +75,7 @@
          }
       }
    }
-   // .catalog-card__gallery
+
    &.with-hover:not(.project-card):has(.catalog-card__main:hover) {
       .catalog-card {
          &__gallery {
@@ -118,6 +118,32 @@
             &__gallery {
                height: 200px;
                flex: 0 0 200px; // new
+            }
+         }
+      }
+   }
+   // .catalog-card__gallery
+   &.with-hover.full-image-hide:not(.project-card):has(
+         .catalog-card__main:hover
+      ) {
+      .catalog-card {
+         &__gallery {
+            height: 24px;
+            flex: 0 0 24px; // new
+            @media (max-width: 1400px) {
+               height: 24px;
+               flex: 0 0 24px; // new
+            }
+         }
+         &__footer {
+            border-color: rgba(24, 24, 24, 0.15);
+         }
+      }
+      @media (max-width: $tablet) {
+         .catalog-card {
+            &__gallery {
+               height: 215px;
+               flex: 0 0 215px;
             }
          }
       }

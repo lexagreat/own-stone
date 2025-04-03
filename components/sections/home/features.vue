@@ -6,7 +6,7 @@
             <p class="body-text home-features__text" v-html="info.text"></p>
             <ul class="home-features__list home-list">
                <li class="home-features__item" v-for="(item, index) in items" :key="item">
-                  <h4 class="h1">{{ item.renderNumber + " " + item.title }}</h4>
+                  <h4 class="h1">{{ formatNumber(item.renderNumber) + " " + item.title }}</h4>
                   <span>{{ item.subtitle }}</span>
                </li>
             </ul>

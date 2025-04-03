@@ -15,7 +15,7 @@
                </li>
             </ul>
 
-            <div class="home-conductor__forms scrollbar-none" v-if="type == 'Коммерция'">
+            <div class="home-conductor__forms scrollbar-none" v-if="type == 'Коммерческая'">
                <div class="home-conductor__form conductor-form" v-for="(item, index) in items" :key="index"
                   :class="{ dark: index == 1 }">
                   <div class="conductor-form__main">
@@ -71,7 +71,7 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/secondary-housing.svg'))),
    },
    {
-      name: 'Коммерция',
+      name: 'Коммерческая',
       value: 2,
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },

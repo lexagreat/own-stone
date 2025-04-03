@@ -9,7 +9,7 @@
                   <UiButton class="black" @click="scrollTo('#home-selection')">Выбрать объект</UiButton>
                </li>
                <li>
-                  <UiButton class="white" @click='isMeeting = true'>Назначить встречу</UiButton>
+                  <UiButton class="white" @click='isMeeting = true'>Записаться на встречу</UiButton>
                </li>
             </ul>
          </div>
