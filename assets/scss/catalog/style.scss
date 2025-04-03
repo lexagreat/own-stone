@@ -601,8 +601,8 @@
    }
 }
 .catalog-filter {
-   .v-select {
-      &__list {
+   .v-select:not(.placement-select) {
+      .v-select__list {
          @media (min-width: 1025px) {
             max-height: 300px;
             overflow: auto;

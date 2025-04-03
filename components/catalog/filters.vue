@@ -50,11 +50,10 @@
                <span class="catalog-filter__title">Площадь, м2</span>
                <div class="catalog-range">
                   <div class="catalog-range__output">
-                     <!-- <input type="number" v-model="priceMinValue"> -->
-                     <input type="number" v-model="areaMinValue">
-                     <!-- <span>{{ formatNumber(areaMinValue) }}</span> -->
-                     <input type="number" v-model="areaMaxValue">
-                     <!-- <span>{{ formatNumber(areaMaxValue) }}</span> -->
+                     <input type="text" :value="formatNumber(areaMinValue)"
+                        @input="areaMinValue = +$event.target.value.replaceAll(' ', '')">
+                     <input type="text" :value="formatNumber(areaMaxValue)"
+                        @input="areaMaxValue = +$event.target.value.replaceAll(' ', '')">
                   </div>
                   <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="10" :minValue="areaMinValue"
                      :maxValue="areaMaxValue" @input="UpdateAreas" />
@@ -78,23 +77,21 @@
                </span>
                <div class="catalog-range" v-if="priceType">
                   <div class="catalog-range__output">
-                     <!-- <span>{{ formatPrice(priceForOneMinValue) }}</span>
-                     <span>{{ formatPrice(priceForOneMaxValue) }}</span>
-                      -->
-                     <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMinValue">
-                     <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMaxValue">
+
+                     <input type="text" :value="formatNumber(priceForOneMinValue)"
+                        @input="priceForOneMinValue = +$event.target.value.replaceAll(' ', '')">
+                     <input type="text" :value="formatNumber(priceForOneMaxValue)"
+                        @input="priceForOneMaxValue = +$event.target.value.replaceAll(' ', '')">
                   </div>
                   <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
                      :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue" @input="UpdateForOnePrices" />
                </div>
                <div class="catalog-range" v-else>
                   <div class="catalog-range__output">
-                     <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceMinValue">
-
-                     <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
-                     <!-- <input type="number" v-model="priceMaxValue"> -->
-                     <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceMaxValue">
-                     <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
+                     <input type="text" :value="formatNumber(priceMinValue)"
+                        @input="priceMinValue = +$event.target.value.replace(/\D/g, '')">
+                     <input type="text" :value="formatNumber(priceMaxValue)"
+                        @input="priceMaxValue = +$event.target.value.replace(/\D/g, '')">
                   </div>
                   <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                      :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
@@ -177,6 +174,11 @@ const props = defineProps({
    products: Array,
    filters: Object
 })
+
+const onInput = (e) => {
+   areaMinValue.value = +e.target.value.replaceAll(" ", '')
+}
+
 const emit = defineEmits(["closeModal", "setCat", "changeType", "search", 'update:filtersCount'])
 const types = ref([
    {
