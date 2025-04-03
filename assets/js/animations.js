@@ -48,19 +48,19 @@ export const stickyForCursor = (sectionSelector, itemSelector) => {
       circle.style.transform = `translate(${event.layerX}px, ${event.layerY}px)`;
    };
 };
-export const aboutValueAnim = () => {
-   const rows = document.querySelectorAll(".about-value__row");
-
+export const aboutValueAnim = (rows) => {
+   // const rows = document.querySelectorAll(".about-value__row");
    rows.forEach((row, index) => {
       gsap.to(row, {
          scrollTrigger: {
             trigger: row, // элемент, который должен запускать анимацию
             start: "top 40%", // Когда верх элемента достигает 80% высоты экрана
             end: `top 8%`, // Используем высоту элемента для end
-            // markers: true, // включить маркеры для визуальной отладки
+            markers: false, // включить маркеры для визуальной отладки
             scrub: 1.5,
             onEnter: () => {
-               // console.log("onEnter", index);
+               console.log("onEnter", index);
+               console.log(rows[index]);
                rows.forEach((item) => {
                   item.classList.remove("active");
                });
@@ -72,7 +72,7 @@ export const aboutValueAnim = () => {
                rows[index].classList.remove("hidden-down");
             },
             onEnterBack: () => {
-               // console.log("onEnterBack", index);
+               console.log("onEnterBack", index);
                rows.forEach((item) => {
                   item.classList.remove("active");
                });

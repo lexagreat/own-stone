@@ -16,7 +16,7 @@
             </button>
             <span>{{ title }}</span>
          </div>
-         <ul class="v-select__list">
+         <ul class="v-select__list scrollbar-none">
             <template v-for="(option, index) in settings.options" :key="index">
                <li class="v-select__item" v-if="option?.name">
                   <label>

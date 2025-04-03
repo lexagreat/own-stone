@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                     }}</label>
+                        }}</label>
                   </li>
                </ul>
             </li>
@@ -107,7 +107,7 @@
             <li class="catalog-filter" v-if="type !== 'secondary'">
                <span class="catalog-filter__title">Срок сдачи</span>
 
-               <UiCatalogSelect title="Срок сдачи" :settings="dateSettings" v-model="dates" />
+               <UiCatalogSelect class="srok-select" title="Срок сдачи" :settings="dateSettings" v-model="dates" />
             </li>
             <!-- <li class="catalog-filter" v-if="!fromHome">
                <span class="catalog-filter__title">Расположение</span>

@@ -21,13 +21,13 @@
                   <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/services">Услуги</NuxtLink>
+                  <a href="/services">Услуги</a>
                </li>
                <li>
                   <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/about">О нас</NuxtLink>
+                  <a href="/about">О нас</a>
                </li>
                <li>
                   <NuxtLink to="/contacts">Контакты</NuxtLink>
@@ -108,13 +108,13 @@
                   <NuxtLink to="/sell">Продать</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/services">Услуги</NuxtLink>
+                  <a href="/services">Услуги</a>
                </li>
                <li>
                   <NuxtLink to="/partners">Партнерам</NuxtLink>
                </li>
                <li>
-                  <NuxtLink to="/about">О нас</NuxtLink>
+                  <a href="/about">О нас</a>
                </li>
                <li>
                   <NuxtLink to="/contacts">Контакты</NuxtLink>

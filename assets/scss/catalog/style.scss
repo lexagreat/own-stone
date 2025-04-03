@@ -600,3 +600,13 @@
       }
    }
 }
+.catalog-filter {
+   .v-select {
+      &__list {
+         @media (min-width: 1025px) {
+            max-height: 300px;
+            overflow: auto;
+         }
+      }
+   }
+}
