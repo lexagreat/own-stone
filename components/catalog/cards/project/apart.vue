@@ -2,8 +2,11 @@
    <div class="catalog-card with-hover apart" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
          <UiLoader v-if="!photos?.length" />
+
          <ul>
-            <li v-for="(item, index) in photos" :key="index" @mouseenter="onMouseenter(index)"></li>
+            <template v-for="(item, index) in photos" :key="index">
+               <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
+            </template>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
             <SwiperSlide v-for="photo in photos" :key="photo">
@@ -325,6 +328,28 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
    &__footer {
       border-top: 0;
       padding-top: 0;
+   }
+}
+
+.catalog-card__nav {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 3;
+
+   ul {
+      display: flex;
+      height: 100%;
+      width: 100%;
+
+      &>* {
+         flex: 1;
+         display: flex;
+         width: 100%;
+         height: 100%;
+      }
    }
 }
 

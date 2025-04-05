@@ -3,10 +3,11 @@
       :class="{ 'project-card': type == 'row', loading: loading, 'full-image-hide': filteredApartsRooms.length > 5 }">
       <div class="catalog-card__gallery">
          <UiLoader v-if="!product?.photos?.length" />
+         <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
+            :photos="product?.photos" :currentIndex="currentPhotoIndex" />
          <ul>
             <template v-for="(item, index) in product?.photos" :key="index">
-               <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
-
+               <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
             </template>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
@@ -16,7 +17,6 @@
                </SwiperSlide>
             </template>
          </Swiper>
-
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li v-for="tag in tags" :key="tag">{{ tag }}</li>
@@ -129,13 +129,16 @@ const props = defineProps({
    type: String,
    product: Object
 })
-
+const isOpenModal = ref(false)
+const currentPhotoIndex = ref(0)
 
 const swiperInstance = ref(null)
 const onSwiper = (swiper) => {
    swiperInstance.value = swiper
 }
+
 const onMouseenter = (index) => {
+   currentPhotoIndex.value = index;
    swiperInstance.value.slideTo(index)
 }
 const isCollapse = ref(false)
@@ -347,6 +350,28 @@ const link = computed(() => {
          border-radius: 30px;
          padding: 0 8px;
          border: 0;
+      }
+   }
+}
+
+.catalog-card__nav {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 3;
+
+   ul {
+      display: flex;
+      height: 100%;
+      width: 100%;
+
+      &>* {
+         flex: 1;
+         display: flex;
+         width: 100%;
+         height: 100%;
       }
    }
 }

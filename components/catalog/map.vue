@@ -50,7 +50,8 @@ import {
    YandexMapMarker,
    YandexMapClusterer
 } from "vue-yandex-maps";
-
+import { useCatalog } from "~/store/catalog";
+const catalog = useCatalog()
 const props = defineProps({
    searchUrl: String,
    category: Number

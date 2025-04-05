@@ -4,9 +4,9 @@
          <div class="header__wrapper">
             <ModalOrderPhone :is-open="isOrderPhone" @close-popup="isOrderPhone = false" />
             <div class="header__info">
-               <NuxtLink to="/" class="header__logo">
+               <a href="/" class="header__logo">
                   <LogoIcon />
-               </NuxtLink>
+               </a>
                <span class="border desktop"></span>
                <div class="header__schedule">
                   <span>{{ address }}</span>
@@ -15,22 +15,22 @@
             </div>
             <ul class="header__list">
                <li>
-                  <NuxtLink to="/catalog">Купить</NuxtLink>
+                  <a href="/catalog">Купить</a>
                </li>
                <li>
-                  <NuxtLink to="/sell">Продать</NuxtLink>
+                  <a href="/sell">Продать</a>
                </li>
                <li>
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <NuxtLink to="/partners">Партнерам</NuxtLink>
+                  <a href="/partners">Партнерам</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
                </li>
                <li>
-                  <NuxtLink to="/contacts">Контакты</NuxtLink>
+                  <a href="/contacts">Контакты</a>
                </li>
             </ul>
             <div class="header__actions">
@@ -102,22 +102,22 @@
          <div class="header-menu scrollbar-none" :class="{ active: isBurgerOpen }">
             <ul class="header-menu__list">
                <li>
-                  <NuxtLink to="/catalog">Купить</NuxtLink>
+                  <a href="/catalog">Купить</a>
                </li>
                <li>
-                  <NuxtLink to="/sell">Продать</NuxtLink>
+                  <a href="/sell">Продать</a>
                </li>
                <li>
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <NuxtLink to="/partners">Партнерам</NuxtLink>
+                  <a href="/partners">Партнерам</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
                </li>
                <li>
-                  <NuxtLink to="/contacts">Контакты</NuxtLink>
+                  <a href="/contacts">Контакты</a>
                </li>
             </ul>
             <div class="header__schedule" style="flex: 1;">
