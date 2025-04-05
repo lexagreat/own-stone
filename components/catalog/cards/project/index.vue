@@ -5,14 +5,14 @@
          <UiLoader v-if="!product?.photos?.length" />
          <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
             :photos="product?.photos" :currentIndex="currentPhotoIndex" />
-         <ul>
+         <ul class="catalog-card__nav">
             <template v-for="(item, index) in product?.photos" :key="index">
                <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
             </template>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
             <template v-for="(photo, index) in product?.photos" :key="photo">
-               <SwiperSlide v-if="index < 3">
+               <SwiperSlide v-if="index < 3" @click="isOpenModal = true, currentPhotoIndex = index">
                   <img :src="photo?.url" alt="" lazy ref="images">
                </SwiperSlide>
             </template>
@@ -355,24 +355,8 @@ const link = computed(() => {
 }
 
 .catalog-card__nav {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 3;
-
-   ul {
-      display: flex;
-      height: 100%;
-      width: 100%;
-
-      &>* {
-         flex: 1;
-         display: flex;
-         width: 100%;
-         height: 100%;
-      }
+   @media(max-width: 1024px) {
+      display: none;
    }
 }
 

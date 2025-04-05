@@ -102,11 +102,11 @@
    &.with-hover.apart:not(.project-card):has(.catalog-card__main:hover) {
       .catalog-card {
          &__gallery {
-            height: 180px;
-            flex: 0 0 180px; // new
+            height: 142px;
+            flex: 0 0 142px; // new
             @media (max-width: 1400px) {
-               height: calc(170px + 10 * ((100vw - 1024px) / (1400 - 1024)));
-               flex: 0 0 calc(170px + 10 * ((100vw - 1024px) / (1400 - 1024))); // new
+               height: calc(132px + 10 * ((100vw - 1024px) / (1400 - 1024)));
+               flex: 0 0 calc(132px + 10 * ((100vw - 1024px) / (1400 - 1024))); // new
             }
          }
          &__footer {

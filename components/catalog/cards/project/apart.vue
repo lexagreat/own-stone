@@ -2,14 +2,15 @@
    <div class="catalog-card with-hover apart" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
          <UiLoader v-if="!photos?.length" />
-
-         <ul>
+         <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
+            :photos="product?.photos" :currentIndex="currentPhotoIndex" />
+         <ul class="catalog-card__nav">
             <template v-for="(item, index) in photos" :key="index">
-               <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
+               <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
             </template>
          </ul>
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
-            <SwiperSlide v-for="photo in photos" :key="photo">
+            <SwiperSlide v-for="photo in photos" :key="photo" @click="isOpenModal = true, currentPhotoIndex = index">
                <img :src="photo?.url" alt="" ref="images">
             </SwiperSlide>
          </Swiper>
@@ -141,7 +142,10 @@ const swiperInstance = ref(null)
 const onSwiper = (swiper) => {
    swiperInstance.value = swiper
 }
+const isOpenModal = ref(false)
+const currentPhotoIndex = ref(0)
 const onMouseenter = (index) => {
+   currentPhotoIndex.value = index
    swiperInstance.value.slideTo(index)
 }
 const isCollapse = ref(false)
@@ -298,6 +302,13 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
       }
    }
 
+   &:has(.catalog-card__main:hover) {
+      .catalog-card__price {
+         -webkit-line-clamp: 5;
+
+      }
+   }
+
    &__price {
       pointer-events: none;
       // white-space: nowrap;
@@ -332,24 +343,8 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
 }
 
 .catalog-card__nav {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 3;
-
-   ul {
-      display: flex;
-      height: 100%;
-      width: 100%;
-
-      &>* {
-         flex: 1;
-         display: flex;
-         width: 100%;
-         height: 100%;
-      }
+   @media(max-width: 1024px) {
+      display: none;
    }
 }
 
