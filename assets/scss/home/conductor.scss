@@ -231,6 +231,9 @@
    background: #f1f1f1;
    overflow: hidden;
    gap: 40px;
+   @media (min-width: 1025px) {
+      max-height: 355px;
+   }
    @media (max-width: $tablet) {
       flex-direction: column-reverse;
       gap: 24px;
@@ -307,17 +310,12 @@
          object-fit: cover;
       }
       @media (max-width: $tablet) {
-         padding-top: 10px;
-         padding-right: 21px;
+         max-height: 140px;
+         flex: 0 0 140px;
          padding-bottom: 0;
          padding-left: 0;
          display: flex;
          justify-content: flex-end;
-         img {
-            width: 110px;
-            height: 135px;
-            object-fit: cover;
-         }
       }
    }
 }

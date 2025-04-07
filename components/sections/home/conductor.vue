@@ -86,7 +86,7 @@ const items = ref([
    {
       title: "РИТЕЙЛ",
       text: "Если Вам нужна помощь в выборе объекта - оставьте заявку и мы с Вами свяжемся в ближайшее время",
-      image: "/img/home/conductor-form1-new.png"
+      image: "/img/home/conductor-form1-new1.png"
    },
    {
       title: "Офисы",
