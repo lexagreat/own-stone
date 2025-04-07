@@ -1,4 +1,5 @@
 <template>
+   <div class="catalog-card loading" v-if="!products?.length" style="height: 640px;max-width: 100%;"></div>
    <div class="catalog-map__wrapper">
       <yandex-map ref="map" class="catalog-map" v-if="products?.length" :settings="{
          location: {
