@@ -1,5 +1,5 @@
 <template>
-   <UiLoader v-if="loading && fromCatalog" />
+   <UiLoader v-if="loading && fromCatalog && false" />
    <!-- .catalog-filters.loading  чтоб был скелетон-->
    <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal, 'catalog-filters_catalog': fromCatalog }">
       <div class="catalog-filters__header">
@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
@@ -172,12 +172,9 @@ const props = defineProps({
    fromHome: Boolean,
    isSearchingMap: Boolean,
    products: Array,
-   filters: Object
+   filters: Object,
+   reset: Boolean
 })
-
-const onInput = (e) => {
-   areaMinValue.value = +e.target.value.replaceAll(" ", '')
-}
 
 const emit = defineEmits(["closeModal", "setCat", "changeType", "search", 'update:filtersCount'])
 const types = ref([
@@ -915,7 +912,12 @@ onMounted(async () => {
    await search()
 
 })
-
+watch(() => props.reset, async (value) => {
+   if (value) {
+      resetFilters()
+      await search()
+   }
+})
 const resetFilters = () => {
    // set ranges
    priceMinValue.value = priceMin.value

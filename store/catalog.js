@@ -21,7 +21,6 @@ export const useCatalog = defineStore("useCatalog", {
       async getProducts(url) {
          let base = "catalog";
          const response = await useBaseFetch(base + url);
-         // console.log("Продукты по поиску", response.data);
          this.products = response.data;
          this.meta = response.meta;
          // console.log("response", response);
@@ -374,6 +373,9 @@ export const useCatalog = defineStore("useCatalog", {
             secondary: "Вторичная",
          };
          let type = types[t];
+         let object = useBaseFetch(`/filter-constructor?type=${type}`);
+         return object;
+         return;
          let base = "catalog";
          let obj = {
             ranges: null,

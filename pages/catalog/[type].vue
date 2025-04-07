@@ -14,10 +14,10 @@
                   <NuxtLink :to="item.to">{{ item.name }}</NuxtLink>
                </li>
             </ul>
-            <CatalogFilters :type="type" from-catalog :isOpenModal="isFiltersOpen" @changeType="onChangeType"
-               @closeModal="isFiltersOpen = false" @search="search" :products="catalog.products" :filters="filters"
-               @setCat="setCat" v-model:loading="loading" v-model="sortOption"
-               @update:filtersCount="filtersCount = $event" />
+            <CatalogFilters :reset="reset" :type="type" from-catalog :isOpenModal="isFiltersOpen"
+               @changeType="onChangeType" @closeModal="isFiltersOpen = false" @search="search"
+               :products="catalog.products" :filters="filters" @setCat="setCat" v-model:loading="loading"
+               v-model="sortOption" @update:filtersCount="filtersCount = $event" />
          </div>
       </section>
       <section class="catalog-page">
@@ -54,7 +54,7 @@
                      </UiButton>
                   </div>
                </div>
-               <div class="catalog-page__main" v-if="!catalog.isMap">
+               <div class="catalog-page__main" v-if="!catalog.isMap && catalog.products.length">
                   <CatalogListsGrid :products="splicedProducts[0]" @openForm="onOpenForm" v-if="currentView == 'grid'"
                      :category="category" />
                   <CatalogListsColumn :products="splicedProducts[0]" @openForm="onOpenForm"
@@ -65,16 +65,18 @@
                   <CatalogListsColumn :products="splicedProducts[1]" @openForm="onOpenForm"
                      v-if="currentView == 'column' && splicedProducts[1].length" :category="category" />
                </div>
-               <CatalogMap v-if="catalog.isMap" :searchUrl="searchUrl" :products="catalog.products" :category="category"
-                  @openForm="onOpenForm" />
+               <CatalogMap v-if="catalog.isMap && catalog.products.length" :searchUrl="searchUrl"
+                  :products="catalog.products" :category="category" @openForm="onOpenForm" />
+               <CatalogEmpty v-if="!catalog.products.length" @reset="onreset" />
+
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
                   :id="currentProductForModal" />
             </div>
          </div>
       </section>
 
-      <CatalogPagination v-if="!catalog.isMap" :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage"
-         @showMore="onShowMore" />
+      <CatalogPagination v-if="!catalog.isMap && catalog.products.length" :pages="catalog?.meta?.pagination?.pageCount"
+         v-model="currentPage" @showMore="onShowMore" />
       <SectionsProductSlider :category="0" :products="recentlyStore.products" v-if="recentlyStore.products?.length">
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
@@ -319,7 +321,14 @@ const mobileSort = () => {
 
 const filtersCount = ref(0)
 
+const reset = ref(false)
+const onreset = () => {
+   reset.value = true;
+   setTimeout(() => {
+      reset.value = false;
 
+   }, 100)
+}
 </script>
 
 
