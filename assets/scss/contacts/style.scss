@@ -277,7 +277,7 @@
       // flex: 0 0 741px;
       overflow: hidden;
       .marquee {
-         --duration: 25s;
+         --duration: 15s;
       }
       .marquee-0 {
          height: 100%;
@@ -288,8 +288,12 @@
                position: relative;
                height: 100%;
                width: 100%;
+               width: 310px;
                margin: 0;
                aspect-ratio: calc(3240 / 1920);
+               @media (max-width: $mobile) {
+                  width: 140px;
+               }
             }
             height: 741px;
             @media (max-width: $mobile) {

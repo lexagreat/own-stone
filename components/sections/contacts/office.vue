@@ -21,7 +21,12 @@
          <div class="marquee-0">
             <div class="marquee marquee-b2b">
                <div class="marquee__group">
-                  <li class="running-line__item">
+                  <li class="running-line__item" v-for="item in 13" :key="item">
+                     <div>
+                        <img :src="'/img/contacts/new-' + item + '.jpg'" alt="">
+                     </div>
+                  </li>
+                  <!-- <li class="running-line__item">
                      <div>
                         <img src="/img/contacts/1.jpg" alt="">
                      </div>
@@ -40,11 +45,16 @@
                      <div>
                         <img src="/img/contacts/4.jpg" alt="">
                      </div>
-                  </li>
+                  </li> -->
 
                </div>
                <div aria-hidden="true" class="marquee__group">
-                  <li class="running-line__item">
+                  <li class="running-line__item" v-for="item in 13" :key="item">
+                     <div>
+                        <img :src="'/img/contacts/new-' + item + '.jpg'" alt="">
+                     </div>
+                  </li>
+                  <!-- <li class="running-line__item">
                      <div>
                         <img src="/img/contacts/1.jpg" alt="">
                      </div>
@@ -63,7 +73,7 @@
                      <div>
                         <img src="/img/contacts/4.jpg" alt="">
                      </div>
-                  </li>
+                  </li> -->
 
                </div>
             </div>
