@@ -311,7 +311,10 @@
       width: 220px;
       @media (max-width: $tablet) {
          flex: unset;
-         width: unset;
+         width: calc((100vw - 75px) / 2);
+      }
+      @media (max-width: $mobile) {
+         width: calc(100vw - 24px);
       }
    }
    &__title {

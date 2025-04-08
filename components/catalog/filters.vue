@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>

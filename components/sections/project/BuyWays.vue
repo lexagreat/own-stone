@@ -29,8 +29,9 @@
                            <div class="catalog-range">
                               <div class="catalog-range__output">
                                  <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
-                                 <input type="number" v-model="priceMaxValue">
-
+                                 <!-- <input type="number" v-model="priceMaxValue"> -->
+                                 <input type="text" :value="formatNumber(priceMaxValue)"
+                                    @input="priceMaxValue = +$event.target.value.replaceAll(' ', '')">
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
@@ -40,8 +41,8 @@
                            <span>Первоначальный взнос</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <span>{{ initialMaxValue }} %</span> -->
-                                 <input type="number" v-model="initialMaxValue">
+                                 <span>{{ initialMaxValue }} %</span>
+                                 <!-- <input type="number" v-model="initialMaxValue"> -->
 
                               </div>
                               <MultiRangeSlider :ruler="false" :min="initialMin" :max="initialMax" :step="1"
@@ -79,7 +80,7 @@
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                              }}</span>
+                           }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">

@@ -7,7 +7,7 @@
                <h2 class="project-filters__title h1 dark-title mob">
                   подобрать квартиру
                   <span>{{ formatNumber(count) }} {{ morph(count, ['предложение', 'предложения', 'предложений'])
-                     }}</span>
+                  }}</span>
                </h2>
                <div class="catalog-filters scrollbar-none" :class="{ open: isOpenModal }">
                   <div class="catalog-filters__header">
@@ -28,7 +28,7 @@
                                     :id="'catalogFilterRooms' + item" name="catalogFilterRooms">
                                  <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+"
                                     : ""
-                                    }}</label>
+                                 }}</label>
                               </li>
                            </ul>
                         </li>
@@ -36,12 +36,10 @@
                            <span class="catalog-filter__title">Площадь, м2</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="areaMinValue">
-                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="areaMaxValue">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <!-- <span>{{ formatNumber(areaMinValue) }}</span> -->
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <!-- <span>{{ formatNumber(areaMaxValue) }}</span> -->
+                                 <input type="text" :value="formatNumber(areaMinValue)"
+                                    @input="areaMinValue = +$event.target.value.replaceAll(' ', '')">
+                                 <input type="text" :value="formatNumber(areaMaxValue)"
+                                    @input="areaMaxValue = +$event.target.value.replaceAll(' ', '')">
                               </div>
                               <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="10"
                                  :minValue="areaMinValue" :maxValue="areaMaxValue" @input="UpdateAreas" />
@@ -63,11 +61,10 @@
                            </span>
                            <div class="catalog-range" v-if="priceType">
                               <div class="catalog-range__output">
-                                 <input type="number" inputmode="numeric" pattern="[0-9]*"
-                                    v-model="priceForOneMinValue">
-                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceForOneMaxValue">
-                                 <!-- <span>{{ formatPrice(priceForOneMinValue) }}</span>
-                                 <span>{{ formatPrice(priceForOneMaxValue) }}</span> -->
+                                 <input type="text" :value="formatNumber(priceForOneMinValue)"
+                                    @input="priceForOneMinValue = +$event.target.value.replaceAll(' ', '')">
+                                 <input type="text" :value="formatNumber(priceForOneMaxValue)"
+                                    @input="priceForOneMaxValue = +$event.target.value.replaceAll(' ', '')">
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
                                  :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue"
@@ -75,12 +72,10 @@
                            </div>
                            <div class="catalog-range" v-else>
                               <div class="catalog-range__output">
-                                 <input type="number" inputmode="numeric" pattern="[0-9]*" v-model="priceMinValue">
-                                 <input type="text" inputmode="numeric" pattern="[0-9]*" v-model="priceMaxValue">
-                                 <!-- <input type="number" v-model="priceMinValue"> -->
-                                 <!-- <span>{{ formatPrice(priceMinValue) }}</span> -->
-                                 <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
+                                 <input type="text" :value="formatNumber(priceMinValue)"
+                                    @input="priceMinValue = +$event.target.value.replace(/\D/g, '')">
+                                 <input type="text" :value="formatNumber(priceMaxValue)"
+                                    @input="priceMaxValue = +$event.target.value.replace(/\D/g, '')">
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
@@ -103,7 +98,7 @@
                                  <input v-model="checkedOptions" type="checkbox" :value="item.value"
                                     :id="'catalogFilterOptions' + item.value" name="catalogFilterOptions">
                                  <label class="circle" :for="'catalogFilterOptions' + item.value">{{ item.name
-                                    }}</label>
+                                 }}</label>
                               </li>
                            </ul>
                         </li>
