@@ -29,7 +29,7 @@
                </button>
             </div>
             <div class="project-hero__main">
-               <ul class="project-hero__banners">
+               <ul style="opacity: 0;pointer-events: none;" class="project-hero__banners">
                   <li>ID {{ info.id }}</li>
                </ul>
                <h1 class="project-hero__title h1 light-title">{{ info.name }} <br> <span
