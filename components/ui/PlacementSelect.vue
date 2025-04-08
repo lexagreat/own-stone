@@ -88,9 +88,14 @@ const searchedItems = computed(() => {
    })
 })
 const choosedValue = computed(() => {
-   // let arr = data.value.map(tab => tab.items).flat().filter((item) => item.selected).map(item => item.name).join(", ")
-   // return arr
-   return projectsValue.value.concat(placementValue.value).concat(metroValue.value).map(item => item.name).join(', ')
+
+   let arr = projectsValue.value.concat(placementValue.value).concat(metroValue.value)
+   if (arr.some(item => item.value !== 0)) {
+      return arr.filter(item => item.value !== 0).map(item => item.name).join(', ')
+   } else {
+      return 'Не важно'
+   }
+   // return projectsValue.value.concat(placementValue.value).concat(metroValue.value).map(item => item.name).join(', ')
 })
 function selectOption(option) {
    data.value[tab.value].items.forEach(item => {
