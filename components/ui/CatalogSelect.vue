@@ -157,6 +157,14 @@ label {
    flex-direction: column;
 }
 
+.v-select__subheader {
+   display: none;
+
+   @media(max-width: 1024px) {
+      display: flex;
+   }
+}
+
 .v-select__list {
    flex: 1;
 
