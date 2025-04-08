@@ -1,9 +1,9 @@
 <template>
    <div class="wrapper lock-padding">
       <NuxtLayout>
-         <transition name="page">
-            <NuxtPage />
-         </transition>
+         <!-- <transition name="page"> -->
+         <NuxtPage />
+         <!-- </transition> -->
       </NuxtLayout>
    </div>
 </template>

@@ -26,8 +26,9 @@
                <FormInput placeholder="Отчество" v-model="fatherName" />
             </li>
             <li>
-               <FormInput placeholder="Номер телефона" v-model="phone" isPhone disabled />
+               <FormInput placeholder="Номер телефона" v-model="phone" custom-mask="+# (###) ###-##-##" disabled />
             </li>
+
             <li>
                <FormInput placeholder="WhatsApp" v-model="wh" />
             </li>
@@ -95,7 +96,7 @@ const store = useAccount()
 const surname = ref(store?.user?.secondname)
 const name = ref(store?.user?.firstname)
 const fatherName = ref(store?.user?.lastname)
-const phone = ref(store?.user?.phonenumber)
+const phone = ref('')
 watch(() => store?.user?.phonenumber, (value) => {
    phone.value = value
    console.log('поменялся телефон', value);
@@ -293,6 +294,12 @@ useHead({
 
       &__wrapper {
 
+         background: #f8f8f8;
+      }
+   }
+
+   .text-input.phone {
+      p {
          background: #f8f8f8;
       }
    }

@@ -97,7 +97,7 @@ const enabledBehaviors = ref(['drag', 'pinchZoom', 'dblClick']);
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 .pin {
    cursor: pointer;
    --size: 48px;
@@ -107,6 +107,12 @@ const enabledBehaviors = ref(['drag', 'pinchZoom', 'dblClick']);
       background-color: unset;
 
 
+   }
+}
+
+.ymaps3x0--marker {
+   &:has(.balloon) {
+      z-index: 23 !important;
    }
 }
 
@@ -121,6 +127,7 @@ const enabledBehaviors = ref(['drag', 'pinchZoom', 'dblClick']);
    top: 0;
    left: 0;
    translate: -50% -50%;
+   line-height: 1.2;
 
    &.project {
       background: #4F0014;

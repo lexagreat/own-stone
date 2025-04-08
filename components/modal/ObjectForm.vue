@@ -77,7 +77,7 @@ const checked = ref(false)
 
 
 const isDisabledBtn = computed(() => {
-   return phone.value.length >= 17 && name.value.length && checked.value
+   return phone.value.length >= 15 && name.value.length && checked.value
 })
 const success = ref(false)
 const send = async () => {

@@ -48,7 +48,7 @@ const project = ref(props.projectName)
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length >= 17
+   return checked.value && name.value.length && phone.value.length >= 15
 })
 const success = ref(false)
 

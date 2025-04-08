@@ -7,12 +7,11 @@
          </svg>
          <span>{{ selectedCode }}</span>
       </p>
-      <input :disabled="disabled" type="text" :id="id" v-model="value" v-maska="'(###) ###-##-##'" v-if="isPhone"
+      <input :disabled="disabled" type="text" :id="id" v-model="modelValue" v-maska="'(###) ###-##-##'" v-if="isPhone"
          placeholder="(999) 999-99-99" />
       <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id" v-model="modelValue"
          v-maska="customMask" v-else-if="customMask?.length" />
       <input :disabled="disabled" :placeholder="placeholder" type="text" :id="id" v-model="modelValue" v-else />
-
       <ul v-if="isPhone" :class="{ open: isOpen }">
          <li v-for="item in PHONE_CODS" :key="item" @click="select(item.code)"
             :class="{ active: item.code == selectedCode }">

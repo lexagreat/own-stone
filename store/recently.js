@@ -28,6 +28,7 @@ export const useRecently = defineStore("useRecently", {
                slugs: this.PRODUCTS,
             },
          });
+         // console.log("resently", res.items);
          this.products = res.items;
       },
       async getSameProducts() {
@@ -38,6 +39,7 @@ export const useRecently = defineStore("useRecently", {
             },
          });
          this.same = res.items;
+         // console.log("same", res.items);
       },
    },
    getters: {

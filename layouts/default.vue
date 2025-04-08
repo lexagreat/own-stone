@@ -1,8 +1,8 @@
 <template lang="">
    <app-header />
-   <slot />
+      <slot />
    <app-footer />
 </template>
 <script setup></script>
 
-<style lang=""></style>
+<style lang="scss"></style>

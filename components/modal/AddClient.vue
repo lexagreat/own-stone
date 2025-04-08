@@ -66,7 +66,7 @@ function onSelectTypeOption(option) {
 }
 
 const isDisabledBtn = computed(() => {
-   return checked.value && fio.value.length && phone.value.length >= 17 && budget.value.length
+   return checked.value && fio.value.length && phone.value.length >= 15 && budget.value.length
 })
 
 

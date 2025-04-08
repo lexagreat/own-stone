@@ -45,7 +45,7 @@ const theme = ref("")
 const checked = ref(false)
 
 const isDisabledBtn = computed(() => {
-   return checked.value && name.value.length && phone.value.length >= 17
+   return checked.value && name.value.length && phone.value.length >= 15
 })
 
 const success = ref(false)
