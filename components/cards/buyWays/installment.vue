@@ -27,7 +27,7 @@
             <span>{{ formatPrice(platezh) }}</span>
          </li>
       </ul>
-      <button class="btn transparent ipoteka-card__btn" @click="emit('form', info)">Оставить заявку</button>
+      <button class="btn transparent ipoteka-card__btn" @click="emit('form', info)">Подробнее</button>
    </div>
 </template>
 <script setup>

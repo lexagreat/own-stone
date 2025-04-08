@@ -27,7 +27,7 @@
       <span class="ipoteka-card__item">от {{ Math.ceil(stavka) }}%</span>
       <span class="ipoteka-card__item">до {{ srok }} {{ morph(srok, ['год', 'года', 'лет']) }}</span>
       <span class="ipoteka-card__item price">от {{ formatPrice(platezh) }}/мес</span>
-      <UiButton class="transparent ipoteka-card__btn" @click="emit('form', info)">Оставить заявку</UiButton>
+      <UiButton class="transparent ipoteka-card__btn" @click="emit('form', info)">Подробнее</UiButton>
    </div>
 </template>
 <script setup>
