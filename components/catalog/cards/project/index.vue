@@ -1,6 +1,8 @@
 <template>
-   <div class="catalog-card with-hover aft"
-      :class="{ 'project-card': type == 'row', loading: loading, 'full-image-hide': filteredApartsRooms.length > 5 }">
+   <div class="catalog-card with-hover aft" :class="{
+      'project-card': type == 'row', loading: loading, 'full-image-hide':
+         product.formatted_rooms.length > 5
+   }">
       <div class="catalog-card__gallery">
          <UiLoader v-if="!product?.photos?.length" />
          <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
@@ -50,8 +52,9 @@
                </svg>
             </button>
             <h4 class="catalog-card__title">{{ product?.name }}</h4>
-            <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
-               ₽ </span>
+            <!-- <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
+               ₽ </span> -->
+            <span class="catalog-card__price">{{ product.formated_price_range.short }}</span>
             <ul class="catalog-card__addresses">
                <div style="min-height: 13px;" v-if="product?.address_short?.length">
                   <li v-if="product?.address_short?.length">
@@ -93,7 +96,7 @@
          </div>
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
 
-            <ul>
+            <!-- <ul>
                <template v-for="(arr, index) in filteredApartsRooms" :key="arr">
                   <li>
                      <p>
@@ -103,6 +106,16 @@
                         <span>от {{ getMinArea(arr) }} м<sup>2</sup></span>
                      </p>
                      <span> от {{ formatPrice(getMinPrice(arr)) }}</span>
+                  </li>
+               </template>
+            </ul> -->
+            <ul>
+               <template v-for="(item, index) in product.formatted_rooms" :key="arr">
+                  <li>
+                     <p>
+                        <span v-html="item.label + ' ' + item.formatted_area"></span>
+                     </p>
+                     <span>{{ item.formatted_short_price }}</span>
                   </li>
                </template>
             </ul>
@@ -123,6 +136,7 @@ import IconAddress from '@/assets/img/icons/catalog-card-address.svg'
 import IconPhone from '@/assets/img/icons/phone.svg'
 import { useFavorites } from '~/store/favorites';
 import { useContacts } from '~/store/contacts';
+const route = useRoute()
 const contactsStore = useContacts()
 const favorites = useFavorites()
 const props = defineProps({
@@ -189,106 +203,106 @@ const collapse = () => {
 
    }
 }
-const prices = computed(() => {
-   let arr = props.product?.apartaments?.map((item) => +item.cost_total);
-   let min = 0;
-   let max = 0;
-   if (arr) {
-      min = Math.round(Math.min(...arr))
-      max = Math.round(Math.max(...arr))
-   }
-   return {
-      min: min,
-      max: max,
-   }
-})
+// const prices = computed(() => {
+//    let arr = props.product?.apartaments?.map((item) => +item.cost_total);
+//    let min = 0;
+//    let max = 0;
+//    if (arr) {
+//       min = Math.round(Math.min(...arr))
+//       max = Math.round(Math.max(...arr))
+//    }
+//    return {
+//       min: min,
+//       max: max,
+//    }
+// })
 const tags = computed(() => {
    if (!props.product?.tags?.length) return []
    return props.product?.tags.split(",")
 })
-const apartsRooms = computed(() => {
-   let arr = []
-   if (!props.product?.apartaments?.length) {
-      return arr;
-   }
-   props.product?.apartaments.forEach(item => {
-      if (+item.count_rooms == 1) {
-         if (!Array.isArray(arr[0])) {
-            arr[0] = []
-         }
-         arr[0].push(item)
-      }
-      if (+item.count_rooms == 2) {
-         if (!Array.isArray(arr[1])) {
-            arr[1] = []
-         }
-         arr[1].push(item)
-      }
-      if (+item.count_rooms == 3) {
-         if (!Array.isArray(arr[2])) {
-            arr[2] = []
-         }
-         arr[2].push(item)
-      }
-      if (+item.count_rooms == 4) {
-         if (!Array.isArray(arr[3])) {
-            arr[3] = []
-         }
-         arr[3].push(item)
-      }
-      if (+item.count_rooms == 5) {
-         if (!Array.isArray(arr[4])) {
-            arr[4] = []
-         }
-         arr[4].push(item)
-      }
-      if (+item.count_rooms > 5) {
-         if (!Array.isArray(arr[5])) {
-            arr[5] = []
-         }
-         arr[5].push(item)
-      }
-   })
-   return arr
-})
+// const apartsRooms = computed(() => {
+//    let arr = []
+//    if (!props.product?.apartaments?.length) {
+//       return arr;
+//    }
+//    props.product?.apartaments.forEach(item => {
+//       if (+item.count_rooms == 1) {
+//          if (!Array.isArray(arr[0])) {
+//             arr[0] = []
+//          }
+//          arr[0].push(item)
+//       }
+//       if (+item.count_rooms == 2) {
+//          if (!Array.isArray(arr[1])) {
+//             arr[1] = []
+//          }
+//          arr[1].push(item)
+//       }
+//       if (+item.count_rooms == 3) {
+//          if (!Array.isArray(arr[2])) {
+//             arr[2] = []
+//          }
+//          arr[2].push(item)
+//       }
+//       if (+item.count_rooms == 4) {
+//          if (!Array.isArray(arr[3])) {
+//             arr[3] = []
+//          }
+//          arr[3].push(item)
+//       }
+//       if (+item.count_rooms == 5) {
+//          if (!Array.isArray(arr[4])) {
+//             arr[4] = []
+//          }
+//          arr[4].push(item)
+//       }
+//       if (+item.count_rooms > 5) {
+//          if (!Array.isArray(arr[5])) {
+//             arr[5] = []
+//          }
+//          arr[5].push(item)
+//       }
+//    })
+//    return arr
+// })
 
-const filteredApartsRooms = computed(() => {
-   let resArr = apartsRooms.value;
-   let fivePlusItems = apartsRooms.value[apartsRooms.value.length - 1]
-   if (fivePlusItems?.length) {
-      let studiosArr = []
-      fivePlusItems.forEach((item) => {
-         if (item.square_apartament < getMinArea(apartsRooms.value[0])) {
-            item.isStud = true
-            studiosArr.push(item)
-            resArr[resArr.length - 1] = resArr[resArr.length - 1].filter(ap => ap.id !== item.id)
-         }
-      })
-      if (studiosArr.length) {
-         resArr.unshift(studiosArr)
-      }
-   }
-   return resArr.filter(arr => arr.length)
-})
-const getMinPrice = (arr) => {
-   if (!arr || !arr.length) {
-      return 0
-   }
-   let res = 0;
-   let prices = arr.map((item) => +item.cost_total);
-   // let areas = arr.map((item) => +item.square_apartament);
-   res = Math.min(...prices);
-   return res
-}
-const getMinArea = (arr) => {
-   if (!arr || !arr.length) {
-      return 0
-   }
-   let res = 0;
-   let areas = arr.map((item) => +item.square_apartament);
-   res = Math.min(...areas);
-   return res
-}
+// const filteredApartsRooms = computed(() => {
+//    let resArr = apartsRooms.value;
+//    let fivePlusItems = apartsRooms.value[apartsRooms.value.length - 1]
+//    if (fivePlusItems?.length) {
+//       let studiosArr = []
+//       fivePlusItems.forEach((item) => {
+//          if (item.square_apartament < getMinArea(apartsRooms.value[0])) {
+//             item.isStud = true
+//             studiosArr.push(item)
+//             resArr[resArr.length - 1] = resArr[resArr.length - 1].filter(ap => ap.id !== item.id)
+//          }
+//       })
+//       if (studiosArr.length) {
+//          resArr.unshift(studiosArr)
+//       }
+//    }
+//    return resArr.filter(arr => arr.length)
+// })
+// const getMinPrice = (arr) => {
+//    if (!arr || !arr.length) {
+//       return 0
+//    }
+//    let res = 0;
+//    let prices = arr.map((item) => +item.cost_total);
+//    // let areas = arr.map((item) => +item.square_apartament);
+//    res = Math.min(...prices);
+//    return res
+// }
+// const getMinArea = (arr) => {
+//    if (!arr || !arr.length) {
+//       return 0
+//    }
+//    let res = 0;
+//    let areas = arr.map((item) => +item.square_apartament);
+//    res = Math.min(...areas);
+//    return res
+// }
 const onLike = () => {
    favorites.toggle(props.product)
 }
@@ -296,13 +310,7 @@ const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.projects) || favorites.isContains(props.product?.slug, favorites.commerce.projects)
 })
 const link = computed(() => {
-   let base = '/project/'
-   if (!props.product?.apartaments?.length) {
-      return ''
-   }
-   props.product?.apartaments[0]?.type_aparts == 'Коммерция' ? base = '/commerce/' : '';
-   let url = base + props.product?.slug
-   return url
+   return `/${props.product?.type_apartaments}/${props.product?.slug}`
 })
 </script>
 

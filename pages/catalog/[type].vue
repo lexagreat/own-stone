@@ -75,12 +75,12 @@
          </div>
       </section>
 
-      <CatalogPagination v-if="!catalog.isMap && catalog.products.length" :pages="catalog?.meta?.pagination?.pageCount"
-         v-model="currentPage" @showMore="onShowMore" />
+      <CatalogPagination v-if="false && !catalog.isMap && catalog.products.length"
+         :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage" @showMore="onShowMore" />
       <SectionsProductSlider :category="0" :products="recentlyStore.products" v-if="recentlyStore.products?.length">
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
-      <SectionsProductSlider :category="0" :products="recentlyStore.same" v-if="recentlyStore.same?.length">
+      <SectionsProductSlider :category="0" :products="recentlyStore.same" v-if="false && recentlyStore.same?.length">
          Вам <span>подходит</span>
       </SectionsProductSlider>
    </main>

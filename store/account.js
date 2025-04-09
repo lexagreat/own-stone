@@ -4,6 +4,7 @@ export const useAccount = defineStore("useAccount", {
       user: null,
       faq: [],
       token: "",
+      time: 0,
    }),
    actions: {
       closeAside() {

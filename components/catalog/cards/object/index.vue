@@ -16,7 +16,7 @@
             <ul class="catalog-card__tags">
                <li>{{ product?.proekty?.date_complete }}</li>
 
-               <li>{{ product?.name }}</li>
+               <!-- <li>{{ product?.name }}</li> -->
             </ul>
             <button class="catalog-card__like" @click.stop="onLike" :class="{ active: liked }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

@@ -16,11 +16,11 @@
          <div class="list-object__info">
             <ul class="catalog-card__tags">
                <li v-if="product?.proekty?.date_complete">{{ product?.proekty?.date_complete }}</li>
-               <li>{{ product?.name }}</li>
+               <!-- <li>{{ product?.name }}</li> -->
             </ul>
             <ul class="list-object__tags">
                <li>{{ product?.proekty?.date_complete }}</li>
-               <li>{{ product?.name }}</li>
+               <!-- <li>{{ product?.name }}</li> -->
                <li>{{ product?.floor }} ЭТАЖ</li>
                <li>{{ product?.finishing }}</li>
             </ul>

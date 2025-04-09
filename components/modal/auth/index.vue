@@ -27,12 +27,20 @@ const checked = ref(false)
 
 
 const isDisabledBtn = computed(() => {
-   return checked.value && phone.value.length >= 15
+   return checked.value && phone.value.length >= 15 && store.time <= 0
 })
 const goToSms = async () => {
    console.log(document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value);
    let res = await store.getCode(document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value)
    // console.log(res);
+   store.time = 59;
+   let timer = setInterval(() => {
+      store.time--;
+      if (store.time <= 0) {
+         clearInterval(timer)
+         timer = null
+      }
+   }, 1000)
    if (res?.status) {
       emit("openSmsModal", document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value)
    }

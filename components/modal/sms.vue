@@ -9,12 +9,14 @@
             </p>
             <div class="sms-modal__row">
                <span>{{ phone }}</span>
-               <button @click="emit('changePhone')" style="color: #181818;">Изменить</button>
+               <button @click="emit('changePhone')" style="color: #181818;" v-if="store.time <= 0">Изменить</button>
             </div>
          </div>
          <div class="sms-modal__main">
             <FormCodeInput @changeValue="onChangeCode" />
-            <span>Получить код повторно через 00:53</span>
+            <span v-if="store.time > 0">Получить код повторно через 00:{{ store.time >= 10 ? store.time : '0' +
+               store.time
+               }}</span>
          </div>
       </div>
    </UiModal>
@@ -24,14 +26,14 @@ import { useAccount } from '~/store/account'
 const router = useRouter()
 const store = useAccount()
 const props = defineProps({
-   phone: String
+   phone: String,
 })
 const emit = defineEmits(['closePopup', 'changePhone'])
 
 const code = ref('')
 const onChangeCode = (value) => {
    code.value = value
-   console.log(value);
+
 }
 watch(code, async (value) => {
    if (String(value).length == 4) {
