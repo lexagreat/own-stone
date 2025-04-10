@@ -1,8 +1,10 @@
 <template>
+   <UiLoader v-if="isLoadingPage" />
    <div class="catalog-card with-hover aft" :class="{
       'project-card': type == 'row', loading: loading, 'full-image-hide':
-         product.formatted_rooms.length > 5
+         product?.name?.length > 19
    }">
+      <!-- product.formatted_rooms.length > 5 -->
       <div class="catalog-card__gallery">
          <UiLoader v-if="!product?.photos?.length" />
          <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
@@ -95,21 +97,7 @@
             </button>
          </div>
          <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
-
             <!-- <ul>
-               <template v-for="(arr, index) in filteredApartsRooms" :key="arr">
-                  <li>
-                     <p>
-                        <span v-if="arr[0].isStud">Студия ({{ arr?.length }})</span>
-                        <span v-if="arr[0].count_rooms <= 5">{{ arr[0]?.count_rooms }}-комн. ({{ arr?.length }})</span>
-                        <span v-else-if="arr[0].count_rooms > 5 && !arr[0].isStud">5+ комн. ({{ arr?.length }})</span>
-                        <span>от {{ getMinArea(arr) }} м<sup>2</sup></span>
-                     </p>
-                     <span> от {{ formatPrice(getMinPrice(arr)) }}</span>
-                  </li>
-               </template>
-            </ul> -->
-            <ul>
                <template v-for="(item, index) in product.formatted_rooms" :key="item">
                   <li>
                      <p>
@@ -118,9 +106,21 @@
                      <span>{{ item.formatted_short_price }}</span>
                   </li>
                </template>
+            </ul> -->
+            <ul>
+               <template v-for="item in 6" :key="item">
+                  <li style="height: 15px;">
+                     <p v-if="product.formatted_rooms[item - 1]?.label">
+                        <span
+                           v-html="product.formatted_rooms[item - 1]?.label + ' ' + product.formatted_rooms[item - 1]?.formatted_area"></span>
+                     </p>
+                     <span v-if="product.formatted_rooms[item - 1]?.formatted_short_price">{{
+                        product.formatted_rooms[item - 1]?.formatted_short_price }}</span>
+                  </li>
+               </template>
             </ul>
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" :to="link">Подробнее о проекте</NuxtLink>
+               <NuxtLink class="btn white" @click="isLoadingPage = true" :to="link">Подробнее о проекте</NuxtLink>
                <NuxtLink class="circle" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
                   <IconPhone />
                </NuxtLink>
@@ -137,6 +137,7 @@ import IconPhone from '@/assets/img/icons/phone.svg'
 import { useFavorites } from '~/store/favorites';
 import { useContacts } from '~/store/contacts';
 const route = useRoute()
+const router = useRouter()
 const contactsStore = useContacts()
 const favorites = useFavorites()
 const props = defineProps({
@@ -163,6 +164,7 @@ const setСollapse = () => {
 }
 const loading = ref(true)
 const images = ref([])
+const isLoadingPage = ref(false)
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
@@ -186,6 +188,7 @@ onMounted(() => {
    }
 })
 onBeforeUnmount(() => {
+   isLoadingPage.value = false
    window.removeEventListener('resize', setСollapse)
    // if (swiperInstance.value) {
    //    swiperInstance.value.destroy(true, true)
@@ -208,106 +211,10 @@ const collapse = () => {
 
    }
 }
-// const prices = computed(() => {
-//    let arr = props.product?.apartaments?.map((item) => +item.cost_total);
-//    let min = 0;
-//    let max = 0;
-//    if (arr) {
-//       min = Math.round(Math.min(...arr))
-//       max = Math.round(Math.max(...arr))
-//    }
-//    return {
-//       min: min,
-//       max: max,
-//    }
-// })
 const tags = computed(() => {
    if (!props.product?.tags?.length) return []
    return props.product?.tags.split(",")
 })
-// const apartsRooms = computed(() => {
-//    let arr = []
-//    if (!props.product?.apartaments?.length) {
-//       return arr;
-//    }
-//    props.product?.apartaments.forEach(item => {
-//       if (+item.count_rooms == 1) {
-//          if (!Array.isArray(arr[0])) {
-//             arr[0] = []
-//          }
-//          arr[0].push(item)
-//       }
-//       if (+item.count_rooms == 2) {
-//          if (!Array.isArray(arr[1])) {
-//             arr[1] = []
-//          }
-//          arr[1].push(item)
-//       }
-//       if (+item.count_rooms == 3) {
-//          if (!Array.isArray(arr[2])) {
-//             arr[2] = []
-//          }
-//          arr[2].push(item)
-//       }
-//       if (+item.count_rooms == 4) {
-//          if (!Array.isArray(arr[3])) {
-//             arr[3] = []
-//          }
-//          arr[3].push(item)
-//       }
-//       if (+item.count_rooms == 5) {
-//          if (!Array.isArray(arr[4])) {
-//             arr[4] = []
-//          }
-//          arr[4].push(item)
-//       }
-//       if (+item.count_rooms > 5) {
-//          if (!Array.isArray(arr[5])) {
-//             arr[5] = []
-//          }
-//          arr[5].push(item)
-//       }
-//    })
-//    return arr
-// })
-
-// const filteredApartsRooms = computed(() => {
-//    let resArr = apartsRooms.value;
-//    let fivePlusItems = apartsRooms.value[apartsRooms.value.length - 1]
-//    if (fivePlusItems?.length) {
-//       let studiosArr = []
-//       fivePlusItems.forEach((item) => {
-//          if (item.square_apartament < getMinArea(apartsRooms.value[0])) {
-//             item.isStud = true
-//             studiosArr.push(item)
-//             resArr[resArr.length - 1] = resArr[resArr.length - 1].filter(ap => ap.id !== item.id)
-//          }
-//       })
-//       if (studiosArr.length) {
-//          resArr.unshift(studiosArr)
-//       }
-//    }
-//    return resArr.filter(arr => arr.length)
-// })
-// const getMinPrice = (arr) => {
-//    if (!arr || !arr.length) {
-//       return 0
-//    }
-//    let res = 0;
-//    let prices = arr.map((item) => +item.cost_total);
-//    // let areas = arr.map((item) => +item.square_apartament);
-//    res = Math.min(...prices);
-//    return res
-// }
-// const getMinArea = (arr) => {
-//    if (!arr || !arr.length) {
-//       return 0
-//    }
-//    let res = 0;
-//    let areas = arr.map((item) => +item.square_apartament);
-//    res = Math.min(...areas);
-//    return res
-// }
 const onLike = () => {
    favorites.toggle(props.product)
 }
@@ -336,6 +243,14 @@ const link = computed(() => {
          left: 0;
       }
 
+   }
+}
+
+.catalog-card__addresses {
+   span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
    }
 }
 

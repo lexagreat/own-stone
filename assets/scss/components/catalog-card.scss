@@ -79,11 +79,11 @@
    &.with-hover:not(.project-card):has(.catalog-card__main:hover) {
       .catalog-card {
          &__gallery {
-            height: 71px;
-            flex: 0 0 71px; // new
+            height: 56px;
+            flex: 0 0 56px; // new
             @media (max-width: 1400px) {
-               height: calc(60px + 11 * ((100vw - 1024px) / (1400 - 1024)));
-               flex: 0 0 calc(60px + 11 * ((100vw - 1024px) / (1400 - 1024))); // new
+               height: calc(45px + 11 * ((100vw - 1024px) / (1400 - 1024)));
+               flex: 0 0 calc(45px + 11 * ((100vw - 1024px) / (1400 - 1024))); // new
             }
          }
          &__footer {
