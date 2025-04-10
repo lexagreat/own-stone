@@ -19,7 +19,7 @@
                   </ul>
                </div>
                <div class="favorite-page__main">
-                  <ul class="favorite-page__categories catalog-filter__categories" v-if="type !== 1">
+                  <ul class="favorite-page__categories catalog-filter__categories" v-if="type == 0">
                      <li v-for="(item, index) in categories" :key="index">
                         <input v-model="category" type="radio" :value="item.value"
                            :id="'catalogFilterType' + item.value" name="catalogFilterType">
@@ -113,11 +113,10 @@ const types = ref([
 ])
 
 watch(type, (value) => {
-   if (value == 1) {
+   if (value == 1 || value == 2) {
       category.value = 2
    } else {
       category.value = 0
-
    }
 })
 
