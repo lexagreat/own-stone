@@ -1,5 +1,8 @@
 <template>
+
    <main class="main services-page">
+      <AppHead :seo="info.seo" />
+
       <SectionsBreadcrumbs :path="path" />
       <ModalService :isOpen="isOpen" :index="current" @closePopup="isOpen = false" />
       <section class="services-section">

@@ -1,5 +1,7 @@
 <template>
    <main class="main">
+      <AppHead :seo="info.seo" />
+
       <SectionsHomeHero :text="info?.hero_text" :running="info.running_line" />
       <SectionsHomeParallax :info="info.paralax_media" />
       <SectionsHomeSelection />

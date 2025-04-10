@@ -15,7 +15,7 @@
                            <p class="h4">
                               {{ city }}, <br> {{ address }}
                            </p>
-                           <p class="h4" v-html="info?.contacts_info.worktime"></p>
+                           <p class="h4" v-html="info?.contacts_info?.worktime"></p>
                         </div>
                      </div>
                      <div class="contacts-hero__block">

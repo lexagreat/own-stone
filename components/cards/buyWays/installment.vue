@@ -7,7 +7,7 @@
       </div>
       <span class="ipoteka-card__item">от {{ Math.ceil(info.mincash) }}%</span>
       <span class="ipoteka-card__item">{{ Math.ceil(info.percentrate) }} %</span>
-      <span class="ipoteka-card__item">инфы нет</span>
+      <span class="ipoteka-card__item">-</span>
       <span class="ipoteka-card__price">{{ formatPrice(platezh) }} </span>
       <ul>
          <li>
@@ -20,7 +20,7 @@
          </li>
          <li>
             <span>Периодичность платежей</span>
-            <span>инфы нет </span>
+            <span>-</span>
          </li>
          <li>
             <span>Сумма платежа</span>

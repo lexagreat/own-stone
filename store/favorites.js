@@ -21,9 +21,9 @@ export const useFavorites = defineStore("useFavorites", {
          return arr.some((item) => item.slug == productSlug);
       },
       toggle(product) {
-         if (product?.apartaments) {
+         if (product?.type_apartaments) {
             // projects
-            if (product?.apartaments[0].type_aparts == "Новостройки") {
+            if (product?.type_apartaments == "project") {
                if (this.isContains(product?.slug, this.build.projects)) {
                   // console.log("удалили товар");
                   this.build.projects = this.remove(
@@ -48,7 +48,7 @@ export const useFavorites = defineStore("useFavorites", {
             }
          } else {
             // apartaments
-            if (product.type_aparts == "Новостройки") {
+            if (product?.type_apartaments == "project") {
                if (this.isContains(product?.slug, this.build.apartaments)) {
                   // console.log("удалили товар");
                   this.build.apartaments = this.remove(

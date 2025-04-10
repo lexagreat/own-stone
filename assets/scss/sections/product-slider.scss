@@ -31,6 +31,17 @@
    // .product-slider__main
 
    &__main {
+      &:has(.modal.open) {
+         & > .swiper {
+            z-index: 110 !important;
+            & > .swiper-wrapper {
+               transform: unset !important;
+               & > .swiper-slide {
+                  transform: unset !important;
+               }
+            }
+         }
+      }
       .swiper-slide {
          width: fit-content;
          @media (max-width: $mobile) {

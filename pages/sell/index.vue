@@ -1,5 +1,7 @@
 <template>
    <main class="main">
+      <AppHead :seo="info.seo" />
+
       <SectionsSellHero :info="info.sel_hero" />
       <SectionsSellCooperation :info="info.sell_coop[0]" />
       <SectionsSellSteps :info="info.sell_steps" />
@@ -18,8 +20,4 @@
 const { data: info } = await useBaseFetch('/sellpage')
 // console.log(info);
 const { data: lots } = await useBaseFetch('/apartaments?filters[parser_type]=cian&filters[parser_type]=avito&pLevel=2')
-console.log("lots", lots);
-useHead({
-   title: 'Продать'
-})
 </script>

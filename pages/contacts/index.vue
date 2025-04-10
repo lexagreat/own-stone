@@ -1,5 +1,7 @@
 <template>
    <main class="main contacts-page">
+      <AppHead :seo="data?.seo" />
+
       <SectionsBreadcrumbs :path="path" />
       <SectionsContactsHero :info="contacts?.info" />
       <SectionsContactsOffice :info="contacts?.info?.contacts_office" />
@@ -18,8 +20,8 @@ const path = ref([
       to: ""
    },
 ])
-
-useHead({
-   title: 'Контакты'
-})
+let { data } = await useBaseFetch("/contactspage");
+// useHead({
+//    title: 'Контакты'
+// })
 </script>

@@ -152,9 +152,9 @@ const products = computed(() => {
 useHead({
    title: 'Избранное'
 })
-onMounted(() => {
-   recentlyStore.add(route.params.slug)
-})
+// onMounted(() => {
+//    recentlyStore.add(route.params.slug)
+// })
 </script>
 
 

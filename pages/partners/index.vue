@@ -5,7 +5,7 @@
       <SectionsPartnersFeatures :info="info.partners_blocks" />
       <SectionsPartnersCollab :info="info.partners_collab" />
       <SectionsPartnersProcess :info="info.partners_pocess" />
-      <SectionsPartnersCases :info="info.partners_case" />
+      <SectionsPartnersCases :info="info.partners_case" v-if="info.partners_case" />
       <SectionsPartnersCalculator />
       <SectionsPartnersControl :info="info.partners_control" />
    </main>

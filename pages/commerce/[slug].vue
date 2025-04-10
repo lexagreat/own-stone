@@ -1,5 +1,7 @@
 <template>
    <main class="main">
+      <AppProjectHead :seo="info.seo" :title="info.name" />
+
       <SectionsProjectHero :info="info" />
       <SectionsProjectFilters type="commerce" :projectSlug="info.slug" class="project-filters_commerce"
          :count="info?.apartaments?.length">
@@ -42,7 +44,7 @@ onMounted(async () => {
    recentlyStore.add(route.params.slug)
    await recentlyStore.getProducts()
 })
-useHead({
-   title: info?.name
-})
+// useHead({
+//    title: info?.name
+// })
 </script>

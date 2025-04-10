@@ -1,4 +1,5 @@
 <template>
+   <AppHead :seo="seo?.seo" />
    <!-- <UiLoader v-if="loading" /> -->
    <main class="main catalog dark-page">
       <section class="catalog-hero">
@@ -75,12 +76,12 @@
          </div>
       </section>
 
-      <CatalogPagination v-if="false && !catalog.isMap && catalog.products.length"
-         :pages="catalog?.meta?.pagination?.pageCount" v-model="currentPage" @showMore="onShowMore" />
+      <CatalogPagination v-if="!catalog.isMap && catalog.products.length" :pages="catalog?.meta?.pagination?.pageCount"
+         v-model="currentPage" @showMore="onShowMore" />
       <SectionsProductSlider :category="0" :products="recentlyStore.products" v-if="recentlyStore.products?.length">
          Вы ранее <span>смотрели</span>
       </SectionsProductSlider>
-      <SectionsProductSlider :category="0" :products="recentlyStore.same" v-if="false && recentlyStore.same?.length">
+      <SectionsProductSlider :category="0" :products="recentlyStore.same" v-if="recentlyStore.same?.length">
          Вам <span>подходит</span>
       </SectionsProductSlider>
    </main>
@@ -127,7 +128,6 @@ const pageStaticInfo = {
    secondary: {
       title: "Вторичная недвижимость <br><span>в москве</span>",
       pageTitle: "Вторичная недвижимость в москве",
-
    },
    commerce: {
       title: "Коммерческая недвижимость <br><span>в москве</span>",
@@ -135,9 +135,9 @@ const pageStaticInfo = {
    }
 }[type] || "404"
 
-useHead({
-   title: pageStaticInfo.pageTitle
-})
+// useHead({
+//    title: pageStaticInfo.pageTitle
+// })
 
 if (pageStaticInfo == '404') {
    throw createError({
@@ -329,6 +329,11 @@ const onreset = () => {
 
    }, 100)
 }
+
+
+
+
+const { data: seo } = await useBaseFetch(`/page-${type}`)
 </script>
 
 

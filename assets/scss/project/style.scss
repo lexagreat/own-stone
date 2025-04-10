@@ -1236,7 +1236,7 @@
    }
    // .ipoteka-card__main
    &_instal {
-      gap: 85px;
+      gap: 82px;
       // .ipoteka-card__main {
       //    flex: 0 0 190px;
       //    @media (max-width: 1440px) {
@@ -1270,8 +1270,14 @@
             line-height: 140%; /* 18.2px */
          }
       }
+      .ipoteka-card__item {
+         @media (min-width: 1440px) {
+            flex: 0 0 50px;
+         }
+      }
+
       @media (max-width: 1440px) {
-         gap: calc(40px + 50 * ((100vw - 1024px) / (1440 - 1024)));
+         gap: calc(40px + 42 * ((100vw - 1024px) / (1440 - 1024)));
       }
       @media (max-width: $tablet) {
          gap: 20px;
@@ -1313,6 +1319,7 @@
       font-size: 16px;
       font-weight: 500;
       line-height: 100%; /* 16px */
+
       @media (max-width: 1440px) {
          font-size: calc(12px + 4 * ((100vw - 1024px) / (1440 - 1024)));
       }

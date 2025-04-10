@@ -110,7 +110,7 @@
                </template>
             </ul> -->
             <ul>
-               <template v-for="(item, index) in product.formatted_rooms" :key="arr">
+               <template v-for="(item, index) in product.formatted_rooms" :key="item">
                   <li>
                      <p>
                         <span v-html="item.label + ' ' + item.formatted_area"></span>
@@ -166,7 +166,7 @@ const images = ref([])
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
-   let tmp = 1;
+   let tmp = 2;
    if (images.value?.length > 0) {
       images.value.forEach(item => {
          item.onload = () => {
@@ -177,7 +177,6 @@ onMounted(() => {
       })
    } else {
       loading.value = false
-
    }
 })
 onBeforeUnmount(() => {

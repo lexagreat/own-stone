@@ -1,7 +1,7 @@
 <template>
 
    <Head>
-      <Title>{{ seo?.metaTitle }}</Title>
+      <Title>{{ seo?.metaTitle || (title + ' | OWN STONE') }}</Title>
       <Meta name="description" :content="seo?.metaDescription" />
       <Meta name="robots" :content="seo?.keywords" />
       <Meta name="keywords" :content="seo?.metaRobots" />
@@ -31,7 +31,8 @@
 </template>
 <script setup>
 const props = defineProps({
-   seo: Object
+   seo: Object,
+   title: String
 })
 
 useHead({
