@@ -50,7 +50,9 @@
             </button>
             <!-- <h4 class="catalog-card__title">{{ product?.name }}</h4> -->
             <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽ </h4>
-            <span class="catalog-card__price" style="min-height: 57px;" v-html="product?.description"></span>
+            <span class="catalog-card__price" @mouseenter="startTimer" @mouseleave="endTimer" style="min-height: 57px;"
+               v-html="product?.description"></span>
+            <p class="catalog-card__hint" :class="{ active: timer > 3 }" v-html="product?.description"></p>
             <ul class="catalog-card__addresses">
                <div>
                   <li v-if="product?.proekty?.metro_nearby[0]" style="height: 18px;">
@@ -205,6 +207,23 @@ const liked = computed(() => {
 
 
 const photos = computed(() => props.product?.photos?.length > 3 ? props.product.photos.slice(0, 3) : props.product.photos)
+
+let timer = ref(0);
+let timerInterval = null;
+const startTimer = () => {
+   console.log('start');
+   timerInterval = setInterval(() => {
+      timer.value++
+   }, 300)
+}
+const endTimer = () => {
+   console.log('end');
+   clearInterval(timerInterval)
+   timerInterval = null;
+   timer.value = 0
+}
+
+
 </script>
 
 
@@ -232,7 +251,7 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
          }
 
          &__price {
-            pointer-events: none;
+            // pointer-events: none;
             white-space: unset;
             -webkit-line-clamp: 4;
             /* Число отображаемых строк */
@@ -241,6 +260,14 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
             -webkit-box-orient: vertical;
             /* Вертикальная ориентация */
             /* Обрезаем всё за пределами блока */
+         }
+
+         &__hint {
+            bottom: unset;
+            top: -15px;
+            left: -330px;
+            width: 200%;
+            border-radius: 0;
          }
 
          &__banners {
@@ -302,15 +329,40 @@ const photos = computed(() => props.product?.photos?.length > 3 ? props.product.
       }
    }
 
-   &:has(.catalog-card__main:hover) {
+   &:not(.project-card):has(.catalog-card__main:hover) {
       .catalog-card__price {
          -webkit-line-clamp: 5;
 
       }
    }
 
-   &__price {
+   &__hint {
+      position: absolute;
+      z-index: 110;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      color: #181818;
+      font-size: 9px;
+      line-height: calc(19 / 16);
+      opacity: 0;
       pointer-events: none;
+      transition: 0.4s;
+      padding: 8px;
+      border-radius: 4px 4px 0 0;
+
+      &.active {
+         opacity: 1;
+      }
+
+      @media(max-width: 1439px) {
+         display: none;
+      }
+   }
+
+   &__price {
+      // pointer-events: none;
       // white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
