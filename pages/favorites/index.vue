@@ -63,16 +63,20 @@ const onOpenForm = (id) => {
    currentProductForModal.value = id;
    isOpenFormModal.value = true
 }
-const categories = ref([
-   {
-      name: "Проекты",
-      value: 0,
-   },
-   {
-      name: "Квартиры",
-      value: 1,
-   },
-])
+const type = ref(0)
+
+const categories = computed(() => {
+   return [
+      {
+         name: "Проекты",
+         value: 0,
+      },
+      {
+         name: type.value === 0 ? "Квартиры" : 'Объекты',
+         value: 1,
+      },
+   ]
+})
 const category = ref(0)
 
 
@@ -107,7 +111,6 @@ const types = ref([
       icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/commercial.svg'))),
    },
 ])
-const type = ref(0)
 
 watch(type, (value) => {
    if (value == 1) {

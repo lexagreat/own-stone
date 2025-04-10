@@ -202,7 +202,7 @@ const categories = ref([
       value: 0
    },
    {
-      name: "Квартиры",
+      name: props.type == 'build' ? "Квартиры" : 'Объекты',
       value: 1
    },
 ])

@@ -39,8 +39,9 @@
 import { useRecently } from '~/store/recently'
 const recentlyStore = useRecently()
 const route = useRoute()
-let { data: info } = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
-if (!info.length) {
+let info = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
+console.log(info);
+if (!info?.length) {
    throw createError({
       statusCode: 404,
       statusMessage: 'Page Not Found'

@@ -21,6 +21,7 @@ export const useFavorites = defineStore("useFavorites", {
          return arr.some((item) => item.slug == productSlug);
       },
       toggle(product) {
+         console.log(product);
          if (product?.type_apartaments) {
             // projects
             if (product?.type_apartaments == "project") {
@@ -48,7 +49,7 @@ export const useFavorites = defineStore("useFavorites", {
             }
          } else {
             // apartaments
-            if (product?.type_apartaments == "project") {
+            if (product?.type_aparts == "Новостройки") {
                if (this.isContains(product?.slug, this.build.apartaments)) {
                   // console.log("удалили товар");
                   this.build.apartaments = this.remove(

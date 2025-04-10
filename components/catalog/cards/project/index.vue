@@ -15,7 +15,7 @@
          <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
             <template v-for="(photo, index) in product?.photos" :key="photo">
                <SwiperSlide v-if="index < 3" @click="isOpenModal = true, currentPhotoIndex = index">
-                  <img :src="photo?.url" alt="" lazy ref="images">
+                  <img :src="photo?.url" alt="" ref="images">
                </SwiperSlide>
             </template>
          </Swiper>
@@ -167,10 +167,16 @@ onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
    let tmp = 2;
+   if (route.path.includes('/favor')) {
+      loading.value = false
+
+   }
    if (images.value?.length > 0) {
       images.value.forEach(item => {
+
          item.onload = () => {
             tmp++
+
             loading.value = tmp < images.value.length
 
          }

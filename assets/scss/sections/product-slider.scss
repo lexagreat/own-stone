@@ -33,6 +33,7 @@
    &__main {
       &:has(.modal.open) {
          & > .swiper {
+            overflow: unset;
             z-index: 110 !important;
             & > .swiper-wrapper {
                transform: unset !important;
