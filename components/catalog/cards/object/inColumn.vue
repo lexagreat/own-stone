@@ -11,7 +11,8 @@
                   <img :src="product?.preview_picture?.url" alt="">
                </a>
             </ModalFancybox> -->
-            <img :src="product?.preview_picture?.url" alt="">
+            <UiLoader v-if="!product?.preview_picture?.url" />
+            <img v-else :src="product?.preview_picture?.url" alt="">
          </div>
          <div class="list-object__info">
             <ul class="catalog-card__tags">
@@ -25,9 +26,12 @@
                <li>{{ product?.finishing }}</li>
             </ul>
             <span class="list-object__price">{{ formatPrice(product?.cost_total) }}</span>
-            <span class="list-object__name">{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }} комнатная
-               квартира, {{ product?.square_apartament }}м<sup>2</sup>, 2
-               спальни </span>
+            <span class="catalog-card__price" v-if="product?.type_aparts == 'Коммерция'">{{ product?.name_commerce ?
+               product?.name_commerce : "Помещение" }},
+               {{ product?.square_apartament }}м<sup>2</sup>, {{ product?.proekty?.name }}</span>
+            <span class="catalog-card__price" v-else>{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }}
+               комнатная
+               квартира, {{ product?.square_apartament }}м<sup>2</sup></span>
             <ul class="catalog-card__addresses">
                <li>
                   <IconAddress />
@@ -132,5 +136,18 @@ const clickHandler = (e) => {
 .fancy {
    width: 100%;
    height: 100%;
+}
+
+.list-object {
+   &__image {
+      position: relative;
+   }
+
+   .loader-wrapper {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+   }
 }
 </style>

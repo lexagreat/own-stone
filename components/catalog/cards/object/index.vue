@@ -35,9 +35,12 @@
                <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <h4 class="catalog-card__title">{{ formatPrice(product?.cost_total) }}</h4>
-            <span class="catalog-card__price">{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }} комнатная
-               квартира, {{ product?.square_apartament }}м<sup>2</sup>, 2
-               спальни </span>
+            <span class="catalog-card__price lc2" v-if="product?.type_aparts == 'Коммерция'">{{ product?.name_commerce ?
+               product?.name_commerce : "Помещение" }},
+               {{ product?.square_apartament }}м<sup>2</sup>, {{ product?.proekty?.name }}</span>
+            <span class="catalog-card__price" v-else>{{ +product?.count_rooms > 5 ? "5+" : product?.count_rooms }}
+               комнатная
+               квартира, {{ product?.square_apartament }}м<sup>2</sup></span>
             <ul class="catalog-card__addresses">
                <li>
                   <IconAddress />
@@ -121,5 +124,13 @@ const clickHandler = (e) => {
       width: 100%;
       height: 100%;
    }
+}
+
+.lc2 {
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   white-space: unset;
 }
 </style>
