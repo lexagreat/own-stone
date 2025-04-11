@@ -1,5 +1,5 @@
 <template>
-   <UiLoader v-if="isLoadingPage" />
+   <!-- <UiLoader v-if="isLoadingPage" /> -->
    <div class="catalog-card with-hover aft" :class="{
       'project-card': type == 'row', loading: loading, 'full-image-hide':
          product?.name?.length > 19
@@ -120,7 +120,7 @@
                </template>
             </ul>
             <div class="catalog-card__btns">
-               <NuxtLink class="btn white" @click="isLoadingPage = true" :to="link">Подробнее о проекте</NuxtLink>
+               <NuxtLink class="btn white" :to="link">Подробнее о проекте</NuxtLink>
                <NuxtLink class="circle" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
                   <IconPhone />
                </NuxtLink>
@@ -164,7 +164,6 @@ const setСollapse = () => {
 }
 const loading = ref(true)
 const images = ref([])
-const isLoadingPage = ref(false)
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
@@ -188,7 +187,6 @@ onMounted(() => {
    }
 })
 onBeforeUnmount(() => {
-   isLoadingPage.value = false
    window.removeEventListener('resize', setСollapse)
    // if (swiperInstance.value) {
    //    swiperInstance.value.destroy(true, true)
