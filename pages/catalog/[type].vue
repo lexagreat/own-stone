@@ -1,7 +1,7 @@
 <template>
    <AppHead :seo="seo?.seo" />
    <!-- <UiLoader v-if="loading" /> -->
-   <main class="main catalog dark-page">
+   <main class="main catalog dark-page" style="overflow: hidden;">
       <section class="catalog-hero">
          <SectionsBreadcrumbs :path="path" />
          <div class="container">
