@@ -3,6 +3,7 @@ export const useCatalog = defineStore("useCatalog", {
       products: [],
       meta: {},
       isMap: false,
+      loading: false,
    }),
    actions: {
       makeSubStr(string) {

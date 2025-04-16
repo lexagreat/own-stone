@@ -22,7 +22,7 @@
                         </li>
 
                         <li>
-                           <span>Стоимость недвижимости</span>
+                           <span>Стоимость недвижимости asdas</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
                                  <span>{{ formatPrice(priceMaxValue) }}</span>

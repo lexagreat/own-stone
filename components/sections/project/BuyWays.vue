@@ -28,10 +28,10 @@
                            <span>Стоимость недвижимости</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <span>{{ formatPrice(priceMaxValue) }}</span> -->
+                                 <span>{{ formatPrice(priceMaxValue) }}</span>
                                  <!-- <input type="number" v-model="priceMaxValue"> -->
-                                 <input type="text" :value="formatNumber(priceMaxValue)"
-                                    @input="priceMaxValue = +$event.target.value.replaceAll(' ', '')">
+                                 <!-- <input type="text" :value="formatNumber(priceMaxValue)"
+                                    @input="priceMaxValue = +$event.target.value.replaceAll(' ', '')"> -->
                               </div>
                               <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
                                  :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
@@ -53,8 +53,8 @@
                            <span>Срок</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
-                                 <!-- <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span> -->
-                                 <input type="number" v-model="dateMaxValue">
+                                 <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
+                                 <!-- <input type="number" v-model="dateMaxValue"> -->
 
                               </div>
                               <MultiRangeSlider :ruler="false" :min="dateMin" :max="dateMax" :step="1"

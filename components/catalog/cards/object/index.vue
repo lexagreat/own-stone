@@ -34,7 +34,8 @@
                <li v-if="product?.finishing?.length">{{ product?.finishing }}</li>
                <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
-            <h4 class="catalog-card__title">{{ formatPrice(product?.cost_total) }}</h4>
+            <h4 class="catalog-card__title"><span style="text-transform: lowercase;">от</span> {{
+               formatPrice(product?.cost_total) }}</h4>
             <span class="catalog-card__price lc2" v-if="product?.type_aparts == 'Коммерция'">{{ product?.name_commerce ?
                product?.name_commerce : "Помещение" }},
                {{ product?.square_apartament }}м<sup>2</sup>, {{ product?.proekty?.name }}</span>

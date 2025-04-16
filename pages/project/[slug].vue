@@ -1,4 +1,5 @@
 <template>
+   <UiLoader v-if="loader" />
    <main class="main">
       <AppProjectHead :seo="info.seo" :title="info.name" />
       <SectionsProjectHero :info="info" />
@@ -36,9 +37,12 @@
    </main>
 </template>
 <script setup>
+import { useCatalog } from '~/store/catalog'
 import { useRecently } from '~/store/recently'
 const recentlyStore = useRecently()
 const route = useRoute()
+const catalogStore = useCatalog()
+catalogStore.loading = true
 let info = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
 console.log(info);
 if (!info?.length) {
@@ -48,7 +52,9 @@ if (!info?.length) {
    })
 }
 info = info[0]
+
 onMounted(async () => {
+   catalogStore.loading = false
    recentlyStore.add(route.params.slug)
    await recentlyStore.getProducts()
    await recentlyStore.getSameProducts()
