@@ -39,7 +39,6 @@
 </template>
 <script setup>
 import { useAccount } from '~/store/account';
-
 const store = useAccount()
 const isOpen = ref(false)
 

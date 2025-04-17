@@ -103,9 +103,6 @@ watch(() => store?.user?.phonenumber, (value) => {
 }, {
    immediate: true
 })
-onMounted(() => {
-
-})
 const wh = ref(store?.user?.whatsapp)
 const tg = ref(store?.user?.telegram)
 const bankName = ref(store?.user?.requisits_fiz_bank)

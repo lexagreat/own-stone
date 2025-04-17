@@ -1,7 +1,6 @@
 <template>
    <main class="main">
       <AppHead :seo="info.seo" />
-
       <SectionsHomeHero :text="info?.hero_text" :running="info.running_line" />
       <SectionsHomeParallax :info="info.paralax_media" />
       <SectionsHomeSelection />
@@ -21,8 +20,9 @@
    </main>
 </template>
 <script setup>
-const { data: info } = await useBaseFetch("/mainpage?pLevel=5")
+
 // console.log(info);
+const { data: info } = await useBaseFetch("/mainpage?pLevel=5")
 useHead({
    title: 'Own stone'
 })

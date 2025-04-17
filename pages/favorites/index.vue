@@ -44,8 +44,6 @@
 </template>
 <script setup>
 import { useFavorites } from '~/store/favorites';
-import { useRecently } from '~/store/recently';
-const recentlyStore = useRecently()
 const favorites = useFavorites()
 const path = ref([
    {

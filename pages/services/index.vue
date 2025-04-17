@@ -94,6 +94,7 @@ const onForm = (i) => {
 }
 
 onMounted(() => {
+
    setTimeout(() => {
       servicesAnimation()
    }, 300)

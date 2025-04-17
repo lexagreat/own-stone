@@ -30,17 +30,25 @@
 import { useRecently } from '~/store/recently'
 
 const recentlyStore = useRecently()
+import { useCatalog } from '~/store/catalog';
+const catalogStore = useCatalog()
+catalogStore.loading = true
 const route = useRoute()
 let { data: info } = await useBaseFetch(`/projects/?pLevel=3&filters[slug]=${route.params.slug}`)
-if (!info.length) {
+if (!info?.length && !info?.data) {
    throw createError({
       statusCode: 404,
       statusMessage: 'Page Not Found'
    })
 }
-info = info[0]
+if (info?.data) {
+   info = info?.data[0]
+} else {
+   info = info[0]
+}
 // console.log('project page info: ', info);
 onMounted(async () => {
+   catalogStore.loading = false
    recentlyStore.add(route.params.slug)
    await recentlyStore.getProducts()
 })
