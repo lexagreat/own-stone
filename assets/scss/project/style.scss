@@ -994,6 +994,9 @@
       display: flex;
       flex-direction: column;
       gap: 27px;
+      .v-select__subheader {
+         display: none !important;
+      }
       & > li {
          display: flex;
          flex-direction: column;
@@ -1021,7 +1024,7 @@
       // grid-template-columns: 1fr repeat(4, auto);
       // gap: 75px;
       display: flex;
-      gap: 50px;
+      gap: 70px;
       padding-left: 20px;
       align-items: center;
       & > span {
@@ -1031,9 +1034,9 @@
          font-weight: 400;
          line-height: 140%; /* 18.2px */
          &:nth-child(1) {
-            flex: 0 0 272px;
+            flex: 0 0 218px;
             @media (max-width: 1440px) {
-               flex: 0 0 calc(132px + 140 * ((100vw - 1024px) / (1440 - 1024)));
+               flex: 0 0 calc(132px + 86 * ((100vw - 1024px) / (1440 - 1024)));
             }
          }
          &:nth-child(2) {
@@ -1056,7 +1059,7 @@
          padding: unset;
       }
       @media (max-width: 1440px) {
-         gap: calc(10px + 40 * ((100vw - 1024px) / (1440 - 1024)));
+         gap: calc(10px + 60 * ((100vw - 1024px) / (1440 - 1024)));
          &_instal {
             gap: calc(10px + 46 * ((100vw - 1024px) / (1440 - 1024)));
          }
@@ -1114,12 +1117,6 @@
          gap: 30px;
          padding: 35px 12px;
       }
-   }
-}
-.buy-ways {
-   // .buy-ways__banner
-
-   &__banner {
    }
 }
 .buy-banner {
@@ -1237,8 +1234,8 @@
    & > *:nth-child(1) {
       grid-column: span 2;
    }
-   @media (max-width: 1440px) {
-      gap: calc(12px + 40 * ((100vw - 1024px) / (1440 - 1024)));
+   @media (max-width: 1400px) {
+      gap: calc(12px + 40 * ((100vw - 1024px) / (1400 - 1024)));
    }
    @media (max-width: $tablet) {
       display: flex;

@@ -45,13 +45,17 @@ const catalogStore = useCatalog()
 catalogStore.loading = true
 let info = await useBaseFetch(`/projects/?pLevel=4&filters[slug]=${route.params.slug}`)
 console.log(info);
-if (!info?.length) {
+if (!info?.length && !info?.data) {
    throw createError({
       statusCode: 404,
       statusMessage: 'Page Not Found'
    })
 }
-info = info[0]
+if (info?.data) {
+   info = info?.data[0]
+} else {
+   info = info[0]
+}
 
 onMounted(async () => {
    catalogStore.loading = false
