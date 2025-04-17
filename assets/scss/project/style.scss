@@ -1234,6 +1234,12 @@
    & > *:nth-child(1) {
       grid-column: span 2;
    }
+   &:not(.ipoteka-card_instal) > .ipoteka-card__item:nth-child(4) {
+      translate: -10px 0;
+   }
+   &:not(.ipoteka-card_instal) > .ipoteka-card__item:nth-child(5) {
+      translate: 12px 0;
+   }
    @media (max-width: 1400px) {
       gap: calc(12px + 40 * ((100vw - 1024px) / (1400 - 1024)));
    }
@@ -1256,6 +1262,19 @@
       //       flex: unset;
       //    }
       // }
+      & > .ipoteka-card__item:nth-child(2) {
+         translate: -10px 0;
+      }
+      & > .ipoteka-card__item:nth-child(3) {
+         translate: -12px 0;
+      }
+      & > .ipoteka-card__item:nth-child(4) {
+         translate: 13px 0;
+      }
+      & > .ipoteka-card__price {
+         translate: 8px 0;
+         text-align: center;
+      }
       .ipoteka-card__main {
          flex: 0 0 50px;
          @media (max-width: $tablet) {

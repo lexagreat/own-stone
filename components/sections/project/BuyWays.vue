@@ -25,7 +25,7 @@
                            <UiCatalogSelect :settings="ipotekaSettings" v-model="ipoteka" />
                         </li>
                         <li>
-                           <span>Стоимость недвижимости</span>
+                           <span>Стоимость недвижимости (руб)</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
                                  <span>{{ formatPrice(priceMaxValue) }}</span>
@@ -38,7 +38,7 @@
                            </div>
                         </li>
                         <li>
-                           <span>Первоначальный взнос</span>
+                           <span>Первоначальный взнос (%)</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
                                  <span>{{ initialMaxValue }} %</span>
@@ -50,7 +50,7 @@
                            </div>
                         </li>
                         <li>
-                           <span>Срок</span>
+                           <span>Срок (лет)</span>
                            <div class="catalog-range">
                               <div class="catalog-range__output">
                                  <span>{{ dateMaxValue }} {{ morph(dateMaxValue, ['год', 'года', 'лет']) }}</span>
@@ -80,7 +80,7 @@
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                           }}</span>
+                              }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">
