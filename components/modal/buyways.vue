@@ -60,7 +60,7 @@ const send = async () => {
          Первоначальный взнос: ${props.info.initial}
          Банк: ${props.info.bank}
          Срок: ${props.info.srok}
-
+         Название: ${props.info.title}
       `,
    }
    let response = await store.sendForm(object)

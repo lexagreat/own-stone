@@ -80,7 +80,7 @@
                            <span class="desktop">Ежемесячный платеж</span>
                            <span>{{ items.length }} {{ morph(items.length, ['предложение', 'предложения',
                               'предложений'])
-                              }}</span>
+                           }}</span>
                         </div>
 
                         <ul class="buy-ways__list scrollbar-none">
@@ -295,7 +295,8 @@ const formInfo = computed(() => {
       price: priceMaxValue.value,
       initial: initialMaxValue.value,
       srok: dateMaxValue.value,
-      bank: currentBank.value
+      bank: currentBank.value,
+      title: tab.value == 0 ? 'Ипотека' : 'Рассрочка'
    }
 })
 const onForm = (data) => {
