@@ -5,7 +5,7 @@
          <ModalSucess title="Заявка <br> <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Узнать <span>подробнее</span></h3>
@@ -75,7 +75,7 @@ const name = ref("")
 const phone = ref("")
 const checked = ref(false)
 
-
+const wrapper = ref(null)
 const isDisabledBtn = computed(() => {
    return phone.value.length >= 15 && name.value.length && checked.value
 })
@@ -85,7 +85,7 @@ const send = async () => {
       subject: "Узнать подробнее про объект с сайта Own stone",
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
          DocumentId: ${props.id}
       `,
       documentId: props.id

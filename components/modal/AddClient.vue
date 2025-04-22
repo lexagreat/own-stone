@@ -5,7 +5,7 @@
          <ModalSucess title="Заявка <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется наш специалист" />
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Передать <span>клиента</span>
@@ -44,7 +44,7 @@ const emit = defineEmits(['closePopup'])
 const fio = ref("")
 const phone = ref("")
 const budget = ref("")
-
+const wrapper = ref(null)
 
 const typeSettings = ref({
    options: [
@@ -69,13 +69,12 @@ const isDisabledBtn = computed(() => {
    return checked.value && fio.value.length && phone.value.length >= 15 && budget.value.length
 })
 
-
 const checked = ref(false)
 const success = ref(false)
 const send = async () => {
    let object = {
       username: fio.value,
-      phone: phone.value,
+      phone: `${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}`,
       budget: budget.value,
       type: typeOption.value.name
    }

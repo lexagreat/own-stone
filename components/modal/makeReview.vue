@@ -5,7 +5,7 @@
          <ModalSucess title="Благодарим <br> за <span>вашу оценку</span>"
             subtitle="Мы обработаем информацию в ближайшее время и свяжемся с вами при необходимости" />
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Оценить качество <br> <span>работы</span></h3>
@@ -68,6 +68,7 @@ function onSelectTypeOption(option) {
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length >= 15
 })
+const wrapper = ref(null)
 const success = ref(false)
 const send = async () => {
    let object = {
@@ -75,7 +76,7 @@ const send = async () => {
       text: `
          Имя: ${name.value}
          ФИО сотрудника: ${fio.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
          Тип: ${typeOption.value}
          Отзыв: ${review.value}
          Рейтинг: ${rating.value}

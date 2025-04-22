@@ -5,7 +5,7 @@
             fill="none">
             <path d="M3.9867 1L7 4.97907L1 5L3.9867 1Z" fill="#181818" />
          </svg>
-         <span>{{ selectedCode }}</span>
+         <span style="color: #181818;">{{ selectedCode }}</span>
       </p>
       <input :disabled="disabled" type="text" :id="id" v-model="modelValue" v-maska="'(###) ###-##-##'" v-if="isPhone"
          placeholder="(999) 999-99-99" />
@@ -51,9 +51,9 @@ const phoneValue = computed(() => {
       return ''
    }
 })
-watch(phoneValue, (value) => {
-   modelValue.value = value;
-})
+// watch(phoneValue, (value) => {
+//    modelValue.value = value;
+// })
 
 const isOpen = ref(false)
 
@@ -78,6 +78,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
+.safari-browser {
+   .phone>p {
+      translate: 0 -1px;
+   }
+}
+
 .phone {
    position: relative;
    display: flex;
@@ -97,6 +103,7 @@ onBeforeUnmount(() => {
       letter-spacing: 0%;
       color: #181818;
       gap: 8px;
+      // translate: 0 -1px;
 
       svg {
          transition: 0.4s;

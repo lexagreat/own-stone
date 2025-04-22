@@ -5,7 +5,7 @@
          <ModalSucess title="Заявка <br> <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Получить <span>каталог</span></h3>
@@ -45,13 +45,13 @@ const isDisabledBtn = computed(() => {
    return phone.value.length >= 15 && checked.value && name.value.length
 })
 const success = ref(false)
-
+const wrapper = ref(null)
 const send = async () => {
    let object = {
       subject: "Скачать каталог с сайта Own stone",
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
       `,
    }
    let response = await store.sendForm(object)

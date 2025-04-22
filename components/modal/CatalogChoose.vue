@@ -6,7 +6,7 @@
             subtitle="В ближайшее время с Вами свяжется наш специалист" />
 
       </div>
-      <div class="modal__content object-form__content row" v-else>
+      <div class="modal__content object-form__content row" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__image">
             <img src="/img/catalog-modal.svg" alt="">
@@ -51,7 +51,7 @@ const emit = defineEmits(['closePopup'])
 const name = ref(store.user?.firstname)
 const phone = ref(store.user?.phonenumber)
 
-
+const wrapper = ref(null)
 
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length >= 15
@@ -66,7 +66,7 @@ const send = async () => {
       subject: "Выбрать объект с сайта Own stone",
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
       `,
 
 

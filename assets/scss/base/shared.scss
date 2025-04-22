@@ -213,6 +213,9 @@
       &::placeholder {
          color: rgba(24, 24, 24, 0.3);
       }
+      &:disabled {
+         opacity: 0.4;
+      }
    }
 }
 .app-textarea {

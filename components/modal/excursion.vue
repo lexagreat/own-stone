@@ -5,7 +5,7 @@
          <ModalSucessDark title="Заявка <br> <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется <br> наш специалист" />
       </div>
-      <div class="modal__content meeting-form__content" style="overflow: hidden;" v-else>
+      <div class="modal__content meeting-form__content" ref="wrapper" style="overflow: hidden;" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="meeting-form__image">
             <img :src="image" alt="">
@@ -52,7 +52,7 @@ const checked = ref(false)
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length >= 15
 })
-
+const wrapper = ref(null)
 const success = ref(false)
 
 const send = async () => {
@@ -60,7 +60,7 @@ const send = async () => {
       subject: "Записать на экскурсию с сайта Own stone",
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
          Проект: ${props.project}
       `,
    }

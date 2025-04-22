@@ -6,7 +6,7 @@
             subtitle="Благодарим за проявленный интерес к работе в агентстве OWNSTONE! В ближайшее время с вами свяжется сотрудник HR-отдела." />
 
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">стать частью <br /> <span>команды</span></h3>
@@ -52,12 +52,13 @@ const props = defineProps({
 const emit = defineEmits(['closePopup'])
 const store = useAccount()
 const name = ref("")
-const phone = ref("7")
+const phone = ref("")
 const email = ref("")
 const about = ref("")
 const checked = ref(false)
 const file = ref(null)
 const loading = ref(false)
+const wrapper = ref(null)
 const isDisabledBtn = computed(() => {
    return checked.value && name.value.length && phone.value.length >= 15
 })
@@ -71,7 +72,7 @@ const send = async () => {
       file: file.value,
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
          E-mail: ${email.value}
          О себе: ${about.value}
       `,

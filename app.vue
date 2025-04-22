@@ -19,6 +19,13 @@ const router = useRouter()
 onMounted(() => {
    favorites.getFromLS()
    recentlyStore.getFromLS()
+   // Проверяем, является ли браузер Safari
+   let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+   if (isSafari) {
+      // Если Safari, добавляем класс к body или другому элементу
+      document.body.classList.add("safari-browser");
+   }
 })
 contacts.getInfo()
 </script>

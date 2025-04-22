@@ -5,7 +5,7 @@
          <ModalSucess title="Заявка <span>отправлена</span>"
             subtitle="В ближайшее время с Вами свяжется наш специалист" />
       </div>
-      <div class="modal__content object-form__content" v-else>
+      <div class="modal__content object-form__content" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__header">
             <h3 class="object-form__title h1 dark-title">Оставить <span>заявку</span></h3>
@@ -43,7 +43,7 @@ const store = useAccount()
 const name = ref("")
 const phone = ref("")
 const checked = ref(false)
-
+const wrapper = ref(null)
 const project = ref(props.projectName)
 
 
@@ -57,7 +57,7 @@ const send = async () => {
       subject: "Заявка на проект с сайта Own stone",
       text: `
          Имя: ${name.value}
-         Телефон: ${phone.value}
+         Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
          Проект: ${project.value}
       `,
    }

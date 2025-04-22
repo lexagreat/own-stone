@@ -227,7 +227,7 @@
       flex: 1;
       width: 100%;
       border-radius: 8px;
-      overflow: hidden;
+      // overflow: hidden;
       display: flex;
       @media (max-width: $tablet) {
          min-height: unset;
@@ -394,6 +394,11 @@
          height: 100%;
          &__wrapper {
             height: 100%;
+         }
+         &__item {
+            justify-content: space-between !important;
+            display: flex;
+            align-items: center;
          }
       }
       @media (max-width: $tablet) {
