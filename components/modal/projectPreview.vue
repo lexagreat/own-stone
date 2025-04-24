@@ -120,4 +120,13 @@ const onSwiper = (swiper) => {
       }
    }
 }
+
+.apart-modal {
+   .swiper img {
+      width: unset;
+      height: unset;
+      max-height: 90%;
+      max-width: 100%;
+   }
+}
 </style>

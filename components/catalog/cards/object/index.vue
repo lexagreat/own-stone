@@ -1,17 +1,10 @@
 <template>
-   <div class="catalog-card catalog-card_object" @click="clickHandler">
+   <div class="catalog-card catalog-card_object" @click="emit('onForm', props.product.documentId)">
       <div class="catalog-card__gallery">
-         <!-- <ModalFancybox class="fancy" :options="{
-            Image: {
-               zoom: true, // Включаем зум
-            },
-         }">
-            <a data-fancybox="gallery" :href="product?.preview_picture?.url">
-               <img :src="product?.preview_picture?.url" alt="">
-            </a>
-         </ModalFancybox> -->
+         <ModalProjectPreview class="apart-modal" @click.stop v-if="isOpenModal" :is-open="isOpenModal"
+            @close-popup="onClose" :photos="[product?.preview_picture]" :currentIndex="0" />
          <UiLoader v-if="!product?.preview_picture?.url" />
-         <img v-else :src="product?.preview_picture?.url" alt="">
+         <img @click.stop="isOpenModal = true" v-else :src="product?.preview_picture?.url" alt="">
          <div class="catalog-card__header">
             <ul class="catalog-card__tags">
                <li>{{ product?.proekty?.date_complete }}</li>
@@ -90,11 +83,11 @@ const onLike = () => {
 const liked = computed(() => {
    return favorites.isContains(props.product?.slug, favorites.build.apartaments) || favorites.isContains(props.product?.slug, favorites.commerce.apartaments) || favorites.isContains(props.product?.slug, favorites.secondary)
 })
-const clickHandler = (e) => {
-   // if (!e.target.closest('.fancy')) {
-   emit('onForm', props.product.documentId)
-
-   // }
+const isOpenModal = ref(false)
+const onClose = () => {
+   setTimeout(() => {
+      isOpenModal.value = false
+   }, 100);
 }
 </script>
 

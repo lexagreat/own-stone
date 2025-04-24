@@ -18,7 +18,8 @@
                </li>
                <li>
                   <span>Стоимость лотов</span>
-                  <p>от {{ formatPrice(apartamentsMinPrice) }}</p>
+                  <p>от {{ apartamentsMinPrice > 1000000 ? Math.ceil(apartamentsMinPrice / 1000000) + ' млн' :
+                     formatNumber(apartamentsMinPrice) }} ₽</p>
                </li>
                <li v-if="finishing.length">
                   <span>Тип отделки</span>
