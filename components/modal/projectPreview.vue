@@ -122,6 +122,10 @@ const onSwiper = (swiper) => {
 }
 
 .apart-modal {
+   .catalog-preview__content {
+      background-color: white;
+   }
+
    .swiper img {
       width: unset;
       height: unset;
