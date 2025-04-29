@@ -132,7 +132,7 @@
                         </li>
                         <li>
                            <NuxtLink to="/catalog/commerce">
-                              Коммерция
+                              Коммерческая
 
                            </NuxtLink>
                         </li>

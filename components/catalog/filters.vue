@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                     }}</label>
+                        }}</label>
                   </li>
                </ul>
             </li>
@@ -83,7 +83,7 @@
                      <input type="text" :value="formatNumber(priceForOneMaxValue)"
                         @input="priceForOneMaxValue = +$event.target.value.replaceAll(' ', '')">
                   </div>
-                  <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="10000"
+                  <MultiRangeSlider :ruler="false" :min="priceForOneMin" :max="priceForOneMax" :step="200000"
                      :minValue="priceForOneMinValue" :maxValue="priceForOneMaxValue" @input="UpdateForOnePrices" />
                </div>
                <div class="catalog-range" v-else>
@@ -93,7 +93,7 @@
                      <input type="text" :value="formatNumber(priceMaxValue)"
                         @input="priceMaxValue = +$event.target.value.replace(/\D/g, '')">
                   </div>
-                  <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="10000"
+                  <MultiRangeSlider :ruler="false" :min="priceMin" :max="priceMax" :step="200000"
                      :minValue="priceMinValue" :maxValue="priceMaxValue" @input="UpdatePrices" />
                </div>
             </li>

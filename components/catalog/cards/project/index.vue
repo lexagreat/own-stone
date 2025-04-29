@@ -56,7 +56,7 @@
             <h4 class="catalog-card__title">{{ product?.name }}</h4>
             <!-- <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
                ₽ </span> -->
-            <span class="catalog-card__price">{{ product.formated_price_range.short }}</span>
+            <span class="catalog-card__price">{{ product?.formated_price_range?.short }}</span>
             <ul class="catalog-card__addresses">
                <div style="min-height: 13px;" v-if="product?.address_short?.length">
                   <li v-if="product?.address_short?.length">
@@ -66,7 +66,7 @@
                </div>
                <div style="min-height: 13px;">
 
-                  <li v-if="product.metro_nearby[0]" style="height: 18px;">
+                  <li v-if="product.metro_nearby?.length && product.metro_nearby[0]" style="height: 18px;">
                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                         <rect x="2" y="2" width="8" height="8" rx="4"
                            :fill="product.metro_nearby[0]?.metro_branch?.color_code" />
@@ -110,12 +110,13 @@
             <ul>
                <template v-for="item in 6" :key="item">
                   <li style="height: 15px;">
-                     <p v-if="product.formatted_rooms[item - 1]?.label">
+                     <p v-if="product.formatted_rooms?.length && product.formatted_rooms[item - 1]?.label">
                         <span
                            v-html="product.formatted_rooms[item - 1]?.label + ' ' + product.formatted_rooms[item - 1]?.formatted_area"></span>
                      </p>
-                     <span v-if="product.formatted_rooms[item - 1]?.formatted_short_price">{{
-                        product.formatted_rooms[item - 1]?.formatted_short_price }}</span>
+                     <span
+                        v-if="product.formatted_rooms?.length && product.formatted_rooms[item - 1]?.formatted_short_price">{{
+                           product.formatted_rooms[item - 1]?.formatted_short_price }}</span>
                   </li>
                </template>
             </ul>
