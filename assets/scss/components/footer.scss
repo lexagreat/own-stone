@@ -45,6 +45,17 @@
    &__phone {
       color: $white;
       font-size: 18px;
+      border-bottom: 1px solid transparent;
+      transition: 0.3s;
+      padding-bottom: 2px;
+      @media (hover: hover) {
+         &:hover {
+            border-color: white;
+         }
+      }
+      &:active {
+         border-color: white;
+      }
    }
 
    // .footer__links
@@ -147,6 +158,16 @@
          line-height: 110%; /* 14.3px */
          a {
             color: $white-50;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+            @media (hover: hover) {
+               &:hover {
+                  border-color: $white-50;
+               }
+            }
+            &:active {
+               border-color: $white-50;
+            }
          }
       }
       div:last-child {
