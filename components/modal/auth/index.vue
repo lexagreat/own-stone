@@ -4,7 +4,7 @@
          <UiModalCloseBtn @click="emit('closePopup')" />
          <h3 class="auth-modal__title h1 dark-title">вход или <br class="pc"> <span>регистрация</span></h3>
          <div class="auth-modal__main">
-            {{ phone }}
+
             <FormInput isPhone placeholder="Ваш номер телефона" v-model="phone" />
             <div class="form-section__check">
                <FormCheckbox v-model="checked" id="form-section__check" />
