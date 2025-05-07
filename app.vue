@@ -3,6 +3,7 @@
       <NuxtLayout>
          <!-- <transition name="page"> -->
          <NuxtPage />
+         <BannersCookie />
          <!-- </transition> -->
       </NuxtLayout>
    </div>

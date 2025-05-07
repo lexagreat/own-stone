@@ -160,12 +160,18 @@
             <div class="footer__down">
                <div>
                   <span>©2025</span>
-                  <NuxtLink to="/policy" target="_blank">Политика конфиденциальности</NuxtLink>
+                  <NuxtLink to="/policy" target="_blank">Политикой в отношении обработки персональных данных</NuxtLink>
                </div>
                <div>
-                  <p>
-                     Instagram принадлежит Meta, признанной <br> экстремистской организацией, которая запрещена в РФ
-                  </p>
+                  <section style="display: flex;flex-direction: column;gap: 8px;">
+                     <p>Instagram принадлежит Meta, признанной <br> экстремистской организацией, которая запрещена в РФ
+                     </p>
+                     <p>
+                        Любая информация, представленная на данном сайте, носит исключительно <br>
+                        информационный характер и ни при каких условиях не является <br>
+                        публичной офертой, определяемой положениями статьи 437 ГК РФ.
+                     </p>
+                  </section>
                   <span>Made by <NuxtLink to="https://oktta.ru/" target="_blank">Oktta</NuxtLink></span>
                </div>
             </div>

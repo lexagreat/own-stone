@@ -18,7 +18,8 @@
                </ul>
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="formCheck" />
-                  <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой конфиденциальности</NuxtLink>
+                  <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой в отношении обработки персональных
+                        данных</NuxtLink>
                   </span>
                </div>
                <UiButton class="black" :class="{ disabled: !isDisabledBtn }" @click="send">Оставить заявку</UiButton>

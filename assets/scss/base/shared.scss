@@ -315,3 +315,50 @@
 .dark-page {
    background-color: #f8f8f8;
 }
+.cookie-modal {
+   position: fixed;
+   bottom: 76px;
+   z-index: 50;
+   left: calc((100vw - 1380px) / 2);
+   max-width: 496px;
+   // .cookie-modal__text
+   display: flex;
+   gap: 15px;
+   padding: 20px;
+   align-items: center;
+   border-radius: 8px;
+   background: #f8f8f8;
+   @media (max-width: 1440px) {
+      left: var(--containerPadding);
+   }
+   .circle {
+      display: none;
+   }
+   &__text {
+      color: var(--black-50, rgba(24, 24, 24, 0.5));
+      font-family: $fontArial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%; /* 19.6px */
+      a {
+         color: var(--black-50, rgba(24, 24, 24, 0.5));
+         text-decoration: underline;
+      }
+   }
+   @media (max-width: $mobile) {
+      max-width: calc(100vw - 2 * var(--containerPadding));
+      width: 100%;
+      &__text {
+         font-size: 12px;
+      }
+      .btn {
+         display: none;
+      }
+      .circle {
+         display: flex;
+         --size: 40px;
+         background-color: $black;
+      }
+   }
+}

@@ -13,7 +13,7 @@
                         <span class="contacts-hero__subtitle">Офлайн-пространство OWNSTONE</span>
                         <div>
                            <p class="h4">
-                              {{ city }}, <br> {{ address }}
+                              {{ city }},<br><span style="translate: -5px 0;display: block;">{{ address }}</span>
                            </p>
                            <p class="h4" v-html="info?.contacts_info?.worktime"></p>
                         </div>
@@ -33,6 +33,11 @@
                            </ul>
                         </div>
                      </div>
+                     <p
+                        style="font-size: 12px;margin-top: 48px;line-height: 1.4;color: var(--black-50, rgba(24, 24, 24, 0.5));">
+                        ИП Нетуков Георгий Валерьевич, ИНН 780446753604, ОГРНИП 322784700148399, г. Москва, ул.
+                        Нащокинский переулок, д. 8
+                     </p>
                   </div>
                   <div class="contacts-hero__map">
                      <MapsContacts :info="info?.contacts_info" />
