@@ -1,8 +1,8 @@
 <template>
    <div v-if="showBanner" class="cookie-modal">
       <p class="cookie-modal__text">
-         Наш сайт использует cookie-файлы в соответствии с 
-         <a href="/policy" target="_blank">политикой в отношении обработки персональных данных</a>
+         Наш сайт использует cookie-файлы в соответствии с <a href="/policy" target="_blank">политикой в отношении
+            обработки персональных данных</a>
       </p>
       <UiButton @click="acceptCookies" class="black">Принять</UiButton>
       <button @click="acceptCookies" class="circle">
