@@ -166,8 +166,8 @@
                      </NuxtLink>
                      <NuxtLink style="display: block; width: fit-content" to="/oferta" target="_blank">Оферта о
                         сотрудничестве</NuxtLink>
-                     <NuxtLink style="display: block; width: fit-content" to="/consent" target="_blank">Согласие
-                        агентство</NuxtLink>
+                     <NuxtLink style="display: block; width: fit-content" to="/consent" target="_blank">Согласие на
+                        обработку персональных данных</NuxtLink>
                   </p>
                </div>
                <div>
