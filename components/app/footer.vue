@@ -160,7 +160,15 @@
             <div class="footer__down">
                <div>
                   <span>©2025</span>
-                  <NuxtLink to="/policy" target="_blank">Политикой в отношении обработки персональных данных</NuxtLink>
+                  <p>
+                     <NuxtLink style="display: block;" to="/policy" target="_blank">Политика в отношении обработки
+                        персональных данных
+                     </NuxtLink>
+                     <NuxtLink style="display: block; width: fit-content" to="/oferta" target="_blank">Оферта о
+                        сотрудничестве</NuxtLink>
+                     <NuxtLink style="display: block; width: fit-content" to="/consent" target="_blank">Согласие
+                        агентство</NuxtLink>
+                  </p>
                </div>
                <div>
                   <section style="display: flex;flex-direction: column;gap: 8px;">

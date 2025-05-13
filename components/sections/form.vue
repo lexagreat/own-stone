@@ -18,7 +18,7 @@
                </ul>
                <div class="form-section__check">
                   <FormCheckbox v-model="checked" id="formCheck" />
-                  <span>Я согласен с <NuxtLink to="/policy" target="_blank">политикой в отношении обработки персональных
+                  <span>Я согласен с <NuxtLink to="/consent" target="_blank">Согласием на обработку персональных
                         данных</NuxtLink>
                   </span>
                </div>
