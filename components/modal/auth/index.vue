@@ -17,7 +17,8 @@
             <div class="form-section__check" style="margin: 0;">
                <FormCheckbox v-model="checkedSec" id="form-section__check" />
                <label for="form-section__check" style="cursor: pointer;">
-                  <span>Я согласен с <NuxtLink to="/oferta" target="_blank">соглашением на оферту</NuxtLink>
+                  <span>Я согласен с <NuxtLink to="/oferta" target="_blank">Соглашением на оферту о сотрудничестве
+                     </NuxtLink>
                   </span>
                </label>
             </div>
