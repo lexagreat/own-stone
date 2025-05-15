@@ -440,7 +440,7 @@
 }
 .partners-cases {
    padding-top: 80px;
-   padding-bottom: var(--margin);
+   padding-bottom: calc(var(--margin) / 2);
    @media (max-width: $tablet) {
       padding-top: 70px;
    }
@@ -678,6 +678,8 @@
    }
 }
 .partners-calc {
+   padding-top: calc(var(--margin) / 2);
+
    overflow: hidden;
    padding-bottom: 122px;
    @media (max-width: $tablet) {

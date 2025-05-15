@@ -10,7 +10,7 @@
             <ul class="home-partners__list scrollbar-none">
                <li class="home-partners__item" v-for="(item, i) in info" :key="item">
                   <div class="home-partners__image">
-                     <img :src="item?.picture.url" alt="">
+                     <img :src="item?.picture?.url" alt="">
                   </div>
                   <p class="home-partners__text h4" v-html="item.text"></p>
                </li>

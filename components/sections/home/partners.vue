@@ -11,7 +11,7 @@
                <li class="home-partners__item" v-for="(item, i) in info.home_partners_list" :key="item">
                   <div class="home-partners__image">
                      <component :is="item.icon" />
-                     <img :src="item?.picture.url" alt="">
+                     <img :src="item?.picture?.url" alt="">
                   </div>
                   <p class="home-partners__text h4" v-html="item.text"></p>
                </li>
