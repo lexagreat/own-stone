@@ -27,8 +27,9 @@
                <li v-if="product?.finishing?.length">{{ product?.finishing }}</li>
                <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
-            <h4 class="catalog-card__title"><span style="text-transform: lowercase;">от</span> {{
-               formatPrice(product?.cost_total) }}</h4>
+            <!-- <h4 class="catalog-card__title"><span style="text-transform: lowercase;">от</span> {{
+               formatPrice(product?.cost_total) }}</h4> -->
+            <h4 class="catalog-card__title" v-html="price"></h4>
             <span class="catalog-card__price lc2" v-if="product?.type_aparts == 'Коммерция'">{{ product?.name_commerce ?
                product?.name_commerce : "Помещение" }},
                {{ product?.square_apartament }}м<sup>2</sup>, {{ product?.proekty?.name }}</span>
@@ -89,6 +90,21 @@ const onClose = () => {
       isOpenModal.value = false
    }, 100);
 }
+function roundDownToTensOfMillions(price) {
+   return Math.floor(price / 10000000) * 10000000;
+}
+const price = computed(() => {
+   let string = '<span style="text-transform: lowercase">от </span>'
+   if (props.product?.cost_total > 1000000000) {
+      string += Math.floor(props.product?.cost_total / 100000000) / 10 + '<span style="text-transform: lowercase"> млрд</span>'
+   } else if (props.product?.cost_total < 10000000) {
+      string += 5 + '<span style="text-transform: lowercase"> млн</span>'
+   } else {
+      string += Math.floor(props.product?.cost_total / 10000000) * 10 + '<span style="text-transform: lowercase"> млн</span>'
+
+   }
+   return string + " ₽";
+})
 </script>
 
 <style lang="scss" scoped>
