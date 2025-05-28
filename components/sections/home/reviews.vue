@@ -16,7 +16,7 @@
                   }
                }">
                   <SwiperSlide v-for="item in groupedArray" :key="item">
-                     <div v-if="item[0]?.text && item[0]?.video">
+                     <div v-if="item[0]?.video">
                         <CardsReviewBig :info="item[0]" @openModal="openReviewsModal" />
                      </div>
                      <div v-if="item[0]?.text && !item[0]?.video">
