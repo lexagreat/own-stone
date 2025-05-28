@@ -24,7 +24,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/referal">Реферальная программа</a>
+                  <a href="/referal">OWN STONE Клуб</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
@@ -75,8 +75,8 @@
                         <ProfileIcon @click="onClickProfile" />
                         <div class="header-profile">
                            <h4 class="h4">Личный кабинет партнера</h4>
-                           <p>Передайте клиента в наше агентство и получите вознаграждение в размере 30% от общей
-                              комиссии по факту реализованной сделки</p>
+                           <p>Передайте клиента в наше агентство и получите свое вознаграждение по факту реализованной
+                              сделки</p>
                            <UiButton class="black" @click="isOpenAuthModal = true">Войти или зарегистрироваться
                            </UiButton>
                            <!-- <div class="header-profile__btns">
@@ -122,7 +122,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/referal">Реферальная программа</a>
+                  <a href="/referal">OWN STONE Клуб</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
