@@ -24,7 +24,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/referal">OWN STONE Клуб</a>
+                  <a href="/referal">OWNSTONE Клуб</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
@@ -122,7 +122,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/referal">OWN STONE Клуб</a>
+                  <a href="/referal">OWNSTONE Клуб</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
