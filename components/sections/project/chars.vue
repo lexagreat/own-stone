@@ -29,10 +29,10 @@
                   <span>Этажи</span>
                   <p>{{info.properties.find(item => item.title == 'Этажи')?.desc}}</p>
                </li>
-               <li>
+               <!-- <li>
                   <span>Всего лотов</span>
                   <p>{{ info.apartaments.length }}</p>
-               </li>
+               </li> -->
                <li v-if="info.properties.find(item => item.title == 'Высота потолков')">
                   <span>Высота потолков</span>
                   <p>{{info.properties.find(item => item.title == 'Высота потолков')?.desc}}</p>

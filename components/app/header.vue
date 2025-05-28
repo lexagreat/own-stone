@@ -24,7 +24,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/partners">Партнерам</a>
+                  <a href="/referal">Реферальная программа</a>
                </li>
                <li>
                   <a href="/about">О нас</a>
@@ -75,16 +75,27 @@
                         <ProfileIcon @click="onClickProfile" />
                         <div class="header-profile">
                            <h4 class="h4">Личный кабинет партнера</h4>
-                           <p>Передайте клиента в наше агентство и получите вознаграждение от общей комиссии по факту
-                              реализованной сделки</p>
+                           <p>Передайте клиента в наше агентство и получите вознаграждение в размере 30% от общей
+                              комиссии по факту реализованной сделки</p>
                            <UiButton class="black" @click="isOpenAuthModal = true">Войти или зарегистрироваться
                            </UiButton>
+                           <!-- <div class="header-profile__btns">
+                              <UiButton style="white-space: nowrap;" class="black" @click="isOpenAuthModal = true">Стать
+                                 партнером
+                              </UiButton>
+                              <UiButton class="white" @click="isOpenAuthModal = true">Войти
+                              </UiButton>
+                           </div> -->
                         </div>
                      </div>
-                     <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
+                     <ModalAuthNewCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
+                        @open="isOpenAuthModal = true" />
+                     <ModalAuthNewHint :isOpen="isOpenAuthHint" @close="isOpenAuthHint = false"
+                        @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" />
+                     <!-- <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
                         @open="isOpenAuthModal = true" />
                      <ModalAuthHint :isOpen="isOpenAuthHint" @close="isOpenAuthHint = false"
-                        @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" />
+                        @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" /> -->
                   </li>
                </ul>
                <span class="border mobile"></span>
@@ -111,7 +122,7 @@
                   <a href="/services">Услуги</a>
                </li>
                <li>
-                  <a href="/partners">Партнерам</a>
+                  <a href="/referal">Реферальная программа</a>
                </li>
                <li>
                   <a href="/about">О нас</a>

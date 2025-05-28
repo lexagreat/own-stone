@@ -107,7 +107,7 @@
                            </NuxtLink>
                         </li>
                         <li>
-                           <NuxtLink to="/partners">
+                           <NuxtLink to="/referal">
                               Партнерам
 
                            </NuxtLink>
