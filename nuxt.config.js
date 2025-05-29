@@ -40,8 +40,7 @@ export default defineNuxtConfig({
    },
    runtimeConfig: {
       public: {
-         baseURL:
-            process.env.BASE_URL || "https://own-admin.okttastudio.ru/api",
+         baseURL: process.env.BASE_URL || "https://admin.ownstone.ru/api",
       },
    },
    experimental: {
