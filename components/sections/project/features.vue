@@ -31,13 +31,13 @@
                   :freeMode="true">
                   <SwiperSlide v-for="item in info" :key="item">
                      <div class="project-feature">
-                        <img v-if="sub?.picture && sub?.picture[0]" :src="item?.picture[0]?.url" alt="">
+                        <img v-if="item?.picture && item?.picture[0]" :src="item?.picture[0]?.url" alt="">
                         <h3 class="h3" v-html="item?.title"></h3>
                      </div>
                   </SwiperSlide>
                   <SwiperSlide v-for="item in info" :key="item">
                      <div class="project-feature">
-                        <img v-if="sub?.picture && sub?.picture[0]" :src="item?.picture[0]?.url" alt="">
+                        <img v-if="item?.picture && item?.picture[0]" :src="item?.picture[0]?.url" alt="">
                         <h3 class="h3" v-html="item?.title"></h3>
                      </div>
                   </SwiperSlide>

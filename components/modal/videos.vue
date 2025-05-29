@@ -5,7 +5,7 @@
             <SwiperSlide v-for="item in info">
                <UiSliderBtn prev @click="swiper.slidePrev()" v-if="info?.length > 1" />
                <UiModalCloseBtn @click="emit('closePopup')" />
-               <video :src="item.video.url" controls></video>
+               <video :src="item.video.url"></video>
                <UiSliderBtn next @click="swiper.slideNext()" v-if="info?.length > 1" />
             </SwiperSlide>
          </Swiper>
