@@ -11,7 +11,8 @@
                </div>
             </div>
             <div class="sell-promotion__slider">
-               <Swiper @swiper="onSwiper" slides-per-view="auto" :space-between="10">
+               <Swiper :modules="[Mousewheel]" @swiper="onSwiper" :mousewheel="{ enabled: true, forceToAxis: true }"
+                  slides-per-view="auto" :space-between="10">
                   <SwiperSlide v-for="(item, index) in info.sell_promotion_list" :key="index">
                      <img :src="item.picture.url" alt="">
                      <h4 class="h4">{{ item.title }}</h4>
@@ -24,6 +25,8 @@
 </template>
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Mousewheel } from 'swiper/modules';
+
 const swiperInstance = ref(null)
 const props = defineProps({
    info: Object
