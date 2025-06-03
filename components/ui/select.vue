@@ -17,7 +17,7 @@
             </button>
             <span>{{ title }}</span>
          </div>
-         <ul class="v-select__list">
+         <ul class="v-select__list scrollbar-none">
             <li class="v-select__item" :class="{ active: option.name === choosedValue }"
                v-for="(option, index) in settings.options" :key="index" @click="selectOption(option)">
                {{ option.name }}

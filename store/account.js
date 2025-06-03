@@ -13,8 +13,10 @@ export const useAccount = defineStore("useAccount", {
       openAside() {
          this.isAside = true;
       },
-      async getCode(phone) {
-         let response = await useBaseFetch(`/profile?type=auth&phone=${phone}`);
+      async getCode(phone, object) {
+         let response = await useBaseFetch(
+            `/profile?type=${object.type}&phone=${phone}&firstname=${object.firstname}&secondname=${object.secondname}&email=${object.email}&user_avctivity=${object.user_avctivity}`
+         );
          return response;
       },
       async sendCode(phone, code) {

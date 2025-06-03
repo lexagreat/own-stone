@@ -1,11 +1,17 @@
 <template>
-   <UiModal @closePopup="emit('closePopup')" class="auth-modal auth-new" :class="{ reg: tab == 0 }">
-      <div class="auth-modal__content modal__content">
+   <UiModal @closePopup="emit('closePopup'), success = false" class="auth-modal auth-new" :class="{ reg: tab == 0 }">
+      <div class="auth-modal__content modal__content success" v-if="success">
          <UiModalCloseBtn @click="emit('closePopup')" />
+         <ModalSucess title="Заявка <br> <span>отправлена</span>"
+            subtitle="Благодарим за проявленный интерес к сотрудничеству с агентством OWNSTONE! Рассмотрение заявки происходит в течение 1-2 дней" />
+      </div>
+      <div class="auth-modal__content modal__content" v-else>
+         <UiModalCloseBtn @click="emit('closePopup'), success = false" />
+
          <ul class="app-tabs">
             <li v-for="item in tabs" :key="item">
-               <input type="radio" name="projectbuyways" :value="item.value" :id="'project' + item.name" v-model="tab">
-               <label :for="'project' + item.name">{{ item.name }}</label>
+               <input type="radio" name="newauth" :value="item.value" :id="'newauth' + item.value" v-model="tab">
+               <label :class="{ active: tab == item.value }" :for="'newauth' + item.value">{{ item.name }}</label>
             </li>
          </ul>
          <h3 class="auth-modal__title h1 dark-title" v-if="tab == 0">регистрация</h3>
@@ -26,7 +32,8 @@
                   <FormInput isPhone placeholder="Ваш номер телефона" v-model="phone" />
                </li>
                <li class="gc2">
-                  <UiSelect class="app-select" :settings="formSettings" @selectOption="onSelectFormOption" />
+                  <UiSelect class="app-select auth-select" :settings="formSettings"
+                     @selectOption="onSelectFormOption" />
                </li>
             </ul>
             <ul class="auth-modal__list" v-if="tab == 1">
@@ -51,14 +58,15 @@
                </label>
             </div>
          </div>
-         <UiButton class="black" :disabled="!isDisabledBtn" @click="" v-if="tab == 0">Оставить заявку</UiButton>
-         <UiButton class="black" :disabled="!isDisabledBtn" @click="goToSms" v-if="tab == 1">Получить код</UiButton>
+         <UiButton class="black" :disabled="!isFormValid" @click="register" v-if="tab == 0">Оставить заявку</UiButton>
+         <UiButton class="black" :disabled="!isFormValid" @click="goToSms" v-if="tab == 1">Получить код</UiButton>
+         <span class="auth-modal__error" v-if="errorMes.length">{{ errorMes }}</span>
       </div>
+
    </UiModal>
 </template>
 <script setup>
 import { useAccount } from '~/store/account'
-
 const store = useAccount()
 const emit = defineEmits(['closePopup', 'openSmsModal'])
 const name = ref('')
@@ -67,6 +75,8 @@ const email = ref('')
 const phone = ref('')
 const checked = ref(false)
 const checkedSec = ref(false)
+const errorMes = ref('')
+const success = ref(false)
 const tabs = ref([
    {
       value: 0,
@@ -97,6 +107,18 @@ const formSettings = ref({
          value: 3,
          name: "Инвестиционная компания",
       },
+      {
+         value: 4,
+         name: "Юридические услуги",
+      },
+      {
+         value: 5,
+         name: "Меблировка/дизайн/отделка",
+      },
+      {
+         value: 6,
+         name: "Другое",
+      },
    ],
    placeholder: "Направление деятельности"
 })
@@ -104,12 +126,53 @@ const form = ref('')
 function onSelectFormOption(option) {
    form.value = option.name
 }
-const isDisabledBtn = computed(() => {
-   return checked.value && checkedSec.value && phone.value.length >= 15 && store.time <= 0
-})
+const isFormValid = computed(() => {
+   return (
+      checked.value &&
+      checkedSec.value &&
+      phone.value.length >= 15 &&
+      store.time <= 0 &&
+      (
+         tab.value === 1 ||
+         (
+            tab.value === 0 &&
+            name.value.length > 0 &&
+            surname.value.length > 0 &&
+            validEmail(email.value)
+         )
+      )
+   );
+});
+const register = async () => {
+   let obj = {
+      type: 'register',
+      firstname: name.value, // имя
+      secondname: surname.value, // фамилия
+      email: email.value, // email
+      user_avctivity: form.value //направление деятельности
+   }
+   let res = await store.getCode(document.querySelector('.auth-new .auth-modal__main .phone p span').innerHTML + ' ' + phone.value, obj)
+   if (!res.status) {
+      errorMes.value = res.message
+      return
+   } else {
+      success.value = true
+
+      name.value = ""
+      surname.value = ""
+      email.value = ""
+      form.value = ""
+      phone.value = ""
+      setTimeout(() => {
+         emit('closePopup')
+         success.value = false
+      }, 5000)
+   }
+}
 const goToSms = async () => {
-   console.log(document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value);
-   let res = await store.getCode(document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value)
+   let res = await store.getCode(document.querySelector('.auth-new .auth-modal__main .phone p span').innerHTML + ' ' + phone.value, {
+      type: "auth"
+   })
    // console.log(res);
    store.time = 59;
    let timer = setInterval(() => {
@@ -120,28 +183,66 @@ const goToSms = async () => {
       }
    }, 1000)
    if (res?.status) {
-      emit("openSmsModal", document.querySelector('.auth-modal__main .phone p span').innerHTML + ' ' + phone.value)
+      emit("openSmsModal", document.querySelector('.auth-new .auth-modal__main .phone p span').innerHTML + ' ' + phone.value)
    }
 }
+watch(
+   () => [
+      name.value,
+      surname.value,
+      email.value,
+      phone.value,
+      form.value,
+      tab.value
+   ],
+   (newValues) => {
+      errorMes.value = "";
+   },
+   { deep: true }
+)
 </script>
 
 
 <style lang="scss">
 .auth-new {
-   .v-select {
+   .auth-modal__error {
+      color: #FF5E5C;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 100%;
+      margin-top: 12px;
+      display: block;
+      /* 12px */
+   }
+
+   .auth-select {
       width: 100%;
       max-width: unset;
 
-      &__wrapper {
-         height: 56px;
+      .v-select {
+         &__wrapper {
+            height: 56px;
 
-         &.placeholder {
-            color: #1818184D;
+            &.placeholder {
+               color: #1818184D;
+            }
+         }
+
+         &__item {
+            justify-content: space-between !important;
+         }
+
+         &__list {
+            height: 168px;
+            overflow: auto;
          }
       }
 
-      &__item {
-         justify-content: space-between !important;
+   }
+
+   .phone {
+      &:has(.open) {
+         z-index: 20;
       }
    }
 
@@ -149,6 +250,14 @@ const goToSms = async () => {
       width: fit-content;
       margin-bottom: 40px;
       border-bottom: 0;
+
+      .active {
+         color: #181818;
+
+         &::after {
+            scale: 1;
+         }
+      }
    }
 
    .auth-modal__list {
@@ -170,11 +279,27 @@ const goToSms = async () => {
    &.reg {
       .modal__content {
          width: 664px;
+
+         @media(max-width: 1024px) {
+            width: 100%;
+         }
+      }
+   }
+
+   .modal__content.success {
+      width: 470px;
+
+      @media(max-width: 1024px) {
+         width: 100%;
       }
    }
 
    .modal__content {
       width: 500px;
+
+      @media(max-width: 1024px) {
+         width: 100%;
+      }
    }
 
    .pc {

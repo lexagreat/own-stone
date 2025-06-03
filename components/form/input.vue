@@ -1,6 +1,6 @@
 <template>
    <div class="text-input" :class="{ phone: isPhone }" ref="input">
-      <p v-if="isPhone" @click="isOpen = true">
+      <p v-if="isPhone" @click="isOpen = !isOpen">
          <svg :class="{ active: isOpen }" xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 8 6"
             fill="none">
             <path d="M3.9867 1L7 4.97907L1 5L3.9867 1Z" fill="#181818" />
