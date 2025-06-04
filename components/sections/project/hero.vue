@@ -68,7 +68,7 @@
                            fill="white" />
                      </svg>
                   </li>
-                  <li>квартиры от {{ formatPrice(apartamentsMinPrice) }}</li>
+                  <li>квартиры от {{ apartamentsMinPrice }} млн ₽</li>
                </ul>
                <div class="project-hero__pagination" ref="pagination"></div>
             </div>
@@ -102,9 +102,16 @@ const path = ref([
 ])
 const pagination = ref(null)
 
+// const apartamentsMinPrice = computed(() => {
+//    return Math.min(...props.info.apartaments.map((item) => +item.cost_total))
+// })
 const apartamentsMinPrice = computed(() => {
-   return Math.min(...props.info.apartaments.map((item) => +item.cost_total))
-})
+   const minPrice = Math.min(...props.info.apartaments.map((item) => +item.cost_total));
+   // Округление в меньшую сторону до ближайшего миллиона
+   return Math.floor(minPrice / 1_000_000);
+});
+
+
 
 const onLike = () => {
    favorites.toggle(props.info)

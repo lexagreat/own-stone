@@ -84,11 +84,11 @@ const links = computed(() => {
          to: "/account/documents",
          subtitle: `${docsLength.value} ${morph(docsLength.value, ['документ', 'документа', 'документов'])}`
       },
-      {
-         icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),
-         title: "Информация",
-         to: "/account/info",
-      },
+      // {
+      //    icon: markRaw(defineAsyncComponent(() => import('@/assets/img/icons/account-info.svg'))),
+      //    title: "Информация",
+      //    to: "/account/info",
+      // },
    ]
 })
 const exit = () => {
