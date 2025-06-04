@@ -77,25 +77,21 @@
                            <h4 class="h4">Личный кабинет партнера</h4>
                            <p>Передайте клиента в наше агентство и получите свое вознаграждение по факту реализованной
                               сделки</p>
-                           <UiButton class="black" @click="isOpenAuthModal = true">Войти или зарегистрироваться
-                           </UiButton>
-                           <!-- <div class="header-profile__btns">
-                              <UiButton style="white-space: nowrap;" class="black" @click="isOpenAuthModal = true">Стать
+
+                           <div class="header-profile__btns">
+                              <UiButton style="white-space: nowrap;" class="black"
+                                 @click="isOpenAuthModal = true, newAuthType = 'reg'">Стать
                                  партнером
                               </UiButton>
-                              <UiButton class="white" @click="isOpenAuthModal = true">Войти
+                              <UiButton class="white" @click="isOpenAuthModal = true, newAuthType = 'log'">Войти
                               </UiButton>
-                           </div> -->
+                           </div>
                         </div>
                      </div>
                      <ModalAuthNewCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
-                        @open="isOpenAuthModal = true" />
+                        @open="isOpenAuthModal = true" :type="newAuthType" />
                      <ModalAuthNewHint :isOpen="isOpenAuthHint" @close="isOpenAuthHint = false"
                         @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" />
-                     <!-- <ModalAuthCollection :isOpen="isOpenAuthModal" @close="isOpenAuthModal = false"
-                        @open="isOpenAuthModal = true" />
-                     <ModalAuthHint :isOpen="isOpenAuthHint" @close="isOpenAuthHint = false"
-                        @openAuth="isOpenAuthHint = false, isOpenAuthModal = true" /> -->
                   </li>
                </ul>
                <span class="border mobile"></span>
@@ -184,6 +180,7 @@ const contacts = useContacts()
 const isBurgerOpen = ref(false)
 const route = useRoute()
 const isOpenAuthModal = ref(false)
+const newAuthType = ref('log')
 const isOpenAuthHint = ref(false)
 watch(isBurgerOpen, (value) => {
    if (value) {

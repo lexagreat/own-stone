@@ -1,5 +1,6 @@
 <template>
    <UiModal @closePopup="emit('closePopup'), success = false" class="auth-modal auth-new" :class="{ reg: tab == 0 }">
+
       <div class="auth-modal__content modal__content success" v-if="success">
          <UiModalCloseBtn @click="emit('closePopup')" />
          <ModalSucess title="Заявка <br> <span>отправлена</span>"
@@ -67,6 +68,10 @@
 </template>
 <script setup>
 import { useAccount } from '~/store/account'
+const props = defineProps({
+   type: String,
+   opened: Boolean
+})
 const store = useAccount()
 const emit = defineEmits(['closePopup', 'openSmsModal'])
 const name = ref('')
@@ -200,6 +205,15 @@ watch(
    },
    { deep: true }
 )
+
+watch(() => props.opened, (value) => {
+
+   if (props.type == 'reg') {
+      tab.value = 0
+   } else {
+      tab.value = 1
+   }
+})
 </script>
 
 

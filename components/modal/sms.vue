@@ -16,7 +16,8 @@
             <FormCodeInput @changeValue="onChangeCode" />
             <span v-if="store.time > 0">Получить код повторно через 00:{{ store.time >= 10 ? store.time : '0' +
                store.time
-               }}</span>
+            }}</span>
+            <button @click="resend" class="sms-modal__resend" v-else>Получить код повторно</button>
          </div>
       </div>
    </UiModal>
@@ -45,6 +46,21 @@ watch(code, async (value) => {
       }
    }
 })
+const resend = async () => {
+   let res = await store.getCode(props.phone, {
+      type: "resent_code"
+   })
+   if (res.status) {
+      store.time = 59;
+      let timer = setInterval(() => {
+         store.time--;
+         if (store.time <= 0) {
+            clearInterval(timer)
+            timer = null
+         }
+      }, 1000)
+   }
+}
 </script>
 
 
@@ -53,5 +69,14 @@ watch(code, async (value) => {
    @media(max-width: 568px) {
       display: none;
    }
+}
+
+.sms-modal__resend {
+   color: #181818;
+   font-family: "PP Neue Montreal";
+   font-size: 13px;
+   width: fit-content;
+   font-weight: 500;
+
 }
 </style>

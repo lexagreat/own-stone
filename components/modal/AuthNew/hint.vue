@@ -4,12 +4,12 @@
          <UiModalCloseBtn @click="emit('close')" />
          <div class="header-profile">
             <h4 class="h4">Личный кабинет партнера</h4>
-            <p>Передайте клиента в наше агентство и получите вознаграждение в размере 30% от общей комиссии по факту
-               реализованной сделки</p>
+            <p>Передайте клиента в наше агентство и получите свое вознаграждение по факту реализованной
+               сделки</p>
             <div class="header-profile__btns">
-               <UiButton class="black" @click="emit('openAuth')">Стать партнером
+               <UiButton class="black" @click="emit('openAuth', 'reg')">Стать партнером
                </UiButton>
-               <UiButton class="white" @click="emit('openAuth')">Войти
+               <UiButton class="white" @click="emit('openAuth', 'log')">Войти
                </UiButton>
             </div>
          </div>

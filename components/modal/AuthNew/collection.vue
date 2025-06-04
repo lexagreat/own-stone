@@ -1,12 +1,14 @@
 <template>
    <div>
-      <ModalAuthNew :isOpen="isOpen" @closePopup="emit('close')" @openSmsModal="onOpenSmsModal" />
+      <ModalAuthNew :isOpen="isOpen" :opened="isOpen" @closePopup="emit('close')" @openSmsModal="onOpenSmsModal"
+         :type="type" />
       <ModalSms :isOpen="isOpenSms" @closePopup="isOpenSms = false" :phone="smsPhone" @changePhone="onChangeSmsPhone" />
    </div>
 </template>
 <script setup>
 const props = defineProps({
-   isOpen: Boolean
+   isOpen: Boolean,
+   type: String
 })
 const emit = defineEmits([
    'close',
@@ -17,7 +19,6 @@ const isOpenSms = ref(false)
 const smsPhone = ref('')
 
 
-
 const onOpenSmsModal = (phone) => {
    smsPhone.value = phone
    isOpenSms.value = true
@@ -26,7 +27,6 @@ const onOpenSmsModal = (phone) => {
 const onChangeSmsPhone = () => {
    isOpenSms.value = false
    emit('open')
-
 }
 
 </script>
