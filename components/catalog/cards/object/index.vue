@@ -90,21 +90,25 @@ const onClose = () => {
       isOpenModal.value = false
    }, 100);
 }
-function roundDownToTensOfMillions(price) {
-   return Math.floor(price / 10000000) * 10000000;
-}
 const price = computed(() => {
-   let string = '<span style="text-transform: lowercase">от </span>'
-   if (props.product?.cost_total > 1000000000) {
-      string += Math.floor(props.product?.cost_total / 100000000) / 10 + '<span style="text-transform: lowercase"> млрд</span>'
-   } else if (props.product?.cost_total < 10000000) {
-      string += 5 + '<span style="text-transform: lowercase"> млн</span>'
-   } else {
-      string += Math.floor(props.product?.cost_total / 10000000) * 10 + '<span style="text-transform: lowercase"> млн</span>'
+   let string = '<span style="text-transform: lowercase">от </span>';
+   const cost = props.product?.cost_total;
 
+   if (cost > 1000000000) {
+      // миллиарды
+      const value = Math.floor(cost / 100000000) / 10; // от миллиардов
+      string += `${value}<span style="text-transform: lowercase"> млрд</span>`;
+   } else if (cost < 10000000) {
+      // меньше 10 млн — всегда показываем 5 млн
+      string += `5<span style="text-transform: lowercase"> млн</span>`;
+   } else {
+      // округляем вниз до 5 млн
+      const rounded = Math.floor(cost / 5000000) * 5; // в млн
+      string += `${rounded}<span style="text-transform: lowercase"> млн</span>`;
    }
+
    return string + " ₽";
-})
+});
 </script>
 
 <style lang="scss" scoped>

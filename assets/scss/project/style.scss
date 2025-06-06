@@ -789,7 +789,7 @@
       padding: 60px 0;
    }
    .product-slider {
-      padding-top: var(--margin);
+      padding-top: calc(var(--margin) / 2);
       margin-bottom: 80px;
       padding-bottom: 0;
       @media (max-width: $tablet) {

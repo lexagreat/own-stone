@@ -53,7 +53,7 @@
                      stroke="white" />
                </svg>
             </button>
-            <h4 class="catalog-card__title">{{ product?.name }}</h4>
+            <NuxtLink :to="link" class="catalog-card__title" style="display: block;">{{ product?.name }}</NuxtLink>
             <!-- <span class="catalog-card__price">{{ formatNumber(prices?.min) }} ₽ - {{ formatNumber(prices?.max) }}
                ₽ </span> -->
             <span class="catalog-card__price">{{ product?.formated_price_range?.short }}</span>

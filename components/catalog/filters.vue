@@ -42,7 +42,7 @@
                      <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
                      <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
-                        }}</label>
+                     }}</label>
                   </li>
                </ul>
             </li>
@@ -55,8 +55,8 @@
                      <input type="text" :value="formatNumber(areaMaxValue)"
                         @input="areaMaxValue = +$event.target.value.replaceAll(' ', '')">
                   </div>
-                  <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="10" :minValue="areaMinValue"
-                     :maxValue="areaMaxValue" @input="UpdateAreas" />
+                  <MultiRangeSlider :ruler="false" :min="areaMin" :max="areaMax" :step="areaStep"
+                     :minValue="areaMinValue" :maxValue="areaMaxValue" @input="UpdateAreas" />
                </div>
             </li>
             <li class="catalog-filter" v-if="type !== 'commerce'">
@@ -401,7 +401,12 @@ const UpdateAreas = (e) => {
    areaMinValue.value = e.minValue
    areaMaxValue.value = e.maxValue
 }
-
+const areaStep = computed(() => {
+   // if (areaMaxValue.value > 150) {
+   //    return 50
+   // }
+   return 10
+})
 
 const options = ref([])
 const checkedOptions = ref([])
