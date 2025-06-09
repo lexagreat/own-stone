@@ -171,12 +171,12 @@ const onForm = (id) => {
    cursor: pointer;
    width: 40px;
    height: 40px;
-   background-color: black;
+   background-color: #4F0014;
    color: white;
    display: flex;
    justify-content: center;
    align-items: center;
-   border-radius: 5px;
+   border-radius: 50%;
    top: 100px;
    translate: -50% -50%;
 }

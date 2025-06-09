@@ -180,7 +180,7 @@
                         публичной офертой, определяемой положениями статьи 437 ГК РФ.
                      </p>
                   </section>
-                  <span>Made by <NuxtLink to="https://oktta.ru/" target="_blank">Oktta</NuxtLink></span>
+                  <!-- <span>Made by <NuxtLink to="https://oktta.ru/" target="_blank">Oktta</NuxtLink></span> -->
                </div>
             </div>
          </div>
