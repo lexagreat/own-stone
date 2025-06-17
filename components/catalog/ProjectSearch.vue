@@ -84,16 +84,17 @@ const searchedItems = computed(() => {
       return item.name.toLowerCase().includes(data.value[tab.value].searchValue.toLowerCase())
    })
 })
-const choosedValue = computed(() => {
+// const choosedValue = computed(() => {
 
-   let arr = projectsValue.value
-   if (arr.some(item => item.value !== 0)) {
-      return arr.filter(item => item.value !== 0).map(item => item.name).join(', ')
-   } else {
-      return 'Не важно'
-   }
-})
+//    let arr = projectsValue.value
+//    if (arr.some(item => item.value !== 0)) {
+//       return arr.filter(item => item.value !== 0).map(item => item.name).join(', ')
+//    } else {
+//       return 'Не важно'
+//    }
+// })
 function selectOption(option) {
+   console.log(option);
    data.value[tab.value].items.forEach(item => {
       if (item.name === option.name) {
          item.selected = !item.selected
@@ -103,9 +104,9 @@ function selectOption(option) {
          }
       }
    })
-   if (option.value) {
-      data.value[tab.value].items[0].selected = false
-   }
+   // if (option.value) {
+   //    data.value[tab.value].items[0].selected = false
+   // }
    setValues()
 }
 watch(isOpen, (value) => {

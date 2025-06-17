@@ -2,6 +2,7 @@
    <UiLoader v-if="catalogStore.loading" />
    <app-header />
       <slot />
+      <UiConsultIcon />
    <app-footer />
 </template>
 <script setup>
