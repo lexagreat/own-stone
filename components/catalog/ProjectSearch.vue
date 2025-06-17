@@ -430,6 +430,10 @@ onMounted(() => {
       }
    }
 
+   .placement-select__content {
+      max-height: 170px;
+   }
+
    .v-select__wrapper {
       @media(hover:hover) {
          &:hover {
@@ -454,6 +458,8 @@ onMounted(() => {
    }
 
    .v-select {
+      max-width: 100%;
+
       &__wrapper {
          padding: 0;
       }
