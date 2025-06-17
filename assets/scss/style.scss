@@ -40,8 +40,18 @@ label {
       position: relative;
       width: 72px;
       height: 72px;
+      @media (hover: hover) {
+         &:hover {
+            .circle {
+               &:nth-child(1) {
+                  scale: 1.1;
+               }
+            }
+         }
+      }
       .circle {
          &:nth-child(1) {
+            transition: 0.3s;
             --size: 72px;
             img {
                width: 100%;
@@ -146,6 +156,12 @@ label {
          li {
             .circle {
                background-color: #181818;
+               @media (hover: hover) {
+                  &:hover {
+                     opacity: 1;
+                     background-color: #4f0014;
+                  }
+               }
                svg path {
                   fill: white;
                }
