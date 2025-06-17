@@ -13,7 +13,7 @@
          </div>
       </div>
       <div class="consult-icon__content" v-else>
-         <UiModalCloseBtn />
+         <UiModalCloseBtn @click="step = 1" />
          <div class="consult-icon__header">
             <div class="consult-icon__image">
                <div class="circle">
