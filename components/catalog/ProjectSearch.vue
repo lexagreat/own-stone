@@ -2,11 +2,21 @@
    <div class="v-select placement-select" :class="{ open: isOpen }">
       <div class="v-select__backdrop" @click="isOpen = false"></div>
       <div class="v-select__wrapper" @click="isOpen = !isOpen">
-         <span class="v-select__input">
+         <!-- <span class="v-select__input">
             {{ choosedValue }}
          </span>
          <div class="v-select__icon">
             <ArrowDownIcon />
+         </div> -->
+         <div class="placement-select__search">
+            <div class="text-input">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                     d="M6.90918 1.50085C8.33279 1.51744 9.69252 2.09474 10.6934 3.1073C11.6942 4.11987 12.2559 5.4863 12.2559 6.91003C12.2558 8.16264 11.8203 9.37004 11.0342 10.3319L14.3516 13.6473C14.5469 13.8426 14.5468 14.1591 14.3516 14.3544C14.1563 14.5496 13.8398 14.5496 13.6445 14.3544L10.332 11.0438C9.37692 11.8491 8.16846 12.3036 6.90918 12.3182C6.19371 12.3265 5.48374 12.1927 4.82031 11.9247C4.15679 11.6566 3.55291 11.2598 3.04395 10.7567C2.53497 10.2536 2.13126 9.65439 1.85547 8.99401C1.57973 8.33377 1.43756 7.62554 1.4375 6.91003C1.4375 6.19436 1.57967 5.48546 1.85547 4.82507C2.13127 4.1647 2.53497 3.56546 3.04395 3.06237C3.55292 2.5593 4.15679 2.16249 4.82031 1.89441C5.48374 1.62637 6.19371 1.49257 6.90918 1.50085ZM6.89844 2.50085C6.31526 2.49405 5.73608 2.60275 5.19531 2.82116C4.65451 3.03965 4.16193 3.36332 3.74707 3.77331C3.33217 4.1834 3.00216 4.6725 2.77734 5.21081C2.55269 5.74895 2.4375 6.32688 2.4375 6.91003C2.43756 7.49324 2.55259 8.07108 2.77734 8.60925C3.00216 9.14748 3.33222 9.63573 3.74707 10.0458C4.16193 10.4558 4.6545 10.7794 5.19531 10.9979C5.73609 11.2163 6.31525 11.325 6.89844 11.3182C8.05858 11.3046 9.16674 10.8347 9.98242 10.0096C10.7981 9.18436 11.2557 8.07039 11.2559 6.91003C11.2559 5.7495 10.7982 4.63483 9.98242 3.80944C9.16674 2.98437 8.05857 2.51449 6.89844 2.50085Z"
+                     fill="#181818" fill-opacity="0.5" />
+               </svg>
+               <input placeholder="Найти проект" type="text" v-model="data[tab].searchValue" />
+            </div>
          </div>
       </div>
       <div class="v-select__content placement-select__content scrollbar-none" ref="content">
@@ -16,23 +26,24 @@
             </button>
             <span>{{ title }}</span>
          </div>
-         <ul class="placement-select__tabs scrollbar-none">
-            <li v-for="(item, index) in data" :key="item.tabName">
-               <label>
-                  <input type="radio" v-model="tab" :value="index" name="placement-tabs">
-                  <span>{{ item.tabName }}</span>
-               </label>
-            </li>
-
-         </ul>
+         <div class="placement-select__search mob">
+            <div class="text-input">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                     d="M6.90918 1.50085C8.33279 1.51744 9.69252 2.09474 10.6934 3.1073C11.6942 4.11987 12.2559 5.4863 12.2559 6.91003C12.2558 8.16264 11.8203 9.37004 11.0342 10.3319L14.3516 13.6473C14.5469 13.8426 14.5468 14.1591 14.3516 14.3544C14.1563 14.5496 13.8398 14.5496 13.6445 14.3544L10.332 11.0438C9.37692 11.8491 8.16846 12.3036 6.90918 12.3182C6.19371 12.3265 5.48374 12.1927 4.82031 11.9247C4.15679 11.6566 3.55291 11.2598 3.04395 10.7567C2.53497 10.2536 2.13126 9.65439 1.85547 8.99401C1.57973 8.33377 1.43756 7.62554 1.4375 6.91003C1.4375 6.19436 1.57967 5.48546 1.85547 4.82507C2.13127 4.1647 2.53497 3.56546 3.04395 3.06237C3.55292 2.5593 4.15679 2.16249 4.82031 1.89441C5.48374 1.62637 6.19371 1.49257 6.90918 1.50085ZM6.89844 2.50085C6.31526 2.49405 5.73608 2.60275 5.19531 2.82116C4.65451 3.03965 4.16193 3.36332 3.74707 3.77331C3.33217 4.1834 3.00216 4.6725 2.77734 5.21081C2.55269 5.74895 2.4375 6.32688 2.4375 6.91003C2.43756 7.49324 2.55259 8.07108 2.77734 8.60925C3.00216 9.14748 3.33222 9.63573 3.74707 10.0458C4.16193 10.4558 4.6545 10.7794 5.19531 10.9979C5.73609 11.2163 6.31525 11.325 6.89844 11.3182C8.05858 11.3046 9.16674 10.8347 9.98242 10.0096C10.7981 9.18436 11.2557 8.07039 11.2559 6.91003C11.2559 5.7495 10.7982 4.63483 9.98242 3.80944C9.16674 2.98437 8.05857 2.51449 6.89844 2.50085Z"
+                     fill="#181818" fill-opacity="0.5" />
+               </svg>
+               <input placeholder="Найти проект" type="text" v-model="data[tab].searchValue" />
+            </div>
+         </div>
          <template v-for="(item, index) in data" :key="item">
             <div class="placement-select__main" v-if="tab == index">
-               <div class="placement-select__search">
+               <!-- <div class="placement-select__search">
                   <div class="text-input">
                      <SearchIcon />
-                     <input :placeholder="'Найти ' + item.tabName" type="text" v-model="data[tab].searchValue" />
+                     <input :placeholder="'Найти проект'" type="text" v-model="data[tab].searchValue" />
                   </div>
-               </div>
+               </div> -->
                <ul class="v-select__list" v-if="searchedItems.length">
                   <li class="v-select__item" :class="{ active: isSelected(option) }"
                      v-for="(option, index) in searchedItems" :key="index" @click="selectOption(option)">
@@ -53,25 +64,16 @@ import ArrowDownIcon from "@/assets/img/icons/arrow_down.svg"
 import SearchIcon from "@/assets/img/icons/search.svg"
 const props = defineProps({
    title: String,
-   placementOptions: Array,
    projectsOptions: Array,
-   metroOptions: Array,
 })
-const placementValue = defineModel('placement')
 const projectsValue = defineModel('projects')
-const metroValue = defineModel('metro')
 
 const isOpen = ref(false)
 const tab = ref(0)
 
 const data = ref([
    {
-      tabName: "Округ",
-      searchValue: ref(""),
-      items: []
-   },
-   {
-      tabName: "Метро",
+      tabName: "Проект",
       searchValue: ref(""),
       items: []
    },
@@ -84,13 +86,12 @@ const searchedItems = computed(() => {
 })
 const choosedValue = computed(() => {
 
-   let arr = metroValue.value.concat(placementValue.value)
+   let arr = projectsValue.value
    if (arr.some(item => item.value !== 0)) {
       return arr.filter(item => item.value !== 0).map(item => item.name).join(', ')
    } else {
       return 'Не важно'
    }
-   // return projectsValue.value.concat(placementValue.value).concat(metroValue.value).map(item => item.name).join(', ')
 })
 function selectOption(option) {
    data.value[tab.value].items.forEach(item => {
@@ -110,6 +111,7 @@ function selectOption(option) {
 watch(isOpen, (value) => {
    if (document.querySelector('.catalog-filters')) {
       let top = document.querySelector('.catalog-filters').scrollTop
+      console.log(top);
       if (window?.innerWidth <= 1024) {
          content.value.style.top = top + "px"
       }
@@ -117,38 +119,27 @@ watch(isOpen, (value) => {
 })
 
 const isSelected = (option) => {
-   return placementValue.value.some(item => item.name == option.name) || metroValue.value.some(item => item.name == option.name)
+   return projectsValue.value.some(item => item.name == option.name)
 }
-watch(() => props.placementOptions, () => {
-   setOptions()
-}, {
-   deep: true
-})
-// watch(() => props.projectsOptions, () => {
-//    setOptions()
-// }, {
-//    deep: true
-// })
-watch(() => props.metroOptions, () => {
+watch(() => props.projectsOptions, () => {
    setOptions()
 }, {
    deep: true
 })
 const setOptions = () => {
-   // data.value[0].items = props?.projectsOptions;
-   data.value[0].items = props?.placementOptions;
-   data.value[1].items = props?.metroOptions;
+   data.value[0].items = props?.projectsOptions;
 }
 const setValues = () => {
-   // projectsValue.value = data.value[0].items.filter(item => item.selected)
-   placementValue.value = data.value[0].items.filter(item => item.selected)
-   metroValue.value = data.value[1].items.filter(item => item.selected)
+   projectsValue.value = data.value[0].items.filter(item => item.selected)
 }
+watch(() => data.value[tab.value].searchValue, (value) => {
+   isOpen.value = true
+})
 onMounted(() => {
    setOptions()
 })
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .v-select {
    cursor: pointer;
    position: relative;
@@ -212,6 +203,11 @@ onMounted(() => {
       gap: 14px;
       padding: 16px 14px;
       background-color: white;
+
+      // @media(min-width: 1024px) {
+      //    height: 168px;
+      //    overflow: auto;
+      // }
    }
 
    &__item {
@@ -409,6 +405,100 @@ onMounted(() => {
       font-size: 13px;
       line-height: 18.2px;
 
+   }
+}
+
+.placement-select__search {
+   &.mob {
+      display: none;
+
+      @media(max-width: 1024px) {
+         display: flex;
+      }
+   }
+}
+
+@media(min-width: 1024px) {
+   .placement-select__search {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+
+      input {
+         height: 48px;
+         border: 0;
+      }
+   }
+
+   .v-select__wrapper {
+      @media(hover:hover) {
+         &:hover {
+            svg path {
+
+               stroke: transparent !important;
+               fill-opacity: 1;
+               fill: #181818;
+
+            }
+         }
+      }
+   }
+
+
+   .placement-select.open {
+      z-index: 100;
+   }
+
+   .placement-select__main .v-select__list {
+      margin: 0;
+   }
+
+   .v-select {
+      &__wrapper {
+         padding: 0;
+      }
+
+   }
+}
+
+@media(max-width: 1024px) {
+   .v-select__wrapper {
+      padding: 0;
+   }
+
+   .placement-select.open {
+      .placement-select__content {
+         left: 0;
+         z-index: 1000;
+      }
+   }
+
+   .placement-select__content {
+      position: fixed;
+      top: 0;
+      left: 100vw;
+      width: 100vw;
+      height: calc(100vh - 0px);
+      padding: 25px var(--containerPadding);
+      background-color: #f1f1f1;
+   }
+
+   .v-select__list {
+      background-color: #f1f1f1;
+
+   }
+
+   .placement-select__search {
+      margin: 0;
+
+      input {
+         height: 48px;
+         border: 0;
+      }
+   }
+
+   .v-select {
+      max-width: unset;
    }
 }
 </style>

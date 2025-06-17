@@ -120,6 +120,11 @@
                <span class="catalog-filter__title">Внутри транспортных колец</span>
                <UiCatalogSelect title="Внутри транспортных колец" :settings="transportSettings" v-model="transport" />
             </li>
+            <li class="catalog-filter">
+               <span class="catalog-filter__title">Поиск по проектам</span>
+               <CatalogProjectSearch title="Найти проект" :projectsOptions="projectsSettings.options"
+                  v-model:projects="projects" />
+            </li>
             <li class="catalog-filter" v-if="type == 'commerce'">
                <span class="catalog-filter__title">Этаж</span>
                <UiCatalogSelect title="Этаж" :settings="floorSettings" v-model="floor" />
