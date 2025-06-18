@@ -10,7 +10,7 @@
       <Meta name="og:url" v-if="seo && seo.openGraph && seo.openGraph['og:url']" :content="seo.openGraph['og:url']" />
       <Meta name="og:type" v-if="seo && seo.openGraph && seo.openGraph['og:type']"
          :content="seo?.openGraph['og:type']" />
-      <Meta name="og:site_name" content="resetly.io" />
+      <!-- <Meta name="og:site_name" content="resetly.io" /> -->
       <Meta name="og:image" v-if="seo && seo.openGraph && seo.openGraph['og:image']"
          :content="seo?.openGraph['og:image']?.url" />
       <Meta name="og:image:type" v-if="seo && seo.openGraph && seo.openGraph['og:image']"
@@ -18,7 +18,7 @@
       <Meta name="og:image:width" content="1024" />
       <Meta name="og:image:height" content="1024" />
       <Meta name="twitter:card" content="summary_large_image" />
-      <Meta property="twitter:domain" content="resetly.io" />
+      <!-- <Meta property="twitter:domain" content="resetly.io" /> -->
       <Meta property="twitter:url" v-if="seo && seo.openGraph && seo.openGraph['og:url']"
          :content="seo?.openGraph['og:url']" />
       <Meta name="twitter:title" :content="seo?.metaTitle" />
