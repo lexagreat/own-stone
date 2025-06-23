@@ -103,6 +103,7 @@
                            </ul>
                         </li>
                         <li class="catalog-filters__btns">
+                           <button class="catalog-filters__resetpc" @click="resetFitlers">Сбросить все</button>
                            <UiButton class="black" @click="search">Показать все</UiButton>
                         </li>
                      </ul>
@@ -114,6 +115,12 @@
                Параметры
             </UiButton>
          </div>
+         <ul class="project-selection__rooms" v-if="formattedRooms?.length">
+            <li v-for="(item, index) in formattedRooms" :key="index">
+               <p v-html="item.label + ' ' + item.formatted_area"></p>
+               <p>{{ item.formatted_short_price }}</p>
+            </li>
+         </ul>
       </div>
       <SectionsProductSlider white-btns :category="category" :products="catalog.products">
          <slot />
@@ -132,7 +139,8 @@ const route = useRoute()
 const props = defineProps({
    type: String,
    projectSlug: String,
-   count: Number
+   count: Number,
+   formattedRooms: Array
 })
 const category = ref(1)
 
@@ -370,7 +378,7 @@ onMounted(async () => {
    await search()
    first.value = false;
 })
-const resetFitlers = () => {
+const resetFitlers = async () => {
    priceMinValue.value = priceMin.value
    priceMaxValue.value = priceMax.value
 
@@ -399,6 +407,8 @@ const resetFitlers = () => {
 
    roomsChecked.value = []
    checkedOptions.value = []
+   await search()
+
 }
 
 </script>

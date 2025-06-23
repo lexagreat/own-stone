@@ -154,6 +154,7 @@
                   <img src="/img/btn-map.png" alt="" class="circle">
                   <span>На карте</span>
                </UiButton>
+               <button class="catalog-filters__resetpc" @click="resetFilters">Сбросить все</button>
                <UiButton class="black" @click="search">Показать все</UiButton>
             </li>
          </ul>
@@ -928,7 +929,7 @@ watch(() => props.reset, async (value) => {
       await search()
    }
 })
-const resetFilters = () => {
+const resetFilters = async () => {
    // set ranges
    priceMinValue.value = priceMin.value
    priceMaxValue.value = priceMax.value
@@ -992,6 +993,8 @@ const resetFilters = () => {
    ]
    roomsChecked.value = []
    checkedOptions.value = []
+   await search()
+
 }
 const filtersCount = computed(() => {
    let int = 0;

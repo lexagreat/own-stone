@@ -4,6 +4,7 @@
          <!-- <transition name="page"> -->
          <NuxtPage />
          <BannersCookie />
+         <!-- <ModalGetCatalog :is-open="true" @close-popup="" /> -->
          <!-- </transition> -->
       </NuxtLayout>
    </div>

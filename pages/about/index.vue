@@ -9,7 +9,7 @@
       <SectionsHomeBosses :info="info.about_bosses" />
       <SectionsAboutRewards :info="info.about_rewards.rewards_section" />
       <SectionsAboutEvents :items="info.about_events" />
-      <SectionsAboutPartners />
+      <!-- <SectionsAboutPartners /> -->
       <SectionsHomeOffice :info="info.about_office.home_office" />
       <SectionsAboutOffice />
    </main>

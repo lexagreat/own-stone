@@ -11,8 +11,8 @@
       <SectionsProjectFeatures :info="info.advantages" v-if="info.advantages?.length">
          <h2 class="project-features__title h1 dark-title">преимущества</h2>
       </SectionsProjectFeatures>
-
-      <SectionsProjectFilters type="build" :projectSlug="info.slug" :count="info?.apartaments?.length">
+      <SectionsProjectFilters type="build" :projectSlug="info.slug" :formatted-rooms="info?.formatted_rooms"
+         :count="info?.apartaments?.length">
          ТИПЫ <span>планировок</span>
       </SectionsProjectFilters>
       <SectionsProjectBuyWays :name="info?.name" />
