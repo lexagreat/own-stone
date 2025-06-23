@@ -121,6 +121,11 @@
          fill: white !important;
       }
    }
+   .text-input.phone {
+      & > p span {
+         color: white !important;
+      }
+   }
    // .meeting-form__content
 
    &__content {

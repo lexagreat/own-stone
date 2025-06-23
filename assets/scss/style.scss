@@ -17,6 +17,13 @@
 label {
    cursor: pointer;
 }
+.wrapper {
+   &:has(.modal.open) {
+      .consult-icon {
+         z-index: 10;
+      }
+   }
+}
 .consult-icon {
    position: fixed;
    bottom: 20px;

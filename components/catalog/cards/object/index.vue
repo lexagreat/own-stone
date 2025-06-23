@@ -94,16 +94,20 @@ const price = computed(() => {
    let string = '<span style="text-transform: lowercase">от </span>';
    const cost = props.product?.cost_total;
 
+   if (!cost) {
+      return '';
+   }
+
    if (cost > 1000000000) {
-      // миллиарды
-      const value = Math.floor(cost / 100000000) / 10; // от миллиардов
+      // миллиарды — округляем до 0.1 млрд
+      const value = Math.floor(cost / 100000000) / 10; // в млрд
       string += `${value}<span style="text-transform: lowercase"> млрд</span>`;
-   } else if (cost < 10000000) {
-      // меньше 10 млн — всегда показываем 5 млн
+   } else if (cost < 5000000) {
+      // меньше 5 млн — всегда показываем "5 млн"
       string += `5<span style="text-transform: lowercase"> млн</span>`;
    } else {
-      // округляем вниз до 5 млн
-      const rounded = Math.floor(cost / 5000000) * 5; // в млн
+      // округляем вниз до миллиона
+      const rounded = Math.floor(cost / 1000000); // в млн
       string += `${rounded}<span style="text-transform: lowercase"> млн</span>`;
    }
 
