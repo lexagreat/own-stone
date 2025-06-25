@@ -4,7 +4,7 @@
          <!-- <transition name="page"> -->
          <NuxtPage />
          <BannersCookie />
-         <!-- <ModalGetCatalog :is-open="true" @close-popup="" /> -->
+         <!-- <ModalGetCatalog :is-open="isOpenCatalogModal" @close-popup="" /> -->
          <!-- </transition> -->
       </NuxtLayout>
    </div>
@@ -16,9 +16,14 @@ import { useRecently } from './store/recently';
 const contacts = useContacts()
 const recentlyStore = useRecently()
 const favorites = useFavorites()
-const router = useRouter()
-
+const isOpenCatalogModal = ref(false)
 onMounted(() => {
+   if (!document.referrer.includes('ownstone')) {
+      setTimeout(() => {
+         isOpenCatalogModal.value = true
+      }, 300)
+   }
+   console.log('referrer:', document.referrer);
    favorites.getFromLS()
    recentlyStore.getFromLS()
    // Проверяем, является ли браузер Safari
@@ -30,6 +35,7 @@ onMounted(() => {
    }
 })
 contacts.getInfo()
+contacts.getConsultIcon()
 </script>
 
 <style lang="scss">

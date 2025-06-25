@@ -38,10 +38,13 @@
             <li class="catalog-filter" v-if="type !== 'commerce'">
                <span class="catalog-filter__title">Количество комнат</span>
                <ul class="catalog-filter__rooms">
-                  <li v-for="item in 5">
-                     <input v-model="roomsChecked" type="checkbox" :value="item" :id="'catalogFilterRooms' + item"
+                  <li v-for="item in 6">
+                     <input v-model="roomsChecked" type="checkbox" :value="item - 1" :id="'catalogFilterRooms' + item"
                         name="catalogFilterRooms">
-                     <label class="circle" :for="'catalogFilterRooms' + item">{{ item }} {{ item == 5 ? "+" : ""
+                     <label class="circle" :for="'catalogFilterRooms' + item" v-if="item - 1 == 0">С</label>
+                     <label class="circle" :for="'catalogFilterRooms' + item" v-else>{{ item - 1 }} {{ item
+                        == 6 ?
+                        "+" : ""
                         }}</label>
                   </li>
                </ul>

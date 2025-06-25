@@ -1,8 +1,9 @@
 <template>
    <div class="consult-icon">
+
       <div class="consult-icon__preview" v-if="step == 1" @click="step = 2">
          <div class="circle">
-            <img src="/img/consult-icon.png" alt="">
+            <img v-if="contacts?.consultIcon?.photo?.url" :src="contacts?.consultIcon?.photo?.url" alt="">
          </div>
          <div class="circle" style="background: #4F0014;">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -17,7 +18,7 @@
          <div class="consult-icon__header">
             <div class="consult-icon__image">
                <div class="circle">
-                  <img src="/img/consult-icon.png" alt="">
+                  <img v-if="contacts?.consultIcon?.photo?.url" :src="contacts?.consultIcon?.photo?.url" alt="">
                </div>
                <div class="circle" style="background-color: #1DC83D;"></div>
             </div>
@@ -27,21 +28,17 @@
             </div>
          </div>
          <div class="consult-icon__footer">
-            <a :href="'tel:' + contacts?.info?.contacts_info?.phonenumber">{{
-               contacts?.info?.contacts_info?.phonenumber }}</a>
+            <a :href="'tel:' + contacts?.consultIcon?.phone_number">{{
+               contacts?.consultIcon?.phone_number }}</a>
             <ul class="consult-icon__media header__icons">
-               <li v-if="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr?.length">
+               <li v-if="contacts?.consultIcon?.tg_link?.length">
 
-                  <NuxtLink target="_blank" class="circle"
-                     :to="contacts?.info?.contacts_info?.contacts_info_links[1]?.href_attr">
+                  <NuxtLink target="_blank" class="circle" :to="contacts?.consultIcon?.tg_link">
                      <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[1]?.icon?.url" />
                   </NuxtLink>
                </li>
-               <li v-if="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr?.length">
-
-
-                  <NuxtLink target="_blank" class="circle"
-                     :to="contacts?.info?.contacts_info?.contacts_info_links[2]?.href_attr">
+               <li v-if="contacts?.consultIcon?.whatsapp_link?.length">
+                  <NuxtLink target="_blank" class="circle" :to="contacts?.consultIcon?.whatsapp_link">
                      <SvgParser :iconUrl="contacts?.info?.contacts_info?.contacts_info_links[2]?.icon?.url" />
 
                   </NuxtLink>

@@ -30,15 +30,26 @@
       <div class="catalog-card__main">
          <div class="catalog-card__content">
             <ul class="catalog-card__banners">
-               <li>{{ product?.count_rooms }} {{ morph(+product?.count_rooms, ['комната', 'комнаты', 'комнат']) }}</li>
+               <li v-if="product?.count_rooms > 0">{{ product?.count_rooms }} {{ morph(+product?.count_rooms,
+                  ['комната',
+                     'комнаты', 'комнат']) }}</li>
+               <li v-else>студия</li>
+
                <li>{{ product?.square_apartament }}м<sup>2</sup></li>
-               <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
+               <li>этаж {{ product?.floor }} <span v-if="product?.proekty?.floors_count">/{{
+                  product?.proekty?.floors_count
+                     }}</span></li>
                <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <ul class="list-object__tags" v-if="type == 'row'">
-               <li>{{ product?.count_rooms }} {{ morph(+product?.count_rooms, ['комната', 'комнаты', 'комнат']) }}</li>
+               <li v-if="product?.count_rooms > 0">{{ product?.count_rooms }} {{ morph(+product?.count_rooms,
+                  ['комната',
+                     'комнаты', 'комнат']) }}</li>
+               <li v-else>студия</li>
                <li>{{ product?.square_apartament }}м<sup>2</sup></li>
-               <li>этаж {{ product?.floor }} /{{ product?.proekty?.floors_count }}</li>
+               <li>этаж {{ product?.floor }} <span v-if="product?.proekty?.floors_count">/{{
+                  product?.proekty?.floors_count
+                     }}</span></li>
                <!-- <li>ID {{ product?.id }}</li> -->
             </ul>
             <button class="catalog-card__like" @click="onLike" :class="{ active: liked }">

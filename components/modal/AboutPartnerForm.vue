@@ -14,7 +14,8 @@
          <div class="meeting-form__wrapper">
             <div class="meeting-form__header">
                <h3 class="meeting-form__title h1 light-title">Запросить <br> <span>контакты</span></h3>
-               <p class="body-text">Если вы хотите запросить контакты ГК ФСК — оставьте заявку и мы свяжемся с вами!</p>
+               <p class="body-text">Если вы хотите запросить контакты {{ partner }} — оставьте заявку и мы свяжемся с
+                  вами!</p>
             </div>
             <div class="meeting-form__main">
                <div class="meeting-form__inputs">
@@ -40,7 +41,6 @@ import { useAccount } from '~/store/account'
 
 const props = defineProps({
    isOpen: Boolean,
-   image: String,
    partner: String
 })
 const emit = defineEmits(['closePopup'])
