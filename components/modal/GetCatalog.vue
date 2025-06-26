@@ -9,16 +9,15 @@
       <div class="modal__content object-form__content row" ref="wrapper" v-else>
          <UiModalCloseBtn @click="emit('closePopup')" />
          <div class="object-form__image">
-            <img src="/img/getCatalogModal.png" alt="">
+            <img v-if="contactsStore.leadMagnit?.image?.url?.length" :src="contactsStore.leadMagnit?.image?.url" alt="">
          </div>
          <div class="object-form__wrapper">
             <div class="object-form__header">
-               <h3 class="object-form__title h1 dark-title">Получить <span>каталог</span>
-               </h3>
-               <p class="body-text">
-                  Хотите получать авторскую подборку объектов? Только лучшие предложения от застройщиков – актуальные
-                  цены, планировки, специальные условия!
-               </p>
+               <h3 class="object-form__title h1 dark-title" v-if="contactsStore.leadMagnit?.title?.length"
+                  v-html="contactsStore.leadMagnit?.title"></h3>
+               <p class="body-text" v-if="contactsStore.leadMagnit?.description?.length"
+                  v-html="contactsStore.leadMagnit?.description"></p>
+
             </div>
             <div class="object-form__main">
                <div class="object-form__inputs">
@@ -54,7 +53,8 @@
 </template>
 <script setup>
 import { useAccount } from '~/store/account'
-
+import { useContacts } from '~/store/contacts'
+const contactsStore = useContacts()
 const store = useAccount()
 const props = defineProps({
    isOpen: Boolean
@@ -77,7 +77,7 @@ const success = ref(false)
 
 const send = async () => {
    let object = {
-      subject: "Получить каталог",
+      subject: "Получить каталог лид-магнит с сайта own stone",
       text: `
          Имя: ${name.value}
          Телефон: ${wrapper.value.querySelector('.phone p span').innerHTML} ${phone.value}
