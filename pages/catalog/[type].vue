@@ -276,9 +276,14 @@ watch(() => route.params.type, () => {
 const stopConditionForSearch = ref(true)
 
 const onShowMore = async () => {
+   console.log("sortOption", sortOption.value);
    stopConditionForSearch.value = true
    currentPage.value++
    let searchingUrl = searchUrl.value + `&pagination[page]=${currentPage.value}`
+   if (sortOption.value.length) {
+      searchingUrl += `&sort=${sortOption.value}`
+
+   }
    let pageUrl = route.path + searchingUrl
    router.push(pageUrl)
    // console.log(searchingUrl);
