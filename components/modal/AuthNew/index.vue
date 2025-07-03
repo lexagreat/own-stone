@@ -10,7 +10,8 @@
          <UiModalCloseBtn @click="emit('closePopup'), success = false" />
 
          <ul class="app-tabs">
-            <li v-for="item in tabs" :key="item">
+
+            <li v-for="item in tabs" :key="item" @click="tab = item.value">
                <input type="radio" name="newauth" :value="item.value" :id="'newauth' + item.value" v-model="tab">
                <label :class="{ active: tab == item.value }" :for="'newauth' + item.value">{{ item.name }}</label>
             </li>
