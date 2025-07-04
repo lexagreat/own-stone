@@ -46,7 +46,8 @@
 import { useContacts } from './store/contacts';
 
 const contacts = useContacts()
-let contactsInfo = await contacts.getInfo()
+contacts.getConsultIcon()
+contacts.getInfo()
 </script>
 <style lang="scss" scoped>
 @import "@/assets/scss/style";
