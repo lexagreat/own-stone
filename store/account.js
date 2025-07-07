@@ -114,10 +114,17 @@ export const useAccount = defineStore("useAccount", {
          return response;
       },
       async sendForm(obj) {
+         document
+            .querySelectorAll(".modal .btn")
+            .forEach((btn) => btn.classList.add("disabled"));
          let response = await useBaseFetch("/mailsender", {
             method: "POST",
             body: objectToFormData(obj),
          });
+         document
+            .querySelectorAll(".modal .btn")
+            .forEach((btn) => btn.classList.remove("disabled"));
+
          return response;
       },
       async init() {

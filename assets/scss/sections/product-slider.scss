@@ -3,6 +3,9 @@
    // .product-slider__wrapper
 
    &__wrapper {
+      @media (min-width: 1025px) {
+         overflow: hidden;
+      }
    }
 
    // .product-slider__header
