@@ -114,10 +114,23 @@ export const useAccount = defineStore("useAccount", {
          return response;
       },
       async sendForm(obj) {
+         const btn = document.querySelector(".modal.open .btn");
+         if (btn) {
+            btn.classList.add("disabled");
+         }
+         // document
+         //    .querySelectorAll(".modal .btn")
+         //    .forEach((btn) => btn.classList.add("disabled"));
          let response = await useBaseFetch("/mailsender", {
             method: "POST",
             body: objectToFormData(obj),
          });
+         if (btn) {
+            btn.classList.remove("disabled");
+         }
+         // document
+         //    .querySelectorAll(".modal .btn")
+         //    .forEach((btn) => btn.classList.remove("disabled"));
 
          return response;
       },
