@@ -1,7 +1,7 @@
 <template>
    <div class="catalog-card with-hover apart" :class="{ 'project-card': type == 'row', loading: loading }">
       <div class="catalog-card__gallery">
-         <UiLoader v-if="!photos?.length" />
+         <UiLoader v-if="!photos[0]?.url?.length" />
          <ModalProjectPreview v-if="isOpenModal" :is-open="isOpenModal" @close-popup="isOpenModal = false"
             :photos="product?.photos" :currentIndex="currentPhotoIndex" />
          <ul class="catalog-card__nav">
@@ -9,8 +9,10 @@
                <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
             </template>
          </ul>
-         <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
-            <SwiperSlide v-for="photo in photos" :key="photo" @click="isOpenModal = true, currentPhotoIndex = index">
+         <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true"
+            v-show="photos[0]?.url?.length">
+            <SwiperSlide v-for="photo in photos" :key="photo" @click="isOpenModal = true, currentPhotoIndex = index"
+               style="padding: 20px;">
                <img :src="photo?.url" alt="" ref="images">
             </SwiperSlide>
          </Swiper>
@@ -51,6 +53,7 @@
                   product?.proekty?.floors_count
                      }}</span></li>
                <!-- <li>ID {{ product?.id }}</li> -->
+
             </ul>
             <button class="catalog-card__like" @click="onLike" :class="{ active: liked }">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -172,19 +175,20 @@ const images = ref([])
 onMounted(() => {
    isCollapse.value = getIsCollapse()
    window.addEventListener("resize", setСollapse)
-   let tmp = 2;
-   if (images.value?.length > 0) {
-      images.value.forEach(item => {
-         item.onload = () => {
-            tmp++
-            loading.value = tmp < images.value.length
+   loading.value = false
 
-         }
-      })
-   } else {
-      loading.value = false
+   // let tmp = 2;
+   // if (images.value?.length > 0) {
+   //    images.value.forEach(item => {
+   //       item.onload = () => {
+   //          tmp++
+   //          loading.value = tmp < images.value.length
 
-   }
+   //       }
+   //    })
+   // } else {
+   //    loading.value = false
+   // }
 })
 onBeforeUnmount(() => {
    window.removeEventListener('resize', setСollapse)
@@ -217,7 +221,7 @@ const liked = computed(() => {
 })
 
 
-const photos = computed(() => props.product?.photos?.length > 3 ? props.product.photos.slice(0, 3) : props.product.photos)
+const photos = computed(() => [props.product?.preview_picture])
 
 let timer = ref(0);
 let timerInterval = null;

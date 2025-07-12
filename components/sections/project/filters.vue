@@ -1,5 +1,5 @@
 <template>
-   <section class="project-selection">
+   <section class="project-selection" :class="{ empty: !catalog.products?.length }">
       <div class="container">
          <div class="project-selection__wrapper">
             <div class="project-selection__filters project-filters">
@@ -124,7 +124,8 @@
             </li>
          </ul>
       </div>
-      <SectionsProductSlider white-btns :category="category" :products="catalog.products">
+      <SectionsProductSlider white-btns :category="category" :products="catalog.products"
+         v-show="catalog.products?.length">
          <slot />
       </SectionsProductSlider>
       <BannersProjectMoreInfo v-if="type !== 'commerce'" />
@@ -417,6 +418,12 @@ const resetFitlers = async () => {
 
 
 <style lang="scss">
+.empty {
+   .project-banner__wrapper {
+      margin-top: var(--margin);
+   }
+}
+
 .all-filters {
    svg path {
       fill: black;
