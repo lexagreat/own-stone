@@ -68,7 +68,9 @@
                </div>
                <CatalogMap v-if="catalog.isMap && catalog.products.length" :searchUrl="searchUrl"
                   :products="catalog.products" :category="category" @openForm="onOpenForm" />
-               <CatalogEmpty v-if="!catalog.products.length" @reset="onreset" />
+
+               <CatalogEmpty v-show="catalog?.products?.length === 0" @reset="onreset" />
+
 
                <ModalObjectForm :isOpen="isOpenFormModal" @closePopup="isOpenFormModal = false"
                   :id="currentProductForModal" />
