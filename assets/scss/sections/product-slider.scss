@@ -4,7 +4,16 @@
 
    &__wrapper {
       @media (min-width: 1025px) {
-         overflow: hidden;
+         // overflow: hidden;
+         .swiper {
+            width: calc(100vw - 2 * var(--containerPadding));
+         }
+      }
+      @media (min-width: 1439px) {
+         // overflow: hidden;
+         .swiper {
+            width: 1360px;
+         }
       }
    }
 
