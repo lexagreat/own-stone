@@ -43,11 +43,11 @@ export const useCatalog = defineStore("useCatalog", {
          resultString += `&filters${this.makeSubStr(
             resultString
          )}[type_aparts]=${object.type}`;
-         if (object.type == "Новостройки") {
-            resultString += `&filters${this.makeSubStr(
-               resultString
-            )}[type_aparts]=Вторичная`;
-         }
+         // if (object.type == "Новостройки") {
+         //    resultString += `&filters${this.makeSubStr(
+         //       resultString
+         //    )}[type_aparts]=Вторичная`;
+         // }
          if (object.type !== "Коммерция") {
             // rooms
             if (object?.rooms?.length) {
