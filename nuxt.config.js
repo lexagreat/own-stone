@@ -7,12 +7,12 @@ export default defineNuxtConfig({
          link: [
             {
                rel: "icon",
-               href: "/fav.png",
+               href: "/fav.svg",
                type: "image/x-icon",
             },
             {
                rel: "apple-touch-icon",
-               href: "/fav.png",
+               href: "/fav.svg",
             },
          ],
          meta: [
