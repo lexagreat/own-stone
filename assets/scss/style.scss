@@ -19,7 +19,16 @@ label {
 }
 .wrapper {
    &:has(.modal.open) {
-      .consult-icon {
+      .consult-icon,
+      .cookie-modal {
+         z-index: 10;
+      }
+   }
+}
+.wrapper {
+   &:has(.catalog-filters.open) {
+      .consult-icon,
+      .cookie-modal {
          z-index: 10;
       }
    }

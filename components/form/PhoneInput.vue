@@ -1,6 +1,6 @@
 <template>
-   <div class="text-input" :class="{ phone: isPhone }" ref="input">
-      <p v-if="isPhone" @click="isOpen = !isOpen">
+   <div class="text-input phone" ref="input">
+      <p @click="isOpen = !isOpen">
          <svg
             :class="{ active: isOpen }"
             xmlns="http://www.w3.org/2000/svg"
@@ -17,29 +17,11 @@
          :disabled="disabled"
          type="text"
          :id="id"
-         v-model="modelValue"
+         v-model="value"
          v-maska="'(###) ###-##-##'"
-         v-if="isPhone"
          placeholder="(999) 999-99-99"
       />
-      <input
-         :disabled="disabled"
-         :placeholder="placeholder"
-         type="text"
-         :id="id"
-         v-model="modelValue"
-         v-maska="customMask"
-         v-else-if="customMask?.length"
-      />
-      <input
-         :disabled="disabled"
-         :placeholder="placeholder"
-         type="text"
-         :id="id"
-         v-model="modelValue"
-         v-else
-      />
-      <ul v-if="isPhone" :class="{ open: isOpen }">
+      <ul :class="{ open: isOpen }">
          <li
             v-for="item in PHONE_CODS"
             :key="item"
@@ -56,19 +38,8 @@
 import { vMaska } from "maska/vue";
 import { PHONE_CODS } from "~/assets/js/constants";
 let props = defineProps({
-   id: String,
    placeholder: String,
-   customMask: String,
-   value: String,
-   isPhone: {
-      type: Boolean,
-      default: false,
-   },
    disabled: {
-      type: Boolean,
-      default: false,
-   },
-   isEmail: {
       type: Boolean,
       default: false,
    },
@@ -77,15 +48,11 @@ const modelValue = defineModel();
 const value = ref("");
 const selectedCode = ref("+7");
 const phoneValue = computed(() => {
-   if (props.isPhone) {
-      return selectedCode.value + value.value;
-   } else {
-      return "";
-   }
+   return selectedCode.value + " " + value.value;
 });
-// watch(phoneValue, (value) => {
-//    modelValue.value = value;
-// })
+watch(phoneValue, (value) => {
+   modelValue.value = value;
+});
 
 const isOpen = ref(false);
 
@@ -99,9 +66,7 @@ const clickHandler = (e) => {
    }
 };
 onMounted(() => {
-   if (props.isPhone) {
-      document.addEventListener("click", clickHandler);
-   }
+   document.addEventListener("click", clickHandler);
 });
 onBeforeUnmount(() => {
    document.removeEventListener("click", clickHandler);
