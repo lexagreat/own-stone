@@ -1,7 +1,14 @@
 <template>
    <main class="main" style="overflow: hidden">
       <div class="form-page">
-         <div class="object-form__content">
+         <div class="object-form__content" v-if="success">
+            <UiModalCloseBtn @click="emit('closePopup')" />
+            <ModalSucess
+               title="Спасибо"
+               subtitle="В ближайшее время с Вами свяжется наш специалист"
+            />
+         </div>
+         <div class="object-form__content" v-else>
             <div class="object-form__header">
                <h3
                   class="object-form__title h1 dark-title"
@@ -90,8 +97,8 @@ const isDisabledBtn = computed(() => {
       phone.value.length >= 15 &&
       name.value.length &&
       (info.show_rating ? rating.value > 0 : true) &&
-      (info.policy.url?.length ? checked.value : true) &&
-      (info.oferta.url?.length ? checkedSec.value : true)
+      (info.policy?.url?.length ? checked.value : true) &&
+      (info.oferta?.url?.length ? checkedSec.value : true)
    );
 });
 const success = ref(false);
@@ -109,6 +116,8 @@ const send = async () => {
    let response = await store.sendForm(object);
    console.log(response);
    if (response.status) {
+      rating.value = 0;
+      name.value = "";
       phone.value = "";
       checked.value = false;
       checkedSec.value = false;
