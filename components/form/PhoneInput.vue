@@ -1,5 +1,5 @@
 <template>
-   <div class="text-input phone" ref="input">
+   <div class="text-input phone">
       <p @click="isOpen = !isOpen">
          <svg
             :class="{ active: isOpen }"
@@ -43,8 +43,10 @@ let props = defineProps({
       type: Boolean,
       default: false,
    },
+   id: String | Number,
 });
 const modelValue = defineModel();
+
 const value = ref("");
 const selectedCode = ref("+7");
 const phoneValue = computed(() => {
