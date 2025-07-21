@@ -5,10 +5,17 @@
       <SectionsHomeParallax :info="info.paralax_media" />
       <SectionsHomeSelection />
       <SectionsHomeConductor :info="info.home_conductor" />
-      <SectionsHomeDownload :info="info.home_download" />
+      <SectionsHomeDownload
+         :info="info.home_download"
+         v-if="info.home_download?.file?.length"
+      />
       <SectionsHomeFeatures :info="info.home_features" />
       <SectionsHomeBosses :info="info.bosses_section" />
-      <SectionsHomeTeam :team="info.home_team" :info="info?.home_team_title" :image="info?.home_team_photo" />
+      <SectionsHomeTeam
+         :team="info.home_team"
+         :info="info?.home_team_title"
+         :image="info?.home_team_photo"
+      />
       <SectionsHomeRewards :info="info.rewards_section" />
       <SectionsHomeOffice :info="info.home_office" />
       <SectionsHomeMedia :info="info.home_media" />
@@ -20,10 +27,9 @@
    </main>
 </template>
 <script setup>
-
 // console.log(info);
-const { data: info } = await useBaseFetch("/mainpage?pLevel=5")
+const { data: info } = await useBaseFetch("/mainpage?pLevel=5");
 useHead({
-   title: 'Own stone'
-})
+   title: "Own stone",
+});
 </script>
