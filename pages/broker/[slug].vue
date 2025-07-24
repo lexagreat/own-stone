@@ -2,7 +2,7 @@
 import PhoneIcon from '@/assets/img/icons/broker-phone.svg';
 import MailIcon from '@/assets/img/icons/broker-mail.svg';
 import PinIcon from '@/assets/img/icons/broker-pin.svg';
-import { IBrokerPage } from '~/types/broker';
+import type { IBrokerPage } from '~/types/broker';
 const route = useRoute();
 const isModalOpen = ref(false);
 
