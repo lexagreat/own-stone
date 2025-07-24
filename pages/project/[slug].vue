@@ -23,7 +23,7 @@
 
       <SectionsProjectDocuments :documents="info.documents" v-if="info.documents?.length" />
       <section class="project-sliders"
-         v-if="recentlyStore.same.filter(item => item.slug !== route.params.slug).length || recentlyStore.products.filter(item => item.slug !== route.params.slug).length">
+         v-if="(recentlyStore?.same.length && recentlyStore?.same.filter(item => item.slug !== route.params.slug)?.length) || (recentlyStore.products.length && recentlyStore.products?.filter(item => item.slug !== route.params.slug).length)">
          <SectionsProductSlider v-if="recentlyStore.same.filter(item => item.slug !== route.params.slug).length"
             :products="recentlyStore.same.filter(item => item.slug !== route.params.slug)">
             похожие <span>предложения</span>
