@@ -92,7 +92,7 @@ const wrapper = ref(null);
 const success = ref(false);
 const send = async () => {
   let object = {
-    subject: 'Оценка качества работы с сайта Own stone',
+    subject: `${props.brokerName ? 'Оценка качества работы брокера' : 'Оценка качества работы с сайта Own stone'}`,
     text: `
          Имя: ${name.value}
          ФИО сотрудника: ${fio.value}

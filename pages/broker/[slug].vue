@@ -15,10 +15,14 @@ if (!info?.id) {
     statusMessage: 'Page Not Found',
   });
 }
+
+useHead({
+  title: `Брокер ${info.name}`,
+});
 </script>
 <template>
   <main class="main">
-    <ModalMakeReview :brokerName="info.name + '(Брокер)'" :isOpen="isModalOpen" @close-popup="isModalOpen = false" />
+    <ModalMakeReview :brokerName="info.name + ' (Брокер)'" :isOpen="isModalOpen" @close-popup="isModalOpen = false" />
     <section class="broker-page">
       <div class="container">
         <div class="broker-page__wrapper">
