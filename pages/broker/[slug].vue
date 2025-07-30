@@ -44,7 +44,7 @@ useHead({
           <div class="broker-page__info">
             <div class="broker-page__content">
               <div class="broker-page__image">
-                <img src="/img/broker.png" alt="" />
+                <img :src="info.photo.url" alt="" />
               </div>
               <div class="broker-page__subheader">
                 <div class="broker-page__header">
