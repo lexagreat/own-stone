@@ -43,7 +43,7 @@ useHead({
           </div>
           <div class="broker-page__info">
             <div class="broker-page__content">
-              <div class="broker-page__image">
+              <div class="broker-page__image" style="background-color: #f1f1f1">
                 <img :src="info.photo.url" alt="" />
               </div>
               <div class="broker-page__subheader">
