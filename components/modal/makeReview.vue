@@ -12,6 +12,7 @@
       <div class="object-form__header">
         <h3 class="object-form__title h1 dark-title">
           Оценить качество
+
           <br />
           <span>работы</span>
         </h3>
@@ -23,7 +24,7 @@
           <FormInput placeholder="ФИО специалиста" v-model="fio" />
           <UiSelect :settings="typeSettings" @selectOption="onSelectTypeOption" />
           <FormTextarea class="gc2" placeholder="Ваш отзыв" v-model="review" />
-          <UiStarRaing v-model="rating" class="gc2" />
+          <UiStarRaing v-model="rating" class="gc2" v-if="!hiddenRating" />
           <div class="form-section__check" style="grid-column: span 2">
             <FormCheckbox v-model="checked" id="object-form__check" />
             <label for="object-form__check" style="cursor: pointer">
@@ -55,6 +56,7 @@ const route = useRoute();
 const props = defineProps({
   isOpen: Boolean,
   brokerName: String,
+  hiddenRating: Boolean,
 });
 const emit = defineEmits(['closePopup']);
 const store = useAccount();
@@ -99,7 +101,7 @@ const send = async () => {
          Телефон: ${phone.value}
          Тип: ${typeOption.value}
          Отзыв: ${review.value}
-         Рейтинг: ${rating.value}
+         ${props.hiddenRating ? '' : 'Рейтинг:' + rating.value}
          ${props.brokerName ? 'Ссылка на страницу: ' + route.params.slug : ''}
       `,
   };

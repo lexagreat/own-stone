@@ -13,6 +13,7 @@ export interface IBrokerPage {
   updatedAt: string;
   publishedAt: string;
   page_url: string;
+  show_rating: boolean | null;
   photo: IFile;
   qr: IFile;
 }

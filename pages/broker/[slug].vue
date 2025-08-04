@@ -22,7 +22,12 @@ useHead({
 </script>
 <template>
   <main class="main">
-    <ModalMakeReview :brokerName="info.name + ' (Брокер)'" :isOpen="isModalOpen" @close-popup="isModalOpen = false" />
+    <ModalMakeReview
+      :brokerName="info.name + ' (Брокер)'"
+      :isOpen="isModalOpen"
+      @close-popup="isModalOpen = false"
+      :hiddenRating="!!!info.show_rating"
+    />
     <section class="broker-page">
       <div class="container">
         <div class="broker-page__wrapper">
@@ -53,6 +58,7 @@ useHead({
                 </div>
                 <p class="broker-page__text body-text" v-html="info?.description"></p>
               </div>
+              <p class="broker-page__text body-text" v-html="info?.description"></p>
             </div>
             <div class="broker-page__footer">
               <ul class="broker-page__list">
