@@ -83,6 +83,7 @@
     @media (max-width: $mobile) {
       gap: 24px;
       padding: 0;
+      flex: 1;
       .broker-page__text {
         display: none;
       }
