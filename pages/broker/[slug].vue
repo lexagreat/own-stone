@@ -17,17 +17,12 @@ if (!info?.id) {
 }
 
 useHead({
-  title: `Брокер ${info.name}`,
+  title: `${info.name}`,
 });
 </script>
 <template>
   <main class="main">
-    <ModalMakeReview
-      :brokerName="info.name + ' (Брокер)'"
-      :isOpen="isModalOpen"
-      @close-popup="isModalOpen = false"
-      :hiddenRating="!!!info.show_rating"
-    />
+    <ModalMakeReview :brokerName="info.name + ' (Брокер)'" :isOpen="isModalOpen" @close-popup="isModalOpen = false" />
     <section class="broker-page">
       <div class="container">
         <div class="broker-page__wrapper">
@@ -36,7 +31,7 @@ useHead({
               <img :src="info.photo.url" alt="" />
             </div>
             <div class="broker-page__form">
-              <div class="contacts-hero__item">
+              <div class="contacts-hero__item" v-if="info.show_rating">
                 <h3 class="h3 dark-title">
                   Оцените качество
                   <br />

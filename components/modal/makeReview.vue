@@ -12,7 +12,6 @@
       <div class="object-form__header">
         <h3 class="object-form__title h1 dark-title">
           Оценить качество
-
           <br />
           <span>работы</span>
         </h3>
@@ -56,7 +55,6 @@ const route = useRoute();
 const props = defineProps({
   isOpen: Boolean,
   brokerName: String,
-  hiddenRating: Boolean,
 });
 const emit = defineEmits(['closePopup']);
 const store = useAccount();
@@ -101,7 +99,7 @@ const send = async () => {
          Телефон: ${phone.value}
          Тип: ${typeOption.value}
          Отзыв: ${review.value}
-         ${props.hiddenRating ? '' : 'Рейтинг:' + rating.value}
+         Рейтинг: ${rating.value}
          ${props.brokerName ? 'Ссылка на страницу: ' + route.params.slug : ''}
       `,
   };
