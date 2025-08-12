@@ -77,7 +77,7 @@
           <div
             class="catalog-page__main"
             :class="{ 'catalog-page__main_secondary': type == 'secondary' }"
-            v-if="!catalog.isMap && catalog.products.length"
+            v-if="!catalog.isMap && catalog.products?.length"
           >
             <CatalogListsGrid
               :products="splicedProducts[0]"
@@ -106,14 +106,14 @@
             />
           </div>
           <CatalogMap
-            v-if="catalog.isMap && catalog.products.length"
+            v-if="catalog.isMap && catalog.products?.length"
             :searchUrl="searchUrl"
             :products="catalog.products"
             :category="category"
             @openForm="onOpenForm"
           />
 
-          <CatalogEmpty v-show="catalog?.products?.length === 0" @reset="onreset" />
+          <CatalogEmpty v-show="!Array.isArray(catalog.products) || catalog?.products?.length === 0" @reset="onreset" />
 
           <ModalObjectForm
             :isOpen="isOpenFormModal"
@@ -125,7 +125,7 @@
     </section>
 
     <CatalogPagination
-      v-if="!catalog.isMap && catalog.products.length"
+      v-if="!catalog.isMap && catalog.products?.length"
       :pages="catalog?.meta?.pagination?.pageCount"
       v-model="currentPage"
       @showMore="onShowMore"
@@ -258,18 +258,22 @@ const sortSettings = ref({
     {
       name: 'По возрастанию цены',
       value: 'cost_total:asc',
+      filter: 'build',
     },
     {
       name: 'По убыванию цены',
       value: 'cost_total:desc',
+      filter: 'build',
     },
     {
       name: 'По возрастанию площади',
       value: 'square_apartament:asc',
+      filter: 'build',
     },
     {
       name: 'По убыванию площади',
       value: 'square_apartament:desc',
+      filter: 'build',
     },
   ],
   // placeholder: "Выберите сортировку"
@@ -307,7 +311,7 @@ const setCat = (cat) => {
 
 // console.log('должно быть set cat -> get filters for cat -> set filters from query -> search');
 const splicedProducts = computed(() => {
-  if (catalog.products.length <= 8) {
+  if (catalog.products?.length <= 8) {
     return [catalog.products, []];
   } else {
     // Иначе возвращаем первые 8 элементов в первом списке и оставшиеся элементы во втором
@@ -354,6 +358,9 @@ const onShowMore = async () => {
   stopConditionForSearch.value = false;
 };
 onMounted(async () => {
+  if (route.params.type == 'build' || route.params.type == 'commerce') {
+    sortSettings.value.options = sortSettings.value.options.filter((item) => !item.filter);
+  }
   if (route.query['pagination[page]']) {
     currentPage.value = route.query['pagination[page]'];
   }
