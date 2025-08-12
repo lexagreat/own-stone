@@ -240,42 +240,43 @@ watch(
     immediate: true,
   },
 );
+const initialSort = [
+  {
+    name: 'По рекомендации',
+    value: '',
+    selected: true,
+  },
+  {
+    name: 'Сначала новые',
+    value: 'createdAt:asc',
+  },
+  {
+    name: 'Сначала старые',
+    value: 'createdAt:desc',
+  },
+  {
+    name: 'По возрастанию цены',
+    value: 'cost_total:asc',
+    filter: true,
+  },
+  {
+    name: 'По убыванию цены',
+    value: 'cost_total:desc',
+    filter: true,
+  },
+  {
+    name: 'По возрастанию площади',
+    value: 'square_apartament:asc',
+    filter: true,
+  },
+  {
+    name: 'По убыванию площади',
+    value: 'square_apartament:desc',
+    filter: true,
+  },
+];
 const sortSettings = ref({
-  options: [
-    {
-      name: 'По рекомендации',
-      value: '',
-      selected: true,
-    },
-    {
-      name: 'Сначала новые',
-      value: 'createdAt:asc',
-    },
-    {
-      name: 'Сначала старые',
-      value: 'createdAt:desc',
-    },
-    {
-      name: 'По возрастанию цены',
-      value: 'cost_total:asc',
-      filter: 'build',
-    },
-    {
-      name: 'По убыванию цены',
-      value: 'cost_total:desc',
-      filter: 'build',
-    },
-    {
-      name: 'По возрастанию площади',
-      value: 'square_apartament:asc',
-      filter: 'build',
-    },
-    {
-      name: 'По убыванию площади',
-      value: 'square_apartament:desc',
-      filter: 'build',
-    },
-  ],
+  options: initialSort,
   // placeholder: "Выберите сортировку"
 });
 const sortOption = ref('');
@@ -320,8 +321,17 @@ const splicedProducts = computed(() => {
 });
 const currentPage = ref(1);
 
+function validateSort() {
+  if (category.value == 0) {
+    sortSettings.value.options = initialSort.filter((item) => !item.filter);
+  } else {
+    sortSettings.value.options = initialSort;
+  }
+}
+
 watch(category, async () => {
   catalog.products = [];
+  validateSort();
 });
 watch(currentPage, async () => {
   if (stopConditionForSearch.value) return;
@@ -358,9 +368,7 @@ const onShowMore = async () => {
   stopConditionForSearch.value = false;
 };
 onMounted(async () => {
-  if (route.params.type == 'build' || route.params.type == 'commerce') {
-    sortSettings.value.options = sortSettings.value.options.filter((item) => !item.filter);
-  }
+  validateSort();
   if (route.query['pagination[page]']) {
     currentPage.value = route.query['pagination[page]'];
   }
