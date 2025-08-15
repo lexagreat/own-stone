@@ -1,244 +1,244 @@
 .modal__content {
-   @media (max-width: $mobile) {
-      width: 100vw;
-      height: 100vh;
-      padding: 12px !important;
-   }
+  @media (max-width: $mobile) {
+    width: 100vw;
+    height: 100vh;
+    padding: 12px !important;
+  }
 }
 
 .auth-modal {
-   // .auth-modal__content
+  // .auth-modal__content
 
-   &__content {
-      width: 460px;
-      @media (max-width: $mobile) {
-         width: 100% !important;
-         padding-top: 130px !important;
-      }
-   }
-   &__header {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-   }
-   // .auth-modal__title
+  &__content {
+    width: 460px;
+    @media (max-width: $mobile) {
+      width: 100% !important;
+      padding-top: 130px !important;
+    }
+  }
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  // .auth-modal__title
 
-   &__title {
-   }
+  &__title {
+  }
 
-   // .auth-modal__main
+  // .auth-modal__main
 
-   &__main {
-      margin-top: 40px;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      @media (max-width: $mobile) {
-         margin-top: 24px;
-         gap: 24px;
-      }
-   }
-   .btn {
-      width: 100%;
-   }
+  &__main {
+    margin-top: 40px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    @media (max-width: $mobile) {
+      margin-top: 24px;
+      gap: 16px;
+    }
+  }
+  .btn {
+    width: 100%;
+  }
 }
 .modal__close {
-   --size: 48px !important;
-   background-color: $black-5 !important;
-   position: absolute;
-   top: 16px;
-   right: 16px;
-   @media (max-width: $mobile) {
-      --size: 40px !important;
-      // top: 48px;
-      top: 12px;
-      right: 12px;
-   }
+  --size: 48px !important;
+  background-color: $black-5 !important;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  @media (max-width: $mobile) {
+    --size: 40px !important;
+    // top: 48px;
+    top: 12px;
+    right: 12px;
+  }
 }
 
 .code-input {
-   display: flex;
-   gap: 15px;
-   input {
-      flex: 0 0 56px;
-      width: 56px;
-      height: 56px;
-      color: $black;
-      text-align: center;
-      font-size: 16px;
-      line-height: 100%; /* 16px */
-      border-radius: 4px;
-      background-color: $white;
-   }
+  display: flex;
+  gap: 15px;
+  input {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    color: $black;
+    text-align: center;
+    font-size: 16px;
+    line-height: 100%; /* 16px */
+    border-radius: 4px;
+    background-color: $white;
+  }
 }
 .sms-modal {
-   // .sms-modal__row
+  // .sms-modal__row
 
-   &__row {
-      display: flex;
-      gap: 20px;
-      & > span:nth-child(1) {
-         color: var(--black-100, #181818);
-         font-family: $fontMontreal;
-         font-size: 20px;
-         font-weight: 500;
-         line-height: 115%; /* 23px */
-         text-transform: uppercase;
-      }
-      button {
-         border-bottom: 1px solid var(--black-100, #181818);
-         padding: 3px;
-         @include button-name;
-      }
-   }
+  &__row {
+    display: flex;
+    gap: 20px;
+    & > span:nth-child(1) {
+      color: var(--black-100, #181818);
+      font-family: $fontMontreal;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 115%; /* 23px */
+      text-transform: uppercase;
+    }
+    button {
+      border-bottom: 1px solid var(--black-100, #181818);
+      padding: 3px;
+      @include button-name;
+    }
+  }
 
-   // .sms-modal__main
+  // .sms-modal__main
 
-   &__main {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      span {
-         color: rgba(24, 24, 24, 0.6);
-         font-family: $fontMontreal;
-         font-size: 13px;
-         font-style: normal;
-         font-weight: 500;
-         line-height: normal;
-      }
-      @media (max-width: $mobile) {
-         gap: 24px;
-      }
-   }
+  &__main {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    span {
+      color: rgba(24, 24, 24, 0.6);
+      font-family: $fontMontreal;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    @media (max-width: $mobile) {
+      gap: 24px;
+    }
+  }
 }
 
 .meeting-form {
-   .modal__close {
-      background: rgba(255, 255, 255, 0.05) !important;
-      svg path {
-         fill: white !important;
-      }
-   }
-   .text-input.phone {
-      & > p span {
-         color: white !important;
-      }
-   }
-   // .meeting-form__content
+  .modal__close {
+    background: rgba(255, 255, 255, 0.05) !important;
+    svg path {
+      fill: white !important;
+    }
+  }
+  .text-input.phone {
+    & > p span {
+      color: white !important;
+    }
+  }
+  // .meeting-form__content
 
-   &__content {
-      padding: 0 !important;
-      display: flex;
-      background-color: $black !important;
-      @media (max-width: $mobile) {
-         border-radius: 0 !important;
+  &__content {
+    padding: 0 !important;
+    display: flex;
+    background-color: $black !important;
+    @media (max-width: $mobile) {
+      border-radius: 0 !important;
+    }
+  }
+
+  // .meeting-form__image
+
+  &__image {
+    flex: 0 0 460px;
+    width: 460px;
+    img {
+      width: 100%;
+      height: 101%;
+      object-fit: cover;
+    }
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  // .meeting-form__wrapper
+
+  &__wrapper {
+    width: 470px;
+    flex: 0 0 470px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    .form-section__check {
+      color: rgba(255, 255, 255, 0.3) !important;
+      a {
+        color: rgba(255, 255, 255, 0.6) !important;
       }
-   }
+    }
+    @media (max-width: $tablet) {
+      width: 100%;
+      flex: unset;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 130px;
+    }
+  }
 
-   // .meeting-form__image
+  // .meeting-form__header
 
-   &__image {
-      flex: 0 0 460px;
-      width: 460px;
-      img {
-         width: 100%;
-         height: 101%;
-         object-fit: cover;
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    p {
+      color: $white-50;
+    }
+  }
+
+  // .meeting-form__title
+
+  &__title {
+  }
+
+  // .meeting-form__main
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  // .meeting-form__inputs
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .app-checkbox {
+      label {
+        border-color: #ffffff4d;
       }
-      @media (max-width: $tablet) {
-         display: none;
-      }
-   }
-
-   // .meeting-form__wrapper
-
-   &__wrapper {
-      width: 470px;
-      flex: 0 0 470px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      padding: 40px;
-      .form-section__check {
-         color: rgba(255, 255, 255, 0.3) !important;
-         a {
-            color: rgba(255, 255, 255, 0.6) !important;
-         }
-      }
-      @media (max-width: $tablet) {
-         width: 100%;
-         flex: unset;
-         padding-left: 12px;
-         padding-right: 12px;
-         padding-top: 130px;
-      }
-   }
-
-   // .meeting-form__header
-
-   &__header {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    }
+    .phone {
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 4px;
       p {
-         color: $white-50;
+        background-color: #181818 !important;
+        color: white !important;
+        border-radius: 4px;
+        svg path {
+          fill: white;
+        }
       }
-   }
-
-   // .meeting-form__title
-
-   &__title {
-   }
-
-   // .meeting-form__main
-
-   &__main {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-   }
-
-   // .meeting-form__inputs
-
-   &__inputs {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      .app-checkbox {
-         label {
-            border-color: #ffffff4d;
-         }
+      input {
+        border: 0;
       }
-      .phone {
-         border: 1px solid rgba(255, 255, 255, 0.6);
-         border-radius: 4px;
-         p {
-            background-color: #181818 !important;
-            color: white !important;
-            border-radius: 4px;
-            svg path {
-               fill: white;
-            }
-         }
-         input {
-            border: 0;
-         }
-      }
-   }
+    }
+  }
 }
 .modal-success {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-   // .modal-success__title
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  // .modal-success__title
 
-   &__title {
-   }
+  &__title {
+  }
 
-   // .modal-success__description
+  // .modal-success__description
 
-   &__description {
-   }
+  &__description {
+  }
 }
