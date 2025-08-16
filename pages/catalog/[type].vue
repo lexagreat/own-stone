@@ -146,6 +146,7 @@ import IconSort from '@/assets/img/icons/sort.svg';
 import IconGeo from '@/assets/img/icons/geo.svg';
 import { useCatalog } from '~/store/catalog';
 import { useRecently } from '~/store/recently';
+
 const recentlyStore = useRecently();
 // Получаем параметр type из маршрута
 const catalog = useCatalog();
@@ -257,22 +258,22 @@ const initialSort = [
   {
     name: 'По возрастанию цены',
     value: 'cost_total:asc',
-    filter: true,
+    //  filter: true,
   },
   {
     name: 'По убыванию цены',
     value: 'cost_total:desc',
-    filter: true,
+    //  filter: true,
   },
   {
     name: 'По возрастанию площади',
     value: 'square_apartament:asc',
-    filter: true,
+    //  filter: true,
   },
   {
     name: 'По убыванию площади',
     value: 'square_apartament:desc',
-    filter: true,
+    //  filter: true,
   },
 ];
 const sortSettings = ref({
