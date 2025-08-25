@@ -1,103 +1,104 @@
 .product-slider {
-   padding-bottom: var(--margin);
-   // .product-slider__wrapper
+  padding-bottom: var(--margin);
+  // .product-slider__wrapper
 
-   &__wrapper {
-      @media (min-width: 1025px) {
-         // overflow: hidden;
-         .swiper {
-            width: calc(100vw - 2 * var(--containerPadding));
-         }
+  &__wrapper {
+    @media (min-width: 1025px) {
+      // overflow: hidden;
+      .swiper {
+        width: calc(100vw - 2 * var(--containerPadding));
       }
-      @media (min-width: 1439px) {
-         // overflow: hidden;
-         .swiper {
-            width: 1360px;
-         }
+    }
+    @media (min-width: 1439px) {
+      // overflow: hidden;
+      .swiper {
+        width: 1360px;
       }
-   }
+    }
+  }
 
-   // .product-slider__header
+  // .product-slider__header
 
-   &__header {
-      display: flex;
-      margin-bottom: 50px;
-      justify-content: space-between;
-   }
+  &__header {
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: space-between;
+  }
 
-   // .product-slider__title
+  // .product-slider__title
 
-   &__title {
-   }
+  &__title {
+  }
 
-   // .product-slider__btns
+  // .product-slider__btns
 
-   &__btns {
-      display: flex;
-      gap: 8px;
-      @media (max-width: $tablet) {
-         display: none;
-      }
-   }
+  &__btns {
+    display: flex;
+    gap: 8px;
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
 
-   // .product-slider__main
+  // .product-slider__main
 
-   &__main {
-      &:has(.modal.open) {
-         & > .swiper {
-            overflow: unset;
-            z-index: 110 !important;
-            & > .swiper-wrapper {
-               transform: unset !important;
-               & > .swiper-slide {
-                  transform: unset !important;
-               }
-            }
-         }
+  &__main {
+    &:has(.modal.open) {
+      & > .swiper {
+        overflow: unset;
+        z-index: 110 !important;
+        & > .swiper-wrapper {
+          transform: unset !important;
+          & > .swiper-slide {
+            transform: unset !important;
+          }
+        }
       }
-      .swiper-slide {
-         width: fit-content;
-         @media (max-width: $mobile) {
-            height: auto;
-         }
-         .catalog-card {
-            @media (max-width: $mobile) {
-               --cardWidth: 100%;
-               height: 100%;
-            }
-         }
+    }
+
+    .swiper-slide {
+      width: fit-content;
+      @media (max-width: $mobile) {
+        height: auto;
       }
-   }
-   @media (max-width: $tablet) {
-      &__header {
-         margin-bottom: 40px;
+      .catalog-card {
+        @media (max-width: $mobile) {
+          --cardWidth: 100%;
+          height: 100%;
+        }
       }
-      &__main {
-         & > .swiper {
-            margin-left: -20px;
-            margin-right: -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-            .swiper-slide {
-               max-width: 333px;
-            }
-         }
+    }
+  }
+  @media (max-width: $tablet) {
+    &__header {
+      margin-bottom: 40px;
+    }
+    &__main {
+      & > .swiper {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        .swiper-slide {
+          max-width: 333px;
+        }
       }
-   }
-   @media (max-width: $mobile) {
-      &__header {
-         margin-bottom: 30px;
+    }
+  }
+  @media (max-width: $mobile) {
+    &__header {
+      margin-bottom: 30px;
+    }
+    &__main {
+      & > .swiper {
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        .swiper-slide {
+          max-width: 308px;
+        }
       }
-      &__main {
-         & > .swiper {
-            margin-left: -12px;
-            margin-right: -12px;
-            padding-left: 12px;
-            padding-right: 12px;
-            .swiper-slide {
-               max-width: 308px;
-            }
-         }
-      }
-   }
+    }
+  }
 }

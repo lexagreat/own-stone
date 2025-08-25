@@ -23,7 +23,7 @@
           <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
         </template>
       </ul>
-      <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true">
+      <Swiper @swiper="onSwiper" :spaceBetween="8" :modules="[Pagination]" :pagination="true" :slidesPerView="1">
         <template v-for="(photo, index) in product?.photos" :key="photo">
           <SwiperSlide v-if="index < 3" @click="(isOpenModal = true), (currentPhotoIndex = index)">
             <img :src="photo?.url" alt="" ref="images" />
@@ -269,6 +269,12 @@ const link = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.swiper {
+  width: 100% !important;
+}
+// .swiper-slide {
+//   width: fit-content !important;
+// }
 .aft {
   .catalog-card__footer {
     &::after {
