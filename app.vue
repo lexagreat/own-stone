@@ -4,7 +4,7 @@
       <!-- <transition name="page"> -->
       <NuxtPage />
       <BannersCookie />
-      <ModalGetCatalog :is-open="isOpenCatalogModal" @close-popup="isOpenCatalogModal = false" />
+      <ModalGetCatalog v-if="isLeadMagnit" :is-open="isOpenCatalogModal" @close-popup="isOpenCatalogModal = false" />
       <!-- </transition> -->
     </NuxtLayout>
   </div>
@@ -18,7 +18,13 @@ const contacts = useContacts();
 const recentlyStore = useRecently();
 const favorites = useFavorites();
 const isOpenCatalogModal = ref(false);
+
 contacts.getLeadMagnit();
+
+const isLeadMagnit = computed(() => {
+  return !route.path.includes('/form/') && !route.path.includes('/broker/');
+});
+
 onMounted(() => {
   if (!document.referrer.includes('ownstone')) {
     setTimeout(() => {
