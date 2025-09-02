@@ -1,5 +1,9 @@
 <template>
-  <div class="catalog-card with-hover apart" :class="{ 'project-card': type == 'row', loading: loading }">
+  <div
+    class="catalog-card with-hover apart"
+    :class="{ 'project-card': type == 'row', loading: loading }"
+    @click="(catalogStore.isOpenSecondaryModal = true), (catalogStore.secondaryModalInfo = product)"
+  >
     <div class="catalog-card__gallery">
       <UiLoader v-if="!photos[0]?.url?.length" />
       <ModalProjectPreview
@@ -11,7 +15,8 @@
       />
       <ul class="catalog-card__nav">
         <template v-for="(item, index) in photos" :key="index">
-          <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
+          <li @mouseenter="onMouseenter(index)" v-if="index < 3"></li>
+          <!-- <li @click="isOpenModal = true" @mouseenter="onMouseenter(index)" v-if="index < 3"></li> -->
         </template>
       </ul>
       <Swiper
@@ -21,12 +26,15 @@
         :pagination="true"
         v-show="photos[0]?.url?.length"
       >
-        <SwiperSlide
+        <!-- <SwiperSlide
           v-for="photo in photos"
           :key="photo"
-          @click="(isOpenModal = true), (currentPhotoIndex = index)"
+          @click.stop="(isOpenModal = true), (currentPhotoIndex = index)"
           style="padding: 20px"
         >
+          <img :src="photo?.url" alt="" ref="images" />
+        </SwiperSlide> -->
+        <SwiperSlide v-for="photo in photos" :key="photo" style="padding: 20px">
           <img :src="photo?.url" alt="" ref="images" />
         </SwiperSlide>
       </Swiper>
@@ -87,14 +95,8 @@
         </button>
         <!-- <h4 class="catalog-card__title">{{ product?.name }}</h4> -->
         <h4 class="catalog-card__title">{{ formatNumber(product?.cost_total) }} ₽</h4>
-        <span
-          class="catalog-card__price"
-          @mouseenter="startTimer"
-          @mouseleave="endTimer"
-          style="min-height: 57px"
-          v-html="product?.description"
-        ></span>
-        <p class="catalog-card__hint" :class="{ active: timer > 3 }" v-html="product?.description"></p>
+        <span class="catalog-card__price" style="min-height: 57px" v-html="product?.description"></span>
+
         <ul class="catalog-card__addresses">
           <div>
             <li v-if="product?.proekty?.metro_nearby[0]" style="height: 18px">
@@ -147,7 +149,13 @@
           <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px"></div>
           <!-- <div v-if="!product?.proekty?.metro_nearby?.length" style="height: 18px;"></div> -->
         </ul>
-        <button class="project-card__show" v-if="isCollapse" @click="collapse" :class="{ active: isCollapsed }">
+        <button
+          class="project-card__show"
+          v-if="isCollapse"
+          @click="collapse"
+          :class="{ active: isCollapsed }"
+          @click.stop
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path
               d="M13 6L8 11L3 6"
@@ -161,7 +169,7 @@
       </div>
       <div class="catalog-card__footer">
         <div class="catalog-card__btns">
-          <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
+          <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber" @click.stop>
             <p>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Icons / phone">
@@ -178,6 +186,7 @@
                 :value="contactsStore?.info?.contacts_info?.phonenumber"
                 v-maska="'+7 (###) ###-##-##'"
                 disabled
+                style="pointer-events: none"
               />
             </p>
           </NuxtLink>
@@ -187,7 +196,7 @@
     <div class="apart-mobile">
       <div class="catalog-card__footer" :class="{ collapse: isCollapse }" ref="spoiler">
         <div class="catalog-card__btns">
-          <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber">
+          <NuxtLink class="btn white" :to="'tel:' + contactsStore?.info?.contacts_info?.phonenumber" @click.stop>
             <p>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Icons / phone">
@@ -204,6 +213,7 @@
                 :value="contactsStore?.info?.contacts_info?.phonenumber"
                 v-maska="'+7 (###) ###-##-##'"
                 disabled
+                style="pointer-events: none"
               />
             </p>
           </NuxtLink>
@@ -218,8 +228,12 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
 import { useFavorites } from '~/store/favorites';
 import { useContacts } from '~/store/contacts';
+import { useCatalog } from '~/store/catalog';
+
 const contactsStore = useContacts();
 const favorites = useFavorites();
+const catalogStore = useCatalog();
+
 const props = defineProps({
   type: String,
   product: Object,
@@ -291,21 +305,6 @@ const liked = computed(() => {
 });
 
 const photos = computed(() => [props.product?.preview_picture]);
-
-let timer = ref(0);
-let timerInterval = null;
-const startTimer = () => {
-  console.log('start');
-  timerInterval = setInterval(() => {
-    timer.value++;
-  }, 300);
-};
-const endTimer = () => {
-  console.log('end');
-  clearInterval(timerInterval);
-  timerInterval = null;
-  timer.value = 0;
-};
 </script>
 
 <style lang="scss" scoped>

@@ -61,6 +61,7 @@ export interface IProjectCard {
   };
 }
 export interface IApartCard {
+  cian_url: null | string;
   id: number;
   documentId: string;
   name_commerce: string | null;
@@ -81,7 +82,13 @@ export interface IApartCard {
   name: string;
   phone: string | null;
   ring_road: string | null;
-  photos: string[] | null;
+  photos:
+    | {
+        id: number;
+        documentId: string;
+        url: string;
+      }[]
+    | null;
   ap_tags: string[] | null;
   preview_picture: {
     id: number;
